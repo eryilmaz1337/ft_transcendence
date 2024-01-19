@@ -1,0 +1,28 @@
+version: "1.29.2"
+
+volumes:
+  backend_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/eryilmaz/data/mysql
+      o: bind
+  frontend_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/eryilmaz/data/wordpress
+      o: bind
+
+networks:
+  network:
+    driver: bridge
+
+services:
+  backend:
+
+  frontend:
+
+  database:
+
+  nginx:
