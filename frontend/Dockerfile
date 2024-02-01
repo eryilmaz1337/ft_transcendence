@@ -1,10 +1,23 @@
-FROM node:14 as builder
+# Resmi Nginx taban imajını kullan
+FROM nginx:alpine
 
-WORKDIR /app
+# Çalışma dizinini belirle
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY package.json ./
 
-RUN npm install
+WORKDIR /usr/share/nginx/html
 
-COPY js_app/ 
+# HTML, CSS ve JavaScript dosyalarını kopyala
+RUN mkdir img
+COPY img ./img
+COPY index.html .
+COPY style.css .
+COPY style2.css .
+COPY app.js .
 
+EXPOSE 423
+
+RUN mkdir -p /run/nginx
+
+# Nginx'i çalıştır
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,20 +1,33 @@
 version: '3'
+
+networks:
+  network:
+    driver: bridge
+
 services:
-  backend:
-    build:
-      context: ./backend
+  nginx:
+    container_name: nginx
+    build: ./nginx
     ports:
-      - "8000:8000"
+      - 443:443
+    restart: always
+    networks:
+      - network
+
+  backend:
+    container_name: backend
+    build: ./backend
+    networks:
+      - network
+    restart: always
+
   frontend:
+    container_name: frontend
     build:
       context: ./frontend
+      dockerfile: Dockerfile
     ports:
-      - "80:80"
-  nginx:
-    build:
-      context: ./nginx
-    ports:
-      - "443:443"
-    depends_on:
-      - backend
-      # - frontend
+     - 423:423
+    restart: always
+    networks:
+      - network
