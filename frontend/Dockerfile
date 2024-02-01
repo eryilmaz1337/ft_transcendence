@@ -1,23 +1,22 @@
-# Resmi Nginx taban imajını kullan
-FROM nginx:alpine
+# Docker taban alınacak imaj
+FROM node:14-alpine
 
-# Çalışma dizinini belirle
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+# Çalışma dizini oluştur
+WORKDIR /usr/src/app
 
+# HTML, CSS ve JS dosyalarını kopyala
+# RUN mkdir img
+# COPY img ./img
+# COPY /front/index.html .
+# COPY style.css .
+# COPY style2.css .
+# COPY app.js .
 
-WORKDIR /usr/share/nginx/html
+# http-server yükleyin
+RUN npm install -g http-server
 
-# HTML, CSS ve JavaScript dosyalarını kopyala
-RUN mkdir img
-COPY img ./img
-COPY index.html .
-COPY style.css .
-COPY style2.css .
-COPY app.js .
-
+# Portu dışa aç
 EXPOSE 423
 
-RUN mkdir -p /run/nginx
-
-# Nginx'i çalıştır
-CMD ["nginx", "-g", "daemon off;"]
+# Sunucuyu başlat
+CMD ["http-server", "--port", "423"]

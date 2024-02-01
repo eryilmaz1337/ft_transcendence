@@ -1,5 +1,19 @@
 version: '3'
 
+volumes:
+  backend:
+    driver: local
+    driver_opts:
+      type: none
+      device: /root/Masaüstü/ft_transcendence/backend/app
+      o: bind
+  frontend:
+    driver: local
+    driver_opts:
+      type: none
+      device: /root/Masaüstü/ft_transcendence/frontend/front
+      o: bind
+
 networks:
   network:
     driver: bridge
@@ -17,6 +31,10 @@ services:
   backend:
     container_name: backend
     build: ./backend
+    volumes:
+      - backend:/app
+    ports:
+      - 8000:8000
     networks:
       - network
     restart: always
@@ -26,6 +44,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    volumes:
+      - frontend:/usr/src/app
     ports:
      - 423:423
     restart: always
