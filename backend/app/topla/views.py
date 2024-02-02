@@ -1,19 +1,14 @@
-# topla/views.py
-
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
 @csrf_exempt
-def calculate_sum(request):
+def add_numbers(request):
     if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            number1 = int(data.get('number1', 0))
-            number2 = int(data.get('number2', 0))
-            result = {'sum': number1 + number2}
-            return JsonResponse(result)
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON format'}, status=400)
+        data = json.loads(request.body)
+        num1 = int(data.get('num1', 0))
+        num2 = int(data.get('num2', 0))
+        result = num1 + num2
+        return JsonResponse({'result': result})
     else:
-        return JsonResponse({'error': 'Invalid request method'}, status=405)
+        return JsonResponse({'error': 'Invalid request method'})

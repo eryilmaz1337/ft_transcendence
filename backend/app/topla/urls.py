@@ -1,8 +1,6 @@
-# topla/urls.py
-
 from django.urls import path
-from . import views
+from .views import add_numbers
 
 urlpatterns = [
-    path('topla/', views.calculate_sum, name='calculate_sum'),
+    path('add/', add_numbers, name='add_numbers'),
 ]
