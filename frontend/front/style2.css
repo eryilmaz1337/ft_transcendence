@@ -10,7 +10,7 @@ html,body {
 
 body {
 	margin: 0;
-	background-image: url('img/stock.jpeg'); /* Arka plan resmi ekleyin */
+	background-image: url('img/comodore64.jpeg'); /* Arka plan resmi ekleyin */
 	background-size: cover; /* Resmi kaplamak için */
 	background-position: center;
 	background-repeat: no-repeat; /* Resmi tekrar etmemek için */
@@ -21,7 +21,7 @@ nav {
 	justify-content: space-around;
 	align-items: center;
 	min-height: 8vh;
-	background-color: rgb(0, 64, 255);
+	background-color:black;
 	font-family:Arial, Helvetica, sans-serif;
 }
 
