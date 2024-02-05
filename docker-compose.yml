@@ -27,6 +27,15 @@ services:
     restart: always
     networks:
       - network
+  
+  database:
+    container_name: database
+    build: ./database
+    ports:
+      - 5432:5432
+    networks:
+      - network
+    restart: always
 
   backend:
     container_name: backend
