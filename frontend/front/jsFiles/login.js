@@ -18,6 +18,7 @@ function loginAdd() {
                 box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
                 width: 300px;
                 text-align: center;
+                margin: 0 auto; /* Sayfayı tam ortala */
             }
 
             form {
@@ -58,22 +59,11 @@ function loginAdd() {
         <div class="container">
             <form id="loginForm">
                 <h2>Login</h2>
-                <label for="username">Kullanıcı Adı</label>
+                <label for="username">Username</label>
                 <input type="text" id="username" required>
-                <label for="password">Şifre</label>
+                <label for="password">Password</label>
                 <input type="password" id="password" required>
                 <button type="button" onclick="login()">Login</button>
-            </form>
-
-            <hr>
-
-            <form id="registerForm">
-                <h2>Sign Up</h2>
-                <label for="newUsername">Yeni Kullanıcı Adı</label>
-                <input type="text" id="newUsername" required>
-                <label for="newPassword">Yeni Şifre</label>
-                <input type="password" id="newPassword" required>
-                <button type="button" onclick="register()">Sign Up</button>
             </form>
         </div>
 
@@ -83,13 +73,6 @@ function loginAdd() {
                 var password = document.getElementById("password").value;
 
                 console.log("Login:", username, password);
-            }
-
-            function register() {
-                var newUsername = document.getElementById("newUsername").value;
-                var newPassword = document.getElementById("newPassword").value;
-
-                console.log("Sign Up:", newUsername, newPassword);
             }
         </script>
     `;
