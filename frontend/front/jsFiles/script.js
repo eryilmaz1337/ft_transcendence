@@ -42,10 +42,9 @@ function changePage(page) {
             content = '<h1>404 Not Found</h1><p>Sayfa bulunamadı.</p>';
             showHeader();
     }
-
     document.getElementById('content').innerHTML = content;
-
     window.location.hash = page;
+    startgame();
 }
 
 function resetBackground() {
@@ -55,7 +54,7 @@ function resetBackground() {
 
 function setGameBackground() {
     document.body.style.backgroundImage = "none";
-    document.body.style.backgroundColor = "red";
+    document.body.style.backgroundColor = "grey";
 }
 
 function setProfileBackground() {
