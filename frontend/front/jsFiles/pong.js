@@ -1,4 +1,4 @@
-function startgame() 
+function startgame()
 {
     const welcomeText = document.getElementById('WelcomeText');
     const canvas = document.getElementById("canvas");
@@ -19,7 +19,7 @@ function startgame()
     }
 
     // Sayfa yüklendiğinde yazıyı göster
-    window.onload = showWelcomeText;
+    showWelcomeText();
 
     window.addEventListener('keydown', function(e){
         keysPressed[e.keyCode] = true;
