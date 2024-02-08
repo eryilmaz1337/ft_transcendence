@@ -15,5 +15,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Expose port 8000 for the Django application
 EXPOSE 8000
 
-# Run the Django development server
+# Run the Django development servepython manage.py makemigrations
 CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -3,36 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veritabanına Değer Ekleme</title>
+    <title>Değer Ekle</title>
 </head>
 <body>
-    <h2>Değer Ekleme Formu</h2>
-    <form id="myForm">
-        <label for="value">Değer:</label>
-        <input type="text" id="value" name="value" required>
-        <button type="button" onclick="submitForm()">Gönder</button>
+    <h2>Değer Ekle</h2>
+    <form id="add-value-form">
+        <label for="deger">Değer:</label><br>
+        <input type="text" id="deger" name="deger"><br><br>
+        <button type="button" onclick="postData()">Gönder</button>
     </form>
 
     <script>
-        function submitForm() {
-            var value = document.getElementById("value").value;
+        function postData() {
+            var formData = new FormData();
+            var deger = document.getElementById('deger').value;
+            formData.append('deger', deger);
 
-            // AJAX kullanarak değeri backend'e gönderme
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:8000/api/add_value/", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        alert("Değer başarıyla eklendi!");
+            xhr.open('POST', 'http://localhost:8000/add-to-tablo-t/');
+            
+            // CSRF token'ı alıp isteğe eklemek
+            var csrftoken = getCookie('csrftoken');
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        alert('Veri başarıyla eklendi. ID: ' + response.id);
                     } else {
-                        alert("Değer eklenirken bir hata oluştu!");
+                        alert('Veri eklenirken bir hata oluştu: ' + response.message);
                     }
+                } else {
+                    alert('İstek başarısız. Hata kodu: ' + xhr.status);
                 }
             };
+            xhr.onerror = function() {
+                alert('İstek başarısız. Sunucuya ulaşılamıyor.');
+            };
+            xhr.send(formData);
+        }
 
-            xhr.send(JSON.stringify({ value: value }));
+        // CSRF token'ı almak için kullanılan yardımcı fonksiyon
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Cookie'nin başlangıcında CSRF token'ını arar
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
         }
     </script>
 </body>

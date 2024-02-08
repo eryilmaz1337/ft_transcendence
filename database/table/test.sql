@@ -1,17 +1,10 @@
+CREATE DATABASE test_db;
 
--- create_test_database.sql
-
--- Veritabanını oluştur
-CREATE DATABASE testdb;
-
--- Kullanılacak veritabanını seç
-\c testdb;
+-- Oluşturduğunuz veritabanını kullan
+\c my_database;
 
 -- Test tablosunu oluştur
-CREATE TABLE test_table (
+CREATE TABLE test_t (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255)
+    deger VARCHAR(255)
 );
-
--- Örnek bir veri ekle
-INSERT INTO test_table (name) VALUES ('Örnek Veri 1'), ('Örnek Veri 2');

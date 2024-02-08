@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
-from .models import MyModel
 import json
 
 @csrf_exempt
@@ -15,12 +14,18 @@ def add_numbers(request):
     else:
         return JsonResponse({'error': 'Invalid request method'})
 
-def add_value(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        value = data.get('value', '')
-        MyModel.objects.create(value=value)
+from .models import TabloT
 
-        return JsonResponse({'message': 'Değer başarıyla eklendi.'})
+def add_to_tablo_t(request):
+    if request.method == 'POST':
+        # Frontend'den gelen veriyi al
+        deger = request.POST.get('deger', None)
+        if deger is not None:
+            # Modelimize gelen veriyi ekleyelim
+            new_entry = TabloT(deger=deger)
+            new_entry.save()
+            return JsonResponse({'success': True, 'message': 'Veri başarıyla eklendi.'})
+        else:
+            return JsonResponse({'success': False, 'message': 'Gönderilen veri eksik veya hatalı.'})
     else:
-        return JsonResponse({'error': 'Geçersiz istek methodu.'})
+        return JsonResponse({'success': False, 'message': 'Geçersiz istek.'})
