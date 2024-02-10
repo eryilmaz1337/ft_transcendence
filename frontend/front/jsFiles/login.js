@@ -1,79 +1,68 @@
 function loginAdd() {
     return `
-        <style>
-            body {
-                font-family: 'Arial', sans-serif;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-                margin: 0;
-                background-color: #f8f9fa;
-            }
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Login Page</title>
+            <style>
+                body {
+                    height: 100vh;
+                    margin: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: sans-serif;
+                    color: black;
+                }
 
-            .container {
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-                width: 300px;
-                text-align: center;
-                margin: 0 auto; /* Sayfayı tam ortala */
-            }
+                .container {
+                    background-color: rgba(255, 255, 255, 0.8); /* Saydam arka plan */
+                    padding: 20px;
+                    border-radius: 20px;
+                    text-align: center;
+                }
 
-            form {
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
-            }
+                .box {
+                    margin-bottom: 20px; /* Kutu altında boşluk */
+                }
 
-            label {
-                font-weight: bold;
-                font-size: 14px;
-                color: #555;
-            }
+                .button {
+                    background-color: #28a745;
+                    color: white;
+                    font-weight: bold;
+                    border: none;
+                    margin-top: 10px;
+                    padding: 10px 20px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                }
 
-            input {
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                font-size: 14px;
-            }
+                .button:hover {
+                    background-color: #218838;
+                }
 
-            button {
-                background-color: #007bff;
-                color: #fff;
-                padding: 12px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 16px;
-                transition: background-color 0.3s ease;
-            }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="box">
+                    <h1 class="is-1 title is-spaced">Welcome to Transcendence</h1>
+                    <a href="#profile">
+                        <button id="toapi" onclick="to_loading()" class="button">Sign in with 42</button>
+                    </a>
+                </div>
+            </div>
 
-            button:hover {
-                background-color: #0056b3;
-            }
-        </style>
-
-        <div class="container">
-            <form id="loginForm">
-                <h2>Login</h2>
-                <label for="username">Username</label>
-                <input type="text" id="username" required>
-                <label for="password">Password</label>
-                <input type="password" id="password" required>
-                <button type="button" onclick="login()">Login</button>
-            </form>
-        </div>
-
-        <script>
-            function login() {
-                var username = document.getElementById("username").value;
-                var password = document.getElementById("password").value;
-
-                console.log("Login:", username, password);
-            }
-        </script>
+            <script>
+                function to_loading() {
+                    document.getElementById("toapi").classList.add("is-loading");
+                }
+                window.history.replaceState({}, document.title, "/" + "");
+            </script>
+        </body>
+        </html>
     `;
 }

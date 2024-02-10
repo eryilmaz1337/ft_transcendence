@@ -1,65 +1,54 @@
 document.addEventListener('DOMContentLoaded', function () {
-    if (window.location.hash) {
-        const page = window.location.hash.substring(1);
-        changePage(page);
-    } else {
-        changePage('login');
-    }
+    const page = window.location.hash.substring(1);
+    changePage(page || 'login'); // Eğer hash yoksa login sayfasına yönlendir
 });
 
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
-    if (window.location.hash) {
-        const page = window.location.hash.substring(1);
-        changePage(page);
-    }
+    const page = window.location.hash.substring(1);
+    changePage(page);
 });
 
 function changePage(page) {
     let content = '';
-
-    resetBackground();
+    showHeader();
+    showBackgroundImage();
 
     switch (page) {
-        case 'home':
-            showHeader();
-            break;
         case 'login':
-            content = loginAdd();
+            setBackgroundLogin();
             removeHeader();
+            content = loginAdd();
             break;
         case 'game':
+            removeBackground();
             content = gameAdd();
-            setGameBackground();
-            showHeader();
+            break;
+        case 'chat':
+            content = chatAdd();
             break;
         case 'profile':
             content = profileAdd();
-            setProfileBackground();
-            showHeader();
             break;
         default:
-            content = '<h1>404 Not Found</h1><p>Sayfa bulunamadı.</p>';
-            showHeader();
+            removeBackground();
+            content = ErrorAdd();
     }
     document.getElementById('content').innerHTML = content;
     window.location.hash = page;
     startgame();
 }
 
-function resetBackground() {
-    document.body.style.backgroundImage = "url('img/comodore64.jpeg')";
-    document.body.style.backgroundColor = "transparent";
+function removeBackground() {
+    document.body.style.backgroundImage = "none";
 }
 
-function setGameBackground() {
-    document.body.style.backgroundImage = "none";
-    document.body.style.backgroundColor = "grey";
+function setBackgroundLogin() {
+    document.body.style.backgroundImage = "url('img/42.png')";
 }
 
-function setProfileBackground() {
-    document.body.style.backgroundImage = "none";
-    document.body.style.backgroundColor = "green";
+function showBackgroundImage() {
+    document.body.style.backgroundImage ="url('img/comodore64.jpeg')";
 }
 
 function removeHeader() {
