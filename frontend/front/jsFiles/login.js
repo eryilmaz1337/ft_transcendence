@@ -1,3 +1,14 @@
+let isLoggedIn = false;
+
+function loginSuccess() {
+    isLoggedIn = true;
+    document.getElementById("toapi").classList.add("is-loading");
+
+    if (isLoggedIn) {
+        window.location.href = "#home";
+    }
+}
+
 function loginAdd() {
     return `
         <!DOCTYPE html>
@@ -50,16 +61,26 @@ function loginAdd() {
             <div class="container">
                 <div class="box">
                     <h1 class="is-1 title is-spaced">Welcome to Transcendence</h1>
-                    <a href="#profile">
-                        <button id="toapi" onclick="to_loading()" class="button">Sign in with 42</button>
+                    <a href="#home">
+                        <!-- onclick event updated -->
+                        <button id="toapi" onclick="loginSuccess()" class="button">Sign in with 42</button>
                     </a>
                 </div>
             </div>
 
             <script>
-                function to_loading() {
+                // JavaScript kodu burada
+                function loginSuccess() {
+                    // Burada kullanıcı başarılı bir şekilde giriş yaptığında bayrağı true yapacağız
+                    isLoggedIn = true;
                     document.getElementById("toapi").classList.add("is-loading");
+
+                    // Yönlendirme işlemi için
+                    if (isLoggedIn) {
+                        window.location.href = "#home";
+                    }
                 }
+
                 window.history.replaceState({}, document.title, "/" + "");
             </script>
         </body>

@@ -14,29 +14,37 @@ function changePage(page) {
     showHeader();
     showBackgroundImage();
 
-    switch (page) {
-        case 'login':
-            setBackgroundLogin();
-            removeHeader();
-            content = loginAdd();
-            break;
-        case 'game':
-            removeBackground();
-            content = gameAdd();
-            break;
-        case 'chat':
-            content = chatAdd();
-            break;
-        case 'profile':
-            content = profileAdd();
-            break;
-        default:
-            removeBackground();
-            content = ErrorAdd();
+    if (isLoggedIn || page == 'login')
+    {
+        switch (page) {
+            case 'login':
+                setBackgroundLogin();
+                removeHeader();
+                content = loginAdd();
+                break;
+            case 'home':
+                content = homeAdd();
+                break;
+            case 'game':
+                removeBackground();
+                content = gameAdd();
+                break;
+            case 'chat':
+                content = chatAdd();
+                break;
+            case 'profile':
+                content = profileAdd();
+                break;
+            default:
+                removeBackground();
+                content = ErrorAdd();
+        }
+        document.getElementById('content').innerHTML = content;
+        window.location.hash = page;
+        startgame();
     }
-    document.getElementById('content').innerHTML = content;
-    window.location.hash = page;
-    startgame();
+    else
+        window.location.hash = 'login';
 }
 
 function removeBackground() {
