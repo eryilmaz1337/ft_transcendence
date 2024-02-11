@@ -108,17 +108,17 @@ function gameAdd() {
             }
         }
 
-        function startSpecialMatch() {
-            if (!${gameStarted}) {
-                ${gameStarted} = true;
-                var opponentName = prompt("Arkadaşının ismini girin:");
-                if (opponentName !== null && opponentName !== '') {
-                    // Özel maç için gerekli işlemler
-                    // Arkadaşın ismini gönder
-                    // Bekleme ekranını göster
-                }
-            }
-        }
+        // function startSpecialMatch() {
+        //     if (!${gameStarted}) {
+        //         ${gameStarted} = true;
+        //         var opponentName = prompt("Arkadaşının ismini girin:");
+        //         if (opponentName !== null && opponentName !== '') {
+        //             // Özel maç için gerekli işlemler
+        //             // Arkadaşın ismini gönder
+        //             // Bekleme ekranını göster
+        //         }
+        //     }
+        // }
     </script>
     `;
 }

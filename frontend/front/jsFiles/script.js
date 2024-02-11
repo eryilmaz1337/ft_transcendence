@@ -11,6 +11,9 @@ window.addEventListener('hashchange', function () {
 
 function changePage(page) {
     let content = '';
+    //önceki içerik temizlenir
+    document.getElementById('content').innerHTML = '';
+
     showHeader();
     showBackgroundImage();
 
@@ -28,6 +31,7 @@ function changePage(page) {
             case 'game':
                 setBackgroundGame();
                 content = chooseGame();
+                //content = gameAdd();
                 break;
             case 'chat':
                 content = chatAdd();
@@ -39,6 +43,7 @@ function changePage(page) {
                 removeBackground();
                 content = ErrorAdd();
         }
+        //Yeni içerik eklenir.
         document.getElementById('content').innerHTML = content;
         window.location.hash = page;
         //startgame();
@@ -53,14 +58,23 @@ function removeBackground() {
 
 function setBackgroundGame() {
     document.body.style.backgroundImage = "url('img/astroturf.jpeg')";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "center";
 }
 
 function setBackgroundLogin() {
     document.body.style.backgroundImage = "url('img/42.png')";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "center";
 }
 
 function showBackgroundImage() {
     document.body.style.backgroundImage ="url('img/comodore64.jpeg')";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "center";
 }
 
 function removeHeader() {
