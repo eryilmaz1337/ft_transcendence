@@ -40,14 +40,16 @@ function loginAdd() {
                 }
 
                 .button {
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    border-radius: 10px;
+                    border: none;
+                    cursor: pointer;
                     background-color: #28a745;
                     color: white;
                     font-weight: bold;
-                    border: none;
                     margin-top: 10px;
                     padding: 10px 20px;
-                    border-radius: 10px;
-                    cursor: pointer;
                     transition: background-color 0.3s ease;
                 }
 

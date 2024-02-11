@@ -26,8 +26,8 @@ function changePage(page) {
                 content = homeAdd();
                 break;
             case 'game':
-                removeBackground();
-                content = gameAdd();
+                setBackgroundGame();
+                content = chooseGame();
                 break;
             case 'chat':
                 content = chatAdd();
@@ -41,7 +41,7 @@ function changePage(page) {
         }
         document.getElementById('content').innerHTML = content;
         window.location.hash = page;
-        startgame();
+        //startgame();
     }
     else
         window.location.hash = 'login';
@@ -49,6 +49,10 @@ function changePage(page) {
 
 function removeBackground() {
     document.body.style.backgroundImage = "none";
+}
+
+function setBackgroundGame() {
+    document.body.style.backgroundImage = "url('img/astroturf.jpeg')";
 }
 
 function setBackgroundLogin() {

@@ -1,6 +1,41 @@
-function gameAdd() {
-    let gameStarted = false; // Oyunun başladığını kontrol etmek için bir değişken
+function chooseGame() {
+    return `
+    <style>
+        .choose-game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
+        .choose-game-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            margin: 10px;
+            font-weight: bold;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .choose-game-button:hover {
+            transform: scale(1.1);
+        }
+    </style>
+
+    <div class="choose-game-container">
+        <button class="choose-game-button" id="quickMatchButton">Hızlı Maç Ara</button>
+        <button class="choose-game-button" id="specialMatchButton">Özel Maç</button>
+    </div>
+    `;
+}
+
+
+function gameAdd() {
     return `
     <style>
     * {
@@ -54,6 +89,7 @@ function gameAdd() {
         }
     }
     </style>
+
     <button id="quickMatchButton" onclick="startQuickMatch()">Hızlı Maç Ara</button>
     <button id="specialMatchButton" onclick="startSpecialMatch()">Özel Maç</button>
     <canvas id="canvas"></canvas>
