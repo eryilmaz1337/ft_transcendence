@@ -31,7 +31,11 @@ function changePage(page) {
             case 'game':
                 setBackgroundGame();
                 content = chooseGame();
-                //content = gameAdd();
+                break;
+            case 'specialMatch':
+                content = gameAdd();
+                setGameBackground();
+                showHeader();
                 break;
             case 'chat':
                 content = chatAdd();
@@ -46,10 +50,15 @@ function changePage(page) {
         //Yeni içerik eklenir.
         document.getElementById('content').innerHTML = content;
         window.location.hash = page;
-        //startgame();
     }
     else
         window.location.hash = 'login';
+}
+
+function setGameBackground()
+{
+    document.body.style.backgroundImage = "none";
+    document.body.style.background = "grey";
 }
 
 function removeBackground() {

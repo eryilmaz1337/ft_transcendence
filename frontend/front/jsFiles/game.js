@@ -10,6 +10,7 @@ function chooseGame() {
         }
 
         .choose-game-button {
+            text-decoration: none;  
             padding: 10px 20px;
             font-size: 16px;
             border: none;
@@ -29,13 +30,14 @@ function chooseGame() {
 
     <div class="choose-game-container">
         <button class="choose-game-button" id="quickMatchButton">Hızlı Maç Ara</button>
-        <button class="choose-game-button" id="specialMatchButton">Özel Maç</button>
+        <a href="#specialMatch" class="choose-game-button">Özel Maç</a>
     </div>
     `;
 }
 
 
 function gameAdd() {
+
     return `
     <style>
     * {
@@ -88,37 +90,12 @@ function gameAdd() {
             transform: translateX(-50%) scale(1);
         }
     }
-    </style>
 
-    <button id="quickMatchButton" onclick="startQuickMatch()">Hızlı Maç Ara</button>
-    <button id="specialMatchButton" onclick="startSpecialMatch()">Özel Maç</button>
+
+    </style>
     <canvas id="canvas"></canvas>
     <h1 id="player1Score">0</h1>
     <h1 id="player2Score">0</h1>
     <h2 id="WelcomeText">Welcome to the Pong Game</h2>
-    <script>
-        function startQuickMatch() {
-            if (!${gameStarted}) {
-                ${gameStarted} = true;
-                setTimeout(function() {
-                    // Hızlı maç için gerekli işlemler
-                    // Oyunu başlat
-                    startgame();
-                }, 2000); // 2 saniye bekle
-            }
-        }
-
-        // function startSpecialMatch() {
-        //     if (!${gameStarted}) {
-        //         ${gameStarted} = true;
-        //         var opponentName = prompt("Arkadaşının ismini girin:");
-        //         if (opponentName !== null && opponentName !== '') {
-        //             // Özel maç için gerekli işlemler
-        //             // Arkadaşın ismini gönder
-        //             // Bekleme ekranını göster
-        //         }
-        //     }
-        // }
-    </script>
     `;
 }
