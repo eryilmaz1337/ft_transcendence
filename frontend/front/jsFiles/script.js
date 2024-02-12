@@ -43,6 +43,15 @@ function changePage(page) {
             case 'profile':
                 content = profileAdd();
                 break;
+            case 'account-profile':
+                content = profileAdd();
+                break;
+            case 'account-change-password':
+                content = profileAdd();
+                break;
+            case 'account-info':
+                content = profileAdd();
+                break;
             default:
                 removeBackground();
                 content = ErrorAdd();
