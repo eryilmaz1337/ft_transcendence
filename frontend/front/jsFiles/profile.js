@@ -60,53 +60,6 @@ function profileAdd() {
 				opacity: 0;
 			}
 
-			.account-settings-links .list-group-item.active {
-				font-weight: bold !important;
-			}
-
-			html:not(.dark-style) .account-settings-links .list-group-item.active {
-				background: transparent !important;
-			}
-
-			.account-settings-multiselect~.select2-container {
-				width: 100% !important;
-			}
-
-			.light-style .account-settings-links .list-group-item {
-				padding: 0.85rem 1.5rem;
-				border-color: rgba(24, 28, 33, 0.03) !important;
-			}
-
-			.light-style .account-settings-links .list-group-item.active {
-				color: #4e5155 !important;
-			}
-
-			.material-style .account-settings-links .list-group-item {
-				padding: 0.85rem 1.5rem;
-				border-color: rgba(24, 28, 33, 0.03) !important;
-			}
-
-			.material-style .account-settings-links .list-group-item.active {
-				color: #4e5155 !important;
-			}
-
-			.dark-style .account-settings-links .list-group-item {
-				padding: 0.85rem 1.5rem;
-				border-color: rgba(255, 255, 255, 0.03) !important;
-			}
-
-			.dark-style .account-settings-links .list-group-item.active {
-				color: #fff !important;
-			}
-
-			.light-style .account-settings-links .list-group-item.active {
-				color: #4E5155 !important;
-			}
-
-			.light-style .account-settings-links .list-group-item {
-				padding: 0.85rem 1.5rem;
-				border-color: rgba(24, 28, 33, 0.03) !important;
-			}
 		</style>
 	</head>
 
@@ -117,16 +70,6 @@ function profileAdd() {
 			</h4>
 			<div class="card overflow-hidden">
 				<div class="row no-gutters row-bordered row-border-light">
-					<div class="col-md-3 pt-0">
-						<div class="list-group list-group-flush account-settings-links">
-							<a class="list-group-item list-group-item-action active" data-toggle="list"
-								href="#account-profile">Profile</a>
-							<a class="list-group-item list-group-item-action" data-toggle="list"
-								href="#account-change-password">Change password</a>
-							<a class="list-group-item list-group-item-action" data-toggle="list"
-								href="#account-info">Info</a>
-						</div>
-					</div>
 					<div class="col-md-9">
 						<div class="tab-content">
 							<div class="tab-pane fade active show" id="Profile">
@@ -157,13 +100,9 @@ function profileAdd() {
 										<label class="form-label">E-mail</label>
 										<input type="text" class="form-control mb-1" value="sensoyyasin@mail.com">
 										<div class="alert alert-warning mt-3">
-											Your email is not confirmed. Please check your inbox.<br>
-											<a href="javascript:void(0)">Resend confirmation</a>
+										<input type="checkbox" id="confirm" name="confirm" checked>
+										<label for="confirm">iki faktörlü doğrulama etkinleştir</label>
 										</div>
-									</div>
-									<div class="form-group">
-										<label class="form-label">Company</label>
-										<input type="text" class="form-control" value="Company Ltd.">
 									</div>
 								</div>
 							</div>

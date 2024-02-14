@@ -13,3 +13,7 @@ ENV POSTGRES_PASSWORD=testpass
 
 # Bağlantı portunu ayarla
 EXPOSE 5432
+
+FROM dpage/pgadmin4 
+
+EXPOSE 5050
