@@ -30,8 +30,8 @@ function profileAdd() {
                         <option value="turkish">Türkçe</option>
                     </select>
                 </div>
-                <button type="button" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-default">Cancel</button>
+                <button type="button" class="btn btn-primary button_profile">Save changes</button>
+                <button type="button" class="btn btn-default button_profile">Cancel</button>
             </form>
 </div>
 
@@ -106,7 +106,7 @@ function profileAdd() {
             color: #000;
         }
 
-        button {
+        .button_profile {
 			text-decoration: none;
             padding: 10px 20px;
             margin-top: 20px;
