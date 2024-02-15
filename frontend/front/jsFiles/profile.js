@@ -1,121 +1,129 @@
 function profileAdd() {
     return `
-	<!DOCTYPE html>
-	<html lang="en">
+    <div class="wrapper">
+        <div class="form-wrapper">
+            <form onsubmit="return false;">
+                <h3>Account Settings</h3>
+                <div class="input-wrapper">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="Yasin Şensoy">
+                </div>
+                <div class="input-wrapper">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" value="sensoyyasin">
+                </div>
+                <div class="input-wrapper">
+                    <label for="confirm-checkbox">Two-Factor Authentication:</label>
+                    <input type="checkbox" id="confirm-checkbox" name="confirm-checkbox">
+                </div>
+                <div class="input-wrapper" id="authentication-wrapper">
+                    <a href="#confirm" id="auth-link" onclick="myConfirm()">Two-Factor Auth Etkinleştir</a>
+                </div>
+                <div class="input-wrapper">
+                    <label for="upload-photo" class="btn btn-outline-primary">Upload new photo</label>
+                    <input type="file" id="upload-photo" class="account-settings-fileinput">
+                </div>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default">Cancel</button>
+            </form>
+        </div>
+    </div>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Sensoyyasin | Profile Template</title>
-		<link rel="stylesheet" href="style.css">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
-		<style>
+    <style>
+        .wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 490px;
+            background: #000;
+            box-shadow: 0 0 50px greenyellow;
+            border-radius: 20px;
+            padding: 40px;
+            overflow: hidden;
+        }
 
-			.profile-body {
-				margin-top: 20px;
-			}
+        .form-wrapper {
+            width: 100%;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
 
-			.ui-w-80 {
-				width: 80px !important;
-				height: auto;
-			}
+        h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #fff;
+            text-align: center;
+        }
 
-			.btn-default {
-				border-color: rgba(24, 28, 33, 0.1);
-				color: #4E5155;
-			}
+        .input-wrapper {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
 
-			label.btn {
-				margin-bottom: 0;
-			}
+        .input-wrapper label {
+            margin-right: 10px;
+            width: 200px;
+        }
 
-			.btn-outline-primary {
-				border-color: #26B4FF;
-				background: transparent;
-				color: #26B4FF;
-			}
+        .input-wrapper input[type="text"],
+        .input-wrapper input[type="file"] {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 210px); /* Genişlik ayarlaması güncellendi */
+        }
 
-			.btn {
-				cursor: pointer;
-			}
+        .input-wrapper input[type="checkbox"] {
+            margin-right: 10px;
+            width: auto; /* Checkbox genişliği otomatik ayarlandı */
+        }
 
-			.text-light {
-				color: #babbbc !important;
-			}
+        .account-settings-fileinput {
+            display: none;
+        }
 
-			.card {
-				background-clip: padding-box;
-				box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
-			}
+        .btn-outline-primary {
+            background: transparent;
+            border: 1px solid greenyellow;
+            color: greenyellow;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-			.row-bordered {
-				overflow: hidden;
-			}
+        .btn-outline-primary:hover {
+            background: greenyellow;
+            color: #000;
+        }
 
-			.account-settings-fileinput {
-				position: absolute;
-				visibility: hidden;
-				width: 1px;
-				height: 1px;
-				opacity: 0;
-			}
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-		</style>
-	</head>
+        .btn-primary {
+            background-color: greenyellow;
+            color: #000;
+            transition: background-color 0.3s ease;
+        }
 
-	<body class="profile-body">
-		<div class="container light-style flex-grow-1 container-p-y">
-			<h4 class="font-weight-bold py-3 mb-4" style="color: #26B4FF;">
-				Account Settings
-			</h4>
-			<div class="card overflow-hidden">
-				<div class="row no-gutters row-bordered row-border-light">
-					<div class="col-md-9">
-						<div class="tab-content">
-							<div class="tab-pane fade active show" id="Profile">
-								<div class="card-body media align-items-center">
-									<img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt
-										class="d-block ui-w-80">
-									<div class="media-body ml-4">
-										<label class="btn btn-outline-primary">
-											Upload new photo
-											<input type="file" class="account-settings-fileinput">
-										</label> &nbsp;
-										<button type="button" class="btn btn-default md-btn-flat">Reset</button>
-										<div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K
-										</div>
-									</div>
-								</div>
-								<hr class="border-light m-0">
-								<div class="card-body">
-									<div class="form-group">
-										<label class="form-label">Username</label>
-										<input type="text" class="form-control mb-1" value="sensoyyasin">
-									</div>
-									<div class="form-group">
-										<label class="form-label">Name</label>
-										<input type="text" class="form-control" value="Nelle Maxwell">
-									</div>
-									<div class="form-group">
-										<label class="form-label">E-mail</label>
-										<input type="text" class="form-control mb-1" value="sensoyyasin@mail.com">
-										<div class="alert alert-warning mt-3">
-										<input type="checkbox" id="confirm" name="confirm" checked>
-										<label for="confirm">iki faktörlü doğrulama etkinleştir</label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="text-right mt-3">
-				<button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-				<button type="button" class="btn btn-default">Cancel</button>
-			</div>
-		</div>
-	</body>
-	</html>
-`;
+        .btn-primary:hover {
+            background-color: #0cf;
+        }
+
+        .btn-default {
+            background-color: #babbbc;
+            color: #000;
+            margin-left: 10px;
+        }
+
+    </style>
+    `;
 }

@@ -16,7 +16,7 @@ body {
 	background-repeat: no-repeat; /* Resmi tekrar etmemek için */
 }
 
-nav {
+.custom-nav {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -26,23 +26,23 @@ nav {
 }
 
 .logo {
-	color: rgb(223, 219, 219);
+	color: white;
 	text-transform: uppercase;
 	letter-spacing: 3px;
 	font-size: 20px;
 }
 
-.nav-links {
+.nav-links-special {
 	display: flex;
 	justify-content: space-around;
 	width: 30%;
 }
 
-.nav-links li {
+.nav-links-special li {
 	list-style: none;
 }
 
-.nav-links a {
+.nav-links-special a {
 	color: greenyellow;
 	text-decoration: none;
 	letter-spacing: 2px;
@@ -64,7 +64,7 @@ nav {
 }
 
 @media screen and (max-width:1024px){
-	.nav-links {
+	.nav-links-special {
 		width: 60%;
 	}
 }
@@ -74,7 +74,7 @@ nav {
 		overflow-x: hidden;
 		background-size: cover;
 	}
-	.nav-links{
+	.nav-links-special{
 		position: absolute;
 		right: 0px;
 		height: 100vh;
@@ -88,7 +88,7 @@ nav {
 		transition: transform 0.5s ease-in;
 	}
 
-	.nav-links li {
+	.nav-links-special li {
 		opacity: 0;
 	}
 	.burger{
@@ -96,7 +96,7 @@ nav {
 	}
 }
 
-.nav-active{
+.custom-nav-active{
 	transform: translateX(0%);
 }
 

@@ -15,26 +15,20 @@ function changePage(page) {
     document.getElementById('content').innerHTML = '';
 
     showHeader();
-    showBackgroundImage();
+    showBackgroundColor();
 
     if (isLoggedIn || page == 'login')
     {
         switch (page) {
             case 'login':
-                setBackgroundLogin();
                 removeHeader();
                 content = loginAdd();
                 break;
-            case 'home':
-                content = homeAdd();
-                break;
             case 'game':
-                setBackgroundGame();
                 content = chooseGame();
                 break;
             case 'specialMatch':
                 content = gameAdd();
-                setGameBackground();
                 showHeader();
                 break;
             case 'chat':
@@ -43,8 +37,9 @@ function changePage(page) {
             case 'profile':
                 content = profileAdd();
                 break;
+            case 'confirm':
+                break;
             default:
-                removeBackground();
                 content = ErrorAdd();
         }
         //Yeni içerik eklenir.
@@ -55,35 +50,16 @@ function changePage(page) {
         window.location.hash = 'login';
 }
 
-function setGameBackground()
-{
+// function setBackgroundLogin() {
+//     document.body.style.backgroundImage = "url('img/42.png')";
+//     document.body.style.backgroundSize = "cover";
+//     document.body.style.backgroundRepeat = "no-repeat";
+//     document.body.style.backgroundPosition = "center";
+// }
+
+function showBackgroundColor() {
+    document.body.style.background = "black";
     document.body.style.backgroundImage = "none";
-    document.body.style.background = "grey";
-}
-
-function removeBackground() {
-    document.body.style.backgroundImage = "none";
-}
-
-function setBackgroundGame() {
-    document.body.style.backgroundImage = "url('img/astroturf.jpeg')";
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundRepeat = "no-repeat";
-    document.body.style.backgroundPosition = "center";
-}
-
-function setBackgroundLogin() {
-    document.body.style.backgroundImage = "url('img/42.png')";
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundRepeat = "no-repeat";
-    document.body.style.backgroundPosition = "center";
-}
-
-function showBackgroundImage() {
-    document.body.style.backgroundImage ="url('img/comodore64.jpeg')";
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundRepeat = "no-repeat";
-    document.body.style.backgroundPosition = "center";
 }
 
 function removeHeader() {
@@ -97,11 +73,11 @@ function showHeader() {
 }
 
 function closeBurgerMenu() {
-    const nav = document.querySelector('.nav-links');
+    const nav = document.querySelector('.nav-links-special');
     const burger = document.querySelector('.burger');
-    const navLinks = document.querySelectorAll('.nav-links li');
+    const navLinks = document.querySelectorAll('.nav-links-special li');
 
-    nav.classList.remove('nav-active');
+    nav.classList.remove('custom-nav-active');
     burger.classList.remove('toggle');
 
     navLinks.forEach((link, index) => {

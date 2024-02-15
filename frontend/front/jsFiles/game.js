@@ -1,39 +1,83 @@
 function chooseGame() {
     return `
-    <style>
-        .choose-game-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+    <div id="game-container">
+        <div class="wrapper">
+        <div class="form-wrapper">
+            <form onsubmit="return false;">
+                <h3>Pong Game</h3>
+                <button class="choose-game-button" id="quickMatchButton">Quick Match</button>
+                <a href="#specialMatch" class="choose-game-button">Special Match</a>
+            </form>
+        </div>
+    </div>
 
-        .choose-game-button {
-            text-decoration: none;  
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #28a745;
-            color: white;
-            margin: 10px;
-            font-weight: bold;
-            transition: transform 0.2s ease-in-out;
-        }
+        <style>
+            #game-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                font-family: 'Poppins', sans-serif;
+                box-sizing: border-box;
+            }
 
-        .choose-game-button:hover {
-            transform: scale(1.1);
-        }
-    </style>
+            .choose-game-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin-top: 20px;
+            }
 
-    <div class="choose-game-container">
-        <button class="choose-game-button" id="quickMatchButton">Hızlı Maç Ara</button>
-        <a href="#specialMatch" class="choose-game-button">Özel Maç</a>
+            .choose-game-button {
+                text-decoration: none;
+                padding: 10px 20px;
+                font-size: 18px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                background-color: greenyellow;
+                color: #000;
+                margin: 10px;
+                font-weight: bold;
+                transition: background-color 0.3s ease;
+            }
+
+            .choose-game-button:hover {
+                background-color: #0cf;
+            }
+
+            .wrapper {
+                position: relative;
+                width: 490px;
+                height: 300px;
+                background: #000;
+                box-shadow: 0 0 50px greenyellow;
+                border-radius: 20px;
+                padding: 40px;
+                overflow: hidden;
+            }
+
+            .form-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+            }
+
+            h3 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                color: #fff;
+                text-align: center;
+            }
+
+        </style>
     </div>
     `;
 }
+
 
 
 function gameAdd() {
