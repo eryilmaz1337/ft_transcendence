@@ -28,6 +28,7 @@ function profileAdd() {
                     <select id="language-select">
                         <option value="english">English</option>
                         <option value="turkish">Türkçe</option>
+                        <option value="german">Deutsch</option>
                     </select>
                 </div>
                 <button type="button" class="btn btn-primary button_profile">Save changes</button>
