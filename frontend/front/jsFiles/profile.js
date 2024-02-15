@@ -23,11 +23,17 @@ function profileAdd() {
                     <label for="upload-photo" class="btn btn-outline-primary">Upload new photo</label>
                     <input type="file" id="upload-photo" class="account-settings-fileinput">
                 </div>
+                <div class="input-wrapper language-wrapper">
+                    <label for="language-select">Dil Seç:</label>
+                    <select id="language-select">
+                        <option value="english">English</option>
+                        <option value="turkish">Türkçe</option>
+                    </select>
+                </div>
                 <button type="button" class="btn btn-primary">Save changes</button>
                 <button type="button" class="btn btn-default">Cancel</button>
             </form>
-        </div>
-    </div>
+</div>
 
     <style>
         .wrapper {
@@ -51,7 +57,7 @@ function profileAdd() {
         }
 
         h3 {
-            font-size: 24px;
+            font-size: 30px;
             margin-bottom: 20px;
             color: #fff;
             text-align: center;
@@ -101,10 +107,12 @@ function profileAdd() {
         }
 
         button {
-            margin-top: 20px;
+			text-decoration: none;
             padding: 10px 20px;
+            margin-top: 20px;
+			font-size: 18px;
             border: none;
-            border-radius: 5px;
+            border-radius: 15px;
             cursor: pointer;
         }
 
@@ -123,6 +131,17 @@ function profileAdd() {
             color: #000;
             margin-left: 10px;
         }
+
+		.language-wrapper {
+			margin-top: 20px;
+			text-align: center;
+		}
+
+		#language-select {
+			padding: 5px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
 
     </style>
     `;

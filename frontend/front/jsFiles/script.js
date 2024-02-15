@@ -16,6 +16,7 @@ function changePage(page) {
 
     showHeader();
     showBackgroundColor();
+    showNavbarStates();
 
     if (isLoggedIn || page == 'login')
     {
@@ -45,17 +46,13 @@ function changePage(page) {
         //Yeni içerik eklenir.
         document.getElementById('content').innerHTML = content;
         window.location.hash = page;
+        //Sayfa içeriği değiştikten sonra navbar gösterme
+        showNavbarStates();
     }
     else
         window.location.hash = 'login';
 }
 
-// function setBackgroundLogin() {
-//     document.body.style.backgroundImage = "url('img/42.png')";
-//     document.body.style.backgroundSize = "cover";
-//     document.body.style.backgroundRepeat = "no-repeat";
-//     document.body.style.backgroundPosition = "center";
-// }
 
 function showBackgroundColor() {
     document.body.style.background = "black";
@@ -73,11 +70,11 @@ function showHeader() {
 }
 
 function closeBurgerMenu() {
-    const nav = document.querySelector('.nav-links-special');
+    const nav = document.querySelector('.nav-links');
     const burger = document.querySelector('.burger');
-    const navLinks = document.querySelectorAll('.nav-links-special li');
+    const navLinks = document.querySelectorAll('.nav-links li');
 
-    nav.classList.remove('custom-nav-active');
+    nav.classList.remove('nav-active');
     burger.classList.remove('toggle');
 
     navLinks.forEach((link, index) => {

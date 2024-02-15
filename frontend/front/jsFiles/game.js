@@ -4,7 +4,7 @@ function chooseGame() {
         <div class="wrapper">
         <div class="form-wrapper">
             <form onsubmit="return false;">
-                <h3>Pong Game</h3>
+                <h3>🏓 Pong Game 🏓</h3>
                 <button class="choose-game-button" id="quickMatchButton">Quick Match</button>
                 <a href="#specialMatch" class="choose-game-button">Special Match</a>
             </form>

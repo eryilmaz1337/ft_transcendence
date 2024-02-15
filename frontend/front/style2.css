@@ -6,23 +6,30 @@ html,body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
 }
 
 body {
 	margin: 0;
-	background-image: url('img/comodore64.jpeg'); /* Arka plan resmi ekleyin */
-	background-size: cover; /* Resmi kaplamak için */
-	background-position: center;
-	background-repeat: no-repeat; /* Resmi tekrar etmemek için */
+	overflow-x: hidden;
 }
 
-.custom-nav {
+nav {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	min-height: 8vh;
 	background-color:black;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family: 'Poppins', sans-serif;
+}
+
+.profile-picture {
+	width: 40px;
+	height: 40px;
+	background-image: url('img/42.png');
+	background-size: cover;
+	background-position: center;
+	border-radius: 50%; /* Yuvarlaklık */
 }
 
 .logo {
@@ -32,17 +39,17 @@ body {
 	font-size: 20px;
 }
 
-.nav-links-special {
+.nav-links {
 	display: flex;
 	justify-content: space-around;
 	width: 30%;
 }
 
-.nav-links-special li {
+.nav-links li {
 	list-style: none;
 }
 
-.nav-links-special a {
+.nav-links a {
 	color: greenyellow;
 	text-decoration: none;
 	letter-spacing: 2px;
@@ -59,12 +66,12 @@ body {
 	width: 25px;
 	height: 3px;
 	margin: 5px;
-	background-color: rgb(255, 255, 255);
+	background-color: white;
 	transition: all 0.3s ease;
 }
 
 @media screen and (max-width:1024px){
-	.nav-links-special {
+	.nav-links {
 		width: 60%;
 	}
 }
@@ -74,7 +81,7 @@ body {
 		overflow-x: hidden;
 		background-size: cover;
 	}
-	.nav-links-special{
+	.nav-links{
 		position: absolute;
 		right: 0px;
 		height: 100vh;
@@ -88,7 +95,7 @@ body {
 		transition: transform 0.5s ease-in;
 	}
 
-	.nav-links-special li {
+	.nav-links li {
 		opacity: 0;
 	}
 	.burger{
@@ -96,7 +103,7 @@ body {
 	}
 }
 
-.custom-nav-active{
+.nav-active{
 	transform: translateX(0%);
 }
 
@@ -121,4 +128,51 @@ body {
 
 .toggle .line3{
 	transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Profile & Log Out */
+
+.profile-wrapper {
+    position: relative;
+}
+
+.profile-picture {
+    width: 40px;
+    height: 40px;
+    background-image: url('img/42.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    cursor: pointer;
+	border: 2px solid greenyellow;
+}
+
+.logout-wrapper {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+	display: none;
+	align-items: center;
+}
+
+.logout-btn {
+    padding: 7px 10px;
+    font-size: 15px;
+	font-family: 'Poppins', sans-serif;
+    border: none;
+	font-weight: bold;
+    background-color: greenyellow;
+    color: black;
+    cursor: pointer;
+	margin-left: 5px;
+}
+
+.logout-btn:hover {
+    background-color: #0cf; /* Üzerine gelince maviye dönsün */
+}
+
+.profile-wrapper:hover .logout-wrapper {
+    display: flex; /* Profil resmine hover yapıldığında göster */
+	transform: translateX(-50%); /*  nesneyi kendi genişliğinin yarısı kadar sola kaydırır.  */
 }
