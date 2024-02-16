@@ -1,11 +1,15 @@
+let gameRunning = false;
+
 function startgame()
 {
-    const welcomeText = document.getElementById('WelcomeText');
+    gameRunning = true;
+
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext('2d');
+    const welcomeText = document.getElementById('WelcomeText');
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth * 0.8;
+    canvas.height = window.innerHeight * 0.8;
 
     const keysPressed = [];
     const KEY_UP = 38;
@@ -106,10 +110,6 @@ this.getCenter = function() {
             ball.velocity.y *= -1;
         if (ball.pos.y - ball.radius <= 0)
             ball.velocity.y *= -1;
-        // if (ball.pos.x + ball.radius >= canvas.width)
-        //     ball.velocity.x *= -1;
-        // if (ball.pos.x - ball.radius <= 0)
-        //     ball.velocity.x *= -1;
     }
 
     function ballPaddleCollision(ball,paddle)
@@ -166,14 +166,30 @@ this.getCenter = function() {
         {
             paddle2.score++;
             document.getElementById('player2Score').innerHTML = paddle2.score;
+            if (paddle2.score == 3){
+                gameRunning = false;
+                window.location.hash = 'game';
+                paddle2.score = 0;
+                paddle1.score = 0;
+                return;
+            }
             respawnBall(ball);
+            gameRunning = true;
         }
 
         if (ball.pos.x >= canvas.width + ball.radius)
         {
             paddle1.score++;
             document.getElementById('player1Score').innerHTML = paddle1.score;
+            if (paddle1.score == 3){
+                gameRunning = false;
+                window.location.hash = 'game';
+                paddle1.score = 0;
+                paddle2.score = 0;
+                return;
+            }
             respawnBall(ball);
+            gameRunning = true;
         }
     }
 
@@ -221,6 +237,9 @@ this.getCenter = function() {
     const paddle1 = new Paddle(vec2(0,50), vec2(15, 15), 20, 160);
     const paddle2 = new Paddle(vec2(canvas.width - 20, 30), vec2(15, 15), 20, 160);
 
+    // paddle1.score = 0;
+    // paddle2.score = 0; -> Asenkron çalışma var.
+
     function gameUpdate()
     {
         ball.update();
@@ -243,6 +262,9 @@ this.getCenter = function() {
 
     function gameLoop()
     {
+        if (!gameRunning)
+            return;
+
         ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
         ctx.fillRect(0,0, canvas.width, canvas.height);
         window.requestAnimationFrame(gameLoop);
@@ -250,6 +272,5 @@ this.getCenter = function() {
         gameUpdate();
         gameDraw();
     }
-
     gameLoop();
 }

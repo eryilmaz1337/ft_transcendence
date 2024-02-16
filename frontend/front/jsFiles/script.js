@@ -28,9 +28,11 @@ function changePage(page) {
             case 'game':
                 content = chooseGame();
                 break;
-            case 'specialMatch':
+            case 'quickMatch':
                 content = gameAdd();
                 showHeader();
+                break;
+            case 'specialMatch':
                 break;
             case 'chat':
                 content = chatAdd();
@@ -48,11 +50,12 @@ function changePage(page) {
         window.location.hash = page;
         //Sayfa içeriği değiştikten sonra navbar gösterme
         showNavbarStates();
+        //Async function()
+        startgame();
     }
     else
         window.location.hash = 'login';
 }
-
 
 function showBackgroundColor() {
     document.body.style.background = "black";

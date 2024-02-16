@@ -5,8 +5,8 @@ function chooseGame() {
         <div class="form-wrapper">
             <form onsubmit="return false;">
                 <h3>🏓 Pong Game 🏓</h3>
-                <button class="choose-game-button" id="quickMatchButton">Quick Match</button>
-                <a href="#specialMatch" class="choose-game-button">Special Match</a>
+                <a href="#quickMatch" class="choose-game-button" id="quickMatchButton">Quick Match</a>
+                <a href="#specialMatch" class="choose-game-button" id="specialMatchButton" onclick="specialMatchClicked()">Special Match</a>
             </form>
         </div>
     </div>
@@ -79,67 +79,101 @@ function chooseGame() {
 }
 
 
-
 function gameAdd() {
-
     return `
     <style>
     * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
     }
 
-    body {
-        background-size: cover;
-        background-repeat: no-repeat;
+    #canvas-container {
+        position: relative;
+        width: 90vw;
+        height: 80vh;
+        max-width: 900px;
+        max-height: 600px;
+        margin: 0 auto;
         overflow: hidden;
     }
 
-    h1 {
-        color: white;
-        font-family: sans-serif;
-        font-size: 4rem;
+    canvas {
+        display: block;
+        background-color: #000;
+        border: 2px solid greenyellow;
+        border-radius: 10px;
+        width: 100%;
+        height: 100%;
+    }
+
+    #scoreboard {
         position: absolute;
-        top: 100px;
-        transform: translateY(-50%);
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        z-index: 1;
+    }
+
+    #player1Score, #player2Score {
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 44px;
     }
 
     #WelcomeText {
-        color: greenyellow;
-        font-family: "Arial Black", Gadget, sans-serif;
-        font-size: 2.5rem;
         position: absolute;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 2rem;
+        font-weight: bold;
         top: 20%;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
         opacity: 0;
         animation: fadeIn 1s ease forwards;
-    }
-
-    #player1Score {
-        left: 35%;
-    }
-
-    #player2Score {
-        right: 35%;
+        z-index: 1;
+        text-align: center;
     }
 
     @keyframes fadeIn {
         from {
             opacity: 0;
-            transform: translateX(-50%) scale(0.5);
+            transform: translate(-50%, -50%) scale(0.5);
         }
         to {
             opacity: 1;
-            transform: translateX(-50%) scale(1);
+            transform: translate(-50%, -50%) scale(1);
         }
     }
 
+    @media screen and (max-width: 768px) {
+        #scoreboard {
+            font-size: 18px;
+        }
+    }
 
-    </style>
+    @media screen and (max-width: 480px) {
+        #scoreboard {
+            font-size: 16px;
+        }
+    }
+
+</style>
+
+<div id="canvas-container">
     <canvas id="canvas"></canvas>
-    <h1 id="player1Score">0</h1>
-    <h1 id="player2Score">0</h1>
+    <div id="scoreboard">
+        <h1 id="player1Score">0</h1>
+        <h1 id="player2Score">0</h1>
+    </div>
     <h2 id="WelcomeText">Welcome to the Pong Game</h2>
+
+    /* Buton eklenecek ve arkaplan değiştirilecek game'de */
+</div>
+
     `;
 }
