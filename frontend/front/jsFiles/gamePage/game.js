@@ -74,7 +74,6 @@ function chooseGame() {
             }
 
         </style>
-    </div>
     `;
 }
 

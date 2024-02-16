@@ -13,9 +13,7 @@ function changePage(page) {
     let content = '';
     //önceki içerik temizlenir
     document.getElementById('content').innerHTML = '';
-
     showHeader();
-    showBackgroundColor();
     showNavbarStates();
 
     if (isLoggedIn || page == 'login')
@@ -57,10 +55,10 @@ function changePage(page) {
         window.location.hash = 'login';
 }
 
-function showBackgroundColor() {
-    document.body.style.background = "black";
-    document.body.style.backgroundImage = "none";
-}
+// function showBackgroundColor() {
+//     document.body.style.background = "black";
+//     document.body.style.backgroundImage = "none";
+// }
 
 function removeHeader() {
     const header = document.querySelector('nav');

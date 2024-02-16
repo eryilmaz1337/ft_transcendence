@@ -97,7 +97,5 @@ function loginAdd() {
                 window.history.replaceState({}, document.title, "/" + "");
             </script>
         </body>
-
-        </html>
     `;
 }
