@@ -1,6 +1,6 @@
 let gameRunning = false;
 
-function startgame()
+async function startgame()
 {
     gameRunning = true;
 

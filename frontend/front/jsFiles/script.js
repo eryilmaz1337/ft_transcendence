@@ -49,7 +49,6 @@ function changePage(page) {
         //Sayfa içeriği değiştikten sonra navbar gösterme
         showNavbarStates();
         //Async function()
-        startgame();
     }
     else
         window.location.hash = 'login';

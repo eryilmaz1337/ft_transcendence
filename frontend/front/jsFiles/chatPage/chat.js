@@ -173,7 +173,7 @@ function chatAdd() {
         <button class="chat-button clear-chat-button">Clear Chat</button>
     </div>
 
-    <script src="chatApp.js"></script>
+    <script src="jsFiles/chatPage/chatApp.js"></script>
 </body>
 
     `;

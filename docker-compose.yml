@@ -28,15 +28,15 @@ services:
     networks:
       - network
   
-  database:
-    container_name: database
-    build: ./database
-    ports:
-      - 5432:5432
-      - 5050:5050
-    networks:
-      - network
-    restart: always
+  # database:
+  #   container_name: database
+  #   build: ./database
+  #   # ports:
+  #   #   - 5432:5432
+  #   #   - 80:5050
+  #   networks:
+  #     - network
+  #   restart: always
 
   backend:
     container_name: backend

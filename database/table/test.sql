@@ -1,7 +1,7 @@
 CREATE DATABASE test_db;
 
 -- Oluşturduğunuz veritabanını kullan
-\c my_database;
+\c test_db;
 
 -- Test tablosunu oluştur
 CREATE TABLE test_t (
