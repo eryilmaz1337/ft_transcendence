@@ -29,3 +29,25 @@ def add_to_tablo_t(request):
             return JsonResponse({'success': False, 'message': 'Gönderilen veri eksik veya hatalı.'})
     else:
         return JsonResponse({'success': False, 'message': 'Geçersiz istek.'})
+
+@csrf_exempt
+def register(request):
+    if request.method == 'POST':
+        try:
+            q = User.objects.filter(Q(email=data["email"]) | Q(username=data["username"]))
+            if q: return JsonResponse({"error": "zaten kayıtlı email veya username"}, status=3131)
+            data = json.loads(request.body)
+            user = User.objects.create(
+                username=data['username'],
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                email=data['email'],
+                password=make_password(data['password'])
+            )
+            print(user)
+            user.save()
+            return JsonResponse({"message": "Kullanıcı başarıyla oluşturuldu"}, status=201)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+    else:
+        return JsonResponse({"error": "Invalid request"}, status=400)

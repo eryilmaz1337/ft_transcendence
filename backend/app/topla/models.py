@@ -9,3 +9,7 @@ class TabloT(models.Model):
     # Diğer alanlar buraya eklenmeli, sizin frontend'den alacağınız veriye göre
     # Örneğin:
     deger = models.CharField(max_length=255)  # Varsayılan maksimum uzunluk 255 karakter
+
+    def __str__(self):
+        return self.deger
+    

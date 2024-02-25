@@ -28,6 +28,7 @@ function changePage(page) {
                 break;
             case 'quickMatch':
                 content = gameAdd();
+                startgame();
                 showHeader();
                 break;
             case 'specialMatch':

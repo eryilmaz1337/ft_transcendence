@@ -27,16 +27,19 @@ services:
     restart: always
     networks:
       - network
-  
-  # database:
-  #   container_name: database
-  #   build: ./database
-  #   # ports:
-  #   #   - 5432:5432
-  #   #   - 80:5050
-  #   networks:
-  #     - network
-  #   restart: always
+
+  database:
+    container_name: database
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+    ports:
+      - 5432:5432
+    networks:
+      - network
 
   backend:
     container_name: backend
@@ -48,6 +51,8 @@ services:
     networks:
       - network
     restart: always
+    depends_on:
+      - database
 
   frontend:
     container_name: frontend
