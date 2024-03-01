@@ -3,7 +3,7 @@ all:
 	@sudo docker-compose -f docker-compose.yml up --build
 
 down:
-	@sudo docker-compose -f srcs/docker-compose.yml down
+	@sudo docker-compose -f docker-compose.yml down
 
 re: clean all
 
