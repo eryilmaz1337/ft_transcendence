@@ -8,6 +8,8 @@ all:
 		else \
 			sudo su -c "make up"; \
 		fi; \
+	else \
+		make up; \
 	fi
 
 up:
