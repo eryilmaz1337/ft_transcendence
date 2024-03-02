@@ -1,19 +1,14 @@
 UNAME := $(shell uname)
 CURRENT_USER := $(shell whoami)
 
-# Define default DOCKER_COMMAND
-DOCKER_COMMAND := make up
-
-# Check if the operating system is Linux
-ifeq ($(UNAME),Linux)
-	ifeq ($(CURRENT_USER),root)
-		DOCKER_COMMAND := make up
-	else
-		DOCKER_COMMAND := sudo su -c "make up"
-	endif
-endif
-
-all: docker-up
+all:
+	@if [ "$(UNAME)" = "Linux" ]; then \
+		if [ "$(CURRENT_USER)" = "root" ]; then \
+			make up; \
+		else \
+			sudo su -c "make up"; \
+		fi; \
+	fi
 
 up:
 	@sudo docker-compose -f docker-compose.yml up --build
@@ -35,7 +30,4 @@ clean:
 clear:
 	@sudo docker system prune -a -f
 
-docker-up:
-	@$(shell $(DOCKER_COMMAND))
-
-.PHONY: all down re clean clear up docker-up
+.PHONY: all down re clean clear up
