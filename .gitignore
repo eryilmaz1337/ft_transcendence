@@ -1,1 +1,4 @@
 *.pyc
+backend/app/pong/__pycache__/*.pyc
+backend/app/topla/migrations/__pycache__/*.pyc
+__pycache__/
