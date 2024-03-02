@@ -59,13 +59,13 @@ DATABASES = {
         'USER': 'testuser',              # PostgreSQL kullanıcı adı
         'PASSWORD': 'testpass',      # PostgreSQL kullanıcı şifresi
         'HOST': 'database',            # PostgreSQL servisinin adı (Docker Compose'da belirttiğiniz ad)
-        'PORT': '5432',                # PostgreSQL bağlantı portu
+        'PORT': '5435',                # PostgreSQL bağlantı portu
     }
 }
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5432",  # Örnek olarak, frontend uygulamanızın adresi
+    "http://localhost:5435",  # Örnek olarak, frontend uygulamanızın adresi
     "http://localhost:423",   # Başka bir örnek origin
 ]
 
