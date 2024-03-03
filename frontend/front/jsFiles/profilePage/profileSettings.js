@@ -1,40 +1,46 @@
-function profileAdd() {
+
+function profileSettings() {
     return `
     <div class="wrapper">
         <div class="form-wrapper">
             <form onsubmit="return false;">
                 <h3>Account Settings</h3>
+                <!-- Profile Photo -->
                 <div class="input-wrapper">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" value="Yasin Şensoy">
+                    <label for="profile-photo">Profile Photo:</label>
+                    <input type="file" id="profile-photo" class="account-settings-fileinput">
                 </div>
+                <!-- Username -->
                 <div class="input-wrapper">
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" value="sensoyyasin">
                 </div>
+                <!-- Email -->
                 <div class="input-wrapper">
-                    <label for="confirm-checkbox">Two-Factor Authentication:</label>
-                    <input type="checkbox" id="confirm-checkbox" name="confirm-checkbox">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="example@example.com">
                 </div>
-                <div class="input-wrapper" id="authentication-wrapper">
-                    <a href="#confirm" id="auth-link" onclick="myConfirm()">Two-Factor Auth Etkinleştir</a>
-                </div>
+                <!-- Nickname -->
                 <div class="input-wrapper">
-                    <label for="upload-photo" class="btn btn-outline-primary">Upload new photo</label>
-                    <input type="file" id="upload-photo" class="account-settings-fileinput">
+                    <label for="nickname">Nickname:</label>
+                    <input type="text" id="nickname" name="nickname" value="Sensoy">
                 </div>
-                <div class="input-wrapper language-wrapper">
-                    <label for="language-select">Dil Seç:</label>
-                    <select id="language-select">
-                        <option value="english">English</option>
-                        <option value="turkish">Türkçe</option>
-                        <option value="german">Deutsch</option>
-                    </select>
+                <!-- First Name -->
+                <div class="input-wrapper">
+                    <label for="first-name">First Name:</label>
+                    <input type="text" id="first-name" name="first-name" value="Yasin">
                 </div>
-                <button type="button" class="btn btn-primary button_profile">Save changes</button>
-                <button type="button" class="btn btn-default button_profile">Cancel</button>
+                <!-- Last Name -->
+                <div class="input-wrapper">
+                    <label for="last-name">Last Name:</label>
+                    <input type="text" id="last-name" name="last-name" value="Şensoy">
+                </div>
+                <!-- Buttons -->
+                <button type="button" class="btn btn-primary button_profile" onclick="saveProfile()">Save</button>
+                <button type="button" class="btn btn-primary button_profile" >Cancel</button>
             </form>
-</div>
+        </div>
+    </div>
 
     <style>
         .wrapper {
@@ -76,6 +82,8 @@ function profileAdd() {
         }
 
         .input-wrapper input[type="text"],
+        .input-wrapper input[type="email"],
+        .input-wrapper input[type="number"],
         .input-wrapper input[type="file"] {
             flex: 1;
             padding: 5px;
@@ -146,4 +154,4 @@ function profileAdd() {
 
     </style>
     `;
-}
+  }
