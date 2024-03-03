@@ -198,14 +198,6 @@ function publicProfile() {
             margin-bottom: 10px;
         }
 
-        .field-wrapper:hover {
-            box-shadow: 0 0 10px greenyellow; /* Add box-shadow effect on hover */
-        }
-
-        .form-wrapper:hover {
-            box-shadow: 0 0 10px #5ff0d0
-        }
-
         .game-status-bottom-wrapper {
             display: flex;
             flex-direction: row;
