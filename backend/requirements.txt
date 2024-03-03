@@ -1,3 +1,4 @@
-Django==3.2.6
+Django==4.2.3
 django-cors-headers
+requests
 psycopg2-binary==2.9.3

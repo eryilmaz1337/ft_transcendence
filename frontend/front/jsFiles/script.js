@@ -13,20 +13,23 @@ function changePage(page) {
     let content = '';
     //önceki içerik temizlenir
     document.getElementById('content').innerHTML = '';
-    showHeader();
-    showNavbarStates();
-
     if (isLoggedIn || page == 'login')
     {
         switch (page) {
             case 'login':
+                showHeader();
+                showNavbarStates();
                 removeHeader();
                 content = loginAdd();
                 break;
             case 'game':
+                showHeader();
+                showNavbarStates();
                 content = chooseGame();
                 break;
             case 'quickMatch':
+                showHeader();
+                showNavbarStates();
                 content = gameAdd();
                 startgame();
                 showHeader();
@@ -34,13 +37,20 @@ function changePage(page) {
             case 'specialMatch':
                 break;
             case 'chat':
+                showHeader();
+                showNavbarStates();
                 content = chatAdd();
                 break;
-            case 'publicProfile':
-                content = publicProfile();
+            case 'profile':
+                showHeader();
+                showNavbarStates();
+                content = profileAdd();
                 break;
-            case 'profileSettings':
-                content = profileSettings();
+            case 'singup':
+                content = singup();
+                break;
+            case 'singin':
+                content = singin();
                 break;
             case 'confirm':
                 break;

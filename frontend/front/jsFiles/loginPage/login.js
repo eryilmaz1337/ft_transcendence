@@ -9,12 +9,34 @@ function loginSuccess() {
     }
 }
 
+function signinFunction(){
+    isLoggedIn = true;
+    document.getElementById("singin").classList.add("is-loading");
+    if (isLoggedIn)
+        window.location.href = "#singin";
+}
+
+function signupFunction(){
+    isLoggedIn = true;
+    document.getElementById("singup").classList.add("is-loading");
+    if (isLoggedIn)
+        window.location.href = "#singup";
+}
+
 function loginAdd() {
     return `
         <head>
             <style>
 
-                * {
+                .form-wrapper button {
+                    margin: 5px; /* Butonlar arasında boşluk bırak */
+                    padding: 10px 20px; /* Buton içi boşluk */
+                    font-size: 16px; /* Yazı boyutu */
+                    border: none; /* Kenarlık kaldır */
+                    border-radius: 5px; /* Kenarları yuvarlak yap */
+                    cursor: pointer; /* İmleç buton üzerine geldiğinde değişsin */
+                 }
+               * {
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
@@ -45,7 +67,7 @@ function loginAdd() {
                     justify-content: center;
                     align-items: center;
                     width: 100%;
-                    height: 100%;
+                    height: 100%; 
                 }
 
                 h3 {
@@ -83,19 +105,11 @@ function loginAdd() {
                     <form onsubmit="return false;">
                         <h3>Welcome to Transcendence Project</h3>
                         <button id="toapi" onclick="loginSuccess()">Sign in with 42 API</button>
+                        <button id="singup" onclick="signupFunction()">Sign up</button>
+                        <button id="singin" onclick="signinFunction()">Sign in</button>
                     </form>
                 </div>
             </div>
-
-            <script>
-                function loginSuccess() {
-                    isLoggedIn = true;
-                    document.getElementById("toapi").classList.add("is-loading");
-                    if (isLoggedIn)
-                        window.location.href = "#home";
-                }
-                window.history.replaceState({}, document.title, "/" + "");
-            </script>
         </body>
     `;
 }
