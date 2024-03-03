@@ -36,8 +36,11 @@ function changePage(page) {
             case 'chat':
                 content = chatAdd();
                 break;
-            case 'profile':
-                content = profileAdd();
+            case 'publicProfile':
+                content = publicProfile();
+                break;
+            case 'profileSettings':
+                content = profileSettings();
                 break;
             case 'confirm':
                 break;
