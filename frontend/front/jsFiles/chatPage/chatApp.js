@@ -41,8 +41,8 @@ const updateMessageSender = (name) => {
 	chatInput.focus();
 }
 
-//johnSelectorBtn.onclick = () => updateMessageSender('John');
-//janeSelectorBtn.onclick = () => updateMessageSender('Jane');
+johnSelectorBtn.onclick = () => updateMessageSender('John');
+janeSelectorBtn.onclick = () => updateMessageSender('Jane');
 
 
 const sendMessage =  (e) => {
@@ -63,9 +63,9 @@ const sendMessage =  (e) => {
 	chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-//chatInputForm.addEventListener('submit', sendMessage)
+chatInputForm.addEventListener('submit', sendMessage)
 
-// clearChatBtn.addEventListener('click', () => {
-// 	localStorage.clear();
-// 	chatMessages.innerHTML = '';
-// })
+clearChatBtn.addEventListener('click', () => {
+	localStorage.clear();
+	chatMessages.innerHTML = '';
+})
