@@ -1,26 +1,60 @@
 let isLoggedIn = false;
 
-function loginSuccess() {
-    isLoggedIn = true;
-    document.getElementById("toapi").classList.add("is-loading");
+function login42() 
+{
+    const client_id = 'u-s4t2ud-1c2cdbd5f93bbb10f5c88928250742cd0f34b7404d28cf9db6ce0a7ec31ae127'; // Ecole 42 uygulamanızın istemci kimliği
+    const redirect_uri = 'http://localhost:423'; // Ecole 42 tarafından yetkilendirme sonrası yönlendirileceğiniz URI
+    const scopes = 'public'; // İzin istediğiniz kapsamlar
+    const authUrl = `https://api.intra.42.fr/oauth/authorize?client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}&response_type=code&scope=${encodeURIComponent(scopes)}`;
+    window.location.href = authUrl;
+}
 
-    if (isLoggedIn) {
-        window.location.href = "#game";
-    }
+function accountsave(accessToken) 
+{
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:8000/api/account/42-api/');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    console.log(accessToken);
+    xhr.onreadystatechange = function () {
+        const data = JSON.parse(xhr.responseText);
+        if (data) 
+        {
+            localStorage.setItem('username', data.result.login);
+            localStorage.setItem('profileImage', data.result.image.link);
+            localStorage.setItem('name', data.result.first_name);
+            localStorage.setItem('surname', data.result.last_name);
+            localStorage.setItem('email', data.result.email);
+        }
+        else {
+            alert('Error while processing the request.');
+        }
+    };
+
+    // accessToken'i doğru şekilde kullan
+    const requestBody = JSON.stringify({ code: accessToken });
+    xhr.send(requestBody);
+    loginSuccess();
+    // isLoggedIn = true;
+}
+
+function loginSuccess() 
+{
+    window.location.hash = "#game"
+    isLoggedIn = true;
 }
 
 function signinFunction(){
     isLoggedIn = true;
     document.getElementById("singin").classList.add("is-loading");
     if (isLoggedIn)
-        window.location.href = "#singin";
+        window.location.hash = "#singin";
 }
 
 function signupFunction(){
     isLoggedIn = true;
     document.getElementById("singup").classList.add("is-loading");
     if (isLoggedIn)
-        window.location.href = "#singup";
+        window.location.hash = "#singup";
 }
 
 function loginAdd() {
@@ -104,7 +138,7 @@ function loginAdd() {
                 <div class="form-wrapper">
                     <form onsubmit="return false;">
                         <h3>Welcome to Transcendence Project</h3>
-                        <button id="toapi" onclick="loginSuccess()">Sign in with 42 API</button>
+                        <button id="toapi" onclick="login42()">Sign in with 42 API</button>
                         <button id="singup" onclick="signupFunction()">Sign up</button>
                         <button id="singin" onclick="signinFunction()">Sign in</button>
                     </form>

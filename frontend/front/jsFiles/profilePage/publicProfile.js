@@ -1,41 +1,29 @@
-function getRandomPhoto() {
-    // Define an array of photo paths
-    const photoPaths = [
-        "../../img/profile_photos/pp01.jpeg",
-        "../../img/profile_photos/pp02.jpeg",
-        "../../img/profile_photos/pp03.jpeg",
-        "../../img/profile_photos/pp04.jpeg",
-        "../../img/profile_photos/pp05.jpeg",
-        "../../img/profile_photos/pp06.jpeg",
-        "../../img/profile_photos/pp07.jpeg",
-        "../../img/profile_photos/pp08.jpeg"
-    ];
+function getRandomPhoto() 
+{
 
-    // Get a random index within the range of photoPaths array length
-    const randomIndex = Math.floor(Math.random() * photoPaths.length);
-
-    // Return the randomly selected photo path
-    return photoPaths[randomIndex];
 }
 
 function publicProfile() {
 
     // Get a random photo path
-    const randomPhotoPath = getRandomPhoto();
-
+    const PhotoPath = localStorage.getItem('profileImage');
+    const username = localStorage.getItem('username');
+    const name= localStorage.getItem('name');
+    const surname= localStorage.getItem('surname');
+    const email= localStorage.getItem('email');
     return `
     <div class="wrapper">
         <div class="form-wrapper">
                 <h3>Profile</h3>
                     <!-- Profile Photo -->
                     <div class="field-wrapper profile-photo-wrapper">
-                        <img src="${randomPhotoPath}" id="profile-photo" class="profile-photo" alt="Profile Photo">
+                        <img src="${PhotoPath}" id="profile-photo" class="profile-photo" alt="Profile Photo">
                     </div>
 
                     <div class="field-wrapper">
                     <!-- Username -->
                         <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" value="sensoyyasin" readonly>
+                        <input type="text" id="username" name="username" value="${username}" readonly>
                     <!-- Nickname -->
                         <label for="nickname">Nickname:</label>
                         <input type="text" id="nickname" name="nickname" value="Sensoy" readonly>
@@ -44,16 +32,16 @@ function publicProfile() {
                     <div class="field-wrapper">
                     <!-- First Name -->
                         <label for="first-name">First Name:</label>
-                        <input type="text" id="first-name" name="first-name" value="Yasin" readonly>
+                        <input type="text" id="first-name" name="first-name" value="${name}" readonly>
                     <!-- Last Name -->
                         <label for="last-name">Last Name:</label>
-                        <input type="text" id="last-name" name="last-name" value="Şensoy" readonly>
+                        <input type="text" id="last-name" name="last-name" value="${surname}" readonly>
                     </div>
 
                     <!-- Email -->
                     <div class="field-wrapper">
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" value="example@example.com" readonly>
+                        <input type="email" id="email" name="email" value="${email}" readonly>
                     </div>
 
                     <div class="game-status-bottom-wrapper">

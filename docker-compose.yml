@@ -20,7 +20,7 @@ networks:
 
 services:
   nginx:
-    container_name: webnginx
+    container_name: nginx
     build: ./nginx
     ports:
       - 443:443
@@ -29,7 +29,7 @@ services:
       - network
 
   database:
-    container_name: webdatabase
+    container_name: database
     image: postgres:latest
     restart: always
     environment:
@@ -42,7 +42,7 @@ services:
       - network
 
   backend:
-    container_name: webbackend
+    container_name: backend
     build: ./backend
     volumes:
       - backend:/app
@@ -55,7 +55,7 @@ services:
       - database
 
   frontend:
-    container_name: webfrontend
+    container_name: frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile

@@ -1,6 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const page = window.location.hash.substring(1);
-    changePage(page || 'login'); // Eğer hash yoksa login sayfasına yönlendir
+    
+    if (window.location.search.includes('code=')) 
+    {
+        // Yetkilendirme kodunu URL'den çıkar
+        const accessToken = new URLSearchParams(window.location.search).get('code');
+        const cleanUrl = window.location.href.split('?')[0] + window.location.hash;
+        window.history.replaceState(null, null, cleanUrl);
+    
+        // `accessToken` değişkenini kullanarak sunucu tarafında erişim token'ı almak için bir istek yapın
+        accountsave(accessToken);
+        // loginSuccess();
+    }
+    else
+    {
+        const page = window.location.hash.substring(1);
+        changePage(page || 'login'); // Eğer hash yoksa login sayfasına yönlendir
+    }
 });
 
 // Sayfa değiştikçe URL hash'ini güncelle
@@ -49,6 +64,9 @@ function changePage(page) {
             case 'singin':
                 removeHeader();
                 content = singin();
+                break;
+            case 'check':
+                console.log("ggg"); 
                 break;
             case 'confirm':
                 break;
