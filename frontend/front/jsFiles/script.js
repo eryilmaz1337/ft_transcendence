@@ -18,6 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+const PhotoPath = localStorage.getItem('profileImage');
+const username = localStorage.getItem('username');
+const name = localStorage.getItem('name');
+const surname = localStorage.getItem('surname');
+const email = localStorage.getItem('email');
+
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
     const page = window.location.hash.substring(1);

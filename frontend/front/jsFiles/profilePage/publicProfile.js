@@ -1,16 +1,6 @@
-function getRandomPhoto() 
-{
-
-}
-
 function publicProfile() {
 
     // Get a random photo path
-    const PhotoPath = localStorage.getItem('profileImage');
-    const username = localStorage.getItem('username');
-    const name= localStorage.getItem('name');
-    const surname= localStorage.getItem('surname');
-    const email= localStorage.getItem('email');
     return `
     <div class="wrapper">
         <div class="form-wrapper">

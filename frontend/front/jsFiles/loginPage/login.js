@@ -39,6 +39,8 @@ function accountsave(accessToken)
 
 function loginSuccess() 
 {
+    // burdan veri tabanındaki çevrimiçi durumunu değiştiren kodu yaz
+
     window.location.hash = "#game"
     isLoggedIn = true;
 }

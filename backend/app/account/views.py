@@ -83,7 +83,10 @@ def account42(request):
                         surname=user_data['last_name'],
                         email=user_data['email']
                     )
-                    return JsonResponse({'result': user_data})
+                        return JsonResponse({'username': user_data['login'], 'name': user_data['first_name'], 'surname': user_data['last_name'], 'email': user_data['email']})
+                    else:
+                        user = User.objects.get(username=username)
+                        return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email})
                 else:
                     return JsonResponse({'error': 'Failed to fetch user data', 'status_code': user_response.status_code})
             else:
@@ -93,3 +96,30 @@ def account42(request):
 
     else:
         return JsonResponse({'error': 'Invalid request method'})
+    
+@csrf_exempt
+def accountdataedit(request):
+    if request.method == 'POST':
+        # POST verisinden kullanıcı adı ve parolayı al
+        data = json.loads(request.body)
+        # oldusername = data.get('jsonoldusername')
+        jusername = data.get('jsonusername')
+        jname = data.get('jsonname')
+        jsurname = data.get('jsonsurname')
+        jemail = data.get('jsonemail')
+        user_exists = False
+        # user_exists = users.objects.filter(username=username).exists()
+        if not user_exists:
+            user = users.objects.get(username=jusername)
+            user.username = jusername
+            user.name = jname
+            user.surname = jsurname
+            user.email = jemail
+            user.save()
+            return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email})
+        else:
+            return JsonResponse({'success': False, 'massage': 'This username is used'})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
+
+    return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})

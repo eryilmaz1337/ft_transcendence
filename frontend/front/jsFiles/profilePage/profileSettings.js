@@ -1,3 +1,29 @@
+function saveProfile()
+{
+    var data = {
+        jsonusername: document.getElementById('username').value,
+        jsonname: document.getElementById('first-name').value,
+        jsonsurname: document.getElementById('last-name').value,
+        jsonemail: document.getElementById('email').value
+      }
+      //console.log(data);
+      fetch("http://localhost:8000/api/account/account-edit/", {
+        method: 'POST', // İstek metodu
+        headers: {
+          'Content-Type': 'application/json', // İçerik tipini belirtme
+        },
+        body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
+      })
+      .then(response => {
+        alert('Başarılı');
+        console.log(JSON.parse(response.json()));
+      }) // JSON olarak dönen yanıtı parse etme
+      .catch((error) => {
+        alert(`Hata`);
+        console.error('Hata:', error);
+      });
+}
+
 
 function profileSettings() {
     return `
@@ -13,12 +39,12 @@ function profileSettings() {
                 <!-- Username -->
                 <div class="input-wrapper">
                     <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" value="sensoyyasin">
+                    <input type="text" id="username" name="username" value="${username}">
                 </div>
                 <!-- Email -->
                 <div class="input-wrapper">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="example@example.com">
+                    <input type="email" id="email" name="email" value="${email}">
                 </div>
                 <!-- Nickname -->
                 <div class="input-wrapper">
@@ -28,16 +54,15 @@ function profileSettings() {
                 <!-- First Name -->
                 <div class="input-wrapper">
                     <label for="first-name">First Name:</label>
-                    <input type="text" id="first-name" name="first-name" value="Yasin">
+                    <input type="text" id="first-name" name="first-name" value="${name}">
                 </div>
                 <!-- Last Name -->
                 <div class="input-wrapper">
                     <label for="last-name">Last Name:</label>
-                    <input type="text" id="last-name" name="last-name" value="Şensoy">
+                    <input type="text" id="last-name" name="last-name" value="${surname}">
                 </div>
                 <!-- Buttons -->
                 <button type="button" class="btn btn-primary button_profile" onclick="saveProfile()">Save</button>
-                <button type="button" class="btn btn-primary button_profile" >Cancel</button>
             </form>
         </div>
     </div>
@@ -98,7 +123,7 @@ function profileSettings() {
         }
 
         .account-settings-fileinput {
-            display: none;
+            display: inline-block;
         }
 
         .btn-outline-primary {
