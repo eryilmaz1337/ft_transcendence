@@ -32,6 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'topla',
+    'chat',
+    'daphne',
+    'channels',
     'account',
     'corsheaders',
     'django.contrib.admin',
@@ -113,6 +116,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pong.wsgi.application'
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/accounts/login/"
+ASGI_APPLICATION = 'pong.asgi.application'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
