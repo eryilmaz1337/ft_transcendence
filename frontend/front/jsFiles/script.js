@@ -1,3 +1,8 @@
+
+var searchlanguages = localStorage.getItem('selectedLanguage');
+        if(!searchlanguages)
+        localStorage.setItem('selectedLanguage', 'tr');
+    
 document.addEventListener('DOMContentLoaded', function () {
     
     if (window.location.search.includes('code=')) 
@@ -25,6 +30,7 @@ window.addEventListener('hashchange', function () {
 });
 
 function changePage(page) {
+    
     let content = '';
     //önceki içerik temizlenir
     document.getElementById('content').innerHTML = '';
@@ -74,8 +80,13 @@ function changePage(page) {
                 content = ErrorAdd();
         }
         //Yeni içerik eklenir.
+        
+
         document.getElementById('content').innerHTML = content;
         window.location.hash = page;
+
+        var languages = localStorage.getItem('selectedLanguage');
+        changeLanguage(languages);
         //Sayfa içeriği değiştikten sonra navbar gösterme
         showNavbarStates();
         //Async function()

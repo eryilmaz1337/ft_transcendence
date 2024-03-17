@@ -22,25 +22,25 @@ function publicProfile() {
 
                     <div class="field-wrapper">
                     <!-- Username -->
-                        <label for="username">Username:</label>
+                        <label for="username" data-translate="profileuser" >Username:</label>
                         <input type="text" id="username" name="username" value="${username}" readonly>
                     <!-- Nickname -->
-                        <label for="nickname">Nickname:</label>
+                        <label for="nickname" data-translate="profilenickname">Nickname:</label>
                         <input type="text" id="nickname" name="nickname" value="Sensoy" readonly>
                     </div>
 
                     <div class="field-wrapper">
                     <!-- First Name -->
-                        <label for="first-name">First Name:</label>
+                        <label for="first-name" data-translate="profilefirstname">First Name:</label>
                         <input type="text" id="first-name" name="first-name" value="${name}" readonly>
                     <!-- Last Name -->
-                        <label for="last-name">Last Name:</label>
+                        <label for="last-name" data-translate="profilelastname">Last Name:</label>
                         <input type="text" id="last-name" name="last-name" value="${surname}" readonly>
                     </div>
 
                     <!-- Email -->
                     <div class="field-wrapper">
-                        <label for="email">Email:</label>
+                        <label for="email" data-translate="profileemail">Email:</label>
                         <input type="email" id="email" name="email" value="${email}" readonly>
                     </div>
 
@@ -139,8 +139,9 @@ function publicProfile() {
         }
 
         .field-wrapper label {
-            margin-right: 20px;
-            margin-left: 20px;
+
+            margin-right: -50px;
+            margin-left: 50px;
             width: 150px;
             display: inline-block;
             color: #fff;
@@ -155,7 +156,10 @@ function publicProfile() {
         .field-wrapper input[type="email"],
         .field-wrapper input[type="number"] {
             flex: 1;
-            padding: 1px;
+            height: 30px;
+            font-size: 16px;
+            
+            padding-left: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
             width: 100%;
@@ -171,6 +175,8 @@ function publicProfile() {
         }
 
         .profile-photo {
+            
+            object-fit: cover;
             width: 150px;
             height: 150px;
             border-radius: 50%; /* Make the border radius 50% to create a circle */
