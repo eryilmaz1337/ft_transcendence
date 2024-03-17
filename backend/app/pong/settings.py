@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'daphne',
-    'chat',
+    'channels',
     'topla',
     'account',
     'corsheaders',
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -65,7 +66,6 @@ DATABASES = {
         'PORT': '5432',                # PostgreSQL bağlantı portu
     }
 }
-
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5432",  # Örnek olarak, frontend uygulamanızın adresi
@@ -114,9 +114,16 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pong.wsgi.application'
-ASGI_APPLICATION = "pong.asgi.application"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/accounts/login/"
 
+WSGI_APPLICATION = 'pong.wsgi.application'
+ASGI_APPLICATION = 'pong.asgi.application'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
