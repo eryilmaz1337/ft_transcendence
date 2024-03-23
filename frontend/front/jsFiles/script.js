@@ -18,15 +18,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-const PhotoPath = localStorage.getItem('profileImage');
-const username = localStorage.getItem('username');
-const name = localStorage.getItem('name');
-const surname = localStorage.getItem('surname');
-const email = localStorage.getItem('email');
+// const PhotoPath = sessionStorage.getItem('profile_image');
+// const username = sessionStorage.getItem('username');
+// const name = sessionStorage.getItem('name');
+// const surname = sessionStorage.getItem('surname');
+// const email = sessionStorage.getItem('email');
+
 
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
     const page = window.location.hash.substring(1);
+    // if(page=='login')
+    //     localStorage.clear();
     changePage(page);
 });
 

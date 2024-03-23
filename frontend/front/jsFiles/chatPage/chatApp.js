@@ -66,6 +66,5 @@ const sendMessage =  (e) => {
 chatInputForm.addEventListener('submit', sendMessage)
 
 clearChatBtn.addEventListener('click', () => {
-	localStorage.clear();
 	chatMessages.innerHTML = '';
 })

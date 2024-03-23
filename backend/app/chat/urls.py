@@ -1,9 +1,6 @@
 from django.urls import path
-
-from . import views
-
+from .views import user_mass
 
 urlpatterns = [
-    path("", views.rooms, name="rooms"),
-    path("<str:slug>", views.room, name="room"),
+    path("<str:slug>", user_mass, name="user_mass"),
 ]

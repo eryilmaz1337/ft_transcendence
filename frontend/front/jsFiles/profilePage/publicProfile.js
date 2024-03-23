@@ -7,13 +7,13 @@ function publicProfile() {
                 <h3>Profile</h3>
                     <!-- Profile Photo -->
                     <div class="field-wrapper profile-photo-wrapper">
-                        <img src="${PhotoPath}" id="profile-photo" class="profile-photo" alt="Profile Photo">
+                        <img src="${sessionStorage.getItem('profile_image')}" id="profile-photo" class="profile-photo" alt="Profile Photo">
                     </div>
 
                     <div class="field-wrapper">
                     <!-- Username -->
                         <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" value="${username}" readonly>
+                        <input type="text" id="username" name="username" value="${sessionStorage.getItem('username')}" readonly>
                     <!-- Nickname -->
                         <label for="nickname">Nickname:</label>
                         <input type="text" id="nickname" name="nickname" value="Sensoy" readonly>
@@ -22,16 +22,16 @@ function publicProfile() {
                     <div class="field-wrapper">
                     <!-- First Name -->
                         <label for="first-name">First Name:</label>
-                        <input type="text" id="first-name" name="first-name" value="${name}" readonly>
+                        <input type="text" id="first-name" name="first-name" value="${sessionStorage.getItem('name')}" readonly>
                     <!-- Last Name -->
                         <label for="last-name">Last Name:</label>
-                        <input type="text" id="last-name" name="last-name" value="${surname}" readonly>
+                        <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('surname')}" readonly>
                     </div>
 
                     <!-- Email -->
                     <div class="field-wrapper">
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" value="${email}" readonly>
+                        <input type="email" id="email" name="email" value="${sessionStorage.getItem('email')}" readonly>
                     </div>
 
                     <div class="game-status-bottom-wrapper">

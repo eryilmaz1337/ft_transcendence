@@ -6,6 +6,18 @@ from django.shortcuts import render
 from .models import users
 import json
 import requests
+import random
+import string
+
+def generate_random_string():
+    length=42
+    # Kullanılacak karakterler
+    characters = string.ascii_letters + string.digits
+    # Rasgele dize oluşturma
+    random_string = ''.join(random.choice(characters) for _ in range(length))
+    while users.objects.filter(securitykey=random_string).exists():
+        random_string = ''.join(random.choice(characters) for _ in range(length))
+    return random_string
 
 @csrf_exempt
 def singup(request):
@@ -16,7 +28,8 @@ def singup(request):
                 name=data['jsonname'],
                 surname=data['jsonsurname'],
                 email=data['jsonemail'],
-                password=make_password(data['jsonpassword'])
+                password=make_password(data['jsonpassword']),
+                securitykey=generate_random_string()
             )
             return JsonResponse({"message": "Kullanıcı başarıyla oluşturuldu"}, status=201)
     else:
@@ -32,7 +45,6 @@ def singin(request):
         password = data.get('jsonpassword')
         user = users.objects.get(username=username)
         if check_password(password, user.password):
-            # Giriş başarılıysa JSON yanıt döndür
             return JsonResponse({'success': True, 'message': 'Login successful'})
         else:
 
@@ -46,13 +58,14 @@ def singin(request):
 @csrf_exempt
 def account42(request):
     if request.method == 'POST':
+        jsecuritykey="NULL"
         data = json.loads(request.body)
         authorization_code = data.get('code')  # Frontend'den gelen yetkilendirme kodu
         if authorization_code:
             # Yetkilendirme kodunu kullanarak access_token al
             token_url = 'https://api.intra.42.fr/oauth/token'
             client_id = 'u-s4t2ud-1c2cdbd5f93bbb10f5c88928250742cd0f34b7404d28cf9db6ce0a7ec31ae127'
-            client_secret = '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'
+            client_secret = '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'
             redirect_uri = 'http://localhost:423'
             grant_type = 'authorization_code'
             
@@ -77,16 +90,19 @@ def account42(request):
                     user_data = user_response.json()
                     user_exists = users.objects.filter(username=user_data['login']).exists()# Kullanıcı adıyla veritabanını kontrol et eğer bu kullanıcı yoksa veritabanına kaydet.
                     if not user_exists:
+                        jsecuritykey=generate_random_string()
                         users.objects.create(
                         username=user_data['login'],
                         name=user_data['first_name'],
                         surname=user_data['last_name'],
-                        email=user_data['email']
+                        email=user_data['email'],
+                        profile_image = user_data['image']['link'],
+                        securitykey= jsecuritykey
                     )
-                        return JsonResponse({'username': user_data['login'], 'name': user_data['first_name'], 'surname': user_data['last_name'], 'email': user_data['email']})
+                        return JsonResponse({'securitykey': jsecuritykey,'username': user_data['login'], 'name': user_data['first_name'], 'surname': user_data['last_name'], 'email': user_data['email'], 'profile_image': user_data['image']['link']})
                     else:
-                        user = User.objects.get(username=username)
-                        return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email})
+                        user = users.objects.get(username=user_data['login'])
+                        return JsonResponse({'securitykey': user.securitykey,'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
                 else:
                     return JsonResponse({'error': 'Failed to fetch user data', 'status_code': user_response.status_code})
             else:
@@ -96,30 +112,44 @@ def account42(request):
 
     else:
         return JsonResponse({'error': 'Invalid request method'})
-    
+
 @csrf_exempt
 def accountdataedit(request):
     if request.method == 'POST':
         # POST verisinden kullanıcı adı ve parolayı al
         data = json.loads(request.body)
-        # oldusername = data.get('jsonoldusername')
+        if not users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            user = users.objects.get(securitykey=jsecuritykey)
+            if not user.securitykey==data.get('jsonsecuritykey'):
+                return JsonResponse({'success': False, 'massage': 'unauthorized transaction'})
+        oldusername = data.get('jsonoldusername')
         jusername = data.get('jsonusername')
         jname = data.get('jsonname')
         jsurname = data.get('jsonsurname')
         jemail = data.get('jsonemail')
-        user_exists = False
-        # user_exists = users.objects.filter(username=username).exists()
-        if not user_exists:
-            user = users.objects.get(username=jusername)
+        jsecuritykey = data.get('jsonsecuritykey')
+        user_exists = users.objects.filter(username=jusername).exists()
+        if not user_exists and jusername != oldusername:
             user.username = jusername
-            user.name = jname
-            user.surname = jsurname
-            user.email = jemail
-            user.save()
-            return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email})
         else:
-            return JsonResponse({'success': False, 'massage': 'This username is used'})
+            return JsonResponse({'success': user_exists, 'massage': 'This username is used'})
+        user.name = jname
+        user.surname = jsurname
+        user.email = jemail
+        user.save()
+        return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email})
     else:
-        return JsonResponse({'error': 'Invalid request method'})
-
-    return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+    
+@csrf_exempt
+def userauthenticator(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if not users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            user = users.objects.get(securitykey=data.securitykey)
+            if not user.securitykey==data.get('jsonsecuritykey'):
+                return JsonResponse({'success': False, 'massage': 'unauthorized transaction'})
+            else:
+                return JsonResponse({'success': True, 'message': 'user authenticator success'})
+    else:
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
