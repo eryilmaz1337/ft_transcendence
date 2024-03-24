@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 const PhotoPath = localStorage.getItem('profileImage');
-const username = localStorage.getItem('username');
+const username = localStorage.getItem('username'); //username element
 const name = localStorage.getItem('name');
 const surname = localStorage.getItem('surname');
 const email = localStorage.getItem('email');

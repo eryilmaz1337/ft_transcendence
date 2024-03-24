@@ -46,11 +46,6 @@ function profileSettings() {
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" value="${email}">
                 </div>
-                <!-- Nickname -->
-                <div class="input-wrapper">
-                    <label for="nickname">Nickname:</label>
-                    <input type="text" id="nickname" name="nickname" value="Sensoy">
-                </div>
                 <!-- First Name -->
                 <div class="input-wrapper">
                     <label for="first-name">First Name:</label>
