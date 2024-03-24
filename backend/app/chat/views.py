@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 def user_mass(request):
     return "a"
 
+
 #     return render(request, "room.html",{"room_name":room_name,"slug":slug,'messages':messages})
 # @csrf_exempt
 # def rooms(request):

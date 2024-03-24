@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Yetkilendirme kodunu URL'den çıkar
         const accessToken = new URLSearchParams(window.location.search).get('code');
         const cleanUrl = window.location.href.split('?')[0] + window.location.hash;
-        window.history.replaceState(null, null, cleanUrl);
-    
+        window.history.replaceState(null, null, cleanUrl); 
         // `accessToken` değişkenini kullanarak sunucu tarafında erişim token'ı almak için bir istek yapın
         accountsave(accessToken);
         // loginSuccess();
@@ -28,8 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
     const page = window.location.hash.substring(1);
-    // if(page=='login')
-    //     localStorage.clear();
     changePage(page);
 });
 

@@ -1,41 +1,43 @@
-# chat/consumers.py
 import json
-
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 
-
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
-        self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
-        self.room_group_name = "chat_%s" % self.room_name
+        # Her bağlantı için benzersiz bir kimlik oluştur
+        self.user_id = self.scope["user"].id
 
-        # Join room group
-        async_to_sync(self.channel_layer.group_add)(
-            self.room_group_name, self.channel_name
-        )
-
+        # Bağlantıyı kabul et
         self.accept()
 
     def disconnect(self, close_code):
-        # Leave room group
-        async_to_sync(self.channel_layer.group_discard)(
-            self.room_group_name, self.channel_name
-        )
+        pass
 
-    # Receive message from WebSocket
     def receive(self, text_data):
+        # Gelen mesajı al
         text_data_json = json.loads(text_data)
-        message = text_data_json["message"]
+        message = text_data_json['message']
 
-        # Send message to room group
-        async_to_sync(self.channel_layer.group_send)(
-            self.room_group_name, {"type": "chat_message", "message": message}
+        # Mesajı gönderilecek kullanıcının kimliğini al
+        to_user_id = text_data_json['to_user_id']
+
+        # Mesajı alıcıya gönder
+        self.send_user_message(to_user_id, message)
+
+    def send_user_message(self, to_user_id, message):
+        # Mesajı gönderecek kanal adını oluştur
+        channel_name = f"user_{to_user_id}"
+
+        # Mesajı alıcıya gönder
+        async_to_sync(self.channel_layer.send)(
+            channel_name,
+            {
+                "type": "chat.message",
+                "message": message,
+                "from_user_id": self.user_id,
+            }
         )
 
-    # Receive message from room group
     def chat_message(self, event):
-        message = event["message"]
-
-        # Send message to WebSocket
-        self.send(text_data=json.dumps({"message": message}))
+        # Mesajı WebSocket'e gönder
+        self.send(text_data=json.dumps(event))

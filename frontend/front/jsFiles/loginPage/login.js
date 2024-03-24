@@ -19,12 +19,6 @@ function accountsave(accessToken)
             if (xhr.status === 200) {
                 const data = JSON.parse(xhr.responseText);
                 if (data) {
-                    // const test = data.profile_image;
-                    // console.log(test);
-                    // const jsonString = ;
-                    // const obj = JSON.parse(jsonString);
-                    // console.log(obj.name); // Output: John
-                    // console.log(obj.age); // Output: 30
                     sessionStorage.setItem('username', data.username);
                     sessionStorage.setItem('name', data.name);
                     sessionStorage.setItem('surname', data.surname);
@@ -45,7 +39,7 @@ function accountsave(accessToken)
     const requestBody = JSON.stringify({ code: accessToken });
     xhr.send(requestBody);
     loginSuccess();
-    // isLoggedIn = true;
+    isLoggedIn = true;
 }
 
 function loginSuccess() 

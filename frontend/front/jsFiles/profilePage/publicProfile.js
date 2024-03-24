@@ -88,6 +88,7 @@ function publicProfile() {
 
     <style>
         .wrapper {
+            margin-top: 37px;
             position: absolute;
             top: 50%; /* Adjusted from 100px to cut from the top */
             left: 50%;
