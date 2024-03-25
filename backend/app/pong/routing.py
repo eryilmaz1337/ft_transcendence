@@ -1,8 +1,7 @@
-# from django.urls import path , include,re_path
-# from .consumers import ChatConsumer
+# chat/routing.py
+from django.urls import re_path
+from . import consumers
 
-
-# websocket_urlpatterns = [
-# 	path("<room_slug>" , ChatConsumer.as_asgi()) ,
-#     re_path(r'^ws/(?P<room_slug>[^/]+)/$', ChatConsumer.as_asgi()),
-# ]
+websocket_urlpatterns = [
+    re_path(r'ws/chat/$', consumers.ChatConsumer.as_asgi()),
+]

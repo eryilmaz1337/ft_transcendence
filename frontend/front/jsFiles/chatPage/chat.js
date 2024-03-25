@@ -6,6 +6,39 @@ function chatAdd() {
     <title>Chat Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        opup {
+          display: none;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border: 1px solid #ccc;
+          padding: 20px;
+          background-color: #fff;
+          z-index: 1000;
+        }
+        
+        .popup form {
+          text-align: center;
+        }
+        
+        .popup input[type="text"], .popup input[type="submit"] {
+          margin: 5px 0;
+          padding: 8px;
+          width: 200px;
+        }
+        
+        .popup input[type="submit"] {
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+        }
+        
+        .popup input[type="submit"]:hover {
+          background-color: #0056b3;
+        }
+
         body {
             background-color: #15202b;
         }
@@ -134,11 +167,39 @@ function chatAdd() {
     </style>
 </head>
 <body>
+    <script>
+    document.getElementById('openPopup').addEventListener('click', function() {
+      document.getElementById('popupForm').style.display = 'block';
+    });
+
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Formun submit işlemini durdur
+
+      // Formdaki değerleri al
+      var firstName = document.getElementById('firstName').value;
+      var lastName = document.getElementById('lastName').value;
+
+      // Burada form verilerini kullanabilirsiniz
+      console.log('İsim: ' + firstName + ', Soyisim: ' + lastName);
+
+      // Formu kapat
+      document.getElementById('popupForm').style.display = 'none';
+    });
+    </script>
+    <div id="popupForm" class="popup">
+      <form id="myForm">
+        <label for="firstName">İsim:</label><br>
+        <input type="text" id="firstName" name="firstName"><br>
+        <label for="lastName">Soyisim:</label><br>
+        <input type="text" id="lastName" name="lastName"><br><br>
+        <input type="submit" value="Gönder">
+      </form>
+    </div>
     <div style="display:flex; flex-direction: row; align-items: start;">
         <div class="person-selector">
             <div style="display:flex; flex-direction: row; align-items: center; justify-content: space-between;">
-            <i class="fas fa-plus" title="Oyuna davet et" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >
-                    <span style="font-size: 12px; padding-left: 5px">Davet Et</span>
+            <i id="openPopup" class="fas fa-plus" title="Oyuna davet et" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >    
+                <span style="font-size: 12px; padding-left: 5px">Davet Et</span>
             </i>
             <i class="fas fa-comment-alt" title="Özel Mesaj Gönder" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >
                 <span style="font-size: 12px; padding-left: 5px">Message</span>
