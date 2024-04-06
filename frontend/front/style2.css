@@ -25,15 +25,6 @@ nav {
 	font-family: 'Poppins', sans-serif;
 }
 
-.profile-picture {
-	width: 40px;
-	height: 40px;
-	background-image: url('img/42.png');
-	background-size: cover;
-	background-position: center;
-	border-radius: 50%; /* Yuvarlaklık */
-}
-
 .logo {
 	color: white;
 	text-transform: uppercase;
@@ -135,13 +126,15 @@ nav {
 /* Profile & Log Out */
 
 .profile-wrapper {
+	display: flex;
+	flex-direction: row;
     position: relative;
 }
 
 .profile-picture {
     width: 40px;
     height: 40px;
-    background-image: url('img/42.png');
+    background-image: url(PhotoPath);
     background-size: cover;
     background-position: center;
     border-radius: 50%;
@@ -170,11 +163,39 @@ nav {
 	margin-left: 5px;
 }
 
+.username_class {
+	position: absolute;
+	right: 10px;
+	display: none;
+	align-items: center;
+}
+
+.username_text {
+    padding: 7px 10px;
+    font-size: 12px;
+	font-family: 'Poppins', sans-serif;
+    border: none;
+	font-weight: bold;
+    background-color: greenyellow;
+    color: black;
+    cursor: pointer;
+}
+
 .logout-btn:hover {
     background-color: #0cf; /* Üzerine gelince maviye dönsün */
 }
 
+.username_class:hover {
+    background-color: #0cf; /* Üzerine gelince maviye dönsün */
+}
+
 .profile-wrapper:hover .logout-wrapper {
+    display: flex; /* Profil resmine hover yapıldığında göster */
+	transform: translateX(-50%); /*  nesneyi kendi genişliğinin yarısı kadar sola kaydırır.  */
+	transition-delay: 0.5s;
+}
+
+.profile-wrapper:hover .username_class {
     display: flex; /* Profil resmine hover yapıldığında göster */
 	transform: translateX(-50%); /*  nesneyi kendi genişliğinin yarısı kadar sola kaydırır.  */
 }

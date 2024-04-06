@@ -1,11 +1,37 @@
-function publicProfile() {
+// function showNavbarStates() {
+//     // var profilePicture = document.getElementById("profile-picture");
+//     // var logoutWrapper = document.getElementById("logout-wrapper");
+//     // var logoutButton = document.getElementById("logout-btn");
+//     var matchHistory = document.getElementById("match_history");
+//     var historyTable = document.getElementById("history-table");
+  
+//     // Profil resmine tıklandığında çıkış yap butonunu göster veya gizle
+//   //   profilePicture.addEventListener("click", function() {
+//   //       if (logoutWrapper.style.display === "block") {
+//   //           logoutWrapper.style.display = "none";
+//   //       } else {
+//   //           logoutWrapper.style.display = "block";
+//   //       }
+//   //   });
+//     matchHistory.addEventListener("click", function() {
+//         if (historyTable.style.display === "block"){
+//             historyTable.style.display = "flex";
+//         } else {
+//             historyTable.style.display = "block";
+//         }
+//     })
+  
+//     // logoutButton.addEventListener("click", function() {
+//     //     window.location.hash = 'login';
+//     // });
+//   }
 
-    // Get a random photo path
+function publicProfile() {
     return `
     <div class="wrapper">
         <div class="form-wrapper">
                 <h3>Profile</h3>
-                    <!-- Profile Photo -->
+                    <!-- Profile Photo <img src="../img/symbols/matchHistory.png" alt="Match History" class="match_history"> -->
                     <div class="field-wrapper profile-photo-wrapper">
                         <img src="${sessionStorage.getItem('profile_image')}" id="profile-photo" class="profile-photo" alt="Profile Photo">
                     </div>
@@ -14,9 +40,9 @@ function publicProfile() {
                     <!-- Username -->
                         <label for="username">Username:</label>
                         <input type="text" id="username" name="username" value="${sessionStorage.getItem('username')}" readonly>
-                    <!-- Nickname -->
-                        <label for="nickname">Nickname:</label>
-                        <input type="text" id="nickname" name="nickname" value="Sensoy" readonly>
+                    <!-- Email -->
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="${sessionStorage.getItem('email')}" readonly>
                     </div>
 
                     <div class="field-wrapper">
@@ -26,12 +52,6 @@ function publicProfile() {
                     <!-- Last Name -->
                         <label for="last-name">Last Name:</label>
                         <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('surname')}" readonly>
-                    </div>
-
-                    <!-- Email -->
-                    <div class="field-wrapper">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" value="${sessionStorage.getItem('email')}" readonly>
                     </div>
 
                     <div class="game-status-bottom-wrapper">
@@ -82,7 +102,47 @@ function publicProfile() {
                             <label for="tournaments-attended">Tournaments Attended</label>
                         </div>
                         </div>
+
+                        <div class="form-wrapper">
+                        <!-- Tournaments Attended Symbol -->
+                            <img src="../img/symbols/matchHistory.png" id="match_history" alt="Match History" class="match_history" onclick="toggleTable()">
+                            <div class="game-explanation">
+                                <label for="match_history_label">Match History</label>
+                            </div>
+                        </div>
                     </div>
+                    <table class="table" id="history-table">
+                        <thead>
+                            <tr>
+                                <th>Column 1</th>
+                                <th>Column 2</th>
+                                <th>Column 3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Row 1, Column 1</td>
+                                <td>Row 1, Column 2</td>
+                                <td>Row 1, Column 3</td>
+                            </tr>
+                            <tr>
+                                <td>Row 2, Column 1</td>
+                                <td>Row 2, Column 2</td>
+                                <td>Row 2, Column 3</td>
+                            </tr>
+                            <tr>
+                                <td>Row 3, Column 1</td>
+                                <td>Row 3, Column 2</td>
+                                <td>Row 3, Column 3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <script>
+                        function toggleTable() {
+                            var table = document.getElementById("history-table");
+                            table.classList.toggle("hidden");
+                        }
+                    </script>
         </div>
     </div>
 
@@ -171,6 +231,18 @@ function publicProfile() {
             box-shadow: 0 0 10px #5ff0d0
         }
 
+        .match_history {
+            width: 125px;
+            height: 125px;
+            // display: inline-block;
+            border-radius: 10%;
+            margin-bottom: 10px;
+        }
+
+        .match_history:hover {
+            box-shadow: 0 0 5px #FFFA67
+        }
+        
         .field-wrapper.profile-photo-wrapper {
             display: flex;
             justify-content: center;
@@ -186,8 +258,8 @@ function publicProfile() {
 
         .symbol-wrapper {
             position: relative;
-            width: 150px;
-            height: 150px;
+            width: 125px;
+            height: 125px;
             border-radius: 50%; /* Make the border radius 50% to create a circle */
             margin-bottom: 10px;
         }
@@ -210,6 +282,36 @@ function publicProfile() {
             color: white;
             font-size: 48px;
             text-shadow: 0 0 5px purple, 0 0 10px purple, 0 0 15px purple, 0 0 20px purple, 0 0 25px purple, 0 0 30px purple, 0 0 35px purple;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table th, .table td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .table th {
+            background-color: #f2f2f2;
+        }
+        
+        /* Satır arka plan rengi değişimi */
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    
+        /* Resim stil */
+        .match_history {
+            cursor: pointer;
+        }
+    
+        /* Tablo gizleme */
+        .hidden {
+            display: none;
         }
 
     </style>
