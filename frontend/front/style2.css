@@ -125,21 +125,23 @@ nav {
 
 /* Profile & Log Out */
 
+.profile-wrapper {
+	display: flex;
+	flex-direction: row;
+    position: relative;
+	border-radius: 50%;
+}
+
 .profile-picture {
     width: 40px;
     height: 40px;
-    background-image: url(PhotoPath);
+    background-image: url("${sessionStorage.getItem('profile_image')}");
     background-size: cover;
     background-position: center;
     border-radius: 50%;
     cursor: pointer;
 	border: 2px solid greenyellow;
-}
-
-.profile-wrapper {
-	display: flex;
-	flex-direction: row;
-    position: relative;
+	z-index: 9999;
 }
 
 .logout-wrapper {
@@ -147,7 +149,7 @@ nav {
     top: calc(100% + 10px);/* 5px -> 10px oldu kullanıcı adı için*/
     left: 50%;
     transform: translateX(-50%);
-	display: none;
+	visibility: hidden;
 	align-items: center;
 	flex-direction: column;
 }
@@ -161,22 +163,19 @@ nav {
     background-color: greenyellow;
     color: black;
     cursor: pointer;
-	margin-top: 5px;
-}
-
-.username-btn:hover {
-    background-color: #0cf; /* Üzerine gelince maviye dönsün */
+	margin-left: 5px;
+	border-radius: 10%;
 }
 
 .username_class {
 	position: absolute;
-	right: 10px;
+	right: -20px;
 	display: none;
-	align-items: center;
+	align-items: left;
 }
 
 .username_text {
-    padding: 7px 10px;
+    padding: 13px 25px 13px 10px;
     font-size: 12px;
 	font-family: 'Poppins', sans-serif;
     border: none;
@@ -184,20 +183,17 @@ nav {
     background-color: greenyellow;
     color: black;
     cursor: pointer;
+	border-top-left-radius: 20px; 
+    border-bottom-left-radius: 20px; 
 }
 
 .logout-btn:hover {
     background-color: #0cf; /* Üzerine gelince maviye dönsün */
 }
 
-.username_class:hover {
-    background-color: #0cf; /* Üzerine gelince maviye dönsün */
-}
-
 .profile-wrapper:hover .logout-wrapper {
     display: flex; /* Profil resmine hover yapıldığında göster */
 	transform: translateX(-50%); /*  nesneyi kendi genişliğinin yarısı kadar sola kaydırır.  */
-	transition-delay: 0.5s;
 }
 
 .profile-wrapper:hover .username_class {

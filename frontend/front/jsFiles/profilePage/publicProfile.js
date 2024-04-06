@@ -25,6 +25,10 @@
 //     //     window.location.hash = 'login';
 //     // });
 //   }
+function toggleTable() {
+    var table = document.getElementById("history-table");
+    table.classList.toggle("hidden");
+}
 
 function publicProfile() {
     return `
@@ -137,12 +141,6 @@ function publicProfile() {
                             </tr>
                         </tbody>
                     </table>
-                    <script>
-                        function toggleTable() {
-                            var table = document.getElementById("history-table");
-                            table.classList.toggle("hidden");
-                        }
-                    </script>
         </div>
     </div>
 

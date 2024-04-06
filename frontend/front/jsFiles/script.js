@@ -39,7 +39,7 @@ function changePage(page) {
 
     if (isLoggedIn || page == 'login')
     {
-        setProfilePicture();
+        updateProfilePictureStyle();
         switch (page) {
             case 'login':
                 removeHeader();
@@ -96,12 +96,18 @@ function changePage(page) {
 //     document.body.style.backgroundImage = "none";
 // }
 
-function setProfilePicture() {
-    const profileImage = sessionStorage.getItem('profile_image');
+document.addEventListener('DOMContentLoaded', function() {
+    var username = sessionStorage.getItem('username');
+    var usernameTextElements = document.querySelectorAll('.username_text');
+    usernameTextElements.forEach(function(element) {
+        element.textContent = username;
+    });
+});
+
+function updateProfilePictureStyle() {
+    var profileImage = sessionStorage.getItem('profile_image');
     if (profileImage) {
-        document.getElementById('profile-picture').style.backgroundImage = `url(${profileImage})`;
-    } else {
-        console.error('Profile image not found in session storage.');
+        document.querySelector('.profile-picture').style.backgroundImage = 'url(' + profileImage + ')';
     }
 }
 
@@ -127,3 +133,17 @@ function closeBurgerMenu() {
         link.style.animation = '';
     });
 }
+
+const profile_wrapper = document.getElementById('profile-wrapper');
+const logout_wrapper = document.getElementById('logout-wrapper');
+
+profile_wrapper.addEventListener('click', function() {
+    // Hedef öğenin görünürlüğünü kontrol et
+    if (logout_wrapper.style.visibility == 'hidden') {
+        // Eğer hedef öğe gizli ise görünür yap
+        logout_wrapper.style.visibility = 'visible';
+    } else {
+        // Eğer hedef öğe görünür ise gizli yap
+        logout_wrapper.style.visibility = 'hidden';
+    }
+});
