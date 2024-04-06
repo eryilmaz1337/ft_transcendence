@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
-    
-    if (window.location.search.includes('code=')) 
+
+    if (window.location.search.includes('code='))
     {
         // Yetkilendirme kodunu URL'den çıkar
         const accessToken = new URLSearchParams(window.location.search).get('code');
         const cleanUrl = window.location.href.split('?')[0] + window.location.hash;
-        window.history.replaceState(null, null, cleanUrl); 
+        window.history.replaceState(null, null, cleanUrl);
         // `accessToken` değişkenini kullanarak sunucu tarafında erişim token'ı almak için bir istek yapın
         accountsave(accessToken);
         // loginSuccess();
@@ -39,6 +39,7 @@ function changePage(page) {
 
     if (isLoggedIn || page == 'login')
     {
+        setProfilePicture();
         switch (page) {
             case 'login':
                 removeHeader();
@@ -63,16 +64,16 @@ function changePage(page) {
             case 'profileSettings':
                 content = profileSettings();
                 break;
-            case 'singup':
+            case 'signup':
                 removeHeader();
                 content = singup();
                 break;
-            case 'singin':
+            case 'signin':
                 removeHeader();
                 content = singin();
                 break;
             case 'check':
-                console.log("ggg"); 
+                console.log("ggg");
                 break;
             case 'confirm':
                 break;
@@ -94,6 +95,15 @@ function changePage(page) {
 //     document.body.style.background = "black";
 //     document.body.style.backgroundImage = "none";
 // }
+
+function setProfilePicture() {
+    const profileImage = sessionStorage.getItem('profile_image');
+    if (profileImage) {
+        document.getElementById('profile-picture').style.backgroundImage = `url(${profileImage})`;
+    } else {
+        console.error('Profile image not found in session storage.');
+    }
+}
 
 function removeHeader() {
     const header = document.querySelector('nav');

@@ -125,12 +125,6 @@ nav {
 
 /* Profile & Log Out */
 
-.profile-wrapper {
-	display: flex;
-	flex-direction: row;
-    position: relative;
-}
-
 .profile-picture {
     width: 40px;
     height: 40px;
@@ -142,17 +136,24 @@ nav {
 	border: 2px solid greenyellow;
 }
 
+.profile-wrapper {
+	display: flex;
+	flex-direction: row;
+    position: relative;
+}
+
 .logout-wrapper {
     position: absolute;
-    top: calc(100% + 5px);
+    top: calc(100% + 10px);/* 5px -> 10px oldu kullanıcı adı için*/
     left: 50%;
     transform: translateX(-50%);
 	display: none;
 	align-items: center;
+	flex-direction: column;
 }
 
-.logout-btn {
-    padding: 7px 10px;
+.logout-btn, .username-btn {
+    padding: 5px 7px;
     font-size: 15px;
 	font-family: 'Poppins', sans-serif;
     border: none;
@@ -160,7 +161,11 @@ nav {
     background-color: greenyellow;
     color: black;
     cursor: pointer;
-	margin-left: 5px;
+	margin-top: 5px;
+}
+
+.username-btn:hover {
+    background-color: #0cf; /* Üzerine gelince maviye dönsün */
 }
 
 .username_class {
