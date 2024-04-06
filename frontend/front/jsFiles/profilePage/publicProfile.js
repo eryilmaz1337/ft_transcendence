@@ -33,25 +33,25 @@ function publicProfile() {
                 <h3>Profile</h3>
                     <!-- Profile Photo <img src="../img/symbols/matchHistory.png" alt="Match History" class="match_history"> -->
                     <div class="field-wrapper profile-photo-wrapper">
-                        <img src="${PhotoPath}" id="profile-photo" class="profile-photo" alt="Profile Photo">
+                        <img src="${sessionStorage.getItem('profile_image')}" id="profile-photo" class="profile-photo" alt="Profile Photo">
                     </div>
 
                     <div class="field-wrapper">
                     <!-- Username -->
                         <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" value="${username}" readonly>
+                        <input type="text" id="username" name="username" value="${sessionStorage.getItem('username')}" readonly>
                     <!-- Email -->
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" value="${email}" readonly>
+                        <input type="email" id="email" name="email" value="${sessionStorage.getItem('email')}" readonly>
                     </div>
 
                     <div class="field-wrapper">
                     <!-- First Name -->
                         <label for="first-name">First Name:</label>
-                        <input type="text" id="first-name" name="first-name" value="${name}" readonly>
+                        <input type="text" id="first-name" name="first-name" value="${sessionStorage.getItem('name')}" readonly>
                     <!-- Last Name -->
                         <label for="last-name">Last Name:</label>
-                        <input type="text" id="last-name" name="last-name" value="${surname}" readonly>
+                        <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('surname')}" readonly>
                     </div>
 
                     <div class="game-status-bottom-wrapper">
@@ -148,6 +148,7 @@ function publicProfile() {
 
     <style>
         .wrapper {
+            margin-top: 37px;
             position: absolute;
             top: 50%; /* Adjusted from 100px to cut from the top */
             left: 50%;

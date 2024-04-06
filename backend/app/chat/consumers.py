@@ -1,41 +1,23 @@
-# chat/consumers.py
+from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 
-from asgiref.sync import async_to_sync
-from channels.generic.websocket import WebsocketConsumer
+class ChatConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        # WebSocket bağlantısı kabul edildiğinde çalışacak kod
+        await self.accept()
 
+    async def disconnect(self, close_code):
+        # WebSocket bağlantısı kesildiğinde çalışacak kod
+        pass
 
-class ChatConsumer(WebsocketConsumer):
-    def connect(self):
-        self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
-        self.room_group_name = "chat_%s" % self.room_name
+    async def receive(self, text_data):
+        # WebSocket'ten veri alındığında çalışacak kod
+        print("Alınan veri:", text_data)
+        
+        # Gelen mesajı aynı istemciye geri gönder
+        await self.send(text_data=text_data)
 
-        # Join room group
-        async_to_sync(self.channel_layer.group_add)(
-            self.room_group_name, self.channel_name
-        )
-
-        self.accept()
-
-    def disconnect(self, close_code):
-        # Leave room group
-        async_to_sync(self.channel_layer.group_discard)(
-            self.room_group_name, self.channel_name
-        )
-
-    # Receive message from WebSocket
-    def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        message = text_data_json["message"]
-
-        # Send message to room group
-        async_to_sync(self.channel_layer.group_send)(
-            self.room_group_name, {"type": "chat_message", "message": message}
-        )
-
-    # Receive message from room group
-    def chat_message(self, event):
+    async def sendMessage(self, event):
         message = event["message"]
-
-        # Send message to WebSocket
-        self.send(text_data=json.dumps({"message": message}))
+        username = event["username"]
+        await self.send(text_data=json.dumps({"message": message, "username": username}))

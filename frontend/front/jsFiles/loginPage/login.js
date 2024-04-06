@@ -14,19 +14,24 @@ function accountsave(accessToken)
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8000/api/account/42-api/');
     xhr.setRequestHeader('Content-Type', 'application/json');
-    console.log(accessToken);
     xhr.onreadystatechange = function () {
-        const data = JSON.parse(xhr.responseText);
-        if (data) 
-        {
-            localStorage.setItem('username', data.result.login);
-            localStorage.setItem('profileImage', data.result.image.link);
-            localStorage.setItem('name', data.result.first_name);
-            localStorage.setItem('surname', data.result.last_name);
-            localStorage.setItem('email', data.result.email);
-        }
-        else {
-            alert('Error while processing the request.');
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                if (data) {
+                    sessionStorage.setItem('username', data.username);
+                    sessionStorage.setItem('name', data.name);
+                    sessionStorage.setItem('surname', data.surname);
+                    sessionStorage.setItem('email', data.email);
+                    sessionStorage.setItem('securitykey', data.securitykey);
+                    sessionStorage.setItem('profile_image', data.profile_image);
+
+                } else {
+                    alert('Error while processing the request.');
+                }
+            } else {
+                console.error('Request failed with status:', xhr.status);
+            }
         }
     };
 
@@ -34,7 +39,7 @@ function accountsave(accessToken)
     const requestBody = JSON.stringify({ code: accessToken });
     xhr.send(requestBody);
     loginSuccess();
-    // isLoggedIn = true;
+    isLoggedIn = true;
 }
 
 function loginSuccess() 

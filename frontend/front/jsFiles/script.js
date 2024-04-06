@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Yetkilendirme kodunu URL'den çıkar
         const accessToken = new URLSearchParams(window.location.search).get('code');
         const cleanUrl = window.location.href.split('?')[0] + window.location.hash;
-        window.history.replaceState(null, null, cleanUrl);
-    
+        window.history.replaceState(null, null, cleanUrl); 
         // `accessToken` değişkenini kullanarak sunucu tarafında erişim token'ı almak için bir istek yapın
         accountsave(accessToken);
         // loginSuccess();
@@ -18,11 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-const PhotoPath = localStorage.getItem('profileImage');
-const username = localStorage.getItem('username'); //username element
-const name = localStorage.getItem('name');
-const surname = localStorage.getItem('surname');
-const email = localStorage.getItem('email');
+// const PhotoPath = sessionStorage.getItem('profile_image');
+// const username = sessionStorage.getItem('username');
+// const name = sessionStorage.getItem('name');
+// const surname = sessionStorage.getItem('surname');
+// const email = sessionStorage.getItem('email');
+
 
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {

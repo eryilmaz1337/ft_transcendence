@@ -1,6 +1,7 @@
 function saveProfile()
 {
     var data = {
+        jsonsecuritykey: localStorage.getItem("securitykey"),
         jsonusername: document.getElementById('username').value,
         jsonname: document.getElementById('first-name').value,
         jsonsurname: document.getElementById('last-name').value,
@@ -39,22 +40,22 @@ function profileSettings() {
                 <!-- Username -->
                 <div class="input-wrapper">
                     <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" value="${username}">
+                    <input type="text" id="username" name="username" value="${sessionStorage.getItem('username')}">
                 </div>
                 <!-- Email -->
                 <div class="input-wrapper">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="${email}">
+                    <input type="email" id="email" name="email" value="${sessionStorage.getItem('email')}">
                 </div>
                 <!-- First Name -->
                 <div class="input-wrapper">
                     <label for="first-name">First Name:</label>
-                    <input type="text" id="first-name" name="first-name" value="${name}">
+                    <input type="text" id="first-name" name="first-name" value="${sessionStorage.getItem('name')}">
                 </div>
                 <!-- Last Name -->
                 <div class="input-wrapper">
                     <label for="last-name">Last Name:</label>
-                    <input type="text" id="last-name" name="last-name" value="${surname}">
+                    <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('surname')}">
                 </div>
                 <!-- Buttons -->
                 <button type="button" class="btn btn-primary button_profile" onclick="saveProfile()">Save</button>
