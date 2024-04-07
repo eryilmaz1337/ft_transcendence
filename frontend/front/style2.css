@@ -175,6 +175,7 @@ nav {
 }
 
 .username_text {
+	height: 40px;
     padding: 13px 25px 13px 10px;
     font-size: 12px;
 	font-family: 'Poppins', sans-serif;

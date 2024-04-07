@@ -3,7 +3,7 @@
 //     // var logoutWrapper = document.getElementById("logout-wrapper");
 //     // var logoutButton = document.getElementById("logout-btn");
 //     var matchHistory = document.getElementById("match_history");
-//     var historyTable = document.getElementById("history-table");
+//     var historyTable = document.getElementById("history-div");
   
 //     // Profil resmine tıklandığında çıkış yap butonunu göster veya gizle
 //   //   profilePicture.addEventListener("click", function() {
@@ -25,17 +25,78 @@
 //     //     window.location.hash = 'login';
 //     // });
 //   }
+
 function toggleTable() {
-    var table = document.getElementById("history-table");
+    var table = document.getElementById("history-div");
     table.classList.toggle("hidden");
 }
 
+// Fonksiyon ile veri alımı
+function fetchData(url) {
+    return fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        return Promise.resolve([]); // Hata durumunda boş liste dön yani data listesi boş dönüyor
+      });
+  }
+  
+  // Verileri tablo olarak gösteren fonksiyon
+  function displayData(data) {
+    const container = document.querySelector('#history-div');
+    console.log(data.length);
+    if (data.length == 0) {
+        const message = document.createElement('h1');
+        message.textContent = 'No match history found!';
+        container.appendChild(message);
+        return;
+    }
+    
+    const header = document.createElement('h1');
+    header.textContent = 'Match History Table';
+    container.appendChild(header);
+    const table = document.createElement('table');
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <!-- Data will be displayed here -->
+      </tbody>
+    `;
+    container.appendChild(table);
+  
+    const tableBody = document.querySelector('#table-body');
+    data.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.id}</td>
+        <td>${item.name}</td>
+        <td>${item.age}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
 function publicProfile() {
+    // Veriyi alma ve tablo olarak gösterme işlemlerini yürütme
+    fetchData('your-backend-url/data')
+    .then(data => {
+      displayData(data);
+    });
     return `
     <div class="wrapper">
         <div class="form-wrapper">
                 <h3>Profile</h3>
-                    <!-- Profile Photo <img src="../img/symbols/matchHistory.png" alt="Match History" class="match_history"> -->
                     <div class="field-wrapper profile-photo-wrapper">
                         <img src="${sessionStorage.getItem('profile_image')}" id="profile-photo" class="profile-photo" alt="Profile Photo">
                     </div>
@@ -108,39 +169,16 @@ function publicProfile() {
                         </div>
 
                         <div class="form-wrapper">
-                        <!-- Tournaments Attended Symbol -->
+                        <!-- Match History Symbol -->
                             <img src="../img/symbols/matchHistory.png" id="match_history" alt="Match History" class="match_history" onclick="toggleTable()">
                             <div class="game-explanation">
                                 <label for="match_history_label">Match History</label>
                             </div>
                         </div>
                     </div>
-                    <table class="table" id="history-table">
-                        <thead>
-                            <tr>
-                                <th>Column 1</th>
-                                <th>Column 2</th>
-                                <th>Column 3</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Row 1, Column 1</td>
-                                <td>Row 1, Column 2</td>
-                                <td>Row 1, Column 3</td>
-                            </tr>
-                            <tr>
-                                <td>Row 2, Column 1</td>
-                                <td>Row 2, Column 2</td>
-                                <td>Row 2, Column 3</td>
-                            </tr>
-                            <tr>
-                                <td>Row 3, Column 1</td>
-                                <td>Row 3, Column 2</td>
-                                <td>Row 3, Column 3</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="history-div" id="history-div">
+                        <!-- Tablo veya mesaj burada görüntülenecek -->
+                    </div>
         </div>
     </div>
 
@@ -232,7 +270,6 @@ function publicProfile() {
         .match_history {
             width: 125px;
             height: 125px;
-            // display: inline-block;
             border-radius: 10%;
             margin-bottom: 10px;
         }
@@ -306,8 +343,12 @@ function publicProfile() {
         .match_history {
             cursor: pointer;
         }
+
+        .history-div {
+            margin-top:20px;
+        }
     
-        /* Tablo gizleme */
+        /* Histry div gizleme */
         .hidden {
             display: none;
         }
