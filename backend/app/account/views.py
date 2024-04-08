@@ -118,16 +118,17 @@ def accountdataedit(request):
     if request.method == 'POST':
         # POST verisinden kullanıcı adı ve parolayı al
         data = json.loads(request.body)
-        if not users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+        jsecuritykey = data.get('jsonsecuritykey')
+        if not users.objects.filter(securitykey=jsecuritykey).exists():
             user = users.objects.get(securitykey=jsecuritykey)
-            if not user.securitykey==data.get('jsonsecuritykey'):
+            if not user.securitykey==jsecuritykey:
                 return JsonResponse({'success': False, 'massage': 'unauthorized transaction'})
+        user = users.objects.get(securitykey=jsecuritykey)
         oldusername = data.get('jsonoldusername')
         jusername = data.get('jsonusername')
         jname = data.get('jsonname')
         jsurname = data.get('jsonsurname')
         jemail = data.get('jsonemail')
-        jsecuritykey = data.get('jsonsecuritykey')
         user_exists = users.objects.filter(username=jusername).exists()
         if not user_exists and jusername != oldusername:
             user.username = jusername
@@ -137,7 +138,7 @@ def accountdataedit(request):
         user.surname = jsurname
         user.email = jemail
         user.save()
-        return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email})
+        return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
     

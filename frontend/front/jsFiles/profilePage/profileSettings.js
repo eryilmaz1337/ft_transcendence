@@ -1,7 +1,8 @@
 function saveProfile()
 {
     var data = {
-        jsonsecuritykey: localStorage.getItem("securitykey"),
+        jsonsecuritykey: sessionStorage.getItem("securitykey"),
+        jsonoldusername: sessionStorage.getItem("username"),
         jsonusername: document.getElementById('username').value,
         jsonname: document.getElementById('first-name').value,
         jsonsurname: document.getElementById('last-name').value,
@@ -17,10 +18,19 @@ function saveProfile()
       })
       .then(response => {
         alert('Başarılı');
-        console.log(JSON.parse(response.json()));
+        const data = JSON.parse(response.json());
+        console.log(data);
+        if (data) {
+            sessionStorage.setItem('username', data.username);
+            sessionStorage.setItem('name', data.name);
+            sessionStorage.setItem('surname', data.surname);
+            sessionStorage.setItem('email', data.email);
+            sessionStorage.setItem('profile_image', data.profile_image);
+        } else {
+            alert('Error while processing the request.');
+        }
       }) // JSON olarak dönen yanıtı parse etme
       .catch((error) => {
-        alert(`Hata`);
         console.error('Hata:', error);
       });
 }

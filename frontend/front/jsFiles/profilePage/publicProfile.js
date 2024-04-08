@@ -1,4 +1,4 @@
-// function showNavbarStates() {
+    // function showNavbarStates() {
 //     // var profilePicture = document.getElementById("profile-picture");
 //     // var logoutWrapper = document.getElementById("logout-wrapper");
 //     // var logoutButton = document.getElementById("logout-btn");

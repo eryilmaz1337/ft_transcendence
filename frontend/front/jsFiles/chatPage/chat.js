@@ -6,39 +6,6 @@ function chatAdd() {
     <title>Chat Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        opup {
-          display: none;
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          border: 1px solid #ccc;
-          padding: 20px;
-          background-color: #fff;
-          z-index: 1000;
-        }
-        
-        .popup form {
-          text-align: center;
-        }
-        
-        .popup input[type="text"], .popup input[type="submit"] {
-          margin: 5px 0;
-          padding: 8px;
-          width: 200px;
-        }
-        
-        .popup input[type="submit"] {
-          background-color: #007bff;
-          color: #fff;
-          border: none;
-          cursor: pointer;
-        }
-        
-        .popup input[type="submit"]:hover {
-          background-color: #0056b3;
-        }
-
         body {
             background-color: #15202b;
         }
@@ -100,15 +67,13 @@ function chatAdd() {
             overflow-y: auto;
             height: auto; /* Yüksekliği otomatik ayarla */
         }
-        
 
-        .chat-messages {
-            height: 35em;
-            overflow-y: scroll;
-            display: flex;
+        .chat-container::-webkit-scrollbar {
+            display: none; /* Chrome ve Safari için */
         }
 
         .message {
+            flex-grow: 1;
             padding: 0.625em;
             border-radius: 1em;
             margin-bottom: 0.625em;
@@ -142,6 +107,8 @@ function chatAdd() {
         }
 
         .chat-input-form {
+            position: sticky;
+            bottom: 0;
             display: flex;
             align-items: center;
             margin-top: 2em;
@@ -167,39 +134,11 @@ function chatAdd() {
     </style>
 </head>
 <body>
-    <script>
-    document.getElementById('openPopup').addEventListener('click', function() {
-      document.getElementById('popupForm').style.display = 'block';
-    });
-
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Formun submit işlemini durdur
-
-      // Formdaki değerleri al
-      var firstName = document.getElementById('firstName').value;
-      var lastName = document.getElementById('lastName').value;
-
-      // Burada form verilerini kullanabilirsiniz
-      console.log('İsim: ' + firstName + ', Soyisim: ' + lastName);
-
-      // Formu kapat
-      document.getElementById('popupForm').style.display = 'none';
-    });
-    </script>
-    <div id="popupForm" class="popup">
-      <form id="myForm">
-        <label for="firstName">İsim:</label><br>
-        <input type="text" id="firstName" name="firstName"><br>
-        <label for="lastName">Soyisim:</label><br>
-        <input type="text" id="lastName" name="lastName"><br><br>
-        <input type="submit" value="Gönder">
-      </form>
-    </div>
     <div style="display:flex; flex-direction: row; align-items: start;">
         <div class="person-selector">
             <div style="display:flex; flex-direction: row; align-items: center; justify-content: space-between;">
-            <i id="openPopup" class="fas fa-plus" title="Oyuna davet et" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >    
-                <span style="font-size: 12px; padding-left: 5px">Davet Et</span>
+            <i class="fas fa-plus" title="Oyuna davet et" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >
+                    <span style="font-size: 12px; padding-left: 5px">Davet Et</span>
             </i>
             <i class="fas fa-comment-alt" title="Özel Mesaj Gönder" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >
                 <span style="font-size: 12px; padding-left: 5px">Message</span>
@@ -218,24 +157,13 @@ function chatAdd() {
             </ul>
         </div>
         <div class="chat-container">
-                <div style="width: 100%; display: flex; flex-direction: column;">
-                    <div class="message blue-bg" style="width: 50%; display: flex">
-                        <div class="message-sender">John</div>
-                        <div class="message-text">Hey Jane, what's up?</div>
-                        <div class="message-timestamp">10:30 AM</div>
-                    </div>
-                    <div class="message gray-bg" style="width: 50%; display: flex; align-self: flex-end">
-                        <div class="message-sender">Jane</div>
-                        <div class="message-text">selam living the dream. How about you?</div>
-                        <div class="message-timestamp">10:35 AM</div>
-                    </div>
+                <div id="chat" style="width: 100%; display: flex; flex-direction: column;">
+                <!-- chat message -->
                 </div>
-            <div>
                 <div class="chat-input-form">
                     <input id=chat-text type="text" class="chat-input" required placeholder="Type here, John..."/>
                     <button type="submit" class="chat-button send-button" onclick="sendMessage()">Send</button>
                 </div>
-            </div>
         </div>
     </div>
 `;
