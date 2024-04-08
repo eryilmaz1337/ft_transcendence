@@ -20,7 +20,7 @@ networks:
 
 services:
   nginx:
-    container_name: nginx
+    container_name: nginx-test
     build: ./nginx
     ports:
       - 443:443
@@ -29,7 +29,7 @@ services:
       - network
 
   database:
-    container_name: database
+    container_name: database-test
     image: postgres:latest
     restart: always
     environment:
@@ -42,7 +42,7 @@ services:
       - network
 
   backend:
-    container_name: backend
+    container_name: backend-test
     build: ./backend
     volumes:
       - backend:/app
@@ -55,7 +55,7 @@ services:
       - database
 
   frontend:
-    container_name: frontend
+    container_name: frontend-test
     build:
       context: ./frontend
       dockerfile: Dockerfile

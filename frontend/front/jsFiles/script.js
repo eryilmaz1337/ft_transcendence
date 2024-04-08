@@ -40,6 +40,7 @@ function changePage(page) {
     if (isLoggedIn || page == 'login')
     {
         updateProfilePictureStyle();
+        console.log("girilen sayfa= "+page);
         switch (page) {
             case 'login':
                 removeHeader();
@@ -78,6 +79,7 @@ function changePage(page) {
             case 'confirm':
                 break;
             default:
+                removeHeader();
                 content = ErrorAdd();
         }
         //Yeni içerik eklenir.

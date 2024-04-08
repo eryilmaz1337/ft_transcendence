@@ -52,16 +52,16 @@ function loginSuccess()
 
 function signinFunction(){
     isLoggedIn = true;
-    document.getElementById("singin").classList.add("is-loading");
+    document.getElementById("signin").classList.add("is-loading");
     if (isLoggedIn)
-        window.location.hash = "#singin";
+        window.location.hash = "#signin";
 }
 
 function signupFunction(){
     isLoggedIn = true;
-    document.getElementById("singup").classList.add("is-loading");
+    document.getElementById("signup").classList.add("is-loading");
     if (isLoggedIn)
-        window.location.hash = "#singup";
+        window.location.hash = "#signup";
 }
 
 function loginAdd() {
@@ -146,8 +146,8 @@ function loginAdd() {
                     <form onsubmit="return false;">
                         <h3>Welcome to Transcendence Project</h3>
                         <button id="toapi" onclick="login42()">Sign in with 42 API</button>
-                        <button id="singup" onclick="signupFunction()">Sign up</button>
-                        <button id="singin" onclick="signinFunction()">Sign in</button>
+                        <button id="signup" onclick="signupFunction()">Sign up</button>
+                        <button id="signin" onclick="signinFunction()">Sign in</button>
                     </form>
                 </div>
             </div>
