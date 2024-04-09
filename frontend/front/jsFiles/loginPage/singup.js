@@ -87,14 +87,14 @@ function singup()
     </style>
     <body>
     <div class="form-wrapper">
-      <h3>Register to Transcendence Project</h3>
+    <h3 data-translate="registertoproject">Register to Transcendence Project</h3>
       <form id="registerForm" method="get" >
         <input type="text" id="username" placeholder="Username" requidred>
         <input type="text" id="name" placeholder="Name" requidred>
         <input type="text" id="surname" placeholder="Surname" requidred>
         <input type="email" id="email" placeholder="Email" required>
         <input type="password" id="password" placeholder="Password" required>
-        <button type="submit" onclick="signupjson()">Sign Up</button>
+        <button type="submit" onclick="signupjson()" data-translate="registerbuton">Sign Up</button>
       </form>
     </div>
   </body>

@@ -96,26 +96,26 @@ function publicProfile() {
     return `
     <div class="wrapper">
         <div class="form-wrapper">
-                <h3>Profile</h3>
+                <h3 data-translate="profileheader">Profile</h3>
                     <div class="field-wrapper profile-photo-wrapper">
                         <img src="${sessionStorage.getItem('profile_image')}" id="profile-photo" class="profile-photo" alt="Profile Photo">
                     </div>
 
                     <div class="field-wrapper">
                     <!-- Username -->
-                        <label for="username">Username:</label>
+                        <label for="username" data-translate="profileuser" >Username:</label>
                         <input type="text" id="username" name="username" value="${sessionStorage.getItem('username')}" readonly>
                     <!-- Email -->
-                        <label for="email">Email:</label>
+                        <label for="email" data-translate="profileemail">Email:</label>
                         <input type="email" id="email" name="email" value="${sessionStorage.getItem('email')}" readonly>
                     </div>
 
                     <div class="field-wrapper">
                     <!-- First Name -->
-                        <label for="first-name">First Name:</label>
+                        <label for="first-name" data-translate="profilefirstname">First Name:</label>
                         <input type="text" id="first-name" name="first-name" value="${sessionStorage.getItem('name')}" readonly>
                     <!-- Last Name -->
-                        <label for="last-name">Last Name:</label>
+                        <label for="last-name" data-translate="profilelastname">Last Name:</label>
                         <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('surname')}" readonly>
                     </div>
 
@@ -226,8 +226,8 @@ function publicProfile() {
         }
 
         .field-wrapper label {
-            margin-right: 20px;
-            margin-left: 20px;
+            margin-right: -50px;
+            margin-left: 50px;
             width: 150px;
             display: inline-block;
             color: #fff;
@@ -244,6 +244,9 @@ function publicProfile() {
             flex: 1;
             padding: 1px;
             border: 1px solid #ccc;
+            height: 30px;
+            font-size: 16px;
+            padding-left: 8px;
             border-radius: 5px;
             width: 100%;
             background-color: #404040;
@@ -258,6 +261,7 @@ function publicProfile() {
         }
 
         .profile-photo {
+            object-fit: cover;
             width: 150px;
             height: 150px;
             border-radius: 50%; /* Make the border radius 50% to create a circle */

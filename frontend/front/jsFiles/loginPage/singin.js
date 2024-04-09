@@ -104,17 +104,17 @@ function singin()
     </style>
     <body>
     <div class="container">
-    <h2>Sign In to Transcendence Project</h2>
+    <h2 data-translate="giristrans">Sign In to Transcendence Project</h2>
     <form id="signInForm">
       <div class="input-group">
         <input type="text" id="username" required>
-        <label for="username">Username</label>
+        <label for="username" data-translate="girisuser" >Username</label>
       </div>
       <div class="input-group">
         <input type="password" id="password" required>
-        <label for="password">Password</label>
+        <label for="password" data-translate="girispass">Password</label>
       </div>
-      <button type="submit" onclick="signinjson()">Sign In</button>
+      <button type="submit" onclick="signinjson()" data-translate="girisbuttons">Sign In</button>
     </form>
     </div>
   </body>

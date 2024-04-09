@@ -40,36 +40,34 @@ function profileSettings() {
     return `
     <div class="wrapper">
         <div class="form-wrapper">
-            <form onsubmit="return false;">
-                <h3>Account Settings</h3>
-                <!-- Profile Photo -->
-                <div class="input-wrapper">
-                    <label for="profile-photo">Profile Photo:</label>
-                    <input type="file" id="profile-photo" class="account-settings-fileinput">
-                </div>
-                <!-- Username -->
-                <div class="input-wrapper">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" value="${sessionStorage.getItem('username')}">
-                </div>
-                <!-- Email -->
-                <div class="input-wrapper">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="${sessionStorage.getItem('email')}">
-                </div>
-                <!-- First Name -->
-                <div class="input-wrapper">
-                    <label for="first-name">First Name:</label>
-                    <input type="text" id="first-name" name="first-name" value="${sessionStorage.getItem('name')}">
-                </div>
-                <!-- Last Name -->
-                <div class="input-wrapper">
-                    <label for="last-name">Last Name:</label>
-                    <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('surname')}">
-                </div>
-                <!-- Buttons -->
-                <button type="button" class="btn btn-primary button_profile" onclick="saveProfile()">Save</button>
-            </form>
+        <form onsubmit="return false;">
+        <h3 data-translate="kullaniciayarlari">Account Settings</h3>
+        <!-- Profile Photo -->
+        <div class="input-wrapper">
+            <label for="profile-photo" data-translate="profilephoto">Profile Photo:</label>
+            <input type="file" id="profile-photo" class="account-settings-fileinput">
+        </div>
+        <div class="input-wrapper">
+            <label for="username" data-translate="accountusername">Username:</label>
+            <input type="text" id="username" name="username" value="${sessionStorage.getItem('username')}">
+        </div>
+        <div class="input-wrapper">
+            <label for="email" data-translate="accountmail">Email:</label>
+            <input type="email" id="email" name="email" value="${sessionStorage.getItem('email')}">
+        </div>
+        <div class="input-wrapper">
+            <label for="first-name" data-translate="accountfirstname">First Name:</label>
+            <input type="text" id="first-name" name="first-name" value="${sessionStorage.getItem('name')}">
+        </div>
+        <div class="input-wrapper">
+            <label for="last-name" data-translate="accountlastname">Last Name:</label>
+            <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('surname')}">
+        </div>
+        <!-- Buttons -->
+        <div class="input-wrapper">
+            <button type="button" data-translate="save"class="btn btn-primary button_profile" onclick="saveProfile()">Save</button>
+        </div>
+        </form>
         </div>
     </div>
 

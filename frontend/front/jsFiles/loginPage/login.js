@@ -141,13 +141,18 @@ function loginAdd() {
         </head>
 
         <body>
+            <div style="display: flex; justify-content: space-between; width: 100%; padding: 25px">
+                <button onclick="language('tr')" style="background : lightblue; ">Turkish</button>
+                <button onclick="language('en')" style="margin-left: 10px; margin-right: 10px; background: lightblue;">English</button>
+                <button onclick="language('ru')" style="background : lightblue; " >Russian </button>
+            </div>
             <div class="wrapper">
                 <div class="form-wrapper">
                     <form onsubmit="return false;">
-                        <h3>Welcome to Transcendence Project</h3>
-                        <button id="toapi" onclick="login42()">Sign in with 42 API</button>
-                        <button id="signup" onclick="signupFunction()">Sign up</button>
-                        <button id="signin" onclick="signinFunction()">Sign in</button>
+                        <h3 data-translate="welcome"> Welcome to Transcendence Project</h3>
+                        <button id="toapi" onclick="login42()" data-translate="intra" >Sign in with 42 API</button>
+                        <button id="singup" onclick="signupFunction()" data-translate="register" >Sign up</button>
+                        <button id="singin" onclick="signinFunction()" data-translate="login" >Sign in</button>
                     </form>
                 </div>
             </div>

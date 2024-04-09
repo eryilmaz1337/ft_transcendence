@@ -137,13 +137,13 @@ function chatAdd() {
     <div style="display:flex; flex-direction: row; align-items: start;">
         <div class="person-selector">
             <div style="display:flex; flex-direction: row; align-items: center; justify-content: space-between;">
-            <i class="fas fa-plus" title="Oyuna davet et" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >
+            <i class="fas fa-plus" title="Oyuna davet et" data-translate="invite" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >
                     <span style="font-size: 12px; padding-left: 5px">Davet Et</span>
             </i>
-            <i class="fas fa-comment-alt" title="Özel Mesaj Gönder" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >
+            <i class="fas fa-comment-alt" title="Özel Mesaj Gönder" data-translate="message" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >
                 <span style="font-size: 12px; padding-left: 5px">Message</span>
             </i>
-            <i class="fas fa-ban" title="Kullanıcı Banla" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >
+            <i class="fas fa-ban" title="Kullanıcı Banla" data-translate="block" style="cursor: pointer;  color: white; font-size: 20px; align-items: center; border: 1px solid gray; padding: 10px; border-radius: 15px" >
                 <span style="font-size: 12px; padding-left: 5px">Engelle</span>
             </i>
             </div>
@@ -162,7 +162,7 @@ function chatAdd() {
                 </div>
                 <div class="chat-input-form">
                     <input id=chat-text type="text" class="chat-input" required placeholder="Type here, John..."/>
-                    <button type="submit" class="chat-button send-button" onclick="sendMessage()">Send</button>
+                    <button type="submit" data-translate="send" class="chat-button send-button" onclick="sendMessage()">Send</button>
                 </div>
         </div>
     </div>

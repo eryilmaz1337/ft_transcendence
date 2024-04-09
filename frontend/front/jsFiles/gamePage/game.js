@@ -4,9 +4,9 @@ function chooseGame() {
         <div class="wrapper">
         <div class="form-wrapper">
             <form onsubmit="return false;">
-                <h3>🏓 Pong Game 🏓</h3>
-                <a href="#quickMatch" class="choose-game-button" id="quickMatchButton">Quick Match</a>
-                <a href="#specialMatch" class="choose-game-button" id="specialMatchButton" onclick="specialMatchClicked()">Special Match</a>
+                <h3 data-translate="ponggame">🏓 Pong Game 🏓</h3>
+                <a href ="#quickMatch" class="choose-game-button" id="quickMatchButton" data-translate="quickmatch">Quick Match</a>
+                <a href ="#specialMatch" class="choose-game-button" id="specialMatchButton" onclick="specialMatchClicked()" data-translate="specialmatch">Special Match</a>
             </form>
         </div>
     </div>
@@ -169,7 +169,7 @@ function gameAdd() {
         <h1 id="player1Score">0</h1>
         <h1 id="player2Score">0</h1>
     </div>
-    <h2 id="WelcomeText">Welcome to the Pong Game</h2>
+    <h2 id ="WelcomeText" data-translate="welcomepong">Welcome to the Pong Game</h2>
 
     /* Buton eklenecek ve arkaplan değiştirilecek game'de */
 </div>
