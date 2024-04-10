@@ -19,13 +19,13 @@ function saveProfile()
       .then(response => {
         alert('Başarılı');
         const data = JSON.parse(response.json());
-        console.log(data);
         if (data) {
             sessionStorage.setItem('username', data.username);
             sessionStorage.setItem('name', data.name);
             sessionStorage.setItem('surname', data.surname);
             sessionStorage.setItem('email', data.email);
             sessionStorage.setItem('profile_image', data.profile_image);
+            alert(data.username);
         } else {
             alert('Error while processing the request.');
         }
@@ -64,7 +64,7 @@ function profileSettings() {
             <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('surname')}">
         </div>
         <!-- Buttons -->
-        <div class="input-wrapper">
+        <div class="input-wrapper button_wrapper">
             <button type="button" data-translate="save"class="btn btn-primary button_profile" onclick="saveProfile()">Save</button>
         </div>
         </form>
@@ -144,15 +144,22 @@ function profileSettings() {
             color: #000;
         }
 
+        .button_wrapper {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
         .button_profile {
-			text-decoration: none;
+            text-decoration: none;
             padding: 10px 20px;
             margin-top: 20px;
-			font-size: 18px;
+            font-size: 18px;
             border: none;
             border-radius: 15px;
             cursor: pointer;
         }
+
 
         .btn-primary {
             background-color: greenyellow;

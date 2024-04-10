@@ -46,7 +46,7 @@ function changePage(page) {
     if (isLoggedIn || page == 'login')
     {
         updateProfilePictureStyle();
-        console.log("girilen sayfa= "+page);
+        //console.log("girilen sayfa= "+page);
         switch (page) {
             case 'login':
                 removeHeader();
@@ -61,6 +61,8 @@ function changePage(page) {
                 showHeader();
                 break;
             case 'specialMatch':
+                content = chooseCustomGame();
+                showHeader();
                 break;
             case 'chat':
                 content = chatAdd();
@@ -79,9 +81,6 @@ function changePage(page) {
                 removeHeader();
                 content = singin();
                 break;
-            case 'check':
-                console.log("ggg");
-                break;
             case 'confirm':
                 break;
             default:
@@ -91,7 +90,7 @@ function changePage(page) {
         //Yeni içerik eklenir.
         document.getElementById('content').innerHTML = content;
         window.location.hash = page;
-        
+
         var languages = localStorage.getItem('selectedLanguage');
         changeLanguage(languages);
         //Sayfa içeriği değiştikten sonra navbar gösterme
@@ -101,11 +100,6 @@ function changePage(page) {
     else
         window.location.hash = 'login';
 }
-
-// function showBackgroundColor() {
-//     document.body.style.background = "black";
-//     document.body.style.backgroundImage = "none";
-// }
 
 document.addEventListener('DOMContentLoaded', function() {
     var username = sessionStorage.getItem('username');

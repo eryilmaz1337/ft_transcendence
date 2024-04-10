@@ -1,3 +1,82 @@
+function chooseCustomGame() {
+    return `
+    <div id="game-container">
+        <div class="wrapper">
+        <div class="form-wrapper">
+            <form onsubmit="return false;">
+                <h3 data-translate="ponggame">👾 Choose Custom Game 👾</h3>
+                <a href ="#quickMatch" class="choose-game-button" id="quickMatchButton" data-translate="quickmatch">Mod1</a>
+                <a href ="#specialMatch" class="choose-game-button" id="specialMatchButton" onclick="specialMatchClicked()" data-translate="specialmatch">Mod2</a>
+            </form>
+        </div>
+    </div>
+
+        <style>
+            #game-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                font-family: 'Poppins', sans-serif;
+                box-sizing: border-box;
+            }
+
+            .choose-game-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin-top: 20px;
+            }
+
+            .choose-game-button {
+                text-decoration: none;
+                padding: 10px 20px;
+                font-size: 18px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                background-color: greenyellow;
+                color: #000;
+                margin: 10px;
+                font-weight: bold;
+                transition: background-color 0.3s ease;
+            }
+
+            .choose-game-button:hover {
+                background-color: #0cf;
+            }
+
+            .wrapper {
+                position: relative;
+                width: 490px;
+                height: 300px;
+                background: #000;
+                box-shadow: 0 0 50px greenyellow;
+                border-radius: 20px;
+                padding: 40px;
+                overflow: hidden;
+            }
+
+            .form-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+            }
+
+            h3 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                color: #fff;
+                text-align: center;
+            }
+
+        </style>
+    `;
+}
+
 function chooseGame() {
     return `
     <div id="game-container">
@@ -77,7 +156,7 @@ function chooseGame() {
     `;
 }
 
-
+// Oyun Fonksiyonu
 function gameAdd() {
     return `
     <style>

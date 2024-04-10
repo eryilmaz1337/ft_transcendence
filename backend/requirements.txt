@@ -1,7 +1,7 @@
 Django==3.2.12
 django-cors-headers==3.10.0
 requests==2.26.0
-psycopg2-binary==2.9.3
+psycopg2-binary
 channels==3.0.3  # Python 3.8 veya 3.9 ile uyumlu bir sürüm
 channels-redis==3.3.0
 redis==3.0.1
