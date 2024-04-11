@@ -169,14 +169,14 @@ nav {
 
 .username_class {
 	position: absolute;
-	right: -20px;
+	right: 0px;
 	display: none;
-	align-items: left;
+	/* align-items: left; */
 }
 
 .username_text {
     height: 40px; /* Sabit yükseklik belirleniyor */
-    padding: 13px 25px 13px 30px;
+    padding: 13px 50px 13px 20px;
     font-size: 12px;
     font-family: 'Poppins', sans-serif;
     border: none;
@@ -184,11 +184,11 @@ nav {
     background-color: greenyellow;
     color: black;
     cursor: pointer;
-    border-radius: 20px; /* Tüm köşeleri yuvarlar */
-    min-width: 40px; /* Minimum genişlik belirleniyor */
-    max-width: 300px; /* Maksimum genişlik belirleniyor */
-    width: auto; /* Otomatik genişlik */
-    box-sizing: border-box; /* Padding ve border dahil genişliği hesaplar */
+    border-radius: 20px;
+    min-width: 100px;
+    /* max-width: 100px; */
+    /* width: auto; */
+    /* box-sizing: border-box; */
 }
 
 
@@ -203,5 +203,4 @@ nav {
 
 .profile-wrapper:hover .username_class {
     display: flex; /* Profil resmine hover yapıldığında göster */
-	transform: translateX(-50%); /*  nesneyi kendi genişliğinin yarısı kadar sola kaydırır.  */
 }
