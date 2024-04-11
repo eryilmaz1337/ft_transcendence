@@ -1,5 +1,6 @@
 function chatAdd() {
     return `
+    <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
@@ -248,7 +249,7 @@ function chatAdd() {
     }
 
     </style>
-
+</head>
 <body>
 
 <div class="container">
@@ -266,7 +267,6 @@ function chatAdd() {
     </div>
 
     <div class="chat-container">
-        <h2 class="chat-header">John chatting...</h2>
 
         <div class="chat-messages">
             <div class="message blue-bg">
@@ -280,11 +280,12 @@ function chatAdd() {
                 <div class="message-timestamp">10:35 AM</div>
             </div>
         </div>
+        <div id="chat" style="width: 100%; display: flex; flex-direction: column;">
 
-        <form class="chat-input-form">
-            <input type="text" class="chat-input" required placeholder="Type here, John..." />
-            <button type="submit" class="button send-button" onclick="sendMessage()">Send</button>
-        </form>
+        <div class="chat-input-form">
+            <input id=chat-text type="text" class="chat-input" required placeholder="Type here, John..."/>
+            <button type="submit" data-translate="send" class="chat-button send-button" onclick="sendMessage()">Send</button>
+        </div>
         <button class="button clear-chat-button">Clear Chat</button>
         <!-- Ayarlamalar Kısmı -->
         <div class="additional-buttons">
@@ -296,8 +297,5 @@ function chatAdd() {
         </div>
     </div>
 </div>
-
-<script src="app.js"></script>
-</body>
 `;
 }

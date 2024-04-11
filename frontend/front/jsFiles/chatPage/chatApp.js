@@ -40,6 +40,18 @@ socket.addEventListener('message', function (event) {
 //     chatMessages.scrollTop = chatMessages.scrollHeight;
 // }
 
+function createChatMessageElement(message) {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    return `
+    <div class="message gray-bg" style="width: 50%; display: flex; align-self: flex-end">
+        <div class="message-sender">${message.sender}</div>
+        <div class="message-text">${message.text}</div>
+        <div class="message-timestamp">${hours}:${minutes}</div>
+    </div>
+    `;
+}
 
 function sendMessage() 
 {
@@ -60,6 +72,20 @@ function sendMessage()
 
 	chatMessages.innerHTML += createChatMessageElement(messageData.message, messageData.username);
 	document.getElementById("chat-text").value='';
+	socket.send(JSON.stringify(messageData));
+}
+
+//KONSOL DENEME
+
+function sendMessage(mesaj) 
+{
+
+	const messageData = {
+		message: mesaj,
+		username: 'bkozluca',  // Kullanıcı adını da mesajla birlikte gönder
+		room_name: 'bkozluca',
+	};
+	console.log(messageData);
 	socket.send(JSON.stringify(messageData));
 }
 
@@ -104,15 +130,4 @@ function sendMessage()
 // });
 
 // Örnek bir mesaj oluşturmak için işlevi güncelleyin
-function createChatMessageElement(message) {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    return `
-    <div class="message gray-bg" style="width: 50%; display: flex; align-self: flex-end">
-        <div class="message-sender">${message.sender}</div>
-        <div class="message-text">${message.text}</div>
-        <div class="message-timestamp">${hours}:${minutes}</div>
-    </div>
-    `;
-}
+
