@@ -283,7 +283,7 @@ function chatAdd() {
 
         <form class="chat-input-form">
             <input type="text" class="chat-input" required placeholder="Type here, John..." />
-            <button type="submit" class="button send-button">Send</button>
+            <button type="submit" class="button send-button" onclick="sendMessage()">Send</button>
         </form>
         <button class="button clear-chat-button">Clear Chat</button>
         <!-- Ayarlamalar Kısmı -->
