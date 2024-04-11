@@ -134,8 +134,6 @@ def accountdataedit(request):
         user_exists = users.objects.filter(username=jusername).exists()
         if not user_exists and jusername != oldusername:
             user.username = jusername
-        else:
-            return JsonResponse({'success': user_exists, 'massage': 'This username is used'})
         user.name = jname
         user.surname = jsurname
         user.email = jemail
