@@ -25,7 +25,17 @@ function signinjson()
       .then(data => {
         signinprocessing();
         alert(`Giriş Başarılı`);
-        console.log('Başarıyla gönderildi:', data);
+        if (data) {
+          sessionStorage.setItem('username', data.username);
+          sessionStorage.setItem('name', data.name);
+          sessionStorage.setItem('surname', data.surname);
+          sessionStorage.setItem('email', data.email);
+          sessionStorage.setItem('securitykey', data.securitykey);
+          sessionStorage.setItem('profile_image', data.profile_image);
+
+        }else {
+          alert('Error while processing the request.');
+        }
       })
       .catch((error) => {
         alert(`Kullanıcı adı veya şifre hatalı`);

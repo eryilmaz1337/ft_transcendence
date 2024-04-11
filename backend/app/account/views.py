@@ -28,6 +28,7 @@ def singup(request):
                 name=data['jsonname'],
                 surname=data['jsonsurname'],
                 email=data['jsonemail'],
+                profile_image = "http://localhost:423/img/profile_photos/pp08.jpeg",
                 password=make_password(data['jsonpassword']),
                 securitykey=generate_random_string()
             )
@@ -45,9 +46,8 @@ def singin(request):
         password = data.get('jsonpassword')
         user = users.objects.get(username=username)
         if check_password(password, user.password):
-            return JsonResponse({'success': True, 'message': 'Login successful'})
+            return JsonResponse({'securitykey': user.securitykey,'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
         else:
-
             # Kullanıcı kimlik bilgileri yanlışsa JSON yanıt döndür
             return JsonResponse({'success': False, 'message': 'Invalid credentials'})
     else:
@@ -90,16 +90,19 @@ def account42(request):
                     user_data = user_response.json()
                     user_exists = users.objects.filter(username=user_data['login']).exists()# Kullanıcı adıyla veritabanını kontrol et eğer bu kullanıcı yoksa veritabanına kaydet.
                     if not user_exists:
-                        jsecuritykey=generate_random_string()
-                        users.objects.create(
-                        username=user_data['login'],
-                        name=user_data['first_name'],
-                        surname=user_data['last_name'],
-                        email=user_data['email'],
-                        profile_image = user_data['image']['link'],
-                        securitykey= jsecuritykey
-                    )
-                        return JsonResponse({'securitykey': jsecuritykey,'username': user_data['login'], 'name': user_data['first_name'], 'surname': user_data['last_name'], 'email': user_data['email'], 'profile_image': user_data['image']['link']})
+                        user_exists = users.objects.filter(login_42=user_data['login']).exists()
+                        if not user_exists:
+                            jsecuritykey=generate_random_string()
+                            users.objects.create(
+                            username=user_data['login'],
+                            login_42=user_data['login'],
+                            name=user_data['first_name'],
+                            surname=user_data['last_name'],
+                            email=user_data['email'],
+                            profile_image = user_data['image']['link'],
+                            securitykey= jsecuritykey
+                            )
+                            return JsonResponse({'securitykey': jsecuritykey,'username': user_data['login'], 'name': user_data['first_name'], 'surname': user_data['last_name'], 'email': user_data['email'], 'profile_image': user_data['image']['link']})
                     else:
                         user = users.objects.get(username=user_data['login'])
                         return JsonResponse({'securitykey': user.securitykey,'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})

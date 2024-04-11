@@ -2,6 +2,7 @@ from django.db import models
 
 class users(models.Model):
     online = models.BooleanField(default=False)
+    login_42 = models.CharField(max_length=100, default='none')
     securitykey = models.CharField(max_length=60, primary_key=True)
     username = models.CharField(max_length=60,default='none')
     name = models.CharField(max_length=60, default='none')

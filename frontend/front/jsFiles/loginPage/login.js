@@ -19,6 +19,7 @@ function accountsave(accessToken)
             if (xhr.status === 200) {
                 const data = JSON.parse(xhr.responseText);
                 if (data) {
+                    window.location.hash = "#game"
                     sessionStorage.setItem('username', data.username);
                     sessionStorage.setItem('name', data.name);
                     sessionStorage.setItem('surname', data.surname);
@@ -38,7 +39,6 @@ function accountsave(accessToken)
     // accessToken'i doğru şekilde kullan
     const requestBody = JSON.stringify({ code: accessToken });
     xhr.send(requestBody);
-    loginSuccess();
     isLoggedIn = true;
 }
 
@@ -46,7 +46,7 @@ function loginSuccess()
 {
     // burdan veri tabanındaki çevrimiçi durumunu değiştiren kodu yaz
 
-    window.location.hash = "#game"
+    window.location.hash = "#loading"
     isLoggedIn = true;
 }
 
@@ -151,8 +151,8 @@ function loginAdd() {
                     <form onsubmit="return false;">
                         <h3 data-translate="welcome"> Welcome to Transcendence Project</h3>
                         <button id="toapi" onclick="login42()" data-translate="intra" >Sign in with 42 API</button>
-                        <button id="singup" onclick="signupFunction()" data-translate="register" >Sign up</button>
-                        <button id="singin" onclick="signinFunction()" data-translate="login" >Sign in</button>
+                        <button id="signup" onclick="signupFunction()" data-translate="register" >Sign up</button>
+                        <button id="signin" onclick="signinFunction()" data-translate="login" >Sign in</button>
                     </form>
                 </div>
             </div>
