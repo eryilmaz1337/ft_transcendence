@@ -36,7 +36,7 @@ function chatAdd() {
 
     .person-selector-container {
         background-color: #15202b;
-        padding: 2em;
+        padding: 1.5em;
         border-radius: 0.5em;
         box-shadow: 0 0 1.25em 0.5em greenyellow;
     }
@@ -66,11 +66,10 @@ function chatAdd() {
     }
 
     .person-selector-button.online{
-        background-color: #5cb85c;
+        color: #5cb85c;
     }
 
     .active-person {
-        background-color: #08529d;
         box-shadow: 0 0 0.5em 0.1em #c3c3c333;
     }
 
