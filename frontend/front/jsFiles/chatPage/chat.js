@@ -214,6 +214,35 @@ function chatAdd() {
         margin-right: 10px;
     }
 
+    .chat-container {
+        max-width: 90%; /* Ekran genişliğinin yüzde 90'u */
+    }
+
+    .person-selector-container {
+        background-color: #15202b;
+        padding: 2em;
+        border-radius: 0.5em;
+        box-shadow: 0 0 1.25em 0.5em greenyellow;
+    }
+
+    .block-button {
+        background-color: #e74c3c;
+        transition: background-color 0.3s ease; /* Geçiş efekti */
+    }
+
+    .block-button:hover {
+        background-color: #c0392b;
+    }
+
+    .message-button, .invite-button, .add-friend-button {
+        background-color: greenyellow;
+        transition: background-color 0.3s ease; /* Geçiş efekti */
+    }
+
+    .message-button:hover, .invite-button:hover, .add-friend-button:hover {
+        background-color: limegreen;
+    }
+
 
     @media screen and (max-width: 700px) {
         /* Sabit kalmamasını istiyorsan
@@ -223,18 +252,6 @@ function chatAdd() {
             width: 700px;
             margin: auto;
         }
-
-        .chat-container {
-            max-width: 90%; /* Ekran genişliğinin yüzde 90'u */
-        }
-
-        .person-selector-container {
-            background-color: #15202b;
-            padding: 2em;
-            border-radius: 0.5em;
-            box-shadow: 0 0 1.25em 0.5em greenyellow;
-        }
-
     }
 
     </style>
