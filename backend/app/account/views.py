@@ -45,6 +45,7 @@ def singin(request):
         username = data.get('jsonusername')
         password = data.get('jsonpassword')
         user = users.objects.get(username=username)
+        print(user);
         if check_password(password, user.password):
             return JsonResponse({'securitykey': user.securitykey,'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
         else:
@@ -88,23 +89,21 @@ def account42(request):
                 
                 if user_response.status_code == 200:
                     user_data = user_response.json()
-                    user_exists = users.objects.filter(username=user_data['login']).exists()# Kullanıcı adıyla veritabanını kontrol et eğer bu kullanıcı yoksa veritabanına kaydet.
+                    user_exists = users.objects.filter(login_42=user_data['login']).exists()# Kullanıcı adıyla veritabanını kontrol et eğer bu kullanıcı yoksa veritabanına kaydet.
                     if not user_exists:
-                        user_exists = users.objects.filter(login_42=user_data['login']).exists()
-                        if not user_exists:
-                            jsecuritykey=generate_random_string()
-                            users.objects.create(
-                            username=user_data['login'],
-                            login_42=user_data['login'],
-                            name=user_data['first_name'],
-                            surname=user_data['last_name'],
-                            email=user_data['email'],
-                            profile_image = user_data['image']['link'],
-                            securitykey= jsecuritykey
-                            )
-                            return JsonResponse({'securitykey': jsecuritykey,'username': user_data['login'], 'name': user_data['first_name'], 'surname': user_data['last_name'], 'email': user_data['email'], 'profile_image': user_data['image']['link']})
+                        jsecuritykey=generate_random_string()
+                        users.objects.create(
+                        username=user_data['login'],
+                        login_42=user_data['login'],
+                        name=user_data['first_name'],
+                        surname=user_data['last_name'],
+                        email=user_data['email'],
+                        profile_image = user_data['image']['link'],
+                        securitykey= jsecuritykey
+                        )
+                        return JsonResponse({'securitykey': jsecuritykey,'username': user_data['login'], 'name': user_data['first_name'], 'surname': user_data['last_name'], 'email': user_data['email'], 'profile_image': user_data['image']['link']})
                     else:
-                        user = users.objects.get(username=user_data['login'])
+                        user = users.objects.get(login_42=user_data['login'])
                         return JsonResponse({'securitykey': user.securitykey,'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
                 else:
                     return JsonResponse({'error': 'Failed to fetch user data', 'status_code': user_response.status_code})
@@ -144,7 +143,7 @@ def accountdataedit(request):
         return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
-    
+
 @csrf_exempt
 def userauthenticator(request):
     if request.method == 'POST':

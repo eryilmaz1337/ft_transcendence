@@ -19,13 +19,17 @@ function accountsave(accessToken)
             if (xhr.status === 200) {
                 const data = JSON.parse(xhr.responseText);
                 if (data) {
-                    window.location.hash = "#game"
                     sessionStorage.setItem('username', data.username);
                     sessionStorage.setItem('name', data.name);
                     sessionStorage.setItem('surname', data.surname);
                     sessionStorage.setItem('email', data.email);
                     sessionStorage.setItem('securitykey', data.securitykey);
                     sessionStorage.setItem('profile_image', data.profile_image);
+                    var usernameTextElements = document.querySelectorAll('.username_text');
+                    usernameTextElements.forEach(function(element) {
+                        element.textContent = data.username;
+                    });
+                    window.location.hash = "#game"
 
                 } else {
                     alert('Error while processing the request.');

@@ -106,13 +106,9 @@ function changePage(page) {
         window.location.hash = 'login';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    var username = sessionStorage.getItem('username');
-    var usernameTextElements = document.querySelectorAll('.username_text');
-    usernameTextElements.forEach(function(element) {
-        element.textContent = username;
-    });
-});
+// document.addEventListener('DOMContentLoaded', function() {
+    
+// });
 
 function updateProfilePictureStyle() {
     var profileImage = sessionStorage.getItem('profile_image');

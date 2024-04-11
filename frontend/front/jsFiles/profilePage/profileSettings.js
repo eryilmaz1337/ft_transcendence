@@ -16,24 +16,61 @@ function saveProfile()
         },
         body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
       })
-      .then(response => {
+      .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
+      .then(data => {
         alert('Başarılı');
-        const data = JSON.parse(response.json());
         if (data) {
             sessionStorage.setItem('username', data.username);
             sessionStorage.setItem('name', data.name);
             sessionStorage.setItem('surname', data.surname);
             sessionStorage.setItem('email', data.email);
             sessionStorage.setItem('profile_image', data.profile_image);
-            alert(data.username);
+            var usernameTextElements = document.querySelectorAll('.username_text');
+            usernameTextElements.forEach(function(element) {
+            element.textContent = data.username;
+            });
         } else {
             alert('Error while processing the request.');
         }
-      }) // JSON olarak dönen yanıtı parse etme
+      })
       .catch((error) => {
         console.error('Hata:', error);
       });
 }
+
+
+function uploadFile() {
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert('Lütfen bir dosya seçin.');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    fetch('', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Dosya başarıyla yüklendi.');
+        } else {
+            alert('Dosya yüklenirken bir hata oluştu.');
+        }
+    })
+    .catch(error => {
+        console.error('Hata:', error);
+        alert('Dosya yüklenirken bir hata oluştu.');
+    });
+}
+
+
+
+
 
 
 function profileSettings() {
@@ -45,7 +82,7 @@ function profileSettings() {
         <!-- Profile Photo -->
         <div class="input-wrapper">
             <label for="profile-photo" data-translate="profilephoto">Profile Photo:</label>
-            <input type="file" id="profile-photo" class="account-settings-fileinput">
+            <input type="file" id="fileInput" class="account-settings-fileinput" onchange="uploadFile()">
         </div>
         <div class="input-wrapper">
             <label for="username" data-translate="accountusername">Username:</label>
