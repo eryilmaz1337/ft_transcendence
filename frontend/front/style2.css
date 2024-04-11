@@ -175,18 +175,22 @@ nav {
 }
 
 .username_text {
-	height: 40px;
-    padding: 13px 25px 13px 10px;
+    height: 40px; /* Sabit yükseklik belirleniyor */
+    padding: 13px 25px 13px 30px;
     font-size: 12px;
-	font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
     border: none;
-	font-weight: bold;
+    font-weight: bold;
     background-color: greenyellow;
     color: black;
     cursor: pointer;
-	border-top-left-radius: 20px; 
-    border-bottom-left-radius: 20px; 
+    border-radius: 20px; /* Tüm köşeleri yuvarlar */
+    min-width: 40px; /* Minimum genişlik belirleniyor */
+    max-width: 300px; /* Maksimum genişlik belirleniyor */
+    width: auto; /* Otomatik genişlik */
+    box-sizing: border-box; /* Padding ve border dahil genişliği hesaplar */
 }
+
 
 .logout-btn:hover {
     background-color: #0cf; /* Üzerine gelince maviye dönsün */
