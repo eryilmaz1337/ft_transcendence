@@ -1,14 +1,11 @@
 function chatAdd() {
     return `
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <style>
     body {
-        background-color: darkcyan;
+        background-color: #15202b;
         height: 100vh;
     }
 
@@ -39,7 +36,7 @@ function chatAdd() {
 
     .person-selector-container {
         background-color: #15202b;
-        padding: 1.5em;
+        padding: 2em;
         border-radius: 0.5em;
         box-shadow: 0 0 1.25em 0.5em greenyellow;
     }
@@ -227,26 +224,33 @@ function chatAdd() {
             margin: auto;
         }
 
-        .person-selector-container,
         .chat-container {
             max-width: 90%; /* Ekran genişliğinin yüzde 90'u */
         }
+
+        .person-selector-container {
+            background-color: #15202b;
+            padding: 2em;
+            border-radius: 0.5em;
+            box-shadow: 0 0 1.25em 0.5em greenyellow;
+        }
+
     }
 
     </style>
-</head>
+
 <body>
 
 <div class="container">
 
     <div class="person-selector-container">
-        <h2 class="person-selector-header"> Users <i class="fa-solid fa-user-group"></i></h2>
+        <h2 class="person-selector-header"> Kullanıcılar </h2>
         <div class="person-selector">
             <button class="button person-selector person-selector-button active-person online" id="john-selector">
-                John <i class="fas fa-circle"></i> <!-- Online icon -->
+            <i class="fa-solid fa-user-group"></i> John <i class="fas fa-circle"></i> <!-- Online icon -->
             </button>
             <button class="button person-selector person-selector-button offline" id="jane-selector">
-                Jane <i class="fas fa-circle"></i> <!-- Offline icon -->
+            <i class="fa-solid fa-user-group"></i> Jane <i class="fas fa-circle"></i> <!-- Offline icon -->
             </button>
         </div>
     </div>
@@ -274,7 +278,7 @@ function chatAdd() {
         <button class="button clear-chat-button">Clear Chat</button>
         <!-- Ayarlamalar Kısmı -->
         <div class="additional-buttons">
-            <h2 class="additional-buttons-header"> Settings <i class="fa-solid fa-gear"></i></h2>
+            <h2 class="additional-buttons-header"> Ayarlar <i class="fa-solid fa-gear"></i></h2>
             <button class="button invite-button"><i class="fas fa-gamepad"></i> Oyuna Davet Et</button>
             <button class="button message-button"><i class="fas fa-envelope"></i> Mesaj</button>
             <button class="button block-button"><i class="fas fa-times"></i> Engelle</button>
