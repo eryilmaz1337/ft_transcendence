@@ -32,6 +32,7 @@ function chatAdd() {
         font-family: 'Roboto', sans-serif;
         border-radius: 0.5em;
         margin: auto;
+        left: 10px;
     }
 
     .person-selector-container {
@@ -215,13 +216,6 @@ function chatAdd() {
 
     .chat-container {
         max-width: 90%; /* Ekran genişliğinin yüzde 90'u */
-    }
-
-    .person-selector-container {
-        background-color: #15202b;
-        padding: 2em;
-        border-radius: 0.5em;
-        box-shadow: 0 0 1.25em 0.5em greenyellow;
     }
 
     .block-button {
