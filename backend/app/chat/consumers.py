@@ -25,9 +25,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # WebSocket'ten veri alındığında çalışacak kod
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        message = text_data_json["message"]
-        username = text_data_json["username"]
-        room_name = text_data_json["room_name"]
+        message = text_data_json.get("message")
+        username = text_data_json.get("username")
+        room_name = text_data_json.get("room_name")
 
         if room_name is None:
         # Handle the missing room_name appropriately:
@@ -48,7 +48,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # Gelen mesajı aynı istemciye geri gönder
         # print("Alınan veri:", text_data)
-        # await self.send(text_data=text_data)
+        await self.send(text_data=text_data)
 
     async def sendMessage(self, event):
         message = event["message"]

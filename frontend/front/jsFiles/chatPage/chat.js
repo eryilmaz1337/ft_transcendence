@@ -268,14 +268,14 @@ function chatAdd() {
             <h2 id="chat-header" class="chat-header" >John chatting...</h2>
 
             <div id="chat" class="chat-messages">
-          
+
             </div>
 
             <form class="chat-input-form">
                 <input id="chat-text" type="text" class="chat-input" required placeholder="Type here, John..." />
                 <button type="submit" class="button send-button" onclick="sendMessage()">Send</button>
             </form>
-            <button class="button clear-chat-button" onclick="clearmassage()">Clear Chat</button>
+            <button class="button clear-chat-button" onclick="clearmessage()">Clear Chat</button>
 			<!-- Ayarlamalar Kısmı -->
 			<div class="additional-buttons">
 				<h2 class="additional-buttons-header"> Settings <i class="fa-solid fa-gear"></i></h2>
