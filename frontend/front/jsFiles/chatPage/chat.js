@@ -1,4 +1,52 @@
+// function updateProfilePictureStyle() {
+//     var profileImage = sessionStorage.getItem('profile_image');
+//     if (profileImage) {
+//         document.querySelector('.chat-profile-picture').style.backgroundImage = 'url(' + profileImage + ')';
+//     }
+// }
+
 function chatAdd() {
+
+    // Sayfa yüklendiğinde çalışacak fonksiyon
+    window.onload = function() {
+        // Dropdown elementini seç
+        var dropdown = document.querySelector('.dropdown');
+        
+        // Option elemanlarını al
+        var options = dropdown.options;
+        
+        // Option elemanlarını kontrol et
+        for (var i = 0; i < options.length; i++) {
+            // Option elemanının değerini al
+            var value = options[i].value;
+            
+            // Duruma göre renkleri ayarla
+            if (isOnline(value)) {
+                options[i].classList.add('online');
+            } else {
+                options[i].classList.add('offline');
+            }
+        }
+    }
+    
+    // Kullanıcının çevrimiçi olup olmadığını kontrol eden bir işlev
+    function isOnline(username) {
+        // Burada kullanıcının çevrimiçi olup olmadığını kontrol etmek için uygun bir mekanizma kullanabilirsiniz
+        // Örneğin, bir kullanıcı listesi veya çevrimiçi durumu takip eden bir veritabanı
+        // Bu örnekte, herkesin çevrimiçi olduğunu varsayıyoruz
+        return true;
+    }
+
+    window.onload = function() {
+        // Dropdown elementini seç
+        var dropdown = document.querySelector('.dropdown');
+        // İlk seçeneğin indeksini al
+        var selectedIndex = dropdown.selectedIndex;
+        // İlk seçeneğin değerini al
+        var selectedValue = dropdown.options[selectedIndex].value;
+        // İlk seçeneğin değerini fonksiyona ileterek çalıştır
+        userchanges(selectedValue);
+    }
     return `
     <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -37,6 +85,8 @@ function chatAdd() {
     }
 
     .person-selector-container {
+        margin-top: 37px;
+        margin-left: 20px;
         background-color: #15202b;
         padding: 1.5em;
         border-radius: 0.5em;
@@ -89,6 +139,7 @@ function chatAdd() {
     }
 
     .chat-header, .person-selector-header {
+        margin-left: 10px;
         margin-bottom: 1em;
         color: #fff;
     }
@@ -170,6 +221,7 @@ function chatAdd() {
     }
 
     .additional-buttons{
+        margin-left: 20px;
         background-color: #15202b;
         padding: 1.5em;
         border-radius: 0.5em;
@@ -216,6 +268,7 @@ function chatAdd() {
     }
 
     .chat-container {
+        margin-top: 37px;
         max-width: 90%; /* Ekran genişliğinin yüzde 90'u */
     }
 
@@ -248,31 +301,64 @@ function chatAdd() {
         }
     }
 
+    .chat-profile-picture {
+        width: 40px;
+        height: 40px;
+        background-image: url("${sessionStorage.getItem('profile_image')}");
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid greenyellow;
+        z-index: 9999;
+    }
+
+    .chat-header-horizontal-container {
+        display: flex; /* Yatay sıralamayı sağlar */
+        margin-top: 10px;
+        align-items: center;
+    }
+
     </style>
 </head>
     <div class="container">
 
-		<div class="person-selector-container">
-			<h2 class="person-selector-header"> Users <i class="fa-solid fa-user-group"></i></h2>
-			<div class="person-selector">
-				<button class="button person-selector person-selector-button active-person online" onclick="userchanges('john')">
-					John <i class="fas fa-circle"></i> <!-- Online icon -->
-				</button>
-				<button class="button person-selector person-selector-button offline" id="jane-selector" onclick="userchanges('jane')">
-					Jane <i class="fas fa-circle"></i> <!-- Offline icon -->
-				</button>
-			</div>
-		</div>
+        <div class="person-selector-container">
+            <h2 class="person-selector-header"> Users <i class="fa-solid fa-user-group"></i></h2>
+            <div class="person-selector">
+                <button class="button person-selector person-selector-button active-person online" onclick="userchanges('john')">
+                    John <i class="fas fa-circle"></i> <!-- Online icon -->
+                </button>
+                <button class="button person-selector person-selector-button offline" id="jane-selector" onclick="userchanges('jane')">
+                    Jane <i class="fas fa-circle"></i> <!-- Offline icon -->
+                </button>
+            </div>
+        </div>
+
+        <div class="person-selector-container">
+            <h2 class="person-selector-header"> Users <i class="fa-solid fa-user-group"></i></h2>
+            <div class="person-selector">
+                <select class="dropdown" onchange="userchanges(this.value)">
+                    <option value="John">John</option>
+                    <option value="Jane">Jane</option>
+                    <option value="User1">User1</option>
+                    <option value="User2">User2</option>
+                    <option value="User3">User3</option>
+                </select>
+            </div>
+        </div>
 
         <div class="chat-container">
-            <h2 id="chat-header" class="chat-header" >John chatting...</h2>
 
-            <div id="chat" class="chat-messages">
+                <div class="chat-header-horizontal-container">
+                    <div class="chat-profile-picture" id="chat-profile-picture"></div>
+                    <h2 id="chat-header" class="chat-header" ><i class="fa-brands fa-rocketchat"></i></h2>
+                </div>
 
-            </div>
+            <div id="chat" class="chat-messages"></div>
 
             <form class="chat-input-form">
-                <input id="chat-text" type="text" class="chat-input" required placeholder="Type here, John..." />
+                <input id="chat-text" type="text" class="chat-input" required placeholder="Type here..." />
                 <button type="submit" class="button send-button" onclick="sendMessage()">Send</button>
             </form>
             <button class="button clear-chat-button" onclick="clearmessage()">Clear Chat</button>
@@ -289,3 +375,4 @@ function chatAdd() {
 
 `;
 }
+
