@@ -2,7 +2,3 @@
 backend/app/pong/__pycache__/*
 backend/app/topla/migrations/__pycache__/*
 __pycache__/*
-
-backend/app/pong/__pycache__/__init__.cpython-38.pyc
-backend/app/pong/__pycache__/settings.cpython-38.pyc
-backend/app/pong/__pycache__/urls.cpython-38.pyc
