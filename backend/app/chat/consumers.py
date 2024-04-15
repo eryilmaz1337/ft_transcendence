@@ -1,7 +1,7 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 from asgiref.sync import sync_to_async
-from chat.models import Room, user_message
+from chat.models import Room, UserMessage
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -28,12 +28,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = text_data_json.get("message")
         username = text_data_json.get("username")
         room_name = text_data_json.get("room_name")
-
-        if room_name is None:
-        # Handle the missing room_name appropriately:
-        # Maybe send an error message back to the client or ignore the message
-            print("Room name is missing in the message!")
-            return
         
         await self.save_message(message, username, room_name)
 
@@ -57,7 +51,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def save_message(self, message, username, room_name):
+        room, created = Room.objects.get_or_create(name=room_name)
+        if created:
+            print("New room created:", room_name)
         print(username,room_name,"----------------------")
+
         room=Room.objects.get(name=room_name)
         
-        Message.objects.create(user=user,room=room,content=message)
+        UserMessage.objects.create(username=username,room=room,message=message)

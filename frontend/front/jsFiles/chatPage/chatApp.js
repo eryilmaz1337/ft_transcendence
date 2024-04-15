@@ -1,4 +1,9 @@
-const socket = new WebSocket('ws://localhost:8000');
+//const socket = new WebSocket('ws://localhost:8000');
+
+
+const roomSlug = 'bkozluca'; // Örneğin bir sohbet odası
+
+const socket = new WebSocket(`ws://localhost:8000/ws/chat/${roomSlug}/`);
 
 socket.addEventListener('open', function (event) {
     console.log('Connected to server');
@@ -10,7 +15,7 @@ socket.addEventListener('close', function (event) {
 
 // Web soket üzerinden mesaj alındığında
 socket.addEventListener('message', function (event) {
-    console.log('Received message from server:', event.data);
+    console.log('JS | Received message from server:', event.data);
 });
 
 function userchanges(name)
@@ -43,24 +48,24 @@ function createChatMessageElement(message)
     `;
 }
 
-function sendMessage()
-{
-    const message_text = document.getElementById("chat-text").value;
-    if(!message_text)
-        return;
-    const chatMessages = document.getElementById('chat');
-    const messageData = {
-        message: message_text,
-    };
-    chatMessages.innerHTML += createChatMessageElement(messageData.message);
-    document.getElementById("chat-text").value='';
-	chatMessages.scrollTop = chatMessages.scrollHeight;
+// function sendMessage()
+// {
+//     const message_text = document.getElementById("chat-text").value;
+//     if(!message_text)
+//         return;
+//     const chatMessages = document.getElementById('chat');
+//     const messageData = {
+//         message: message_text,
+//     };
+//     chatMessages.innerHTML += createChatMessageElement(messageData.message);
+//     document.getElementById("chat-text").value='';
+// 	chatMessages.scrollTop = chatMessages.scrollHeight;
 
-	const messages = JSON.parse(localStorage.getItem('messages')) || [];
-	messages.push(messageData);
-	localStorage.setItem('messages', JSON.stringify(messages));
-    // socket.send(messageData);
-}
+// 	const messages = JSON.parse(localStorage.getItem('messages')) || [];
+// 	messages.push(messageData);
+// 	localStorage.setItem('messages', JSON.stringify(messages));
+//     // socket.send(messageData);
+// }
 
 window.onload = () => {
     const messages = JSON.parse(localStorage.getItem('messages')) || [];
@@ -72,3 +77,16 @@ window.onload = () => {
         }
     });
 };
+
+
+//DENEME KONSOL ICIN
+
+
+function sendMessage(username, message) {
+    if (socket.readyState === WebSocket.OPEN) {
+        const messageData = {username: username, message: message, room_name: roomSlug};
+        socket.send(JSON.stringify(messageData));
+    } else {
+        console.log('WebSocket connection is not open. Unable to send message.');
+    }
+}

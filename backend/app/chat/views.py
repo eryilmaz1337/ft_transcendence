@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import user_message
+from .models import UserMessage
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
