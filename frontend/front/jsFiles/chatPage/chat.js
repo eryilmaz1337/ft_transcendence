@@ -407,7 +407,7 @@ function chatAdd() {
             <div class="chat-container">
     
                     <div class="chat-header-horizontal-container">
-                        <div class="chat-profile-picture" id="chat-profile-picture"></div>
+                        <div class="chat-profile-picture" id="chachat-textt-profile-picture"></div>
                         <h2 id="chat-header" class="chat-header" ><i class="fa-brands fa-rocketchat"></i></h2>
                     </div>
     
