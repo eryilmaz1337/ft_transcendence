@@ -1,3 +1,11 @@
+from django.conf import settings
+from django.core.files.storage import default_storage
+from rest_framework import status
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from .serializers import FileUploadSerializer
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
@@ -8,6 +16,7 @@ import json
 import requests
 import random
 import string
+
 
 def generate_random_string():
     length=42
@@ -143,20 +152,20 @@ def accountdataedit(request):
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
 
 
-@csrf_exempt
+@api_view(['POST'])
+@parser_classes([MultiPartParser, FormParser])
 def upload_image(request):
-    if request.method == 'POST' and request.FILES['image']:
-        uploaded_image = request.FILES['image']
-        # Burada resmi işleyebilir, doğrulayabilir ve saklayabilirsiniz.
-        # Örneğin, resmi bir dosyaya kaydetmek için:
-        # with open('uploaded_image.jpg', 'wb+') as destination:
-        #     for chunk in uploaded_image.chunks():
-        #         destination.write(chunk)
-        return JsonResponse({'message': 'Resim başarıyla yüklendi.'})
-    else:
-        return JsonResponse({'error': 'Resim yüklenirken bir hata oluştu.'}, status=400)
+    if request.method == 'POST':
+        serializer = FileUploadSerializer(data=request.data)
+        if serializer.is_valid():
+            file = serializer.validated_data['file']
+            description = serializer.validated_data.get('description', 'No description')
+            file_path = default_storage.save('uploads/' + file.name, file)
+            file_url = settings.MEDIA_URL + file_path
 
-
+            return Response({'file_url': file_url, 'description': description}, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @csrf_exempt
 def userauthenticator(request):
@@ -170,3 +179,13 @@ def userauthenticator(request):
                 return JsonResponse({'success': True, 'message': 'user authenticator success'})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+
+@csrf_exempt
+def file_upload(request):
+    if request.method == 'POST' and request.FILES['file']:
+        myfile = request.FILES['file']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return JsonResponse({'success': True, 'filepath': uploaded_file_url})
+    return JsonResponse({'success': False, 'message': 'Failed to upload file'})

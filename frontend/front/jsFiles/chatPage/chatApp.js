@@ -5,6 +5,7 @@ const roomSlug = 'bkozluca'; // Örneğin bir sohbet odası
 
 const socket = new WebSocket(`ws://localhost:8000/ws/chat/${roomSlug}/`);
 
+
 socket.addEventListener('open', function (event) {
     console.log('Connected to server');
 });

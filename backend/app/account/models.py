@@ -12,3 +12,11 @@ class users(models.Model):
     profile_image = models.CharField(max_length=1000, default='notimg')
     def __str__(self):
         return f"Username: {self.username}, Name: {self.name} {self.surname}, email: {self.email}"
+
+class UploadedFile(models.Model):
+    file = models.FileField(upload_to='uploads/%Y/%m/%d/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"File id {self.id}, uploaded at {self.uploaded_at}"

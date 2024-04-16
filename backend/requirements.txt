@@ -6,3 +6,5 @@ channels==3.0.3  # Python 3.8 veya 3.9 ile uyumlu bir sürüm
 channels-redis==3.3.0
 redis==3.0.1
 daphne==3.0.1
+djangorestframework==3.12.4
+Pillow

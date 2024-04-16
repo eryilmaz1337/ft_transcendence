@@ -1,25 +1,25 @@
-function saveProfile()
-{
+function saveProfile() {
     var data = {
         jsonsecuritykey: sessionStorage.getItem("securitykey"),
         jsonoldusername: sessionStorage.getItem("username"),
         jsonusername: document.getElementById('username').value,
         jsonname: document.getElementById('first-name').value,
         jsonsurname: document.getElementById('last-name').value,
-        jsonemail: document.getElementById('email').value
-      }
-      //console.log(data);
-      fetch("http://localhost:8000/api/account/account-edit/", {
-        method: 'POST', // İstek metodu
+        jsonemail: document.getElementById('email').value,
+        jsonprofileimage: sessionStorage.getItem("profile_image") // Profil resmi yolu
+    }
+
+    fetch("http://localhost:8000/api/account/account-edit/", {
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // İçerik tipini belirtme
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
-      })
-      .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
-      .then(data => {
-        alert('Başarılı');
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
         if (data) {
+            alert('Başarılı');
             sessionStorage.setItem('username', data.username);
             sessionStorage.setItem('name', data.name);
             sessionStorage.setItem('surname', data.surname);
@@ -27,15 +27,16 @@ function saveProfile()
             sessionStorage.setItem('profile_image', data.profile_image);
             var usernameTextElements = document.querySelectorAll('.username_text');
             usernameTextElements.forEach(function(element) {
-            element.textContent = data.username;
+                element.textContent = data.username;
             });
+            updateProfileImageOnPage(data.profile_image);
         } else {
             alert('Error while processing the request.');
         }
-      })
-      .catch((error) => {
+    })
+    .catch((error) => {
         console.error('Hata:', error);
-      });
+    });
 }
 
 
@@ -68,7 +69,12 @@ function uploadFile() {
     });
 }
 
-
+function updateProfileImageOnPage(filepath) {
+    const profileImage = document.getElementById('profileImage');
+    if (profileImage) {
+        profileImage.src = filepath; // Resmin yeni kaynağını ayarla.
+    }
+}
 
 
 
