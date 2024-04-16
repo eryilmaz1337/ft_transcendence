@@ -3,7 +3,7 @@ function chatAdd() {
     document.addEventListener('DOMContentLoaded', function() {
         // Kullanıcıları başlangıçta yükleyen fonksiyonu çağır
         initializeUsers();
-    });
+    });8
     
     // Kullanıcıları başlangıçta yükleyen fonksiyon
     function initializeUsers() {
@@ -241,20 +241,19 @@ function chatAdd() {
             margin: 2.5em auto;
         }
     
-        .additional-buttons{
+        .additional-buttons {
             margin-left: 20px;
             background-color: #15202b;
             padding: 1.5em;
             border-radius: 0.5em;
             box-shadow: 0 0 1.25em 0.5em greenyellow;
-            position: fixed;
             display: flex;
-            left: 10px;
             bottom: 20px;
             flex-direction: column;
             gap: 10px;
             font-family: 'Roboto', sans-serif;
         }
+        
     
         .additional-buttons .button {
             width: 100%;
@@ -357,32 +356,6 @@ function chatAdd() {
         </style>
     </head>
         <div class="container">
-    
-            <div class="person-selector-container">
-                <h2 class="person-selector-header"> Users <i class="fa-solid fa-user-group"></i></h2>
-                <div class="person-selector">
-                    <button class="button person-selector person-selector-button active-person online" onclick="userchanges('john')">
-                        John <i class="fas fa-circle"></i> <!-- Online icon -->
-                    </button>
-                    <button class="button person-selector person-selector-button offline" id="jane-selector" onclick="userchanges('jane')">
-                        Jane <i class="fas fa-circle"></i> <!-- Offline icon -->
-                    </button>
-                </div>
-            </div>
-    
-            <div class="person-selector-container">
-                <h2 class="person-selector-header"> Users <i class="fa-solid fa-user-group"></i></h2>
-                <div class="person-selector">
-                    <select class="dropdown" onchange="userchanges(this.value)">
-                        <option value="John">John</option>
-                        <option value="Jane">Jane</option>
-                        <option value="User1">User1</option>
-                        <option value="User2">User2</option>
-                        <option value="User3">User3</option>
-                    </select>
-                </div>
-            </div>
-    
             <div class="person-selector-container">
                 <h2 class="online-users"> Online Users <i class="fa-solid fa-user-group"></i>
                 <select class="dropdown" onchange="userchanges(this.value)">
@@ -420,15 +393,42 @@ function chatAdd() {
                 </form>
     
                 <!-- Ayarlamalar Kısmı -->
-                <div class="additional-buttons">
-                    <h2 class="additional-buttons-header"> Settings <i class="fa-solid fa-gear"></i></h2>
-                    <button class="button invite-button"><i class="fas fa-gamepad"></i> Oyuna Davet Et</button>
-                    <button class="button message-button"><i class="fas fa-envelope"></i> Mesaj</button>
-                    <button class="button block-button"><i class="fas fa-times"></i> Engelle</button>
-                    <button class="button add-friend-button"><i class="fas fa-user-plus"></i> Arkadaş Ekle</button>
-                </div>
+            </div>
+            <div class="additional-buttons">
+                <h2 class="additional-buttons-header"> Settings <i class="fa-solid fa-gear"></i></h2>
+                <button class="button invite-button"><i class="fas fa-gamepad"></i> Oyuna Davet Et</button>
+                <button class="button message-button"><i class="fas fa-envelope"></i> Mesaj</button>
+                <button class="button block-button"><i class="fas fa-times"></i> Engelle</button>
+                <button class="button add-friend-button"><i class="fas fa-user-plus"></i> Arkadaş Ekle</button>
             </div>
         </div>
     
     `;
     }
+
+
+
+//     <div class="person-selector-container">
+//     <h2 class="person-selector-header"> Users <i class="fa-solid fa-user-group"></i></h2>
+//     <div class="person-selector">
+//         <button class="button person-selector person-selector-button active-person online" onclick="userchanges('john')">
+//             John <i class="fas fa-circle"></i> <!-- Online icon -->
+//         </button>
+//         <button class="button person-selector person-selector-button offline" id="jane-selector" onclick="userchanges('jane')">
+//             Jane <i class="fas fa-circle"></i> <!-- Offline icon -->
+//         </button>
+//     </div>
+// </div>
+
+// <div class="person-selector-container">
+//     <h2 class="person-selector-header"> Users <i class="fa-solid fa-user-group"></i></h2>
+//     <div class="person-selector">
+//         <select class="dropdown" onchange="userchanges(this.value)">
+//             <option value="John">John</option>
+//             <option value="Jane">Jane</option>
+//             <option value="User1">User1</option>
+//             <option value="User2">User2</option>
+//             <option value="User3">User3</option>
+//         </select>
+//     </div>
+// </div>
