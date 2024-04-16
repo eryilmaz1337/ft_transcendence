@@ -66,7 +66,7 @@ def account42(request):
             # Yetkilendirme kodunu kullanarak access_token al
             token_url = 'https://api.intra.42.fr/oauth/token'
             client_id = 'u-s4t2ud-1c2cdbd5f93bbb10f5c88928250742cd0f34b7404d28cf9db6ce0a7ec31ae127'
-            client_secret = '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'
+            client_secret = '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'
             redirect_uri = 'http://localhost:423'
             grant_type = 'authorization_code'
             
@@ -141,6 +141,22 @@ def accountdataedit(request):
         return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+
+
+@csrf_exempt
+def upload_image(request):
+    if request.method == 'POST' and request.FILES['image']:
+        uploaded_image = request.FILES['image']
+        # Burada resmi işleyebilir, doğrulayabilir ve saklayabilirsiniz.
+        # Örneğin, resmi bir dosyaya kaydetmek için:
+        # with open('uploaded_image.jpg', 'wb+') as destination:
+        #     for chunk in uploaded_image.chunks():
+        #         destination.write(chunk)
+        return JsonResponse({'message': 'Resim başarıyla yüklendi.'})
+    else:
+        return JsonResponse({'error': 'Resim yüklenirken bir hata oluştu.'}, status=400)
+
+
 
 @csrf_exempt
 def userauthenticator(request):

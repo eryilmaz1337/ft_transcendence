@@ -12,8 +12,3 @@ class users(models.Model):
     profile_image = models.CharField(max_length=1000, default='notimg')
     def __str__(self):
         return f"Username: {self.username}, Name: {self.name} {self.surname}, email: {self.email}"
-
-class user_chat_room(models.Model):
-    username = models.CharField(max_length=100,default='none')
-    target_username = models.CharField(max_length=100,default='none')
-    room_id = models.CharField(max_length=60, default='none')
