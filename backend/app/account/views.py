@@ -140,12 +140,14 @@ def accountdataedit(request):
         jname = data.get('jsonname')
         jsurname = data.get('jsonsurname')
         jemail = data.get('jsonemail')
+        jprofileimage = data.get('jsonprofileimage')
         user_exists = users.objects.filter(username=jusername).exists()
         if not user_exists and jusername != oldusername:
             user.username = jusername
         user.name = jname
         user.surname = jsurname
         user.email = jemail
+        user.profile_image = jprofileimage
         user.save()
         return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
     else:

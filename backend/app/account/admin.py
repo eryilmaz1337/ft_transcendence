@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import users, UploadedFile
+from .models import users
 
 admin.site.register(users)
-admin.site.register(UploadedFile)

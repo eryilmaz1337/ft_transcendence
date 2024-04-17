@@ -6,7 +6,7 @@ function saveProfile() {
         jsonname: document.getElementById('first-name').value,
         jsonsurname: document.getElementById('last-name').value,
         jsonemail: document.getElementById('email').value,
-        jsonprofileimage: sessionStorage.getItem("profile_image") // Profil resmi yolu
+        jsonprofileimage: "http://localhost:8000/api/account/media/uploads/IMG_1413%202.jpg" // Profil resmi yolu
     }
 
     fetch("http://localhost:8000/api/account/account-edit/", {
