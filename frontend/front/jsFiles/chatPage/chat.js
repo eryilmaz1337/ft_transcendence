@@ -125,7 +125,7 @@ function chatAdd() {
     .person-selector-button {
         width: 90%;
         color: #fff;
-        font-size: 1.2em;
+        font-size: 1.1em;
     }
 
     .person-selector-button.offline{
@@ -151,6 +151,18 @@ function chatAdd() {
         box-shadow: 0 0 1.25em 0.5em greenyellow;
         display: inline-block; /* Yan yana hizalamak için */
         vertical-align: top; /* Üst kenardan hizalamak için */
+    }
+    
+    .chat-profile-picture {
+        width: 40px;
+        height: 40px;
+        background-image: url("${sessionStorage.getItem('profile_image')}");
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid greenyellow;
+        z-index: 2;
     }
 
     .chat-header, .person-selector-header {
@@ -352,7 +364,7 @@ function chatAdd() {
     <div class="container">
 
         <div class="person-selector-container">
-            <h2 class="person-selector-header"> Online Users <i class="fa-solid fa-user-group"></i>
+            <h2 class="online-users"> Online Users <i class="fa-solid fa-user-group"></i>
             <select class="dropdown" onchange="userchanges(this.value)">
                 <option value="John">John</option>
                 <option value="Jane">Jane</option>
