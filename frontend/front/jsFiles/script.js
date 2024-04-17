@@ -57,8 +57,15 @@ function changePage(page) {
                 content = chooseGame();
                 break;
             case 'quickMatch':
+                console.log("quickMatch case'ine girildi");
                 content = gameAdd();
-                startgame();
+                console.log("content gameAdd yapıldı");
+                setTimeout(function() {
+                    startgame();
+                    // Bu kod, 1000 milisaniye (1 saniye) sonra çalışacak
+                    console.log("Bu kod 1 saniye sonra çalışacak.");
+                }, 1000);
+                console.log("startgame başlatıldı");
                 showHeader();
                 break;
             case 'specialMatch':

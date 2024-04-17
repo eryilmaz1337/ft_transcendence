@@ -1,11 +1,20 @@
 let gameRunning = false;
 
-async function startgame()
+function startgame()
 {
+    console.log(">"+window.location.hash+"<");
     gameRunning = true;
 
     const canvas = document.getElementById("canvas");
+    if (!canvas) {
+        console.error('Canvas elementi bulunamadı.');
+        return;
+    }
     const ctx = canvas.getContext('2d');
+    if (!ctx) {
+        console.error('2D context alınamadı.');
+        return;
+    }
     const welcomeText = document.getElementById('WelcomeText');
 
     canvas.width = window.innerWidth * 0.8;
@@ -262,6 +271,9 @@ this.getCenter = function() {
 
     function gameLoop()
     {
+        if(window.location.hash != "#quickMatch"){
+            gameRunning = false;
+        }
         if (!gameRunning)
             return;
 

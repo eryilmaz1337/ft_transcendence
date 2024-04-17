@@ -172,8 +172,8 @@ function gameAdd() {
         height: 80vh;
         max-width: 900px;
         max-height: 600px;
-        margin: 0 auto;
-        overflow: hidden;
+        margin: 30px auto;
+        box-shadow: 0 0 1.25em 0.5em greenyellow;
     }
 
     canvas {
@@ -183,6 +183,7 @@ function gameAdd() {
         border-radius: 10px;
         width: 100%;
         height: 100%;
+        box-shadow: 0 0 1.25em 0.5em greenyellow;
     }
 
     #scoreboard {
@@ -249,8 +250,6 @@ function gameAdd() {
         <h1 id="player2Score">0</h1>
     </div>
     <h2 id ="WelcomeText" data-translate="welcomepong">Welcome to the Pong Game</h2>
-
-    /* Buton eklenecek ve arkaplan değiştirilecek game'de */
 </div>
 
     `;

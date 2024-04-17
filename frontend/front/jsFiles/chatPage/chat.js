@@ -99,11 +99,13 @@ body {
     align-items: flex-start;
     font-family: 'Roboto', sans-serif;
     border-radius: 0.5em;
-    margin: auto;
+    margin: auto 0;
     left: 10px;
+    //box-shadow: 0 0 1.25em 0.5em white;
 }
 
 .person-selector-container {
+    margin-top: 30px;
     padding: 1.5em;
     border-radius: 0.5em;
     box-shadow: 0 0 1.25em 0.5em greenyellow;
@@ -141,11 +143,11 @@ body {
 }
 
 .chat-container {
+    margin-top: 30px;
     background: #15202b;
     font-family: 'Roboto', sans-serif;
     border-radius: 0.5em;
     padding: 0.5em 1.25em;
-    margin: auto;
     max-width: 37.5em;
     height: 37.5em;
     box-shadow: 0 0 1.25em 0.5em greenyellow;
@@ -166,7 +168,7 @@ body {
 }
 
 .chat-header, .person-selector-header {
-    margin-bottom: 1em;
+    margin: auto 0;
     color: #fff;
 }
 
@@ -385,7 +387,7 @@ body {
     </div>
 
     <div class="chat-container">
-            <div class="chat-header-horizontal-container">
+        <div class="chat-header-horizontal-container">
             <div class="chat-profile-picture" id="chachat-textt-profile-picture"></div>
             <h2 id="chat-header" class="chat-header" ><i class="fa-brands fa-rocketchat"></i></h2>
         </div>
