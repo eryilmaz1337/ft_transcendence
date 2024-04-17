@@ -3,7 +3,7 @@ function chatAdd() {
         document.addEventListener('DOMContentLoaded', function() {
             // Kullanıcıları başlangıçta yükleyen fonksiyonu çağır
             initializeUsers();
-        });8
+        });
 
         // Kullanıcıları başlangıçta yükleyen fonksiyon
         function initializeUsers() {
