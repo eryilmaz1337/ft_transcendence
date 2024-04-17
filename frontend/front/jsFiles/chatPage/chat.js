@@ -85,7 +85,7 @@ function chatAdd() {
 
     .button:hover {
         filter: brightness(0.9);
-        transform: scale(1.1);
+        transform: scale(1.2);
     }
 
     .button:active{
@@ -125,7 +125,7 @@ function chatAdd() {
     .person-selector-button {
         width: 90%;
         color: #fff;
-        font-size: 1.1em;
+        font-size: 1.2em;
     }
 
     .person-selector-button.offline{
@@ -232,7 +232,7 @@ function chatAdd() {
 
     .send-button:hover {
         background-color: #0f5b78;
-        transform: scale(1.1);
+        transform: scale(1.2);
     }
 
     .clear-message-button {
@@ -249,7 +249,7 @@ function chatAdd() {
 
     .clear-message-button:hover {
         background-color: #c0392b; /* Kırmızının koyu tonu */
-        transform: scale(1.1);
+        transform: scale(1.2);
     }
 
     .additional-buttons{
@@ -280,7 +280,7 @@ function chatAdd() {
 
     .additional-buttons .button:hover {
         filter: brightness(0.9);
-        transform: scale(1.1);
+        transform: scale(1.2);
     }
 
     .additional-buttons .button i {
@@ -311,7 +311,7 @@ function chatAdd() {
 
     .block-button:hover {
         background-color: #c0392b;
-        transform: scale(1.1);
+        transform: scale(1.2);
     }
 
     .message-button, .invite-button, .add-friend-button {
@@ -321,7 +321,7 @@ function chatAdd() {
 
     .message-button:hover, .invite-button:hover, .add-friend-button:hover {
         background-color: limegreen;
-        transform: scale(1.1);
+        transform: scale(1.2);
     }
 
 
