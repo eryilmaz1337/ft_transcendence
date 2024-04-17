@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from .serializers import FileUploadSerializer
+from django.utils.crypto import get_random_string
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -161,11 +162,13 @@ def upload_image(request):
         serializer = FileUploadSerializer(data=request.data)
         if serializer.is_valid():
             file = serializer.validated_data['file']
-            description = serializer.validated_data.get('description', 'No description')
-            file_path = default_storage.save('uploads/' + file.name, file)
+            new_name = request.data.get('new_name', 'uploaded_file')  # Varsayılan bir ad kullan
+            extension = file.name.split('.')[-1]
+            new_filename = f"{new_name}.{extension}"
+            file_path = default_storage.save('uploads/' + new_filename, file)
             file_url = settings.MEDIA_URL + file_path
 
-            return Response({'file_url': file_url, 'description': description}, status=status.HTTP_201_CREATED)
+            return Response({'file_url': file_url}, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

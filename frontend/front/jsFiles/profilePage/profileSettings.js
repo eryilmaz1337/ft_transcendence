@@ -6,7 +6,7 @@ function saveProfile() {
         jsonname: document.getElementById('first-name').value,
         jsonsurname: document.getElementById('last-name').value,
         jsonemail: document.getElementById('email').value,
-        jsonprofileimage: "http://localhost:8000/api/account/media/uploads/IMG_1413%202.jpg" // Profil resmi yolu
+        jsonprofileimage: "http://localhost:8000/api/account/media/uploads/profile_image.jpg" // Profil resmi yolu
     }
 
     fetch("http://localhost:8000/api/account/account-edit/", {
@@ -52,6 +52,8 @@ function uploadFile() {
     const formData = new FormData();
     formData.append('file', file);
 
+    formData.append('new_name', 'profile_image');
+    
     fetch('http://localhost:8000/api/account/upload/', {
         method: 'POST',
         body: formData
