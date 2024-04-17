@@ -1,3 +1,11 @@
+from django.conf import settings
+from django.core.files.storage import default_storage
+from rest_framework import status
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from .serializers import FileUploadSerializer
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
@@ -8,6 +16,7 @@ import json
 import requests
 import random
 import string
+
 
 def generate_random_string():
     length=42
@@ -28,6 +37,7 @@ def singup(request):
                 name=data['jsonname'],
                 surname=data['jsonsurname'],
                 email=data['jsonemail'],
+                profile_image = "http://localhost:423/img/profile_photos/pp08.jpeg",
                 password=make_password(data['jsonpassword']),
                 securitykey=generate_random_string()
             )
@@ -44,10 +54,10 @@ def singin(request):
         username = data.get('jsonusername')
         password = data.get('jsonpassword')
         user = users.objects.get(username=username)
+        print(user);
         if check_password(password, user.password):
-            return JsonResponse({'success': True, 'message': 'Login successful'})
+            return JsonResponse({'securitykey': user.securitykey,'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
         else:
-
             # Kullanıcı kimlik bilgileri yanlışsa JSON yanıt döndür
             return JsonResponse({'success': False, 'message': 'Invalid credentials'})
     else:
@@ -65,7 +75,7 @@ def account42(request):
             # Yetkilendirme kodunu kullanarak access_token al
             token_url = 'https://api.intra.42.fr/oauth/token'
             client_id = 'u-s4t2ud-1c2cdbd5f93bbb10f5c88928250742cd0f34b7404d28cf9db6ce0a7ec31ae127'
-            client_secret = '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'
+            client_secret = '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'
             redirect_uri = 'http://localhost:423'
             grant_type = 'authorization_code'
             
@@ -88,20 +98,21 @@ def account42(request):
                 
                 if user_response.status_code == 200:
                     user_data = user_response.json()
-                    user_exists = users.objects.filter(username=user_data['login']).exists()# Kullanıcı adıyla veritabanını kontrol et eğer bu kullanıcı yoksa veritabanına kaydet.
+                    user_exists = users.objects.filter(login_42=user_data['login']).exists()# Kullanıcı adıyla veritabanını kontrol et eğer bu kullanıcı yoksa veritabanına kaydet.
                     if not user_exists:
                         jsecuritykey=generate_random_string()
                         users.objects.create(
                         username=user_data['login'],
+                        login_42=user_data['login'],
                         name=user_data['first_name'],
                         surname=user_data['last_name'],
                         email=user_data['email'],
                         profile_image = user_data['image']['link'],
                         securitykey= jsecuritykey
-                    )
+                        )
                         return JsonResponse({'securitykey': jsecuritykey,'username': user_data['login'], 'name': user_data['first_name'], 'surname': user_data['last_name'], 'email': user_data['email'], 'profile_image': user_data['image']['link']})
                     else:
-                        user = users.objects.get(username=user_data['login'])
+                        user = users.objects.get(login_42=user_data['login'])
                         return JsonResponse({'securitykey': user.securitykey,'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
                 else:
                     return JsonResponse({'error': 'Failed to fetch user data', 'status_code': user_response.status_code})
@@ -132,8 +143,6 @@ def accountdataedit(request):
         user_exists = users.objects.filter(username=jusername).exists()
         if not user_exists and jusername != oldusername:
             user.username = jusername
-        else:
-            return JsonResponse({'success': user_exists, 'massage': 'This username is used'})
         user.name = jname
         user.surname = jsurname
         user.email = jemail
@@ -141,7 +150,23 @@ def accountdataedit(request):
         return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
-    
+
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser, FormParser])
+def upload_image(request):
+    if request.method == 'POST':
+        serializer = FileUploadSerializer(data=request.data)
+        if serializer.is_valid():
+            file = serializer.validated_data['file']
+            description = serializer.validated_data.get('description', 'No description')
+            file_path = default_storage.save('uploads/' + file.name, file)
+            file_url = settings.MEDIA_URL + file_path
+
+            return Response({'file_url': file_url, 'description': description}, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @csrf_exempt
 def userauthenticator(request):
     if request.method == 'POST':
@@ -154,3 +179,13 @@ def userauthenticator(request):
                 return JsonResponse({'success': True, 'message': 'user authenticator success'})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+
+@csrf_exempt
+def file_upload(request):
+    if request.method == 'POST' and request.FILES['file']:
+        myfile = request.FILES['file']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return JsonResponse({'success': True, 'filepath': uploaded_file_url})
+    return JsonResponse({'success': False, 'message': 'Failed to upload file'})

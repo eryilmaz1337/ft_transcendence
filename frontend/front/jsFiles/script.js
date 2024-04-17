@@ -1,4 +1,3 @@
-
 var searchlanguages = localStorage.getItem('selectedLanguage');
         if(!searchlanguages)
         localStorage.setItem('selectedLanguage', 'tr');
@@ -14,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         window.history.replaceState(null, null, cleanUrl);
         // `accessToken` değişkenini kullanarak sunucu tarafında erişim token'ı almak için bir istek yapın
         accountsave(accessToken);
+        loginSuccess();
         // loginSuccess();
     }
     else
@@ -22,13 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
         changePage(page || 'login'); // Eğer hash yoksa login sayfasına yönlendir
     }
 });
-
-// const PhotoPath = sessionStorage.getItem('profile_image');
-// const username = sessionStorage.getItem('username');
-// const name = sessionStorage.getItem('name');
-// const surname = sessionStorage.getItem('surname');
-// const email = sessionStorage.getItem('email');
-
 
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
@@ -81,6 +74,10 @@ function changePage(page) {
                 removeHeader();
                 content = singin();
                 break;
+            case 'loading':
+                removeHeader();
+                content = loading();
+                break;
             case 'confirm':
                 break;
             default:
@@ -101,13 +98,9 @@ function changePage(page) {
         window.location.hash = 'login';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    var username = sessionStorage.getItem('username');
-    var usernameTextElements = document.querySelectorAll('.username_text');
-    usernameTextElements.forEach(function(element) {
-        element.textContent = username;
-    });
-});
+// document.addEventListener('DOMContentLoaded', function() {
+
+// });
 
 function updateProfilePictureStyle() {
     var profileImage = sessionStorage.getItem('profile_image');

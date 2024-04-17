@@ -63,7 +63,7 @@ nav {
 	transition: all 0.3s ease;
 }
 
-@media screen and (max-width:1024px){
+/* @media screen and (max-width:1024px){
 	.nav-links {
 		width: 60%;
 	}
@@ -94,7 +94,7 @@ nav {
 	.burger{
 		display: block;
 	}
-}
+} */
 
 .nav-active{
 	transform: translateX(0%);
@@ -169,24 +169,28 @@ nav {
 
 .username_class {
 	position: absolute;
-	right: -20px;
+	right: 0px;
 	display: none;
-	align-items: left;
+	/* align-items: left; */
 }
 
 .username_text {
-	height: 40px;
-    padding: 13px 25px 13px 10px;
+    height: 40px; /* Sabit yükseklik belirleniyor */
+    padding: 13px 50px 13px 20px;
     font-size: 12px;
-	font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
     border: none;
-	font-weight: bold;
+    font-weight: bold;
     background-color: greenyellow;
     color: black;
     cursor: pointer;
-	border-top-left-radius: 20px; 
-    border-bottom-left-radius: 20px; 
+    border-radius: 20px;
+    min-width: 100px;
+    /* max-width: 100px; */
+    /* width: auto; */
+    /* box-sizing: border-box; */
 }
+
 
 .logout-btn:hover {
     background-color: #0cf; /* Üzerine gelince maviye dönsün */
@@ -199,5 +203,4 @@ nav {
 
 .profile-wrapper:hover .username_class {
     display: flex; /* Profil resmine hover yapıldığında göster */
-	transform: translateX(-50%); /*  nesneyi kendi genişliğinin yarısı kadar sola kaydırır.  */
 }

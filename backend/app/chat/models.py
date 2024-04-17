@@ -1,9 +1,16 @@
 from django.db import models
-# from django.contrib.auth.models import User
-# Create your models here.
-class user_message(models.Model):
-    username = models.CharField(max_length=60,default='none')
-    room_id= models.CharField(max_length=60,default='none')
-    massage = models.CharField(max_length=60,default='none')
+
+class Room(models.Model):
+    name = models.CharField(max_length=60)
+    slug = models.CharField(max_length=60)
+
     def __str__(self):
-        return "Room : "+self.username
+        return f"Room: {self.name} | Id: {self.slug}"
+
+class UserMessage(models.Model):
+    username = models.CharField(max_length=60, default='none')
+    message = models.TextField()
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Message: {self.message} by {self.username}"
