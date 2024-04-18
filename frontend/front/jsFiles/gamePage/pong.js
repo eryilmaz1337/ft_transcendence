@@ -60,8 +60,8 @@ function startgame()
 
         this.draw = function()
         {
-            ctx.fillStyle = "#33ff00";
-            ctx.strokeStyle = "#33ff00";
+            ctx.fillStyle = "#33ff00"; //#33ff00" green
+            ctx.strokeStyle = "#33ff00"; //#33ff00" green
             ctx.beginPath();
             ctx.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2);
             ctx.fill();
@@ -85,7 +85,7 @@ this.update = function() {
 };
 
 this.draw = function() {
-    ctx.fillStyle = "#33ff00";
+    ctx.fillStyle = "#33ff00"; //#33ff00" green
     ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
 };
 
@@ -204,7 +204,7 @@ this.getCenter = function() {
 
     function drawGameScene()
     {
-        ctx.strokeStyle = '#ffff00';
+        ctx.strokeStyle = '#33ff00'; //ffff00 yellow, 33ff00 green
 
 
         ctx.beginPath();
@@ -277,12 +277,31 @@ this.getCenter = function() {
         if (!gameRunning)
             return;
 
-        ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+        /* ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
         ctx.fillRect(0,0, canvas.width, canvas.height);
         window.requestAnimationFrame(gameLoop);
 
         gameUpdate();
-        gameDraw();
+        gameDraw(); */
+
+        var img = new Image();
+        img.onload = function() {
+            ctx.globalAlpha = 0.1;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            ctx.globalAlpha = 1;
+            // Resmin üzerine renkle doldur
+            ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Oyun döngüsünü devam ettir
+            window.requestAnimationFrame(gameLoop);
+            
+            // Oyun durumunu güncelle
+            gameUpdate();
+            // Ekranı çiz
+            gameDraw();
+        };
+        img.src = "../img/game_background/a1.jpeg";
     }
     gameLoop();
 }

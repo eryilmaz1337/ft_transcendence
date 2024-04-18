@@ -173,11 +173,13 @@ function gameAdd() {
         max-width: 900px;
         max-height: 600px;
         margin: 30px auto;
-        box-shadow: 0 0 1.25em 0.5em greenyellow;
+        /* box-shadow: 0 0 1.25em 0.5em greenyellow; */
     }
 
     canvas {
         display: block;
+        background-image: url('../img/game_background/a1.jpeg');
+        background-size: cover;
         background-color: #000;
         border: 2px solid greenyellow;
         border-radius: 10px;
