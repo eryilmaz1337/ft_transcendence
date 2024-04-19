@@ -162,10 +162,17 @@ def upload_image(request):
         serializer = FileUploadSerializer(data=request.data)
         if serializer.is_valid():
             file = serializer.validated_data['file']
-            new_name = request.data.get('new_name', 'uploaded_file')  # Varsayılan bir ad kullan
-            extension = file.name.split('.')[-1]
+            new_name = 'profile_image'  # Sabit bir dosya adı kullanıyoruz
+            extension = 'jpg'  # Sabit bir uzantı kullanıyoruz
             new_filename = f"{new_name}.{extension}"
-            file_path = default_storage.save('uploads/' + new_filename, file)
+            
+            # Eski dosyayı sil
+            existing_file_path = 'uploads/' + new_filename
+            if default_storage.exists(existing_file_path):
+                default_storage.delete(existing_file_path)
+
+            # Yeni dosyayı kaydet
+            file_path = default_storage.save(existing_file_path, file)
             file_url = settings.MEDIA_URL + file_path
 
             return Response({'file_url': file_url}, status=status.HTTP_201_CREATED)
@@ -184,13 +191,3 @@ def userauthenticator(request):
                 return JsonResponse({'success': True, 'message': 'user authenticator success'})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
-
-@csrf_exempt
-def file_upload(request):
-    if request.method == 'POST' and request.FILES['file']:
-        myfile = request.FILES['file']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        return JsonResponse({'success': True, 'filepath': uploaded_file_url})
-    return JsonResponse({'success': False, 'message': 'Failed to upload file'})

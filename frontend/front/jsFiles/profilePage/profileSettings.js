@@ -49,9 +49,18 @@ function uploadFile() {
         return;
     }
 
+    // Dosya uzantısını kontrol et
+    const fileName = file.name;
+    const extension = fileName.slice(fileName.lastIndexOf('.') + 1).toLowerCase();
+    if (extension !== 'jpg') {
+        alert('Lütfen bir .jpg dosyası yükleyin.');
+        return;
+    }
+
     const formData = new FormData();
     formData.append('file', file);
 
+    // Burada 'new_name' değerini dosya adı olarak ayarlıyorsunuz, belki sonuna uzantıyı eklemek istersiniz
     formData.append('new_name', 'profile_image');
     
     fetch('http://localhost:8000/api/account/upload/', {
@@ -71,15 +80,13 @@ function uploadFile() {
     });
 }
 
+
 function updateProfileImageOnPage(filepath) {
     const profileImage = document.getElementById('profileImage');
     if (profileImage) {
         profileImage.src = filepath; // Resmin yeni kaynağını ayarla.
     }
 }
-
-
-
 
 function profileSettings() {
     return `
