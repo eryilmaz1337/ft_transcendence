@@ -156,10 +156,34 @@ function chooseGame() {
     `;
 }
 
+function checkGameTheme() {
+    if(window.location.hash == "#quickMatch")
+    {if(gameTheme === 0) {
+       window.setTimeout(checkGameTheme, 1000); /* this checks the flag every 1000 milliseconds*/
+       console.log("gameTheme 0");
+    } else {
+        startgame();
+        console.log("gameTheme not 0");
+    }}
+    return;
+}
+
+
 // Oyun Fonksiyonu
 function gameAdd() {
+    checkGameTheme();
     return `
+    <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
+
+    body {
+        background-color: #15202b;
+        height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+    }
+
     * {
         margin: 0;
         padding: 0;
@@ -173,19 +197,17 @@ function gameAdd() {
         max-width: 900px;
         max-height: 600px;
         margin: 30px auto;
-        /* box-shadow: 0 0 1.25em 0.5em greenyellow; */
+        box-shadow: 0 0 1.25em 0.5em greenyellow;
     }
 
     canvas {
-        display: block;
-        background-image: url('../img/game_background/a1.jpeg');
-        background-size: cover;
+        /* display: grid; */
         background-color: #000;
         border: 2px solid greenyellow;
         border-radius: 10px;
         width: 100%;
         height: 100%;
-        box-shadow: 0 0 1.25em 0.5em greenyellow;
+        /* box-shadow: 0 0 1.25em 0.5em greenyellow; */
     }
 
     #scoreboard {
@@ -243,10 +265,25 @@ function gameAdd() {
         }
     }
 
+    .btn-group{
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: space-between;
+    }
+
 </style>
+</head>
 
 <div id="canvas-container">
     <canvas id="canvas"></canvas>
+    <div class="btn-group btn-group-lg" role="group" aria-label="Basic radio toggle button group">
+        <button type="button" class="btn btn-outline-light">Classic Pong</button>
+        <button type="button" class="btn btn-outline-danger">Phoenix Bird</button>
+        <button type="button" class="btn btn-outline-info">Champions League</button>
+        <button type="button" class="btn btn-outline-success">Fangorn Forest</button>
+        <button type="button" class="btn btn-outline-secondary">Milky Way</button>
+    </div>
     <div id="scoreboard">
         <h1 id="player1Score">0</h1>
         <h1 id="player2Score">0</h1>

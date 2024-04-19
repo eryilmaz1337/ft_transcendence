@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // const surname = sessionStorage.getItem('surname');
 // const email = sessionStorage.getItem('email');
 
+gameTheme=0;
 
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
@@ -60,12 +61,6 @@ function changePage(page) {
                 console.log("quickMatch case'ine girildi");
                 content = gameAdd();
                 console.log("content gameAdd yapıldı");
-                setTimeout(function() {
-                    startgame();
-                    // Bu kod, 1000 milisaniye (1 saniye) sonra çalışacak
-                    console.log("Bu kod 1 saniye sonra çalışacak.");
-                }, 1000);
-                console.log("startgame başlatıldı");
                 showHeader();
                 break;
             case 'specialMatch':
@@ -112,10 +107,6 @@ function changePage(page) {
     else
         window.location.hash = 'login';
 }
-
-// document.addEventListener('DOMContentLoaded', function() {
-    
-// });
 
 function updateProfilePictureStyle() {
     var profileImage = sessionStorage.getItem('profile_image');

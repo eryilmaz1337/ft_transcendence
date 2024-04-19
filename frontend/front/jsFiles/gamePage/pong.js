@@ -272,6 +272,7 @@ this.getCenter = function() {
     function gameLoop()
     {
         if(window.location.hash != "#quickMatch"){
+            gameTheme = 0;
             gameRunning = false;
         }
         if (!gameRunning)

@@ -69,6 +69,7 @@ return `
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
 body {
@@ -389,14 +390,14 @@ body {
     <div class="chat-container">
         <div class="chat-header-horizontal-container">
             <div class="chat-profile-picture" id="chachat-textt-profile-picture"></div>
-            <h2 id="chat-header" class="chat-header" ><i class="fa-brands fa-rocketchat"></i></h2>
+            <h2 id="chat-header" class="chat-header" ><i class="bi bi-chat-left-dots"></i></h2>
         </div>
 
         <div id="chat" class="chat-messages"></div>
 
         <form class="chat-input-form">
             <input id="chat-text" type="text" class="chat-input" required placeholder="Type here..." />
-            <button type="submit" class="button send-button" onclick="sendMessage()">Send</button>
+            <button type="submit" class="button send-button" onclick="sendMessage()">Send <i class="bi bi-send"></i></button>
             <button type="button" class="clear-message-button" onclick="clearmessage()">Clear Chat <i class="fa-solid fa-comment-slash"></i></button>
         </form>
 
