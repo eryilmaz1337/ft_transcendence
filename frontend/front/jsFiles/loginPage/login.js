@@ -25,11 +25,12 @@ function accountsave(accessToken)
                     sessionStorage.setItem('email', data.email);
                     sessionStorage.setItem('securitykey', data.securitykey);
                     sessionStorage.setItem('profile_image', data.profile_image);
-                    var usernameTextElements = document.querySelectorAll('.username_text');
+                    var usernameTextElements = document.querySelectorAll('.username_text'); 
                     usernameTextElements.forEach(function(element) {
                         element.textContent = data.username;
                     });
-                    window.location.hash = "#game"
+                    con();
+                    window.location.hash = "#game";
 
                 } else {
                     alert('Error while processing the request.');

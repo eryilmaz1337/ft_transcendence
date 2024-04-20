@@ -1,23 +1,26 @@
 //const socket = new WebSocket('ws://localhost:8000');
 
 
-const roomSlug = 'bkozluca'; // Örneğin bir sohbet odası
+ // Örneğin bir sohbet odası
 
-const socket = new WebSocket(`ws://localhost:8000/ws/chat/${roomSlug}/`);
+function con()
+{   
+    const roomSlug = sessionStorage.getItem("securitykey");
+    const socket = new WebSocket(`ws://localhost:8000/ws/chat/${roomSlug}/`);
+    socket.addEventListener('open', function (event) {
+        console.log('Connected to server');
+    });
 
+    socket.addEventListener('close', function (event) {
+        console.log('Connection closed');
+    });
 
-socket.addEventListener('open', function (event) {
-    console.log('Connected to server');
-});
+    // Web soket üzerinden mesaj alındığında
+    socket.addEventListener('message', function (event) {
+        console.log('JS | Received message from server:', event.data);
+    });
+}
 
-socket.addEventListener('close', function (event) {
-    console.log('Connection closed');
-});
-
-// Web soket üzerinden mesaj alındığında
-socket.addEventListener('message', function (event) {
-    console.log('JS | Received message from server:', event.data);
-});
 
 function userchanges(name)
 {

@@ -55,7 +55,6 @@ def singin(request):
         username = data.get('jsonusername')
         password = data.get('jsonpassword')
         user = users.objects.get(username=username)
-        print(user);
         if check_password(password, user.password):
             return JsonResponse({'securitykey': user.securitykey,'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
         else:
@@ -176,14 +175,18 @@ def upload_image(request):
 def userauthenticator(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        if not users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
-            user = users.objects.get(securitykey=data.securitykey)
-            if not user.securitykey==data.get('jsonsecuritykey'):
-                return JsonResponse({'success': False, 'massage': 'unauthorized transaction'})
+        if users.objects.filter(securitykey=data.get('skey')).exists():
+            user = users.objects.get(securitykey=data.get('skey'))
+            if user.online:
+                user.online = False
             else:
-                return JsonResponse({'success': True, 'message': 'user authenticator success'})
+                user.online = True
+            user.save()
+            return JsonResponse({'success': True, 'massage': 'user authenticator success'})
+        else:
+            return JsonResponse({'success': False, 'message': 'unauthorized transaction'})
     else:
-        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'}) 
 
 @csrf_exempt
 def file_upload(request):
@@ -194,3 +197,18 @@ def file_upload(request):
         uploaded_file_url = fs.url(filename)
         return JsonResponse({'success': True, 'filepath': uploaded_file_url})
     return JsonResponse({'success': False, 'message': 'Failed to upload file'})
+
+
+# @csrf_exempt
+# def userauthenticator(request):
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         if not users.objects.filter(securitykey=data.skey).exists():
+#             user = users.objects.get(securitykey=data.skey)
+#             user.online = True
+#             user.save()
+#             return JsonResponse({'success': True, 'massage': 'user authenticator success'})
+#         else:
+#             return JsonResponse({'success': False, 'message': 'unauthorized transaction'})
+#     else:
+#         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'}) 
