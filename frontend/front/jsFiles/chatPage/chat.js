@@ -346,12 +346,69 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
-    font-family: 'Roboto', sans-serif; /* Yeni font belirleme */
     color: #fff;
 }
 
 .additional-buttons-header i {
     margin-right: 10px;
+}
+
+.friend-selector-container {
+    margin-top: 30px;
+    padding: 0.5em;
+    border-radius: 1.5em;
+    box-shadow: 0 0 1.25em 0.5em greenyellow;
+}
+
+.friend-selector-container h3 {
+    margin-bottom: 0.5em;
+    color: #fff;
+}
+
+.friend-selector {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1em;
+    max-width: 15em;
+}
+
+.friend-selector-button {
+    width: 70%;
+    color: #fff;
+    font-size: 1em;
+}
+
+.friend-selector-button.offline{
+    color: red;
+}
+
+.friend-selector-button.online{
+    color: #5cb85c;
+}
+
+.active-person {
+    box-shadow: 0 0 0.5em 0.1em #c3c3c333;
+}
+
+.friend-selector-container .dropdown {
+    width: 80%;
+    color: #fff;
+    font-size: 1em;
+    padding: 0.5em;
+    border-radius: 0.3em;
+    background-color: #15202b;
+    border: none;
+    cursor: pointer;
+}
+
+.friend-selector-container .dropdown:hover {
+    filter: brightness(0.9);
+    transform: scale(1.05);
+}
+
+.friend-selector-container .dropdown:active {
+    transform: translateY(1px);
 }
 
 .chat-container {
@@ -402,45 +459,16 @@ body {
     pointer-events: none;
 }
 
-.friend-container {
-    background-color: #15202b;
-    padding: 1em;
-    border-radius: 1.5em;
-    box-shadow: 0 0 1em 0.25em greenyellow;
-    position: fixed;
-    display: flex;
-    right: 40px;
-    bottom: 20px;
-    flex-direction: column;
-    gap: 10px;
-    transform: translateX(-50%);
-    font-family: 'Roboto', sans-serif;
+.online {
+    color: green;
 }
 
-.friend-container h3 {
-    margin-bottom: 0.3em;
-    color: #fff;
+.offline {
+    color: red;
 }
 
-.friend-container .dropdown {
-    width: 70%;
-    height: 2em;
-    font-size: 0.8em;
-    padding: 0.3em;
-    border-radius: 0.3em;
-    color: #fff;
-    background-color: #15202b;
-    border: none;
-    cursor: pointer;
-}
-
-.friend-container .dropdown:hover {
-    filter: brightness(0.9);
-    transform: scale(1.05);
-}
-
-.friend-container .dropdown:active {
-    transform: translateY(1px);
+.myfriends {
+    color: orange;
 }
 
 </style>
@@ -449,7 +477,7 @@ body {
 <div class="container">
 
     <div class="person-selector-container">
-        <h3 class="online-users"> Online Users <i class="fa-solid fa-user-group"></i>
+        <h3 class="online-users"> Online Users <i class="fa-solid fa-user-group online"></i>
         <select class="dropdown" onchange="userchanges(this.value)">
             <option value="John">John</option>
             <option value="Jane">Jane</option>
@@ -458,7 +486,7 @@ body {
             <option value="User3">User3</option>
         </select>
         </h3>
-        <h3 class="offline-users"> Offline Users <i class="fa-solid fa-user-group"></i>
+        <h3 class="offline-users"> Offline Users <i class="fa-solid fa-user-group offline"></i>
         <select class="dropdown" onchange="userchanges(this.value)">
             <option value="John">John</option>
             <option value="Jane">Jane</option>
@@ -469,27 +497,24 @@ body {
         </h3>
     </div>
 
-    <div class="friend-container">
-        <h3 class="my-friends"> Friends <i class="fa-solid fa-user-group"></i>
-        <select class="dropdown" onchange="userchanges(this.value)">
-            <option value="Yasin">Yasin</option>
-            <option value="Erdem">Erdem</option>
-            <option value="Onur">Onur</option>
-            <option value="Musa">Musa</option>
-            <option value="Burak">Burak</option>
-        </select>
+    <div class="friend-selector-container">
+        <h3 class="friend-selector-header"> Friends <i class="fa-solid fa-user-group myfriends"></i>
+            <select class="dropdown" onchange="userchanges(this.value)">
+                <option value="Yasin">Yasin</option>
+                <option value="Erdem">Erdem</option>
+                <option value="Onur">Onur</option>
+                <option value="Musa">Musa</option>
+                <option value="Burak">Burak</option>
+            </select>
         </h3>
     </div>
-
 
     <div class="chat-container">
         <div class="chat-header-horizontal-container">
             <div class="chat-profile-picture" id="chachat-textt-profile-picture"></div>
             <h3 id="chat-header" class="chat-header" ><i class="fa-brands fa-rocketchat"></i></h3>
         </div>
-
         <div id="chat" class="chat-messages"></div>
-
         <form class="chat-input-form">
             <input id="chat-text" type="text" class="chat-input" required placeholder="Type here..." />
             <button type="submit" class="button send-button" onclick="sendMessage()">Send</button>
