@@ -23,7 +23,7 @@ function userchanges(name)
 {
     const chatInput = document.getElementById('chat-text');
     const chatHeader = document.getElementById('chat-header');
-    chatHeader.innerHTML = `${name} <i class="bi bi-chat-left-dots">`;
+    chatHeader.innerText = `${name}`;
     chatInput.placeholder = `Type to ${name}...`;
     //clearmessage();
 }

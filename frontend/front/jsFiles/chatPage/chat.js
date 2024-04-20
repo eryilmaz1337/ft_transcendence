@@ -65,11 +65,30 @@ function chatAdd() {
         return true;
     }
 
+// Blurlama için kodlar eğer arkadaş ekle butonuna basılırsa 2 saniye blur eklendi.
+document.addEventListener('click', function(event) {
+    var target = event.target;
+    if (target.classList.contains('invite-button')) {
+        addBlurEffect();
+    }
+});
+
+function addBlurEffect() {
+    document.body.style.filter = "blur(5px)";
+
+    setTimeout(function() {
+        removeBlurEffect();
+    }, 2000);
+}
+
+function removeBlurEffect() {
+    document.body.style.filter = "none";
+}
+
 return `
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
 body {
@@ -107,12 +126,12 @@ body {
 
 .person-selector-container {
     margin-top: 30px;
-    padding: 1.5em;
-    border-radius: 0.5em;
+    padding: 0.5em;
+    border-radius: 1.5em;
     box-shadow: 0 0 1.25em 0.5em greenyellow;
 }
 
-.person-selector-container h2 {
+.person-selector-container h3 {
     margin-bottom: 0.5em;
     color: #fff;
 }
@@ -122,13 +141,13 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     gap: 1em;
-    max-width: 40em;
+    max-width: 15em;
 }
 
 .person-selector-button {
-    width: 90%;
+    width: 70%;
     color: #fff;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .person-selector-button.offline{
@@ -141,6 +160,26 @@ body {
 
 .active-person {
     box-shadow: 0 0 0.5em 0.1em #c3c3c333;
+}
+
+.person-selector-container .dropdown {
+    width: 80%;
+    color: #fff;
+    font-size: 1em;
+    padding: 0.5em;
+    border-radius: 0.3em;
+    background-color: #15202b;
+    border: none;
+    cursor: pointer;
+}
+
+.person-selector-container .dropdown:hover {
+    filter: brightness(0.9);
+    transform: scale(1.05);
+}
+
+.person-selector-container .dropdown:active {
+    transform: translateY(1px);
 }
 
 .chat-container {
@@ -173,7 +212,7 @@ body {
     color: #fff;
 }
 
-.chat-header h2 {
+.chat-header h3 {
     font-size: 1.25em;
     font-weight: bold;
 }
@@ -270,14 +309,14 @@ body {
 .additional-buttons{
     background-color: #15202b;
     padding: 1.5em;
-    border-radius: 0.5em;
-    box-shadow: 0 0 1.25em 0.5em greenyellow;
-    position: fixed;
-    display: flex;
-    left: 10px;
+    border-radius: 1.5em;
+    left : 10px;
     bottom: 20px;
     flex-direction: column;
     gap: 10px;
+    box-shadow: 0 0 1.25em 0.5em greenyellow;
+    position: fixed;
+    display: flex;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -339,11 +378,9 @@ body {
     transform: scale(1.2);
 }
 
-
 @media screen and (max-width: 700px) {
-    /* Sabit kalmamasını istiyorsan
-        flex-direction: column; /* Dikey düzen
-        align-items: center; /* Ortalama hizalama */
+    flex-direction: column; /* Dikey düzen
+    align-items: center; /* Ortalama hizalama */
     .container {
         width: 700px;
         margin: auto;
@@ -360,14 +397,59 @@ body {
     box-shadow: 0 0 10px red
 }
 
-</style>
+.blur{
+    filter: blur(5px);
+    pointer-events: none;
+}
 
+.friend-container {
+    background-color: #15202b;
+    padding: 1em;
+    border-radius: 1.5em;
+    box-shadow: 0 0 1em 0.25em greenyellow;
+    position: fixed;
+    display: flex;
+    right: 40px;
+    bottom: 20px;
+    flex-direction: column;
+    gap: 10px;
+    transform: translateX(-50%);
+    font-family: 'Roboto', sans-serif;
+}
+
+.friend-container h3 {
+    margin-bottom: 0.3em;
+    color: #fff;
+}
+
+.friend-container .dropdown {
+    width: 70%;
+    height: 2em;
+    font-size: 0.8em;
+    padding: 0.3em;
+    border-radius: 0.3em;
+    color: #fff;
+    background-color: #15202b;
+    border: none;
+    cursor: pointer;
+}
+
+.friend-container .dropdown:hover {
+    filter: brightness(0.9);
+    transform: scale(1.05);
+}
+
+.friend-container .dropdown:active {
+    transform: translateY(1px);
+}
+
+</style>
 
 </head>
 <div class="container">
 
     <div class="person-selector-container">
-        <h2 class="online-users"> Online Users <i class="fa-solid fa-user-group"></i>
+        <h3 class="online-users"> Online Users <i class="fa-solid fa-user-group"></i>
         <select class="dropdown" onchange="userchanges(this.value)">
             <option value="John">John</option>
             <option value="Jane">Jane</option>
@@ -375,8 +457,8 @@ body {
             <option value="User2">User2</option>
             <option value="User3">User3</option>
         </select>
-        </h2>
-        <h2 class="offline-users"> Offline Users <i class="fa-solid fa-user-group"></i>
+        </h3>
+        <h3 class="offline-users"> Offline Users <i class="fa-solid fa-user-group"></i>
         <select class="dropdown" onchange="userchanges(this.value)">
             <option value="John">John</option>
             <option value="Jane">Jane</option>
@@ -384,28 +466,40 @@ body {
             <option value="User2">User2</option>
             <option value="User3">User3</option>
         </select>
-        </h2>
+        </h3>
     </div>
+
+    <div class="friend-container">
+        <h3 class="my-friends"> Friends <i class="fa-solid fa-user-group"></i>
+        <select class="dropdown" onchange="userchanges(this.value)">
+            <option value="Yasin">Yasin</option>
+            <option value="Erdem">Erdem</option>
+            <option value="Onur">Onur</option>
+            <option value="Musa">Musa</option>
+            <option value="Burak">Burak</option>
+        </select>
+        </h3>
+    </div>
+
 
     <div class="chat-container">
         <div class="chat-header-horizontal-container">
             <div class="chat-profile-picture" id="chachat-textt-profile-picture"></div>
-            <h2 id="chat-header" class="chat-header" ><i class="bi bi-chat-left-dots"></i></h2>
+            <h3 id="chat-header" class="chat-header" ><i class="fa-brands fa-rocketchat"></i></h3>
         </div>
 
         <div id="chat" class="chat-messages"></div>
 
         <form class="chat-input-form">
             <input id="chat-text" type="text" class="chat-input" required placeholder="Type here..." />
-            <button type="submit" class="button send-button" onclick="sendMessage()">Send <i class="bi bi-send"></i></button>
+            <button type="submit" class="button send-button" onclick="sendMessage()">Send</button>
             <button type="button" class="clear-message-button" onclick="clearmessage()">Clear Chat <i class="fa-solid fa-comment-slash"></i></button>
         </form>
 
         <!-- Ayarlamalar Kısmı -->
         <div class="additional-buttons">
-            <h2 class="additional-buttons-header"> Settings <i class="fa-solid fa-gear"></i></h2>
+            <h3 class="additional-buttons-header"> Settings <i class="fa-solid fa-gear"></i></h3>
             <button class="button invite-button"><i class="fas fa-gamepad"></i> Oyuna Davet Et</button>
-            <button class="button message-button"><i class="fas fa-envelope"></i> Mesaj</button>
             <button class="button block-button"><i class="fas fa-times"></i> Engelle</button>
             <button class="button add-friend-button"><i class="fas fa-user-plus"></i> Arkadaş Ekle</button>
         </div>
