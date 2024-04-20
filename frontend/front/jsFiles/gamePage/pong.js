@@ -16,6 +16,7 @@ function startgame()
         return;
     }
     const welcomeText = document.getElementById('WelcomeText');
+    const chooseTheme = document.getElementById('ChooseTheme');
 
     canvas.width = window.innerWidth * 0.8;
     canvas.height = window.innerHeight * 0.8;
@@ -26,8 +27,10 @@ function startgame()
 
     function showWelcomeText() {
         welcomeText.style.visibility = 'visible';
+        chooseTheme.style.visibility = 'visible';
         setTimeout(function() {
             welcomeText.style.visibility = 'hidden'; // Yazıyı 5 saniye sonra gizle
+            chooseTheme.style.visibility = 'hidden'; // Yazıyı 5 saniye sonra gizle
         }, 1000); // 5000 milisaniye = 5 saniye
     }
 

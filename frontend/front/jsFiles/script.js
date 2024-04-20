@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // const email = sessionStorage.getItem('email');
 
 gameTheme=0;
+gameBGImagePath="";
 
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {

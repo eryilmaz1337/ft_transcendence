@@ -162,12 +162,38 @@ function checkGameTheme() {
        window.setTimeout(checkGameTheme, 1000); /* this checks the flag every 1000 milliseconds*/
        console.log("gameTheme 0");
     } else {
+        console.log("gameTheme= "+gameTheme);
         startgame();
-        console.log("gameTheme not 0");
     }}
     return;
 }
 
+function setGameTheme(value){
+    console.log("value is: "+value);
+    switch (value) {
+        case 1:
+            gameTheme=1;
+            break;
+        case 2:
+            gameBGImagePath = function() {
+                const imagePaths = [
+                    "../img/game_background/a1.jpeg",
+                    "../img/game_background/a1.jpeg",
+                    "../img/game_background/a1.jpeg",
+                    "../img/game_background/a1.jpeg"
+                ];
+                const randomIndex = Math.floor(Math.random() * imagePaths.length);
+                console.log("random index: "+randomIndex);
+                gameBGImagePath = imagePaths[randomIndex];
+                console.log("game image path: "+gameBGImagePath);
+                return gameBGImagePath;
+            };
+            gameTheme=2;
+            break;
+        default:
+            break;
+    }
+}
 
 // Oyun Fonksiyonu
 function gameAdd() {
@@ -197,7 +223,7 @@ function gameAdd() {
         max-width: 900px;
         max-height: 600px;
         margin: 30px auto;
-        box-shadow: 0 0 1.25em 0.5em greenyellow;
+        /* box-shadow: 0 0 1.25em 0.5em greenyellow; */
     }
 
     canvas {
@@ -242,6 +268,21 @@ function gameAdd() {
         text-align: center;
     }
 
+    #ChooseTheme {
+        position: absolute;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 2rem;
+        font-weight: bold;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        animation: fadeIn 1s ease forwards;
+        z-index: 1;
+        text-align: center;
+    }
+
     @keyframes fadeIn {
         from {
             opacity: 0;
@@ -278,17 +319,18 @@ function gameAdd() {
 <div id="canvas-container">
     <canvas id="canvas"></canvas>
     <div class="btn-group btn-group-lg" role="group" aria-label="Basic radio toggle button group">
-        <button type="button" class="btn btn-outline-light">Classic Pong</button>
-        <button type="button" class="btn btn-outline-danger">Phoenix Bird</button>
-        <button type="button" class="btn btn-outline-info">Champions League</button>
-        <button type="button" class="btn btn-outline-success">Fangorn Forest</button>
-        <button type="button" class="btn btn-outline-secondary">Milky Way</button>
+        <button type="button" class="btn btn-outline-light" onclick="setGameTheme(1)">Classic Pong</button>
+        <button type="button" class="btn btn-outline-danger" onclick="setGameTheme(2)">Phoenix Bird</button>
+        <button type="button" class="btn btn-outline-info" onclick="setGameTheme(3)">Champions League</button>
+        <button type="button" class="btn btn-outline-success" onclick="setGameTheme(4)">Fangorn Forest</button>
+        <button type="button" class="btn btn-outline-secondary" onclick="setGameTheme(5)">Milky Way</button>
     </div>
     <div id="scoreboard">
         <h1 id="player1Score">0</h1>
         <h1 id="player2Score">0</h1>
     </div>
     <h2 id ="WelcomeText" data-translate="welcomepong">Welcome to the Pong Game</h2>
+    <h2 id ="ChooseTheme" data-translate="choosetheme">Choose a theme below!</h2>
 </div>
 
     `;
