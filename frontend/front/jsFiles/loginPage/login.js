@@ -29,7 +29,8 @@ function accountsave(accessToken)
                     usernameTextElements.forEach(function(element) {
                         element.textContent = data.username;
                     });
-                    window.location.hash = "#game"
+                    con();
+                    window.location.hash = "#game";
 
                 } else {
                     alert('Error while processing the request.');

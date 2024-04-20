@@ -8,3 +8,4 @@ redis==3.0.1
 daphne==3.0.1
 djangorestframework==3.12.4
 Pillow
+aiohttp
