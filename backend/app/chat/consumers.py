@@ -5,6 +5,8 @@ from chat.models import Room, UserMessage
 import aiohttp
 # from account.views import include
 
+connected_users = {}
+
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         skey = self.scope['url_route']['kwargs']['room_slug']
@@ -14,8 +16,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
         async with aiohttp.ClientSession() as session:
             async with session.post(api_url, json=data) as response:
                 json_response = await response.json()
+        self.username = json_response.get('username')
+        connected_users[self.username] = self.channel_name 
         if json_response.get('success'):
-           await self.accept()
+            await self.accept()
+        else:
+            await self.close()
     
     async def disconnect(self, close_code):
         skey = self.scope['url_route']['kwargs']['room_slug']
@@ -27,25 +33,20 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 json_response = await response.json()
     # WebSocket'ten veri alındığında çalışacak kod
     async def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        message = text_data_json.get("message")
-        username = text_data_json.get("username")
-        room_name = text_data_json.get("room_name")
-        
-        await self.save_message(message, username, room_name)
+          data = json.loads(text_data)
+          receiver_username = data['receiver_username']
+          message = data['message']
+          receiver_channel_name = connected_users.get(receiver_username)
+          if receiver_channel_name:
+              await self.channel_layer.send(
+                  receiver_channel_name,
+                  {
+                      "type": "chat.message",
+                      "message": message,
+                      "sender_username": self.username,
+                  },
+              )
 
-        await self.channel_layer.group_send(
-            self.roomGroupName, {
-                "type": "sendMessage",
-                "message": message,
-                "username": username,
-                "room_name": room_name,
-            }
-        )
-
-        # Gelen mesajı aynı istemciye geri gönder
-        # print("Alınan veri:", text_data)
-        await self.send(text_data=text_data)
 
     # async def connect(self):
         

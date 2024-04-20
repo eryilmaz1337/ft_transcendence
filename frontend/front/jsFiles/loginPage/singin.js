@@ -1,12 +1,3 @@
-function signinprocessing()
-{
-  isLoggedIn = true;
-    if (isLoggedIn) {
-        window.location.href = "#game";
-    }
-}
-
-
 function signinjson()
 {
     var data = {
@@ -23,16 +14,20 @@ function signinjson()
       })
       .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
       .then(data => {
-        signinprocessing();
         alert(`Giriş Başarılı`);
         if (data) {
           sessionStorage.setItem('username', data.username);
           sessionStorage.setItem('name', data.name);
           sessionStorage.setItem('surname', data.surname);
-          sessionStorage.setItem('email', data.email);
           sessionStorage.setItem('securitykey', data.securitykey);
+          sessionStorage.setItem('email', data.email);
           sessionStorage.setItem('profile_image', data.profile_image);
-
+          var usernameTextElements = document.querySelectorAll('.username_text');
+          usernameTextElements.forEach(function(element) {
+              element.textContent = data.username;
+          });
+          con()
+          window.location.href = "#game";
         }else {
           alert('Error while processing the request.');
         }
@@ -130,4 +125,3 @@ function singin()
   </body>
     `;
 }
-
