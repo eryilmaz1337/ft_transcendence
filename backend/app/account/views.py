@@ -55,7 +55,6 @@ def singin(request):
         username = data.get('jsonusername')
         password = data.get('jsonpassword')
         user = users.objects.get(username=username)
-        print(user);
         if check_password(password, user.password):
             return JsonResponse({'securitykey': user.securitykey,'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
         else:
@@ -190,7 +189,7 @@ def userauthenticator(request):
             else:
                 user.online = True
             user.save()
-            return JsonResponse({'success': True, 'massage': 'user authenticator success'})
+            return JsonResponse({'success': True, 'username': user.username})
         else:
             return JsonResponse({'success': False, 'message': 'unauthorized transaction'})
     else:
