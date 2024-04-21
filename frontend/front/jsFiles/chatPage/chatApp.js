@@ -71,3 +71,4 @@
      document.getElementById("chat-text").value='';
      chatMessages.scrollTop = chatMessages.scrollHeight;
  }
+

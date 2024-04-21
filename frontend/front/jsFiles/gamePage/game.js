@@ -92,6 +92,7 @@ function chooseGame() {
 
         <style>
             #game-container {
+                background-image: url('../img/walpaper-arcade-3.jpeg');
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -177,7 +178,7 @@ function setGameTheme(value){
             gameBGColor='#ffffff';
             break;
         case 2:
-            
+
             const imagePaths = [
                 "../img/game_background/a1.jpeg",
                 "../img/game_background/a2.jpeg",

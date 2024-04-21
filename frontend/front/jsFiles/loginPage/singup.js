@@ -1,17 +1,14 @@
 function signupjson()
 {
-  if(!document.getElementById('username').value)
-    return;
-  if(!document.getElementById('name').value)
-    return;
-  if(!document.getElementById('surname').value)
+  if(!document.getElementById('username').value || !document.getElementById('name').value
+    || !document.getElementById('surname').value)
     return;
   var data = {
     jsonusername: document.getElementById('username').value,
     jsonname: document.getElementById('name').value,
     jsonsurname: document.getElementById('surname').value,
     jsonemail: document.getElementById('email').value,
-    jsonpassword: document.getElementById('password').value  
+    jsonpassword: document.getElementById('password').value
   }
   console.log(data);
   fetch("http://localhost:8000/api/account/singup/", {
@@ -23,17 +20,15 @@ function signupjson()
   })
   .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
   .then(data => {
-    alert(`Kayıt Başarılı`);
     console.log('Başarıyla gönderildi:', data);
   })
   .catch((error) => {
-    alert(`Hata!!!!!!!`);
     console.error('Hata:', error);
   });
 }
 
 
-function singup() 
+function singup()
 {
     return `
     <title>Register - Transcendence Project</title>
@@ -51,10 +46,10 @@ function singup()
         background-size: cover;
       }
       .form-wrapper {
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: #111;
         padding: 20px;
         border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        box-shadow: 0 0 1.25em 0.5em greenyellow;
       }
       h3 {
         text-align: center;
@@ -80,23 +75,43 @@ function singup()
         color: #000;
         cursor: pointer;
         font-weight: bold;
+        transition: transform 0.2s, background-color 0.2s;
       }
       button:hover {
         background-color: #0c0;
+        transform: scale(1.1);
       }
+
+      .back-button {
+        margin-bottom: 10px;
+        border: none;
+        background-color: #f00;
+        color: #fff;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.2s;
+      }
+
+      .back-button:hover {
+        background-color: #c00;
+        transform: scale(1.3);
+      }
+
     </style>
+
     <body>
-    <div class="form-wrapper">
-    <h3 data-translate="registertoproject">Register to Transcendence Project</h3>
-      <form id="registerForm" method="get" >
-        <input type="text" id="username" placeholder="Username" requidred>
-        <input type="text" id="name" placeholder="Name" requidred>
-        <input type="text" id="surname" placeholder="Surname" requidred>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button type="submit" onclick="signupjson()" data-translate="registerbuton">Sign Up</button>
-      </form>
-    </div>
+      <div class="form-wrapper">
+        <button class="back-button" onclick="location.href='#login'" data-translate="back">Back to Login</button>
+        <h3 data-translate="registertoproject">Register to Transcendence Project</h3>
+          <form id="registerForm" method="get" >
+            <input type="text" id="username" placeholder="Username" requidred>
+            <input type="text" id="name" placeholder="Name" requidred>
+            <input type="text" id="surname" placeholder="Surname" requidred>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" onclick="signupjson()" data-translate="registerbuton">Sign Up</button>
+          </form>
+      </div>
   </body>
     `;
 }
