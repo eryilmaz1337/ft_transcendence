@@ -1,58 +1,5 @@
 //const socket = new WebSocket('ws://localhost:8000');
 
-const socketUrl = 'ws://localhost:8000/ws/chat/ROOM_SLUG/'; // WebSocket endpoint URL'niz, ROOM_SLUG alanını uygun değer ile değiştirin
-let websocket = null;
-
-function openWebSocket() {
-    websocket = new WebSocket(socketUrl);
-
-    websocket.onopen = function(event) {
-        console.log('Connection opened!');
-    };
-
-    websocket.onerror = function(event) {
-        console.error('WebSocket error:', event);
-    };
-
-    websocket.onmessage = function(event) {
-        const data = JSON.parse(event.data);
-        if (data.type === 'chat.message') {
-            console.log(`Message from ${data.sender_username}: ${data.message}`);
-        }
-    };
-
-    websocket.onclose = function(event) {
-        console.log('WebSocket closed:', event);
-    };
-}
-
-function sendMessage(receiver, message) {
-    const data = JSON.stringify({
-        receiver_username: receiver,
-        message: message
-    });
-
-    if (websocket && websocket.readyState === WebSocket.OPEN) {
-        websocket.send(data);
-    } else {
-        console.error('WebSocket is not open.');
-    }
-}
-
-function closeWebSocket() {
-    if (websocket) {
-        websocket.close();
-    }
-}
-
-// WebSocket bağlantısını aç
-openWebSocket();
-
-// Mesaj gönderme örneği (konsoldan `sendMessage('kullanıcı_adı', 'Merhaba!')` şeklinde çağırılabilir)
-// sendMessage('otheruser', 'Hello there!');
-
-// WebSocket bağlantısını kapamak için `closeWebSocket()` fonksiyonu kullanılabilir.
-
 
  // Örneğin bir sohbet odası
 
@@ -124,4 +71,3 @@ openWebSocket();
      document.getElementById("chat-text").value='';
      chatMessages.scrollTop = chatMessages.scrollHeight;
  }
-
