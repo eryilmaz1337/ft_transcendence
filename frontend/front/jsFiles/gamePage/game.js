@@ -173,21 +173,21 @@ function setGameTheme(value){
     switch (value) {
         case 1:
             gameTheme=1;
+            gameBGImagePath="";
+            gameBGColor='#ffffff';
             break;
         case 2:
-            gameBGImagePath = function() {
-                const imagePaths = [
-                    "../img/game_background/a1.jpeg",
-                    "../img/game_background/a1.jpeg",
-                    "../img/game_background/a1.jpeg",
-                    "../img/game_background/a1.jpeg"
-                ];
-                const randomIndex = Math.floor(Math.random() * imagePaths.length);
-                console.log("random index: "+randomIndex);
-                gameBGImagePath = imagePaths[randomIndex];
-                console.log("game image path: "+gameBGImagePath);
-                return gameBGImagePath;
-            };
+            
+            const imagePaths = [
+                "../img/game_background/a1.jpeg",
+                "../img/game_background/a2.jpeg",
+                "../img/game_background/a3.jpeg",
+                "../img/game_background/a4.jpeg"
+            ];
+            const randomIndex = Math.floor(Math.random() * imagePaths.length);
+            console.log("random index: "+randomIndex);
+            gameBGImagePath = imagePaths[randomIndex];
+            console.log("game image path: "+gameBGImagePath);
             gameTheme=2;
             break;
         default:

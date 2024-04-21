@@ -305,7 +305,7 @@ this.getCenter = function() {
             // Ekranı çiz
             gameDraw();
         };
-        img.src = "../img/game_background/a1.jpeg";
+        img.src = gameBGImagePath;
     }
     gameLoop();
 }
