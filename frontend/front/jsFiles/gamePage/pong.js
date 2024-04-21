@@ -298,10 +298,10 @@ this.getCenter = function() {
             // Resmin üzerine renkle doldur
             ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
+
             // Oyun döngüsünü devam ettir
             window.requestAnimationFrame(gameLoop);
-            
+
             // Oyun durumunu güncelle
             gameUpdate();
             // Ekranı çiz

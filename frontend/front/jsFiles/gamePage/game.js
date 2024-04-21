@@ -92,7 +92,7 @@ function chooseGame() {
 
         <style>
             #game-container {
-                background-image: url('../img/walpaper-arcade-3.jpeg');
+                background-image: url('../img/retro-arcade.jpeg');
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -172,6 +172,7 @@ function checkGameTheme() {
 function setGameTheme(value){
     var audio = document.getElementById("clMusic");
     console.log("setGameTheme value is: "+value);
+
     switch (value) {
         case 1:
             gameBGImagePath="../img/game_background/b1.jpg";
@@ -181,14 +182,14 @@ function setGameTheme(value){
             break;
         case 2:
             imagePaths = [
-                "../img/game_background/a1.jpeg",
-                "../img/game_background/a2.jpeg",
-                "../img/game_background/a3.jpeg",
-                "../img/game_background/a4.jpeg"
+                "../img/game_background/elon-musk.jpeg",
+                "../img/game_background/elon-musk.jpeg",
+                "../img/game_background/elon-musk.jpeg",
+                "../img/game_background/elon-musk.jpeg"
             ];
             randomIndex = Math.floor(Math.random() * imagePaths.length);
             gameBGImagePath = imagePaths[randomIndex];
-            gameBGColor='#EE2224';
+            gameBGColor='#ffc001';
             audio.pause();
             gameTheme=2;
             break;
@@ -358,7 +359,7 @@ function gameAdd() {
     <canvas id="canvas"></canvas>
     <div class="btn-group btn-group-lg" role="group" aria-label="Basic radio toggle button group">
         <button type="button" class="btn btn-outline-light" onclick="setGameTheme(1)">Classic Pong</button>
-        <button type="button" class="btn btn-outline-danger" onclick="setGameTheme(2)">Phoenix Bird</button>
+        <button type="button" class="btn btn-outline-warning" onclick="setGameTheme(2)">Doge Coin</button>
         <button type="button" class="btn btn-outline-info" onclick="setGameTheme(3)">Champions League</button>
         <button type="button" class="btn btn-outline-success" onclick="setGameTheme(4)">Fangorn Forest</button>
         <button type="button" class="btn btn-outline-secondary" onclick="setGameTheme(5)">Milky Way</button>

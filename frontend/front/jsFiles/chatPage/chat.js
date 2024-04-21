@@ -93,16 +93,7 @@ return `
 <style>
 
 body {
-    background-image: linear-gradient(
-      23deg,
-      hsl(49deg 100% 69%) 0%,
-      hsl(16deg 80% 61%) 2%,
-      hsl(330deg 81% 34%) 12%,
-      hsl(259deg 100% 15%) 50%,
-      hsl(212deg 100% 25%) 88%,
-      hsl(197deg 100% 30%) 98%,
-      hsl(183deg 79% 36%) 100%
-    );
+    background-color: #15202b;
     height: 100vh;
   }
 
@@ -131,7 +122,6 @@ body {
     border-radius: 0.5em;
     margin: auto 0;
     left: 10px;
-    //box-shadow: 0 0 1.25em 0.5em white;
 }
 
 .person-selector-container {
@@ -218,7 +208,7 @@ body {
 
 .chat-header, .person-selector-header {
     margin: auto 0;
-    color: #fff;
+    color: #a0bff0;
 }
 
 .chat-header h3 {
@@ -442,14 +432,13 @@ body {
     transform: scale(1.2);
 }
 
-@media screen and (max-width: 700px) {
-    flex-direction: column; /* Dikey düzen
-    align-items: center; /* Ortalama hizalama */
-    .container {
-        width: 700px;
-        margin: auto;
+@media screen and (min-width: 768px) {
+    .chat-container-wrapper {
+        margin-left: auto; /* Sağa hizalama */
+        margin-right: 20px; /* Sağ kenardan 20px içeri */
     }
 }
+
 
 .chat-header-horizontal-container {
     display: flex; /* Yatay sıralamayı sağlar */
