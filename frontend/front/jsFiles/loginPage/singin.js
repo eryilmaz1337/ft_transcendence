@@ -39,19 +39,19 @@ function signinjson()
 }
 
 
-function singin() 
+function singin()
 {
     return `
-    
+
     <style>
     body, html {
         height: 100%;
         margin: 0;
         font-family: Arial, sans-serif;
-        background: #121212;
+        background-color: #111;
         color: white;
       }
-      
+
       .container {
         width: 300px;
         padding: 40px;
@@ -59,21 +59,21 @@ function singin()
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: #232323;
+        background-color: #111;
         text-align: center;
         border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+        box-shadow: 0 0 1.25em 0.5em greenyellow;
       }
-      
+
       h2 {
         margin-bottom: 20px;
         color: #ffffff;
       }
-      
+
       .input-group {
         margin-bottom: 20px;
       }
-      
+
       .input-group input {
         width: 100%;
         padding: 10px;
@@ -83,14 +83,14 @@ function singin()
         color: #fff;
         border-radius: 5px;
       }
-      
+
       .input-group label {
         display: block;
         text-align: left;
         margin: 5px;
         color: #999;
       }
-      
+
       button {
         width: 100%;
         padding: 10px;
@@ -102,10 +102,11 @@ function singin()
         font-size: 16px;
         transition: background 0.3s ease;
       }
-      
+
       button:hover {
         background: #0c0;
-      }      
+        transform: scale(1.3);
+      }
     </style>
     <body>
     <div class="container">
@@ -125,3 +126,4 @@ function singin()
   </body>
     `;
 }
+
