@@ -63,8 +63,8 @@ function startgame()
 
         this.draw = function()
         {
-            ctx.fillStyle = "#33ff00"; //#33ff00" green
-            ctx.strokeStyle = "#33ff00"; //#33ff00" green
+            ctx.fillStyle = gameBGColor;
+            ctx.strokeStyle = gameBGColor;
             ctx.beginPath();
             ctx.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2);
             ctx.fill();
@@ -88,7 +88,7 @@ this.update = function() {
 };
 
 this.draw = function() {
-    ctx.fillStyle = "#33ff00"; //#33ff00" green
+    ctx.fillStyle = gameBGColor;
     ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
 };
 
@@ -159,13 +159,13 @@ this.getCenter = function() {
     {
         if (ball.velocity.x > 0)
         {
-            ball.pos.x = canvas.width - 150;
+            ball.pos.x = (Math.random() * (canvas.width / 2 - 150)) + canvas.width / 2 + 150;
             ball.pos.y = (Math.random() * (canvas.height - 200)) + 100;
         }
 
         if (ball.velocity.x < 0)
         {
-            ball.pos.x = 150;
+            ball.pos.x = (Math.random() * (canvas.width / 2 - 150)) + 150;
             ball.pos.y = (Math.random() * (canvas.height - 200)) + 100;
         }
         ball.velocity.x *= -1;
@@ -207,7 +207,7 @@ this.getCenter = function() {
 
     function drawGameScene()
     {
-        ctx.strokeStyle = '#33ff00'; //ffff00 yellow, 33ff00 green
+        ctx.strokeStyle = gameBGColor;
 
 
         ctx.beginPath();
@@ -236,18 +236,20 @@ this.getCenter = function() {
 
         ctx.beginPath();
         ctx.lineWidth = 10;
+        ctx.setLineDash([40, 20]);
         ctx.moveTo(canvas.width / 2,0);
         ctx.lineTo(canvas.width / 2, canvas.height);
         ctx.stroke();
+        ctx.setLineDash([]);
 
-        ctx.beginPath();
+        /* ctx.beginPath();
         ctx.arc(canvas.width/2, canvas.height/2, 50, 0, Math.PI * 2);
-        ctx.stroke();
+        ctx.stroke(); */
     }
 
     const ball = new Ball(vec2(200,200), vec2(10, 10), 20);
-    const paddle1 = new Paddle(vec2(0,50), vec2(15, 15), 20, 160);
-    const paddle2 = new Paddle(vec2(canvas.width - 20, 30), vec2(15, 15), 20, 160);
+    const paddle1 = new Paddle(vec2(0,50), vec2(15, 15), 20, 100);
+    const paddle2 = new Paddle(vec2(canvas.width - 20, 30), vec2(15, 15), 20, 100);
 
     // paddle1.score = 0;
     // paddle2.score = 0; -> Asenkron çalışma var.

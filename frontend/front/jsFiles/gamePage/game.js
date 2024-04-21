@@ -170,30 +170,60 @@ function checkGameTheme() {
 }
 
 function setGameTheme(value){
-    console.log("value is: "+value);
+    console.log("setGameTheme value is: "+value);
     switch (value) {
         case 1:
-            gameTheme=1;
-            gameBGImagePath="";
+            gameBGImagePath="../img/game_background/b1.jpg";
             gameBGColor='#ffffff';
+            gameTheme=1;
             break;
         case 2:
-
-            const imagePaths = [
+            imagePaths = [
                 "../img/game_background/a1.jpeg",
                 "../img/game_background/a2.jpeg",
                 "../img/game_background/a3.jpeg",
                 "../img/game_background/a4.jpeg"
             ];
-            const randomIndex = Math.floor(Math.random() * imagePaths.length);
-            console.log("random index: "+randomIndex);
+            randomIndex = Math.floor(Math.random() * imagePaths.length);
             gameBGImagePath = imagePaths[randomIndex];
-            console.log("game image path: "+gameBGImagePath);
+            gameBGColor='#EE2224';
             gameTheme=2;
             break;
+        case 3:
+            gameBGImagePath="../img/game_background/c1.jpg";
+            gameBGColor='#6594C0';
+            var audio = document.getElementById("clMusic");
+            audio.play();
+            gameTheme=3;
+            break;
+        case 4:
+            imagePaths = [
+                "../img/game_background/f1.jpeg",
+                "../img/game_background/f2.jpeg",
+                "../img/game_background/f3.jpeg",
+                "../img/game_background/f4.jpeg"
+            ];
+            randomIndex = Math.floor(Math.random() * imagePaths.length);
+            gameBGImagePath = imagePaths[randomIndex];
+            gameBGColor='#7cbd8f';
+            gameTheme=4;
+            break;
+        case 5:
+            imagePaths = [
+                "../img/game_background/m1.jpeg",
+                "../img/game_background/m2.jpeg",
+                "../img/game_background/m3.jpeg",
+                "../img/game_background/m4.jpeg"
+            ];
+            randomIndex = Math.floor(Math.random() * imagePaths.length);
+            gameBGImagePath = imagePaths[randomIndex];
+            gameBGColor='#b8b7c5';
+            gameTheme=5;
         default:
             break;
     }
+    console.log("setGameTheme image path: "+gameBGImagePath);
+    console.log("setGameTheme bg color: "+gameBGColor);
 }
 
 // Oyun Fonksiyonu
@@ -202,6 +232,7 @@ function gameAdd() {
     return `
     <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap">
     <style>
 
     body {
@@ -230,7 +261,7 @@ function gameAdd() {
     canvas {
         /* display: grid; */
         background-color: #000;
-        border: 2px solid greenyellow;
+        /* border: 2px solid greenyellow; */
         border-radius: 10px;
         width: 100%;
         height: 100%;
@@ -250,7 +281,9 @@ function gameAdd() {
 
     #player1Score, #player2Score {
         color: white;
-        font-family: 'Poppins', sans-serif;
+        /* font-family: 'Poppins', sans-serif; */
+        /* font-family: 'Courier New', Courier, monospace; */
+        font-family: 'Press Start 2P', cursive;
         font-size: 44px;
     }
 
@@ -316,7 +349,7 @@ function gameAdd() {
 
 </style>
 </head>
-
+<audio id="clMusic" src="../sounds/UEFA Champions League Anthem (Full Version).m4a"></audio>
 <div id="canvas-container">
     <canvas id="canvas"></canvas>
     <div class="btn-group btn-group-lg" role="group" aria-label="Basic radio toggle button group">
