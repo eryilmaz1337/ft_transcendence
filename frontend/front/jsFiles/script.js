@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 gameTheme=0;
 gameBGImagePath="";
+gameBGColor='';
 
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
