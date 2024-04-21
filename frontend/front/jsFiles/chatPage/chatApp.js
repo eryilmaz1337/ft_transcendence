@@ -2,6 +2,51 @@
 
 
  // Örneğin bir sohbet odası
+ document.addEventListener('DOMContentLoaded', function() {
+    var wsStart = 'ws://';
+    if (window.location.protocol === 'https:') {
+        wsStart = 'wss://';
+    }
+    var endpoint = wsStart + window.location.host + '/ws/chat/YOUR_ROOM_SLUG_HERE/';
+    var socket = new WebSocket(endpoint);
+
+    socket.onopen = function(e) {
+        console.log('Chat socket opened', e);
+    };
+
+    socket.onerror = function(e) {
+        console.log('Chat socket encountered error: ', e.message, 'Closing socket');
+        socket.close();
+    };
+
+    socket.onmessage = function(e) {
+        console.log('Message:', e.data);
+        var messageData = JSON.parse(e.data);
+        var chatLog = document.getElementById('chat-log');
+        chatLog.innerHTML += '<div><strong>' + messageData.sender_username + ':</strong> ' + messageData.message + '</div>';
+    };
+
+    socket.onclose = function(e) {
+        console.log('Chat socket closed unexpectedly');
+    };
+
+    document.getElementById('send-button').onclick = function(e) {
+        var messageInput = document.getElementById('message-input');
+        var receiverInput = document.getElementById('receiver-input');
+        var message = messageInput.value.trim();
+        var receiver = receiverInput.value.trim();
+
+        if (message && receiver) {
+            socket.send(JSON.stringify({
+                'message': message,
+                'receiver_username': receiver
+            }));
+            messageInput.value = '';
+        }
+    };
+});
+
+
 
  function con()
  {   
