@@ -170,11 +170,13 @@ function checkGameTheme() {
 }
 
 function setGameTheme(value){
+    var audio = document.getElementById("clMusic");
     console.log("setGameTheme value is: "+value);
     switch (value) {
         case 1:
             gameBGImagePath="../img/game_background/b1.jpg";
             gameBGColor='#ffffff';
+            audio.pause();
             gameTheme=1;
             break;
         case 2:
@@ -187,12 +189,12 @@ function setGameTheme(value){
             randomIndex = Math.floor(Math.random() * imagePaths.length);
             gameBGImagePath = imagePaths[randomIndex];
             gameBGColor='#EE2224';
+            audio.pause();
             gameTheme=2;
             break;
         case 3:
             gameBGImagePath="../img/game_background/c1.jpg";
             gameBGColor='#6594C0';
-            var audio = document.getElementById("clMusic");
             audio.play();
             gameTheme=3;
             break;
@@ -206,6 +208,7 @@ function setGameTheme(value){
             randomIndex = Math.floor(Math.random() * imagePaths.length);
             gameBGImagePath = imagePaths[randomIndex];
             gameBGColor='#7cbd8f';
+            audio.pause();
             gameTheme=4;
             break;
         case 5:
@@ -218,6 +221,7 @@ function setGameTheme(value){
             randomIndex = Math.floor(Math.random() * imagePaths.length);
             gameBGImagePath = imagePaths[randomIndex];
             gameBGColor='#b8b7c5';
+            audio.pause();
             gameTheme=5;
         default:
             break;
