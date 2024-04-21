@@ -91,10 +91,20 @@ return `
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 <style>
+
 body {
-    background-color: #15202b;
+    background-image: linear-gradient(
+      23deg,
+      hsl(49deg 100% 69%) 0%,
+      hsl(16deg 80% 61%) 2%,
+      hsl(330deg 81% 34%) 12%,
+      hsl(259deg 100% 15%) 50%,
+      hsl(212deg 100% 25%) 88%,
+      hsl(197deg 100% 30%) 98%,
+      hsl(183deg 79% 36%) 100%
+    );
     height: 100vh;
-}
+  }
 
 .button {
     border: none;
@@ -184,7 +194,6 @@ body {
 
 .chat-container {
     margin-top: 30px;
-    background: #15202b;
     font-family: 'Roboto', sans-serif;
     border-radius: 0.5em;
     padding: 0.5em 1.25em;
@@ -270,7 +279,6 @@ body {
     padding: 0.625em;
     border: none;
     border-radius: 0.5em;
-    background-color: #f5f5f5;
     color: #333;
     font-size: 1em;
     flex-grow: 1;
@@ -307,7 +315,6 @@ body {
 }
 
 .additional-buttons{
-    background-color: #15202b;
     padding: 1.5em;
     border-radius: 1.5em;
     left : 10px;
@@ -521,7 +528,7 @@ body {
             <button type="button" class="clear-message-button" onclick="clearmessage()">Clear Chat <i class="fa-solid fa-comment-slash"></i></button>
         </form>
 
-        <!-- Ayarlamalar Kısmı -->
+        <!-- Settings Kısmı -->
         <div class="additional-buttons">
             <h3 class="additional-buttons-header"> Settings <i class="fa-solid fa-gear"></i></h3>
             <button class="button invite-button"><i class="fas fa-gamepad"></i> Oyuna Davet Et</button>
