@@ -1,3 +1,5 @@
+let selectedUsername = null;
+
 function chatAdd() {
     // Sayfa içeriği tamamen yüklendiğinde çalışacak fonksiyon
     document.addEventListener('DOMContentLoaded', function() {
@@ -39,6 +41,9 @@ function chatAdd() {
                 option.addEventListener('click', function() {
                     var selectedUser = this.value;
                     var isUserOnline = isOnline(selectedUser);
+                    
+                    selectedUsername = selectedUser;
+                    console.log(selectedUser);
 
                     if (isUserOnline) {
                         onlineContainer.appendChild(createUserElement(selectedUser));

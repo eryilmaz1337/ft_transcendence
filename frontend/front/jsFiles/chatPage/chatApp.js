@@ -1,4 +1,6 @@
 let socket;
+let receiver_username;
+
 function useradd(selectedValue) 
 {
     var selectElement = document.getElementsByClassName("dropdown")[0];
@@ -27,7 +29,6 @@ function getonlinestatususer()
             onlineUsers.forEach(user => {
                 if(user.username != sessionStorage.getItem("username"))
                 {
-                    console.log(user.username);
                     useradd(user.username);
                 }
             });
@@ -63,12 +64,11 @@ function con()
         console.log('JS | Received message from server:', event.data);
         const messageData = JSON.parse(event.data);
         console.log(messageData);
-        messageData.innerHTML += createChatMessageElementReceiver(messageData);
-        document.getElementById('chat-text').value='';
-        messageData.scrollTop = messageData.scrollHeight;
+        const chatMessages = document.getElementById('chat');
+        chatMessages.innerHTML += createChatMessageElementReceiver(messageData);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
     });
 }
-
 
 function userchanges(name)
 {
@@ -78,7 +78,7 @@ function userchanges(name)
     chatHeader.innerText = `${myUsername}'s chatting...`;
     chatHeader.style.color = 'greenyellow';
     chatInput.placeholder = `Type to ${name}...`;
-    //clearmessage();
+    receiver_username = name;
 }
 
 function clearmessage()
@@ -87,16 +87,14 @@ function clearmessage()
     chat.innerHTML = '';
 }
 
-//farklı websocketlere istek atıyor onu düzeltmek gerekiyor.!!
 function createChatMessageElementReceiver(message) {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
-    const myUsername = sessionStorage.getItem('username');
 
     return `
     <div class="message gray-bg" style="width: 100%; display: flex; justify-content: flex-end;">
-        <div class = "message-sender">${sessionStorage.getItem('username')}</div>
+        <div class = "message-sender">${receiver_username}</div>
         <div class="message-text">${message.message}</div>
         <div class="message-timestamp" style="text-align: right;">${hours}:${minutes}</div>
     </div>
@@ -124,15 +122,15 @@ function createChatMessageElement(message) {
     `;
 }
 
+
 function sendMessage()
 {
     const message_text = document.getElementById("chat-text").value;
-    const receiver = 'y'; //burayı güncelle hedefe göre
     if(!message_text)
         return;
     
     const messageData = {
-        receiver_username: receiver,
+        receiver_username: receiver_username,
         message: message_text,
     };
 
