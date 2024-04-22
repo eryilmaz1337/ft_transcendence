@@ -1,75 +1,9 @@
 let selectedUsername = null;
 
 function chatAdd() {
-    // Sayfa içeriği tamamen yüklendiğinde çalışacak fonksiyon
-    document.addEventListener('DOMContentLoaded', function() {
-        // Kullanıcıları başlangıçta yükleyen fonksiyonu çağır
-        initializeUsers();
-    });
-
-    // Kullanıcıları başlangıçta yükleyen fonksiyon
-    function initializeUsers() {
-        // Online ve offline kullanıcıları ayırmak için gerekli div'leri seç
-        var onlineContainer = document.querySelector('.online-users');
-        var offlineContainer = document.querySelector('.offline-users');
-
-        // Dropdown elementlerini seç
-        var dropdowns = document.querySelectorAll('.dropdown');
-
-        // Dropdown menüsüne tıklandığında kullanıcıları ekle
-        dropdowns.forEach(function(dropdown) {
-            dropdown.addEventListener('click', function() {
-                // Dropdown menüsünü genişlet
-                this.nextElementSibling.classList.toggle('show');
-            });
-        });
-
-        // Dropdown menüsünden dışarı tıklanınca menüyü kapat
-        window.addEventListener('click', function(event) {
-            dropdowns.forEach(function(dropdown) {
-                if (!dropdown.contains(event.target)) {
-                    dropdown.nextElementSibling.classList.remove('show');
-                }
-            });
-        });
-
-        // Dropdown seçeneklerine tıklanınca kullanıcıları ekle
-        dropdowns.forEach(function(dropdown) {
-            var options = dropdown.options;
-
-            options.forEach(function(option) {
-                option.addEventListener('click', function() {
-                    var selectedUser = this.value;
-                    var isUserOnline = isOnline(selectedUser);
-                    
-                    selectedUsername = selectedUser;
-                    console.log(selectedUser);
-
-                    if (isUserOnline) {
-                        onlineContainer.appendChild(createUserElement(selectedUser));
-                    } else {
-                        offlineContainer.appendChild(createUserElement(selectedUser));
-                    }
-                });
-            });
-        });
-    }
-
-    // Kullanıcıların listelendiği div elementi oluşturan yardımcı fonksiyon
-    function createUserElement(username) {
-        var div = document.createElement('div');
-        div.textContent = username;
-        return div;
-    }
-
-    // Kullanıcının çevrimiçi olup olmadığını kontrol eden bir işlev
-    function isOnline(username) {
-        // Burada kullanıcının çevrimiçi olup olmadığını kontrol etmek için uygun bir mekanizma kullanabilirsiniz
-        // Örneğin, bir kullanıcı listesi veya çevrimiçi durumu takip eden bir veritabanı
-        // Bu örnekte, herkesin çevrimiçi olduğunu varsayıyoruz
-        return true;
-    }
-
+    getonlinestatususer();
+    getofflinestatususer();
+    getfriends();
 // Blurlama için kodlar eğer arkadaş ekle butonuna basılırsa 2 saniye blur eklendi.
 document.addEventListener('click', function(event) {
     var target = event.target;
@@ -491,11 +425,6 @@ body {
     <div class="friend-selector-container">
         <h3 class="friend-selector-header"> Friends <i class="fa-solid fa-user-group myfriends"></i>
             <select class="dropdown" onchange="userchanges(this.value)">
-                <option value="Yasin">Yasin</option>
-                <option value="Erdem">Erdem</option>
-                <option value="Onur">Onur</option>
-                <option value="Musa">Musa</option>
-                <option value="Burak">Burak</option>
             </select>
         </h3>
     </div>
@@ -516,8 +445,8 @@ body {
         <div class="additional-buttons">
             <h3 class="additional-buttons-header"> Settings <i class="fa-solid fa-gear"></i></h3>
             <button class="button invite-button"><i class="fas fa-gamepad"></i> Oyuna Davet Et</button>
-            <button class="button block-button"><i class="fas fa-times"></i> Engelle</button>
-            <button class="button add-friend-button"><i class="fas fa-user-plus"></i> Arkadaş Ekle</button>
+            <button class="button block-button" onclick="adddarklist()"><i class="fas fa-times"></i> Engelle</button>
+            <button class="button add-friend-button" onclick="addfriends()"><i class="fas fa-user-plus"></i> Arkadaş Ekle</button>
         </div>
     </div>
 </div>

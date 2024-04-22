@@ -74,7 +74,6 @@ function changePage(page) {
                 break;
             case 'chat':
                 content = chatAdd();
-                getonlinestatususer();
                 break;
             case 'publicProfile':
                 content = publicProfile();

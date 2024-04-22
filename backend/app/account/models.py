@@ -13,10 +13,15 @@ class users(models.Model):
     def __str__(self):
         return f"Username: {self.username}, Name: {self.name} {self.surname}, email: {self.email}"
 
-# class UploadedFile(models.Model):
-#     file = models.FileField(upload_to='uploads/%Y/%m/%d/')
-#     uploaded_at = models.DateTimeField(auto_now_add=True)
-#     description = models.TextField(blank=True)
+class friends(models.Model):
+    username = models.CharField(max_length=60,default='none')
+    friends = models.CharField(max_length=60,default='none')
+    def __str__(self):
+        return f"Username: {self.username}, Name: {self.friends}"
+    
 
-#     def __str__(self):
-#         return f"File id {self.id}, uploaded at {self.uploaded_at}"
+class darklist(models.Model):
+    username = models.CharField(max_length=60,default='none')
+    darkfriends = models.CharField(max_length=60,default='none')
+    def __str__(self):
+        return f"Username: {self.username}, Name: {self.darkfriends}"

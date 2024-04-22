@@ -12,7 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import render
-from .models import users
+from .models import users ,friends, darklist
 import json
 import requests
 import random
@@ -212,3 +212,70 @@ def onlineusers(request):
             return JsonResponse({'success': False, 'message': 'no unauthorized'})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'}) 
+    
+@csrf_exempt
+def offlineusers(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            offline_users = users.objects.filter(online=False)
+            offline_users_data = []
+            for user in offline_users:
+                user_data = {
+                    'username': user.username
+                }
+                offline_users_data.append(user_data)
+            return JsonResponse({'offline_users': offline_users_data})
+        else:
+            return JsonResponse({'success': False, 'message': 'no unauthorized'})
+    else:
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+
+@csrf_exempt
+def getfriends(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            friend_users = friends.objects.filter(username=data["jsonusername"])
+            friend_users_data = []
+            for user in friend_users:
+                user_data = {
+                    'username': user.friends
+                }
+                friend_users_data.append(user_data)
+            return JsonResponse({'friend_users': friend_users_data})
+        else:
+            return JsonResponse({'success': False, 'message': 'no unauthorized'})
+    else:
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+
+
+@csrf_exempt
+def friendsadd(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            friends.objects.create(
+                username=data['jsonusername'],
+                friends=data['jsonfriend']
+            )
+            return JsonResponse({'success': True, 'message': 'friend add'})
+        else:
+            return JsonResponse({'success': False, 'message': 'no unauthorized'})
+    else:
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+
+@csrf_exempt
+def darklistadd(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            darklist.objects.create(
+                username=data['jsonusername'],
+                darkfriends=data['jsondarkfriend']
+            )
+            return JsonResponse({'success': True, 'message': 'darklist add'})
+        else:
+            return JsonResponse({'success': False, 'message': 'no unauthorized'})
+    else:
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})

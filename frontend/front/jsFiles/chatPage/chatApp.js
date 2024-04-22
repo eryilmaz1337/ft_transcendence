@@ -1,7 +1,61 @@
 let socket;
 let receiver_username;
 
-function useradd(selectedValue) 
+function addfriends()
+{
+    var data = {
+        jsonsecuritykey: sessionStorage.getItem('securitykey'),
+        jsonusername: sessionStorage.getItem('username'),
+        jsonfriend: receiver_username,
+      }
+      fetch("http://localhost:8000/api/account/friendsadd/", {
+          method: 'POST', // İstek metodu
+        headers: {
+          'Content-Type': 'application/json', // İçerik tipini belirtme
+        },
+        body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
+    })
+      .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
+      .then(data => {
+          if (data) {
+            alert("add friends");
+        }else {
+            alert('Error while processing the request.');
+        }
+    })
+    .catch((error) => {
+        console.error('Hata:', error);
+    });
+}
+
+function adddarklist()
+{
+    var data = {
+        jsonsecuritykey: sessionStorage.getItem('securitykey'),
+        jsonusername: sessionStorage.getItem('username'),
+        jsondarkfriend: receiver_username,
+      }
+      fetch("http://localhost:8000/api/account/darklistadd/", {
+          method: 'POST', // İstek metodu
+        headers: {
+          'Content-Type': 'application/json', // İçerik tipini belirtme
+        },
+        body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
+    })
+      .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
+      .then(data => {
+          if (data) {
+            alert("add darklist");
+        }else {
+            alert('Error while processing the request.');
+        }
+    })
+    .catch((error) => {
+        console.error('Hata:', error);
+    });
+}
+
+function onlineuseradd(selectedValue) 
 {
     var selectElement = document.getElementsByClassName("dropdown")[0];
     var option = document.createElement("option");
@@ -10,10 +64,58 @@ function useradd(selectedValue)
     selectElement.add(option);
 }
 
-function getonlinestatususer()
+function offlineuseradd(selectedValue) 
+{
+    var selectElement = document.getElementsByClassName("dropdown")[1];
+    var option = document.createElement("option");
+    option.text = selectedValue;
+    option.value = selectedValue;
+    selectElement.add(option);
+}
+
+function frienduseradd(selectedValue) 
+{
+    var selectElement = document.getElementsByClassName("dropdown")[2];
+    var option = document.createElement("option");
+    option.text = selectedValue;
+    option.value = selectedValue;
+    selectElement.add(option);
+}
+
+function  getfriends()
 {
     var data = {
         jsonsecuritykey: sessionStorage.getItem('securitykey'),
+        jsonusername: sessionStorage.getItem('username')
+      }
+      fetch("http://localhost:8000/api/account/getfriends/", {
+          method: 'POST', // İstek metodu
+        headers: {
+          'Content-Type': 'application/json', // İçerik tipini belirtme
+        },
+        body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
+    })
+      .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
+      .then(data => {
+          if (data) {
+            const offlineUsers = data.friend_users;
+            offlineUsers.forEach(user => {
+                console.log(data);
+                frienduseradd(user.username);
+            });
+        }else {
+            alert('Error while processing the request.');
+        }
+    })
+    .catch((error) => {
+        console.error('Hata:', error);
+    });
+}
+
+function getonlinestatususer()
+{
+    var data = {
+        jsonsecuritykey: sessionStorage.getItem('securitykey')
       }
       fetch("http://localhost:8000/api/account/onlineusers/", {
           method: 'POST', // İstek metodu
@@ -29,8 +131,36 @@ function getonlinestatususer()
             onlineUsers.forEach(user => {
                 if(user.username != sessionStorage.getItem("username"))
                 {
-                    useradd(user.username);
+                    onlineuseradd(user.username);
                 }
+            });
+        }else {
+            alert('Error while processing the request.');
+        }
+    })
+    .catch((error) => {
+        console.error('Hata:', error);
+    });
+}
+
+function  getofflinestatususer()
+{
+    var data = {
+        jsonsecuritykey: sessionStorage.getItem('securitykey')
+      }
+      fetch("http://localhost:8000/api/account/offlineusers/", {
+          method: 'POST', // İstek metodu
+        headers: {
+          'Content-Type': 'application/json', // İçerik tipini belirtme
+        },
+        body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
+    })
+      .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
+      .then(data => {
+          if (data) {
+            const offlineUsers = data.offline_users;
+            offlineUsers.forEach(user => {
+                offlineuseradd(user.username);
             });
         }else {
             alert('Error while processing the request.');
