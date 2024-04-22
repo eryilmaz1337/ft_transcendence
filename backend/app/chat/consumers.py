@@ -3,6 +3,7 @@ import requests
 from asgiref.sync import sync_to_async
 from chat.models import Room, UserMessage
 import aiohttp
+import json
 # from account.views import include
 
 connected_users = {}
@@ -46,6 +47,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
                       "sender_username": self.username,
                   },
               )
+              
+    async def chat_message(self, event):
+        message = event['message']
+        sender_username = event['sender_username']
+
+        # Send message to WebSocket
+        await self.send(text_data=json.dumps({
+            'message': message,
+            'sender_username': sender_username
+        }))
 
 
     # async def connect(self):
