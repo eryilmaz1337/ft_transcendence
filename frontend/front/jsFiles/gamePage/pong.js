@@ -276,7 +276,7 @@ this.getCenter = function() {
 
     function gameLoop()
     {
-        if(window.location.hash != "#quickMatch"){
+        if(window.location.hash != "#aimode"){
             gameTheme = 0;
             gameRunning = false;
         }

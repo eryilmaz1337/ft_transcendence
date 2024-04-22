@@ -6,6 +6,7 @@ var searchlanguages = localStorage.getItem('selectedLanguage');
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    const page = window.location.hash.substring(1);
     if (window.location.search.includes('code='))
     {
         // Yetkilendirme kodunu URL'den çıkar
@@ -19,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     else
     {
-        const page = window.location.hash.substring(1);
         changePage(page || 'login'); // Eğer hash yoksa login sayfasına yönlendir
     }
 });
@@ -59,7 +59,10 @@ function changePage(page) {
             case 'game':
                 content = chooseGame();
                 break;
-            case 'quickMatch':
+            case 'tournament':
+                content = tournamentPage(); 
+                break;
+            case 'aimode':
                 console.log("quickMatch case'ine girildi");
                 content = gameAdd();
                 console.log("content gameAdd yapıldı");
@@ -71,6 +74,7 @@ function changePage(page) {
                 break;
             case 'chat':
                 content = chatAdd();
+                getonlinestatususer();
                 break;
             case 'publicProfile':
                 content = publicProfile();

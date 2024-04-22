@@ -194,3 +194,21 @@ def userauthenticator(request):
             return JsonResponse({'success': False, 'message': 'unauthorized transaction'})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'}) 
+
+@csrf_exempt
+def onlineusers(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            online_users = users.objects.filter(online=True)
+            online_users_data = []
+            for user in online_users:
+                user_data = {
+                    'username': user.username
+                }
+                online_users_data.append(user_data)
+            return JsonResponse({'online_users': online_users_data})
+        else:
+            return JsonResponse({'success': False, 'message': 'no unauthorized'})
+    else:
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'}) 

@@ -49,7 +49,7 @@ function chooseCustomGame() {
 
             .wrapper {
                 position: relative;
-                width: 490px;
+                width: 600px;
                 height: 300px;
                 background: #000;
                 box-shadow: 0 0 50px greenyellow;
@@ -84,8 +84,8 @@ function chooseGame() {
         <div class="form-wrapper">
             <form onsubmit="return false;">
                 <h3 data-translate="ponggame">🏓 Pong Game 🏓</h3>
-                <a href ="#quickMatch" class="choose-game-button" id="quickMatchButton" data-translate="quickmatch">Quick Match</a>
-                <a href ="#specialMatch" class="choose-game-button" id="specialMatchButton" onclick="specialMatchClicked()" data-translate="specialmatch">Special Match</a>
+                <a href ="#aimode" class="choose-game-button" data-translate="aimode">ai</a>
+                <a href ="#tournament" class="choose-game-button" id="specialMatchButton" data-translate="tournamentt">tournament</a>
             </form>
         </div>
     </div>
@@ -158,7 +158,7 @@ function chooseGame() {
 }
 
 function checkGameTheme() {
-    if(window.location.hash == "#quickMatch")
+    if(window.location.hash == "#aimode")
     {if(gameTheme === 0) {
        window.setTimeout(checkGameTheme, 1000); /* this checks the flag every 1000 milliseconds*/
        console.log("gameTheme 0");

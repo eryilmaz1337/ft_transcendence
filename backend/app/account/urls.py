@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 from django.views.static import serve
-from .views import singup ,singin, account42, accountdataedit, userauthenticator, upload_image
+from .views import singup ,singin, account42, accountdataedit, userauthenticator, upload_image, onlineusers
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -12,6 +12,7 @@ urlpatterns = [
     path('account-edit/', accountdataedit, name='accountdataedit'),
     path('userauthenticator/', userauthenticator, name='userauthenticator'),
     path('upload/', upload_image, name='upload_image'),
+    path('onlineusers/', onlineusers, name='onlineusers'),
     re_path(r'^api/account/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
 

@@ -475,20 +475,10 @@ body {
     <div class="person-selector-container">
         <h3 class="online-users"> Online Users <i class="fa-solid fa-user-group online"></i>
         <select class="dropdown" onchange="userchanges(this.value)">
-            <option value="John">John</option>
-            <option value="Jane">Jane</option>
-            <option value="User1">User1</option>
-            <option value="User2">User2</option>
-            <option value="User3">User3</option>
         </select>
         </h3>
         <h3 class="offline-users"> Offline Users <i class="fa-solid fa-user-group offline"></i>
         <select class="dropdown" onchange="userchanges(this.value)">
-            <option value="John">John</option>
-            <option value="Jane">Jane</option>
-            <option value="User1">User1</option>
-            <option value="User2">User2</option>
-            <option value="User3">User3</option>
         </select>
         </h3>
     </div>
@@ -526,7 +516,6 @@ body {
         </div>
     </div>
 </div>
-</head>
 
 `;
 }

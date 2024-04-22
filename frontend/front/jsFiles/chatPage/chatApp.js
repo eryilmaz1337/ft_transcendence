@@ -1,23 +1,46 @@
-
-
-// function sendMessage(receiver, message) {
-//     const data = JSON.stringify({
-//         receiver_username: receiver,
-//         message: message
-//     });
-
-//     if (websocket && websocket.readyState === WebSocket.OPEN) {
-//         websocket.send(data);
-//     } else {
-//         console.error('WebSocket is not open.');
-//     }
-// }
-
-// Mesaj gönderme örneği (konsoldan `sendMessage('kullanıcı_adı', 'Merhaba!')` şeklinde çağırılabilir)
-// sendMessage('otheruser', 'Hello there!');
-
-// WebSocket bağlantısını kapamak için `closeWebSocket()` fonksiyonu kullanılabilir.
 let socket;
+function useradd(selectedValue) 
+{
+    var selectElement = document.getElementsByClassName("dropdown")[0];
+    var option = document.createElement("option");
+    option.text = selectedValue;
+    option.value = selectedValue;
+    selectElement.add(option);
+}
+
+function getonlinestatususer()
+{
+    var data = {
+        jsonsecuritykey: sessionStorage.getItem('securitykey'),
+      }
+      fetch("http://localhost:8000/api/account/onlineusers/", {
+          method: 'POST', // İstek metodu
+        headers: {
+          'Content-Type': 'application/json', // İçerik tipini belirtme
+        },
+        body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
+    })
+      .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
+      .then(data => {
+          if (data) {
+            const onlineUsers = data.online_users;
+            onlineUsers.forEach(user => {
+                if(user.username != sessionStorage.getItem("username"))
+                {
+                    console.log(user.username);
+                    useradd(user.username);
+                }
+            });
+        }else {
+            alert('Error while processing the request.');
+        }
+    })
+    .catch((error) => {
+        console.error('Hata:', error);
+    });
+}
+
+
 
 function con()
 {
