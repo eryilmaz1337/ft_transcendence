@@ -205,17 +205,38 @@ function userchanges(name)
     const chatInput = document.getElementById('chat-text');
     const chatHeader = document.getElementById('chat-header');
     const myUsername = sessionStorage.getItem('username');
-    chatHeader.innerText = `${myUsername}'s chatting...`;
+    chatHeader.innerText = `${myUsername} is chatting with ${name}`;
     chatHeader.style.color = 'greenyellow';
     chatInput.placeholder = `Type to ${name}...`;
     receiver_username = name;
+
+    loadMessages(myUsername, name);
 }
 
-function clearmessage()
-{
-    const chat = document.getElementById('chat');
-    chat.innerHTML = '';
+function loadMessages(sender, receiver) {
+    const chatMessages = document.getElementById('chat');
+    chatMessages.innerHTML = ''; // Clear the chat window first
+
+    let storedMessages = JSON.parse(sessionStorage.getItem('messages')) || {};
+    let messageKey = `${sender}_${receiver}`;
+    let reverseMessageKey = `${receiver}_${sender}`; // To load messages sent by the other user as well
+
+    let messagesToShow = (storedMessages[messageKey] || []).concat(storedMessages[reverseMessageKey] || []);
+    messagesToShow.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)); // Sort messages by timestamp
+
+    messagesToShow.forEach(message => {
+        displayMessage(message);
+    });
+
+    console.log(storedMessages);
 }
+
+
+// function clearmessage()
+// {
+//     const chat = document.getElementById('chat');
+//     chat.innerHTML = '';
+// }
 
 function createChatMessageElementReceiver(message) {
     const now = new Date();
@@ -236,13 +257,6 @@ function createChatMessageElement(message) {
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const myUsername = sessionStorage.getItem('username');
-    // const name = sessionStorage.getItem('name');
-    // let backgroundColor;
-
-    // if (myUsername === name)
-    //     backgroundColor = 'blue-bg';
-    // else
-    //     backgroundColor = 'gray-bg';
     return `
     <div class="message blue-bg" style="width: 100%; display: flex; justify-content: flex-end;">
         <div class = "message-sender">${sessionStorage.getItem('username')}</div>
@@ -252,16 +266,22 @@ function createChatMessageElement(message) {
     `;
 }
 
-
 function sendMessage()
 {
     const message_text = document.getElementById("chat-text").value;
     if(!message_text)
         return;
-    
+
+    if(!receiver_username){
+        alert("Seçili kullanıcı yok");
+        return; 
+    }
+    const myUsername = sessionStorage.getItem('username');
     const messageData = {
+        sender: myUsername,
         receiver_username: receiver_username,
         message: message_text,
+        timestamp: new Date().toISOString(),
     };
 
     if (socket && socket.readyState === WebSocket.OPEN) {
@@ -270,8 +290,33 @@ function sendMessage()
         console.error('WebSocket is not open.');
     }
 
+    // Session Storage'a kaydetme
+    let storedMessages = JSON.parse(sessionStorage.getItem('messages')) || {};
+    let messageKey = `${myUsername}_${receiver_username}`;
+    let messages = storedMessages[messageKey] || [];
+    messages.push(messageData);
+    storedMessages[messageKey] = messages;
+    sessionStorage.setItem('messages', JSON.stringify(storedMessages));
+    
+    //saveMessageToSessionStorage(messageData);
+    displayMessage(messageData);
+}
+
+// function saveMessageToSessionStorage(message) {
+//     let storedMessages = JSON.parse(sessionStorage.getItem('messages')) || {};
+//     let messageKey = `${message.sender}_${message.receiver}`;
+
+//     if (!storedMessages[messageKey]) {
+//         storedMessages[messageKey] = [];
+//     }
+
+//     storedMessages[messageKey].push(message);
+//     sessionStorage.setItem('messages', JSON.stringify(storedMessages));
+// }
+
+function displayMessage(message) {
     const chatMessages = document.getElementById('chat');
-    chatMessages.innerHTML += createChatMessageElement(messageData);
-    document.getElementById("chat-text").value='';
+    chatMessages.innerHTML += createChatMessageElement(message);
+    document.getElementById("chat-text").value = '';
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }

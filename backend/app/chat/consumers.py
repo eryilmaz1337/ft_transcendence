@@ -35,8 +35,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # WebSocket'ten veri alındığında çalışacak kod
     async def receive(self, text_data):
           data = json.loads(text_data)
+          sender_username = data['sender']
           receiver_username = data['receiver_username']
           message = data['message']
+          timestamp = data['timestamp']
           receiver_channel_name = connected_users.get(receiver_username)
           if receiver_channel_name:
               await self.channel_layer.send(
@@ -44,18 +46,21 @@ class ChatConsumer(AsyncWebsocketConsumer):
                   {
                       "type": "chat.message",
                       "message": message,
-                      "sender_username": self.username,
+                      "sender_username": sender_username,
+                      "timestamp": timestamp,
                   },
               )
               
     async def chat_message(self, event):
         message = event['message']
         sender_username = event['sender_username']
+        timestamp = event['timestamp']
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
             'message': message,
-            'sender_username': sender_username
+            'sender_username': sender_username,
+            'timestamp': timestamp,
         }))
 
 
