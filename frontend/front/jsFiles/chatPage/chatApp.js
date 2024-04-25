@@ -1,6 +1,6 @@
 let socket;
 let receiver_username;
-
+let showm;
 function addfriends()
 {
     var data = {
@@ -57,6 +57,7 @@ function adddarklist()
 
 function onlineuseradd(selectedValue) 
 {
+    showm = false;
     var selectElement = document.getElementsByClassName("dropdown")[0];
     var option = document.createElement("option");
     option.text = selectedValue;
@@ -171,8 +172,6 @@ function  getofflinestatususer()
     });
 }
 
-
-
 function con()
 {
     const roomSlug = sessionStorage.getItem("securitykey");
@@ -194,9 +193,29 @@ function con()
         console.log('JS | Received message from server:', event.data);
         const messageData = JSON.parse(event.data);
         console.log(messageData);
-        const chatMessages = document.getElementById('chat');
-        chatMessages.innerHTML += createChatMessageElementReceiver(messageData);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        if(messageData.sender_username == receiver_username && showm == true)
+        {
+            const chatMessages = document.getElementById('chat');
+            chatMessages.innerHTML += createChatMessageElementReceiver(messageData);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        else
+        {
+            const myUsername = messageData.sender_username;
+            const messageDataadd = 
+            {
+                sender: myUsername,
+                receiver_username: sessionStorage.getItem('username'),
+                message: messageData.message,
+                timestamp: new Date().toISOString(),
+            };
+            let storedMessages = JSON.parse(sessionStorage.getItem('messages')) || {};
+            let messageKey = `${myUsername}_${sessionStorage.getItem('username')}`;
+            let messages = storedMessages[messageKey] || [];
+            messages.push(messageDataadd);
+            storedMessages[messageKey] = messages;
+            sessionStorage.setItem('messages', JSON.stringify(storedMessages));
+        }
     });
 }
 
@@ -209,14 +228,14 @@ function userchanges(name)
     chatHeader.style.color = 'greenyellow';
     chatInput.placeholder = `Type to ${name}...`;
     receiver_username = name;
+    showm = true;
 
     loadMessages(myUsername, name);
 }
 
-function loadMessages(sender, receiver) {
-    const chatMessages = document.getElementById('chat');
-    chatMessages.innerHTML = ''; // Clear the chat window first
-
+function loadMessages(sender, receiver) 
+{
+    clearmessage(); // Clear the chat window first
     let storedMessages = JSON.parse(sessionStorage.getItem('messages')) || {};
     let messageKey = `${sender}_${receiver}`;
     let reverseMessageKey = `${receiver}_${sender}`; // To load messages sent by the other user as well
@@ -225,45 +244,56 @@ function loadMessages(sender, receiver) {
     messagesToShow.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)); // Sort messages by timestamp
 
     messagesToShow.forEach(message => {
-        displayMessage(message);
+        displayMessager(message,receiver_username);
     });
-
-    console.log(storedMessages);
 }
 
 
-// function clearmessage()
-// {
-//     const chat = document.getElementById('chat');
-//     chat.innerHTML = '';
-// }
+function clearmessage()
+{
+    const chat = document.getElementById('chat');
+    chat.innerHTML = '';
+}
 
 function createChatMessageElementReceiver(message) {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
+    // const now = new Date();
+    // const hours = now.getHours().toString().padStart(2, '0');
+    // const minutes = now.getMinutes().toString().padStart(2, '0');
 
     return `
     <div class="message gray-bg" style="width: 100%; display: flex; justify-content: flex-end;">
-        <div class = "message-sender">${receiver_username}</div>
+        <div class = "message-sender">${message.sender_username}</div>
         <div class="message-text">${message.message}</div>
-        <div class="message-timestamp" style="text-align: right;">${hours}:${minutes}</div>
-    </div>
-    `;
+        </div>
+        `;
+        // <div class="message-timestamp" style="text-align: right;">${hours}:${minutes}</div>
+}
+
+function createChatMessageElementReceiverr(message,rusername) {
+    // const now = new Date();
+    // const hours = now.getHours().toString().padStart(2, '0');
+    // const minutes = now.getMinutes().toString().padStart(2, '0');
+
+    return `
+    <div class="message gray-bg" style="width: 100%; display: flex; justify-content: flex-end;">
+        <div class = "message-sender">${rusername}</div>
+        <div class="message-text">${message.message}</div>
+        </div>
+        `;
+        // <div class="message-timestamp" style="text-align: right;">${hours}:${minutes}</div>
 }
 
 function createChatMessageElement(message) {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
-    const myUsername = sessionStorage.getItem('username');
     return `
     <div class="message blue-bg" style="width: 100%; display: flex; justify-content: flex-end;">
         <div class = "message-sender">${sessionStorage.getItem('username')}</div>
         <div class="message-text">${message.message}</div>
-        <div class="message-timestamp" style="text-align: right;">${hours}:${minutes}</div>
-    </div>
-    `;
+        </div>
+        `;
+        // <div class="message-timestamp" style="text-align: right;">${hours}:${minutes}</div>
 }
 
 function sendMessage()
@@ -314,9 +344,18 @@ function sendMessage()
 //     sessionStorage.setItem('messages', JSON.stringify(storedMessages));
 // }
 
-function displayMessage(message) {
+function displayMessage(message) 
+{
     const chatMessages = document.getElementById('chat');
     chatMessages.innerHTML += createChatMessageElement(message);
+    document.getElementById("chat-text").value = '';
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function displayMessager(message,rusername) 
+{
+    const chatMessages = document.getElementById('chat');
+    chatMessages.innerHTML += createChatMessageElementReceiverr(message,rusername);
     document.getElementById("chat-text").value = '';
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
