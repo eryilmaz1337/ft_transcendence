@@ -1,5 +1,24 @@
 let gameRunning = false;
 
+var roomName = "exampleRoom";
+var soket = new WebSocket(`ws://localhost:8000/ws/game/${roomName}/`);
+
+soket.onopen = function() {
+    console.log('Connected to the game room:', roomName);
+};
+
+soket.onmessage = function(event) {
+    console.log('Received message:', event.data);
+};
+
+soket.onclose = function() {
+    console.log('Disconnected from the game room');
+};
+
+soket.onerror = function(error) {
+    console.error('WebSocket error:', error);
+};
+
 function startgame()
 {
     console.log(">"+window.location.hash+"<");
@@ -50,7 +69,7 @@ function startgame()
         return{x: x, y: y};
     }
 
-    function Ball(pos, velocity, radius)
+    function Ball(pos, velocity, radius) // burda ada topun konumu al ve gönder
     {
         this.pos = pos;
         this.velocity = velocity;
@@ -59,6 +78,9 @@ function startgame()
         this.update = function() {
             this.pos.x += this.velocity.x;
             this.pos.y += this.velocity.y;
+
+            // Topun yeni pozisyonunu sunucuya gönder
+            soket.send(JSON.stringify({ type: 'ballMove', x: this.pos.x, y: this.pos.y }));
         };
 
         this.draw = function()
@@ -73,40 +95,43 @@ function startgame()
 
     }
 
-function Paddle(pos, velocity, width, height) {
-this.pos = pos;
-this.velocity = velocity;
-this.width = width;
-this.height = height;
-this.score = 0;
+    function Paddle(pos, velocity, width, height) {
+        this.pos = pos;
+        this.velocity = velocity;
+        this.width = width;
+        this.height = height;
+        this.score = 0;
+        
+        this.update = function() { // burda soket e gönder basışı
+            if (keysPressed[KEY_UP])
+                this.pos.y -= this.velocity.y;
+            if (keysPressed[KEY_DOWN])
+                this.pos.y += this.velocity.y;
+        
+            // Pozisyon güncellendikten sonra, sunucuya gönder
+            soket.send(JSON.stringify({ type: 'paddleMove', y: this.pos.y }));
+        };
 
-this.update = function() {
-    if (keysPressed[KEY_UP])
-        this.pos.y -= this.velocity.y;
-    if (keysPressed[KEY_DOWN])
-        this.pos.y += this.velocity.y;
-};
+        this.draw = function() {
+            ctx.fillStyle = gameBGColor;
+            ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
+        };
 
-this.draw = function() {
-    ctx.fillStyle = gameBGColor;
-    ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
-};
+        this.getHalfWidth = function() {
+            return this.width / 2;
+        };
 
-this.getHalfWidth = function() {
-    return this.width / 2;
-};
+        this.getHalfHeight = function() {
+            return this.height / 2;
+        };
 
-this.getHalfHeight = function() {
-    return this.height / 2;
-};
-
-this.getCenter = function() {
-    return {
-        x: this.pos.x + this.getHalfWidth(),
-        y: this.pos.y + this.getHalfHeight()
-    };
-};
-}
+        this.getCenter = function() {
+            return {
+                x: this.pos.x + this.getHalfWidth(),
+                y: this.pos.y + this.getHalfHeight()
+            };
+        };
+    }
 
     function paddleCollisionWithTheEdges(paddle)
     {
@@ -133,7 +158,7 @@ this.getCenter = function() {
             ball.velocity.x *= -1;
     }
 
-    function player2AI(ball,paddle)
+    function player2AI(ball,paddle) // gelen veri için kullan burda gelen veri işle ve konum güncellemesini yap
     {
         if (ball.velocity.x > 0)
         {
@@ -178,6 +203,11 @@ this.getCenter = function() {
         {
             paddle2.score++;
             document.getElementById('player2Score').innerHTML = paddle2.score;
+
+            // Skor güncellemesini sunucuya gönder
+            // Skor güncellemesini sunucuya gönder
+            soket.send(JSON.stringify({ type: 'scoreUpdate', player2Score: paddle2.score }));
+
             if (paddle2.score == 3){
                 gameRunning = false;
                 window.location.hash = 'game';
@@ -193,6 +223,11 @@ this.getCenter = function() {
         {
             paddle1.score++;
             document.getElementById('player1Score').innerHTML = paddle1.score;
+
+            // Skor güncellemesini sunucuya gönder
+            // Skor güncellemesini sunucuya gönder
+            soket.send(JSON.stringify({ type: 'scoreUpdate', player1Score: paddle1.score }));
+
             if (paddle1.score == 3){
                 gameRunning = false;
                 window.location.hash = 'game';

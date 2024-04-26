@@ -1,6 +1,7 @@
 function chooseCustomGame() {
     return `
     <div id="game-container">
+        <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
         <div class="wrapper">
         <div class="form-wrapper">
             <form onsubmit="return false;">
