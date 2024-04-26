@@ -53,6 +53,8 @@ services:
     restart: always
     depends_on:
       - database
+    env_file:
+      - ./app/.env
 
   frontend:
     container_name: frontend

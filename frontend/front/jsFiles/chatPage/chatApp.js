@@ -359,3 +359,11 @@ function displayMessager(message,rusername)
     document.getElementById("chat-text").value = '';
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+
+//Oyuna Davet Kısmı
+
+function oyunadavet() {
+    var selectedUser = document.querySelector(".dropdown").value; // Assuming dropdown has user ids/names
+    var message = { type: "invite", from: currentUser, to: selectedUser };
+    soket.send(JSON.stringify(message)); // Send invitation over WebSocket
+}
