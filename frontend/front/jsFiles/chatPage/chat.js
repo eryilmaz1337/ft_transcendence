@@ -299,6 +299,7 @@ body {
 .friend-selector-container h3 {
     margin-bottom: 0.5em;
     color: #fff;
+   
 }
 
 .friend-selector {
@@ -411,23 +412,33 @@ body {
 </head>
 <div class="container">
 
-    <div class="person-selector-container">
-        <h3 class="online-users"> Online Users <i class="fa-solid fa-user-group online"></i>
-        <select class="dropdown" onchange="userchanges(this.value)">
-        </select>
-        </h3>
-        <h3 class="offline-users"> Offline Users <i class="fa-solid fa-user-group offline"></i>
-        <select class="dropdown" onchange="userchanges(this.value)">
-        </select>
-        </h3>
-    </div>
-
+<div class="person-selector-container">
+<h3 class="online-users">
+    <span data-translate="onlineusers">Online Users</span> <!-- Çevrilmek üzere metni buraya ekledim -->
+    <i class="fa-solid fa-user-group online"></i> <!-- İkona burada sahip çıktım -->
+</h3>
+<select class="dropdown" onchange="userchanges(this.value)">
+    <!-- Kombobox burada -->
+</select>
+</h3>
+<h3 class="offline-users">
+    <span data-translate="offlineusers">Offline Users</span> <!-- Çevrilmek üzere metni buraya ekledim -->
+    <i class="fa-solid fa-user-group offline"></i> <!-- İkona burada sahip çıktım -->
+</h3>
+<select class="dropdown" onchange="userchanges(this.value)">
+    <!-- Kombobox burada -->
+</select>
+</h3>
+</div>
     <div class="friend-selector-container">
-        <h3 class="friend-selector-header"> Friends <i class="fa-solid fa-user-group myfriends"></i>
-            <select class="dropdown" onchange="userchanges(this.value)">
-            </select>
-        </h3>
-    </div>
+    <h3 class="friend-selector-header">
+        <span data-translate="addfriend">Friends</span> <!-- Arkadaş ekle metnini buraya ekledim -->
+        <i class="fa-solid fa-user-group myfriends"></i> <!-- İkona burada sahip çıktım -->
+    </h3>
+    <select class="dropdown" onchange="userchanges(this.value)">
+        <!-- Kombobox burada -->
+    </select>
+</div>
 
     <div class="chat-container">
         <div class="chat-header-horizontal-container">
@@ -437,17 +448,18 @@ body {
         <div id="chat" class="chat-messages"></div>
         <form class="chat-input-form">
             <input id="chat-text" type="text" class="chat-input" required placeholder="Type here..." />
-            <button type="submit" class="button send-button" onclick="sendMessage()">Send</button>
-            <button type="button" class="clear-message-button" onclick="clearmessage()">Clear Chat <i class="fa-solid fa-comment-slash"></i></button>
+            <button type="submit" class="button send-button" onclick="sendMessage()" data-translate="chatmesajgonder">Send</button>
+            <button type="button" class="clear-message-button" onclick="clearmessage()" data-translate="chattemizle">Clear Chat <i class="fa-solid fa-comment-slash"></i></button>
         </form>
 
         <!-- Settings Kısmı -->
+        
         <div class="additional-buttons">
-            <h3 class="additional-buttons-header"> Settings <i class="fa-solid fa-gear"></i></h3>
-            <button class="button invite-button"><i class="fas fa-gamepad"></i> Oyuna Davet Et</button>
-            <button class="button block-button" onclick="adddarklist()"><i class="fas fa-times"></i> Engelle</button>
-            <button class="button add-friend-button" onclick="addfriends()"><i class="fas fa-user-plus"></i> Arkadaş Ekle</button>
-        </div>
+        <h3 class="additional-buttons-header" data-translate="chatsettings"> Settings <i class="fa-solid fa-gear"></i></h3>
+        <button class="button invite-button" data-translate="addgameuser"><i class="fas fa-gamepad"></i><span data-translate="addgameuser"> Oyuna Davet Et</span></button>
+        <button class="button block-button" data-translate="blockuser" onclick="adddarklist()"><i class="fas fa-times"></i><span data-translate="blockuser"> Engelle</span></button>
+        <button class="button add-friend-button" data-translate="addfriend" onclick="addfriends()"><i class="fas fa-user-plus"></i><span data-translate="addfriend"> Arkadaş Ekle</span></button>
+    </div>
     </div>
 </div>
 

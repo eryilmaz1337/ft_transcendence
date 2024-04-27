@@ -113,7 +113,7 @@ function chooseGame() {
             .choose-game-button {
                 text-decoration: none;
                 padding: 10px 20px;
-                font-size: 18px;
+                font-size: 17px;
                 border: none;
                 border-radius: 20px;
                 cursor: pointer;

@@ -5,14 +5,11 @@ function tournamentPage() {
             <div class="form-wrapper">
                 <form onsubmit="return false;">
                     <h3 data-translate="turnuvaolustur">Turnuva Oluştur</h3>
-                    <input type="text" placeholder="Turnuva Adı"/>
-                    <br/>
-                    <a href ="#quickMatch" class="choose-game-button" id="quickMatchButton" data-translate="turnuvaolusturbuton">Quick Match</a>
-                    <br/>
-                    <br/>
+                   
+                
                     <input type="text" placeholder="Oyuncu Adı"/>
                   
-                    <a href ="#quickMatch" class="eklebutton" id="quickMatchButton" data-translate="oyuncuekle"></a>
+                    <a href ="#quickMatch" class="choose-game-button2" id="quickMatchButton" data-translate="oyuncuekle">Start Tournament</a>
                     
                 </form>
             </div>
@@ -30,7 +27,9 @@ function tournamentPage() {
                     </ul>
                 </form>
             </div>
+            
             <a href ="#quickMatch" class="choose-game-button2" id="quickMatchButton" data-translate="TurnuvaStart">Start Tournament</a>
+
         </div>
     </div>
 

@@ -103,19 +103,19 @@ function publicProfile() {
 
                 <div class="field-wrapper">
                 <!-- Username -->
-                    <label for="username">Username:</label>
+                    <label for="username" data-translate="profileusername">Username:</label>
                     <input type="text" id="username" name="username" value="${sessionStorage.getItem('username')}" readonly>
                 <!-- Email -->
-                    <label for="email">Email:</label>
+                    <label for="email"  data-translate="profileemail">Email:</label>
                     <input type="email" id="email" name="email" value="${sessionStorage.getItem('email')}" readonly>
                 </div>
 
                 <div class="field-wrapper">
                 <!-- First Name -->
-                    <label for="first-name">First Name:</label>
+                    <label for="first-name" data-translate="profilefirstname">First Name:</label>
                     <input type="text" id="first-name" name="first-name" value="${sessionStorage.getItem('name')}" readonly>
                 <!-- Last Name -->
-                    <label for="last-name">Last Name:</label>
+                    <label for="last-name" data-translate="profilelastname">Last Name:</label>
                     <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('surname')}" readonly>
                 </div>
                     <div class="form-wrapper">
