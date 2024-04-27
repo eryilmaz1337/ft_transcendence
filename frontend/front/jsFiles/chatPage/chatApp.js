@@ -261,10 +261,6 @@ function clearmessage()
 }
 
 function createChatMessageElementReceiver(message) {
-    // const now = new Date();
-    // const hours = now.getHours().toString().padStart(2, '0');
-    // const minutes = now.getMinutes().toString().padStart(2, '0');
-
     return `
     <div class="message gray-bg" style="width: 100%; display: flex; justify-content: flex-end;">
         <div class = "message-sender">${message.sender_username}</div>
@@ -275,10 +271,6 @@ function createChatMessageElementReceiver(message) {
 }
 
 function createChatMessageElementReceiverr(message,rusername) {
-    // const now = new Date();
-    // const hours = now.getHours().toString().padStart(2, '0');
-    // const minutes = now.getMinutes().toString().padStart(2, '0');
-
     return `
     <div class="message gray-bg" style="width: 100%; display: flex; justify-content: flex-end;">
         <div class = "message-sender">${rusername}</div>
@@ -289,9 +281,6 @@ function createChatMessageElementReceiverr(message,rusername) {
 }
 
 function createChatMessageElement(message) {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
     return `
     <div class="message blue-bg" style="width: 100%; display: flex; justify-content: flex-end;">
         <div class = "message-sender">${sessionStorage.getItem('username')}</div>
@@ -311,6 +300,7 @@ function sendMessage()
         alert("Seçili kullanıcı yok");
         return;
     }
+
     const myUsername = sessionStorage.getItem('username');
     const messageData = {
         sender: myUsername,
@@ -333,21 +323,8 @@ function sendMessage()
     storedMessages[messageKey] = messages;
     sessionStorage.setItem('messages', JSON.stringify(storedMessages));
 
-    //saveMessageToSessionStorage(messageData);
     displayMessage(messageData);
 }
-
-// function saveMessageToSessionStorage(message) {
-//     let storedMessages = JSON.parse(sessionStorage.getItem('messages')) || {};
-//     let messageKey = `${message.sender}_${message.receiver}`;
-
-//     if (!storedMessages[messageKey]) {
-//         storedMessages[messageKey] = [];
-//     }
-
-//     storedMessages[messageKey].push(message);
-//     sessionStorage.setItem('messages', JSON.stringify(storedMessages));
-// }
 
 function displayMessage(message)
 {
@@ -378,9 +355,28 @@ function displayMessager(message,rusername)
 }
 
 //Oyuna Davet Kısmı
-
 function oyunadavet() {
-    var selectedUser = document.querySelector(".dropdown").value; // Assuming dropdown has user ids/names
-    var message = { type: "invite", from: currentUser, to: selectedUser };
-    soket.send(JSON.stringify(message)); // Send invitation over WebSocket
+    const message_text = `<a href="#onevsone" return false;">SENİ OYUNA DAVET EDİYORUM</a>`;
+    const myUsername = sessionStorage.getItem('username');
+    const messageData = {
+        sender: myUsername,
+        receiver_username: receiver_username,
+        message: message_text,
+        timestamp: new Date().toISOString(),
+    };
+
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify(messageData));
+    } else {
+        console.error('WebSocket is not open.');
+    }
+    // Session Storage'a kaydetme
+    let storedMessages = JSON.parse(sessionStorage.getItem('messages')) || {};
+    let messageKey = `${myUsername}_${receiver_username}`;
+    let messages = storedMessages[messageKey] || [];
+    messages.push(messageData);
+    storedMessages[messageKey] = messages;
+    sessionStorage.setItem('messages', JSON.stringify(storedMessages));
+
+    displayMessage(messageData);
 }

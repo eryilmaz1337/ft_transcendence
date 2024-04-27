@@ -459,7 +459,7 @@ body {
         
         <div class="additional-buttons">
         <h3 class="additional-buttons-header" data-translate="chatsettings"> Settings <i class="fa-solid fa-gear"></i></h3>
-        <button class="button invite-button" data-translate="addgameuser"><i class="fas fa-gamepad"></i><span data-translate="addgameuser"> Oyuna Davet Et</span></button>
+        <button class="button invite-button" data-translate="addgameuser" onclick="oyunadavet()"><i class="fas fa-gamepad"></i><span data-translate="addgameuser"> Oyuna Davet Et</span></button>
         <button class="button block-button" data-translate="blockuser" onclick="adddarklist()"><i class="fas fa-times"></i><span data-translate="blockuser"> Engelle</span></button>
         <button class="button add-friend-button" data-translate="addfriend" onclick="addfriends()"><i class="fas fa-user-plus"></i><span data-translate="addfriend"> Arkadaş Ekle</span></button>
     </div>
