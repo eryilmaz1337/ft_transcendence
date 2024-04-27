@@ -86,7 +86,10 @@ function checkGameTheme() {
     } 
     else {
         console.log("gameTheme= "+gameTheme);
-        startgame();
+        if(window.location.hash == "#aimode")
+            startgame();
+        else
+            startgameone();
     }}
     return;
 }

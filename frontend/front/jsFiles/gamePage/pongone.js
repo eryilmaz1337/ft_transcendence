@@ -1,8 +1,8 @@
-let gameRunning = false;
+let gameRunningone = false;
 
-function startgame()
+function startgameone()
 {
-    gameRunning = true;
+    gameRunningone = true;
 
     const canvas = document.getElementById("canvas");
     if (!canvas) {
@@ -23,6 +23,8 @@ function startgame()
     const keysPressed = [];
     const KEY_UP = 38;
     const KEY_DOWN = 40;
+    const KEY_UP_P = 87;
+    const KEY_DOWN_P = 83;
 
     function showWelcomeText() {
         welcomeText.style.visibility = 'visible';
@@ -72,18 +74,28 @@ function startgame()
 
     }
 
-    function Paddle(pos, velocity, width, height) {
+    function Paddle(pos, velocity, width, height,player) {
         this.pos = pos;
         this.velocity = velocity;
         this.width = width;
         this.height = height;
         this.score = 0;
         
-        this.update = function() { 
-            if (keysPressed[KEY_UP])
-                this.pos.y -= this.velocity.y;
-            if (keysPressed[KEY_DOWN])
-                this.pos.y += this.velocity.y;
+        this.update = function() {
+            if(player == "player2")
+            {
+                if (keysPressed[KEY_UP])
+                    this.pos.y -= this.velocity.y;
+                if (keysPressed[KEY_DOWN])
+                    this.pos.y += this.velocity.y;
+            }
+            if(player == "player1")
+            {
+                if (keysPressed[KEY_UP_P])
+                    this.pos.y -= this.velocity.y;
+                if (keysPressed[KEY_DOWN_P])
+                    this.pos.y += this.velocity.y;
+            }
         };
 
         this.draw = function() {
@@ -132,28 +144,6 @@ function startgame()
             ball.velocity.x *= -1;
     }
 
-    function player2AI(ball,paddle) // gelen veri için kullan burda gelen veri işle ve konum güncellemesini yap
-    {
-        if (ball.velocity.x > 0)
-        {
-            if (ball.pos.y > paddle.pos.y)
-            {
-                paddle.pos.y += paddle.velocity.y;
-
-                if (paddle.pos.y + paddle.height >= canvas.height)
-                    paddle.pos.y = canvas.height - paddle.height;
-            }
-
-            if (ball.pos.y < paddle.pos.y)
-            {
-                paddle.pos.y -= paddle.velocity.y;
-
-                if (paddle.pos.y <= 0)
-                    paddle.pos.y = 0;
-            }
-        }
-    }
-
     function respawnBall(ball)
     {
         if (ball.velocity.x > 0)
@@ -179,14 +169,14 @@ function startgame()
             document.getElementById('player2Score').innerHTML = paddle2.score;
 
             if (paddle2.score == 3){
-                gameRunning = false;
+                gameRunningone = false;
                 window.location.hash = 'game';
                 paddle2.score = 0;
                 paddle1.score = 0;
                 return;
             }
             respawnBall(ball);
-            gameRunning = true;
+            gameRunningone = true;
         }
 
         if (ball.pos.x >= canvas.width + ball.radius)
@@ -195,14 +185,14 @@ function startgame()
             document.getElementById('player1Score').innerHTML = paddle1.score;
 
             if (paddle1.score == 3){
-                gameRunning = false;
+                gameRunningone = false;
                 window.location.hash = 'game';
                 paddle1.score = 0;
                 paddle2.score = 0;
                 return;
             }
             respawnBall(ball);
-            gameRunning = true;
+            gameRunningone = true;
         }
     }
 
@@ -249,8 +239,8 @@ function startgame()
     }
 
     const ball = new Ball(vec2(200,200), vec2(10, 10), 20);
-    const paddle1 = new Paddle(vec2(0,50), vec2(15, 15), 20, 100);
-    const paddle2 = new Paddle(vec2(canvas.width - 20, 30), vec2(15, 15), 20, 100);
+    const paddle1 = new Paddle(vec2(0,50), vec2(15, 15), 20, 100, "player2");
+    const paddle2 = new Paddle(vec2(canvas.width - 20, 50), vec2(15, 15), 20, 100, "player1");
 
     // paddle1.score = 0;
     // paddle2.score = 0; -> Asenkron çalışma var.
@@ -259,9 +249,10 @@ function startgame()
     {
         ball.update();
         paddle1.update();
+        paddle2.update();
         paddleCollisionWithTheEdges(paddle1);
+        paddleCollisionWithTheEdges(paddle2);
         ballCallisionWithTheEdges(ball);
-        player2AI(ball,paddle2);
         ballPaddleCollision(ball,paddle1);
         ballPaddleCollision(ball,paddle2);
         increaseScore(ball,paddle1,paddle2);
@@ -277,11 +268,11 @@ function startgame()
 
     function gameLoop()
     {
-        if(window.location.hash != "#aimode"){
+        if(window.location.hash != "#onevsone"){
             gameTheme = 0;
-            gameRunning = false;
+            gameRunningone = false;
         }
-        if (!gameRunning)
+        if (!gameRunningone)
             return;
 
         /* ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
