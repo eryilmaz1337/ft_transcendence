@@ -3,7 +3,6 @@ import requests
 from asgiref.sync import sync_to_async
 import aiohttp
 import json
-# from account.views import include
 
 connected_users = {}
 
