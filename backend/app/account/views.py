@@ -17,7 +17,7 @@ import json
 import requests
 import random
 import string
-
+import os
 
 def generate_random_string():
     length=42
@@ -74,8 +74,8 @@ def account42(request):
         if authorization_code:
             # Yetkilendirme kodunu kullanarak access_token al
             token_url = 'https://api.intra.42.fr/oauth/token'
-            client_id = 'u-s4t2ud-1c2cdbd5f93bbb10f5c88928250742cd0f34b7404d28cf9db6ce0a7ec31ae127'
-            client_secret = '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'
+            client_id = os.getenv('CLIENT_ID')
+            client_secret = os.getenv('CLIENT_SECRET')
             redirect_uri = 'http://localhost:423'
             grant_type = 'authorization_code'
             

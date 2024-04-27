@@ -10,3 +10,4 @@ djangorestframework==3.12.4
 Pillow
 aiohttp
 python-decouple>=3.4
+python-dotenv
