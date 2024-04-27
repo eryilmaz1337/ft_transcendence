@@ -30,7 +30,7 @@ function addplayer()
     else
     {
         alert("Tüm Slotlar Dolu");
-        document.getElementById("addtext").value = ''; 
+        document.getElementById("addtext").value = '';
     }
     
 }
