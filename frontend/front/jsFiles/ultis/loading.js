@@ -2,7 +2,7 @@ function loading() {
     return `
 			<style>
 				.background {
-					background-image: url('img/loading-page1.gif');
+					background-color: black;
 					background-size: cover; /* contain */
 					background-position: center;
 					background-repeat: no-repeat;
@@ -14,6 +14,8 @@ function loading() {
 				}
 			</style>
 
-			<div class="background"></div>
+			<div class="background">
+			<img src="../img/loading-page1.gif">
+			</div>
 		`;
 }
