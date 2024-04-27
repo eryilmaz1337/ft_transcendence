@@ -16,9 +16,11 @@ function accountsave(accessToken)
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
+            if (xhr.status === 200) 
+            {
                 const data = JSON.parse(xhr.responseText);
-                if (data) {
+                if (data)
+                {
                     sessionStorage.setItem('username', data.username);
                     sessionStorage.setItem('name', data.name);
                     sessionStorage.setItem('surname', data.surname);

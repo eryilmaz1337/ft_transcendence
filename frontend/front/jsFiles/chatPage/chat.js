@@ -417,7 +417,7 @@ body {
     <span data-translate="onlineusers">Online Users</span> <!-- Çevrilmek üzere metni buraya ekledim -->
     <i class="fa-solid fa-user-group online"></i> <!-- İkona burada sahip çıktım -->
 </h3>
-<select class="dropdown" onchange="userchanges(this.value)">
+<select class="dropdown" onchange=" (this.value)">
     <option value="">seçiniz</option>
     <!-- Kombobox burada -->
 </select>

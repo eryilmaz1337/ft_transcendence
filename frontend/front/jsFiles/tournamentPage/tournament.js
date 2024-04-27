@@ -1,3 +1,40 @@
+function addplayer()
+{
+    const player1 = document.getElementById("player1");
+    const player2 = document.getElementById("player2");
+    const player3 = document.getElementById("player3");
+    const player4 = document.getElementById("player4");
+    const text = document.getElementById("addtext").value;
+    if(!text)
+        return;
+    if(player1.textContent === 'Player 1')
+    {
+        player1.textContent = text;
+        document.getElementById("addtext").value = ''; 
+    }
+    else if(player2.textContent == "Player 2")
+    {
+        player2.textContent = text;
+        document.getElementById("addtext").value = '';
+    }
+    else if(player3.textContent == "Player 3")
+    {
+        player3.textContent = text;
+        document.getElementById("addtext").value = '';
+    }
+    else if(player4.textContent == "Player 4")
+    {
+        player4.textContent = text;
+        document.getElementById("addtext").value = ''; 
+    }
+    else
+    {
+        alert("Tüm Slotlar Dolu");
+        document.getElementById("addtext").value = ''; 
+    }
+    
+}
+
 function tournamentPage() {
     return `
     <div id="game-container">
@@ -6,10 +43,9 @@ function tournamentPage() {
                 <form onsubmit="return false;">
                     <h3 data-translate="turnuvaolustur">Turnuva Oluştur</h3>
                    
-                
-                    <input type="text" placeholder="Oyuncu Adı"/>
+                    <input type="text" id="addtext" placeholder="Oyuncu Adı"/>
                   
-                    <a href ="#quickMatch" class="choose-game-button2" id="quickMatchButton" data-translate="oyuncuekle">Start Tournament</a>
+                    <button class="choose-game-button2" data-translate="oyuncuekle" onclick="addplayer()">Start Tournament</button>
                     
                 </form>
             </div>
@@ -20,15 +56,15 @@ function tournamentPage() {
                 <form onsubmit="return false;">
                     <h3 data-translate="turnuva">🏆 Turnuva 🏆</h3>
                     <ul>
-                        <li>Player 1</li>
-                        <li>Player 2</li>
-                        <li>Player 3</li>
-                        <li>Player 4</li>
+                        <li id="player1">Player 1</li>
+                        <li id="player2">Player 2</li>
+                        <li id="player3">Player 3</li>
+                        <li id="player4">Player 4</li>
                     </ul>
                 </form>
             </div>
             
-            <a href ="#quickMatch" class="choose-game-button2" id="quickMatchButton" data-translate="TurnuvaStart">Start Tournament</a>
+            <a href ="#quickMatch" class="choose-game-button2" data-translate="TurnuvaStart">Start Tournament</a>
 
         </div>
     </div>
