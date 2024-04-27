@@ -2,7 +2,6 @@ let gameRunning = false;
 
 function startgame()
 {
-    console.log(">"+window.location.hash+"<");
     gameRunning = true;
 
     const canvas = document.getElementById("canvas");
@@ -278,7 +277,7 @@ function startgame()
 
     function gameLoop()
     {
-        if(window.location.hash != "#aimode"){
+        if(window.location.hash != "#aimode" && window.location.hash != "#onevsone"){
             gameTheme = 0;
             gameRunning = false;
         }

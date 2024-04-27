@@ -418,6 +418,7 @@ body {
     <i class="fa-solid fa-user-group online"></i> <!-- İkona burada sahip çıktım -->
 </h3>
 <select class="dropdown" onchange="userchanges(this.value)">
+    <option value="">seçiniz</option>
     <!-- Kombobox burada -->
 </select>
 </h3>
@@ -426,6 +427,7 @@ body {
     <i class="fa-solid fa-user-group offline"></i> <!-- İkona burada sahip çıktım -->
 </h3>
 <select class="dropdown" onchange="userchanges(this.value)">
+    <option value="">seçiniz</option>
     <!-- Kombobox burada -->
 </select>
 </h3>
@@ -436,6 +438,7 @@ body {
         <i class="fa-solid fa-user-group myfriends"></i> <!-- İkona burada sahip çıktım -->
     </h3>
     <select class="dropdown" onchange="userchanges(this.value)">
+        <option value="">seçiniz</option>
         <!-- Kombobox burada -->
     </select>
 </div>

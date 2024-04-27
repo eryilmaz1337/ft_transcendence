@@ -55,7 +55,7 @@ function adddarklist()
     });
 }
 
-function onlineuseradd(selectedValue) 
+function onlineuseradd(selectedValue)
 {
     showm = false;
     var selectElement = document.getElementsByClassName("dropdown")[0];
@@ -65,7 +65,7 @@ function onlineuseradd(selectedValue)
     selectElement.add(option);
 }
 
-function offlineuseradd(selectedValue) 
+function offlineuseradd(selectedValue)
 {
     var selectElement = document.getElementsByClassName("dropdown")[1];
     var option = document.createElement("option");
@@ -74,7 +74,7 @@ function offlineuseradd(selectedValue)
     selectElement.add(option);
 }
 
-function frienduseradd(selectedValue) 
+function frienduseradd(selectedValue)
 {
     var selectElement = document.getElementsByClassName("dropdown")[2];
     var option = document.createElement("option");
@@ -202,7 +202,7 @@ function con()
         else
         {
             const myUsername = messageData.sender_username;
-            const messageDataadd = 
+            const messageDataadd =
             {
                 sender: myUsername,
                 receiver_username: sessionStorage.getItem('username'),
@@ -224,7 +224,7 @@ function userchanges(name)
     const chatInput = document.getElementById('chat-text');
     const chatHeader = document.getElementById('chat-header');
     const myUsername = sessionStorage.getItem('username');
-    chatHeader.innerText = `${myUsername} is chatting with ${name}`;
+    chatHeader.innerHTML = `${myUsername} is chatting with <a href="#" onclick="goToProfile('${name}')">${name}</a>`;
     chatHeader.style.color = 'greenyellow';
     chatInput.placeholder = `Type to ${name}...`;
     receiver_username = name;
@@ -233,7 +233,12 @@ function userchanges(name)
     loadMessages(myUsername, name);
 }
 
-function loadMessages(sender, receiver) 
+function goToProfile(username)
+{
+    window.location.href = `/publicProfile/${username}`;
+}
+
+function loadMessages(sender, receiver)
 {
     clearmessage(); // Clear the chat window first
     let storedMessages = JSON.parse(sessionStorage.getItem('messages')) || {};
@@ -304,7 +309,7 @@ function sendMessage()
 
     if(!receiver_username){
         alert("Seçili kullanıcı yok");
-        return; 
+        return;
     }
     const myUsername = sessionStorage.getItem('username');
     const messageData = {
@@ -327,7 +332,7 @@ function sendMessage()
     messages.push(messageData);
     storedMessages[messageKey] = messages;
     sessionStorage.setItem('messages', JSON.stringify(storedMessages));
-    
+
     //saveMessageToSessionStorage(messageData);
     displayMessage(messageData);
 }
@@ -344,7 +349,7 @@ function sendMessage()
 //     sessionStorage.setItem('messages', JSON.stringify(storedMessages));
 // }
 
-function displayMessage(message) 
+function displayMessage(message)
 {
     const chatMessages = document.getElementById('chat');
     chatMessages.innerHTML += createChatMessageElement(message);
@@ -352,7 +357,7 @@ function displayMessage(message)
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-function displayMessager(message,rusername) 
+function displayMessager(message,rusername)
 {
     const chatMessages = document.getElementById('chat');
     chatMessages.innerHTML += createChatMessageElementReceiverr(message,rusername);

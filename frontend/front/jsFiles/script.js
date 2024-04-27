@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // `accessToken` değişkenini kullanarak sunucu tarafında erişim token'ı almak için bir istek yapın
         accountsave(accessToken);
         loginSuccess();
-        // loginSuccess();
     }
     else
     {
@@ -50,8 +49,8 @@ function changePage(page) {
     if (isLoggedIn || page == 'login')
     {
         updateProfilePictureStyle();
-        //console.log("girilen sayfa= "+page);
-        switch (page) {
+        switch (page) 
+        {
             case 'login':
                 removeHeader();
                 content = loginAdd();
@@ -59,17 +58,14 @@ function changePage(page) {
             case 'game':
                 content = chooseGame();
                 break;
+            case 'onevsone':
+                content = gameAdd();
+                break;
             case 'tournament':
                 content = tournamentPage(); 
                 break;
             case 'aimode':
-                console.log("quickMatch case'ine girildi");
                 content = gameAdd();
-                console.log("content gameAdd yapıldı");
-                showHeader();
-                break;
-            case 'specialMatch':
-                content = chooseCustomGame();
                 showHeader();
                 break;
             case 'chat':
