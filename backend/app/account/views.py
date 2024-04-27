@@ -33,16 +33,20 @@ def generate_random_string():
 def singup(request):
     if request.method == 'POST':
             data = json.loads(request.body)
-            users.objects.create(
-                username=data['jsonusername'],
-                name=data['jsonname'],
-                surname=data['jsonsurname'],
-                email=data['jsonemail'],
-                profile_image = "http://localhost:423/img/profile_photos/pp08.jpeg",
-                password=make_password(data['jsonpassword']),
-                securitykey=generate_random_string()
-            )
-            return JsonResponse({"message": "Kullanıcı başarıyla oluşturuldu"}, status=201)
+            user_exists = users.objects.filter(username=data['jsonusername']).exists()
+            if not user_exists:
+                users.objects.create(
+                    username=data['jsonusername'],
+                    name=data['jsonname'],
+                    surname=data['jsonsurname'],
+                    email=data['jsonemail'],
+                    profile_image = "http://localhost:423/img/profile_photos/pp08.jpeg",
+                    password=make_password(data['jsonpassword']),
+                    securitykey=generate_random_string()
+                )
+                return JsonResponse({"message": "Kullanıcı başarıyla oluşturuldu"}, status=201)
+            else:
+                JsonResponse({'error': 'Hata'})
     else:
         return JsonResponse({'error': 'Invalid request method'})
     
@@ -62,8 +66,6 @@ def singin(request):
             return JsonResponse({'success': False, 'message': 'Invalid credentials'})
     else:
         return JsonResponse({'error': 'Invalid request method'})
-
-    return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
 
 @csrf_exempt
 def account42(request):
