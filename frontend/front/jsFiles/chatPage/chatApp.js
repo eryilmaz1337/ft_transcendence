@@ -352,7 +352,13 @@ function sendMessage()
 function displayMessage(message)
 {
     const chatMessages = document.getElementById('chat');
-    chatMessages.innerHTML += createChatMessageElement(message);
+    if (message.sender === sessionStorage.getItem('username')) {
+        // Aktif kullanıcı tarafından gönderilmiş mesaj
+        chatMessages.innerHTML += createChatMessageElement(message);
+    } else {
+        // Başka bir kullanıcı tarafından gönderilmiş mesaj
+        chatMessages.innerHTML += createChatMessageElementReceiver(message);
+    }
     document.getElementById("chat-text").value = '';
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
@@ -360,7 +366,13 @@ function displayMessage(message)
 function displayMessager(message,rusername)
 {
     const chatMessages = document.getElementById('chat');
-    chatMessages.innerHTML += createChatMessageElementReceiverr(message,rusername);
+    if (message.sender === sessionStorage.getItem('username')) {
+        // Aktif kullanıcı tarafından gönderilmiş mesaj
+        chatMessages.innerHTML += createChatMessageElement(message);
+    } else {
+        // Başka bir kullanıcı tarafından gönderilmiş mesaj
+        chatMessages.innerHTML += createChatMessageElementReceiverr(message,rusername);
+    }
     document.getElementById("chat-text").value = '';
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
