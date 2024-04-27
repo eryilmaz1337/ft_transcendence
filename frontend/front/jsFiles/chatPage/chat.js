@@ -1,6 +1,7 @@
 let selectedUsername = null;
 
 function chatAdd() {
+    offlineUSerList = [];
     getonlinestatususer();
     getofflinestatususer();
     getfriends();
@@ -143,6 +144,7 @@ body {
     cursor: pointer;
     border: 2px solid greenyellow;
     z-index: 2;
+    
 }
 
 .chat-header, .person-selector-header {
@@ -387,6 +389,7 @@ body {
 }
 
 .offline-users{
+    margin-top: 10px;
     box-shadow: 0 0 10px red
 }
 
@@ -417,8 +420,8 @@ body {
     <span data-translate="onlineusers">Online Users</span> <!-- Çevrilmek üzere metni buraya ekledim -->
     <i class="fa-solid fa-user-group online"></i> <!-- İkona burada sahip çıktım -->
 </h3>
-<select class="dropdown" onchange=" (this.value)">
-    <option value="">seçiniz</option>
+<select class="dropdown" onchange="userchanges(this.value)">
+    <option value="" data-translate="choosePerson">seçiniz</option>
     <!-- Kombobox burada -->
 </select>
 </h3>
@@ -427,18 +430,18 @@ body {
     <i class="fa-solid fa-user-group offline"></i> <!-- İkona burada sahip çıktım -->
 </h3>
 <select class="dropdown" onchange="userchanges(this.value)">
-    <option value="">seçiniz</option>
+    <option value="" data-translate="choosePerson">seçiniz</option>
     <!-- Kombobox burada -->
 </select>
 </h3>
 </div>
     <div class="friend-selector-container">
     <h3 class="friend-selector-header">
-        <span data-translate="addfriend">Friends</span> <!-- Arkadaş ekle metnini buraya ekledim -->
+        <span data-translate="friends">Friends</span> <!-- Arkadaş ekle metnini buraya ekledim -->
         <i class="fa-solid fa-user-group myfriends"></i> <!-- İkona burada sahip çıktım -->
     </h3>
     <select class="dropdown" onchange="userchanges(this.value)">
-        <option value="">seçiniz</option>
+        <option value="" data-translate="choosePerson">seçiniz</option>
         <!-- Kombobox burada -->
     </select>
 </div>
@@ -450,7 +453,7 @@ body {
         </div>
         <div id="chat" class="chat-messages"></div>
         <form class="chat-input-form">
-            <input id="chat-text" type="text" class="chat-input" required placeholder="Type here..." />
+            <input id="chat-text" type="text" class="chat-input" placeholder="Type here..." />
             <button type="submit" class="button send-button" onclick="sendMessage()" data-translate="chatmesajgonder">Send</button>
             <button type="button" class="clear-message-button" onclick="clearmessage()" data-translate="chattemizle">Clear Chat <i class="fa-solid fa-comment-slash"></i></button>
         </form>

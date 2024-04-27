@@ -1,6 +1,7 @@
 let socket;
 let receiver_username;
 let showm;
+var offlineUSerList = [];
 function addfriends()
 {
     var data = {
@@ -72,6 +73,7 @@ function offlineuseradd(selectedValue)
     option.text = selectedValue;
     option.value = selectedValue;
     selectElement.add(option);
+    offlineUSerList.push(selectedValue);
 }
 
 function frienduseradd(selectedValue)
@@ -221,7 +223,8 @@ function con()
 
 function userchanges(name)
 {
-    const chatInput = document.getElementById('chat-text');
+    if(name && name.trim().length != 0)
+    {const chatInput = document.getElementById('chat-text');
     const chatHeader = document.getElementById('chat-header');
     const myUsername = sessionStorage.getItem('username');
     chatHeader.innerHTML = `${myUsername} is chatting with <a href="#" onclick="goToProfile('${name}')">${name}</a>`;
@@ -230,7 +233,21 @@ function userchanges(name)
     receiver_username = name;
     showm = true;
 
-    loadMessages(myUsername, name);
+    if(offlineUSerList.includes(name)){
+        chatInput.disabled = true;
+        var sendButtons = document.getElementsByClassName("send-button");
+        for (var j = 0; j < sendButtons.length; j++) {
+            sendButtons[j].disabled = true;
+          }
+    } else {
+        chatInput.disabled = false;
+        var sendButtons = document.getElementsByClassName("send-button");
+        for (var j = 0; j < sendButtons.length; j++) {
+            sendButtons[j].disabled = false;
+          }
+    }
+
+    loadMessages(myUsername, name);}
 }
 
 function goToProfile(username)

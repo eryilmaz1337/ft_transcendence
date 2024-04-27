@@ -18,6 +18,7 @@ var translations = {
       'TurnuvaStart': 'Turnuvayı Başlat',
       'welcomepong': 'Pong Oyununa Hoşgeldin',
       "choosetheme": "Aşağıdan bir tema seç!",
+      "choosePerson": "Kişi seç!",
       'gameheader': 'Oyun',
       'chatheader': 'Sohbet',
       'profileheader': 'Profil',
@@ -55,12 +56,12 @@ var translations = {
       'chattemizle' : 'Temizle',
       'onlineusers' : 'Aktif Kullanıcı',
       'offlineusers' : 'Pasif Kullanıcı',
-      'addfriend' : 'Arkadaş Ekle',
       'chatsettings' : 'Ayarlar',
       'addplayers' : 'Oyuncu Ekle',
       'addgameuser' : '🎮 Oyuna Davet Et ',
       'blockuser' : '❌ Engelle',
       'addfriend' : '➕ Arkadaş Ekle',
+      'friends' : 'Arkadaşlar'
 
       
   },
@@ -82,6 +83,7 @@ var translations = {
     'TurnuvaStart': 'Start Tournament',
     'welcomepong': 'Welcome to Pong Game',
     'choosetheme': 'Choose a theme from below!',
+    "choosePerson": "Choose person!",
     'gameheader': 'Game',
     'chatheader': 'Chat',
     'profileheader': 'Profile',
@@ -119,12 +121,12 @@ var translations = {
     'chattemizle': 'Clear',
     'onlineusers': 'Active Users',
     'offlineusers': 'Offline Users',
-    'addfriend': 'Add Friend',
     'chatsettings': 'Settings',
     'addplayers': 'Add Players',
     'addgameuser': '🎮 Invite to Game',
     'blockuser': '❌ Block User',
-    'addfriend': '➕ Add Friend'
+    'addfriend': '➕ Add Friend',
+    'friends' : 'Friends'
   },
   ru: {
 
@@ -145,6 +147,7 @@ var translations = {
     'TurnuvaStart': 'Начать турнир',
     'welcomepong': 'Добро пожаловать в игру в пинг-понг',
     'choosetheme': 'Выберите тему из списка ниже!',
+    "choosePerson": "Киши Сеч!",
     'gameheader': 'Игра',
     'chatheader': 'Чат',
     'profileheader': 'Профиль',
@@ -182,12 +185,12 @@ var translations = {
     'chattemizle': 'Очистить',
     'onlineusers': 'Онлайн',
     'offlineusers': 'Оффлайн',
-    'addfriend': 'Добавить друга',
     'chatsettings': 'Настройки чата',
     'addplayers': 'Добавить игроков',
     'addgameuser': '🎮 Пригласить в игру',
     'blockuser': '❌ Заблокировать пользователя',
-    'addfriend': '➕ Добавить друга'
+    'addfriend': '➕ Добавить друга',
+    'friends' : 'Друзья'
   
   }
 };

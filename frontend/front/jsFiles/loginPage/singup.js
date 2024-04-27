@@ -1,3 +1,9 @@
+function isValidEmail(email) {
+  // E-posta adresi formatını kontrol etmek için bir düzenli ifade
+  var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$/;
+  return emailRegex.test(email);
+}
+
 function signupjson()
 {
   if(!document.getElementById('username').value || !document.getElementById('name').value
@@ -9,6 +15,10 @@ function signupjson()
     jsonsurname: document.getElementById('surname').value,
     jsonemail: document.getElementById('email').value,
     jsonpassword: document.getElementById('password').value
+  }
+  if(!isValidEmail(data.jsonemail)){
+    alert("email formatı yanlış\nÖrnek:abc@abc.com");
+    return;
   }
   console.log(data);
   fetch("http://localhost:8000/api/account/singup/", {
