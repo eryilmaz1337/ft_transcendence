@@ -55,14 +55,38 @@ function starttournament() {
     sessionStorage.setItem("player4", player4);
 
     // Change the href to direct to the onevsone page with a hash
-    let link = document.getElementById("startLink");
-    link.href = "#onevsone";
     
-    // Redirect to the page
-    window.location.href = "#onevsone";
+    var data = 
+    {
+        jsonplayer1: sessionStorage.getItem('player1'),
+        jsonplayer2: sessionStorage.getItem('player2'),
+        jsonplayer3: sessionStorage.getItem('player3'),
+        jsonplayer4: sessionStorage.getItem('player4'),
+        jsonsecuritykey: sessionStorage.getItem('securitykey'),
+        jsonusername: sessionStorage.getItem('username'),
+    }
+    console.log(data);
+    fetch("http://localhost:8000/api/account/tournament/", {
+      method: 'POST', // İstek metodu
+      headers: {
+        'Content-Type': 'application/json', // İçerik tipini belirtme
+      },
+      body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
+    })
+    .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
+    .then(data => {
+            //console.log(data.message[0]);
+            sessionStorage.setItem("round1_paddle1", data.message[0]);
+            sessionStorage.setItem("round1_paddle2", data.message[1]);
 
+            sessionStorage.setItem("round2_paddle1", data.message[0]);
+            sessionStorage.setItem("round2_paddle2", data.message[1]);
+            window.location.hash = "tournamentmatches"
+    })
+    .catch((error) => {
+      console.error('Hata:', error);
+    });
     // Optionally display the message on redirection or through another means
-    alert(`It's now time for ${player1} and ${player2}`);
 }
 
 
@@ -93,7 +117,7 @@ function tournamentPage() {
                 </form>
             </div>
             
-            <a href ="#onevsone" onclick = "starttournament()" class="choose-game-button2" data-translate="TurnuvaStart">Start Tournament</a>
+            <button onclick = "starttournament()" class="choose-game-button2" data-translate="TurnuvaStart">Start Tournament</button>
 
         </div>
     </div>

@@ -283,16 +283,21 @@ def darklistadd(request):
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
 
 @csrf_exempt
-def get_user_data(request):
+def tournament(request):
     if request.method == 'POST':
-        # POST verisinden kullanıcı adı ve parolayı al
         data = json.loads(request.body)
-        jsecuritykey = data.get('jsonsecuritykey')
-        if not users.objects.filter(securitykey=jsecuritykey).exists():
-            user = users.objects.get(securitykey=jsecuritykey)
-            if not user.securitykey==jsecuritykey:
-                return JsonResponse({'success': False, 'massage': 'unauthorized transaction'})
-        user = users.objects.get(username=data.get("getusername"))
-        return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
+        if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            user = users.objects.get(securitykey=data.get('jsonsecuritykey'))
+            if user.username == data.get('jsonusername'):
+                my_list = [data.get("jsonplayer1"), data.get("jsonplayer2"), data.get("jsonplayer3"), data.get("jsonplayer4")]
+                json_data_list = []
+                for i in range(4):
+                    selected_value = random.choice(my_list)
+                    my_list.remove(selected_value)
+                    json_data = { i : selected_value}
+                    json_data_list.append(json_data)
+                return JsonResponse({'success': True , 'message': json_data_list})
+        else:
+            return JsonResponse({'success': False})
     else:
-        return JsonResponse({'success': False, 'message': 'Only POST method is allow'})
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})

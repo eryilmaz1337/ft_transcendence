@@ -1,6 +1,7 @@
 let selectedUsername = null;
 
 function chatAdd() {
+    receiver_username = 0;
     offlineUSerList = [];
     getonlinestatususer();
     getofflinestatususer();

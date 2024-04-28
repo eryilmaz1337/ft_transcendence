@@ -35,7 +35,7 @@ function addfriends()
 
 function adddarklist()
 {
-    if (is_flag == true)
+    if (is_flag == true && receiver_username != 0)
     {
         var data = {
             jsonsecuritykey: sessionStorage.getItem('securitykey'),
@@ -257,6 +257,7 @@ function userchanges(name)
     chatInput.placeholder = `Type to ${name}...`;
     receiver_username = name;
     showm = true;
+        is_flag = true;
 
     if(offlineUSerList.includes(name)){
         chatInput.disabled = true;
@@ -271,8 +272,13 @@ function userchanges(name)
             sendButtons[j].disabled = false;
           }
     }
-    loadMessages(myUsername, name);
-    }
+
+    loadMessages(myUsername, name);}
+}
+
+function goToProfile(username)
+{
+    window.location.href = `/publicProfile/${username}`;
 }
 
 function loadMessages(sender, receiver)
@@ -392,7 +398,7 @@ function displayMessager(message,rusername)
 
 //Oyuna Davet Kısmı
 function oyunadavet() {
-    if ((is_flag == true))
+    if ((is_flag == true) && (receiver_username != 0))
     {
         const message_text = `<a href="#onevsone" return false;">SENİ OYUNA DAVET EDİYORUM</a>`;
         const myUsername = sessionStorage.getItem('username');
@@ -418,5 +424,3 @@ function oyunadavet() {
         displayMessage(messageData);
     }
 }
-
-

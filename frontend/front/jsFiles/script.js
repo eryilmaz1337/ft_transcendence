@@ -69,7 +69,7 @@ function changePage(page) {
     showHeader();
     showNavbarStates();
 
-    if (isLoggedIn || page == 'login')
+    if (true)
     {
         updateProfilePictureStyle();
         switch (page) 
@@ -87,9 +87,11 @@ function changePage(page) {
             case 'tournament':
                 content = tournamentPage(); 
                 break;
+            case 'tournamentmatches':
+                content = gameAdd();
+                break;
             case 'aimode':
                 content = gameAdd();
-                showHeader();
                 break;
             case 'chat':
                 content = chatAdd();

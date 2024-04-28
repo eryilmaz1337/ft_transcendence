@@ -1,7 +1,7 @@
-// function toggleTable() {
-//     var table = document.getElementById("history-div");
-//     table.classList.toggle("hidden");
-// }
+function toggleTable() {
+    var table = document.getElementById("history-div");
+    table.classList.toggle("hidden");
+}
 
 // // Fonksiyon ile veri alımı
 // // function fetchData(url) {
