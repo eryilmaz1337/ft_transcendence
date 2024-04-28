@@ -1,3 +1,4 @@
+
 var searchlanguages = localStorage.getItem('selectedLanguage');
         if(!searchlanguages)
         localStorage.setItem('selectedLanguage', 'tr');
@@ -5,6 +6,7 @@ var searchlanguages = localStorage.getItem('selectedLanguage');
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    const page = window.location.hash.substring(1);
     if (window.location.search.includes('code='))
     {
         // Yetkilendirme kodunu URL'den çıkar
@@ -14,20 +16,50 @@ document.addEventListener('DOMContentLoaded', function () {
         // `accessToken` değişkenini kullanarak sunucu tarafında erişim token'ı almak için bir istek yapın
         accountsave(accessToken);
         loginSuccess();
-        // loginSuccess();
     }
     else
     {
-        const page = window.location.hash.substring(1);
         changePage(page || 'login'); // Eğer hash yoksa login sayfasına yönlendir
     }
 });
 
+// const PhotoPath = sessionStorage.getItem('profile_image');
+// const username = sessionStorage.getItem('username');
+// const name = sessionStorage.getItem('name');
+// const surname = sessionStorage.getItem('surname');
+// const email = sessionStorage.getItem('email');
+
+gameTheme=0;
+gameBGImagePath="";
+gameBGColor='';
+
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
     const page = window.location.hash.substring(1);
+    if(page=="loading")
+    {
+        isgetdata = false;
+    }
     changePage(page);
 });
+
+// function checklogin() devam edilcek yarın
+// {
+//     const myUsername = sessionStorage.getItem('username');
+//     const messageData = {
+//         sender: myUsername,
+//         receiver_username: receiver_username,
+//         message: message_text,
+//         timestamp: new Date().toISOString(),
+//     };
+
+//     if (socket && socket.readyState === WebSocket.OPEN) {
+//         socket.send(JSON.stringify(messageData));
+//     } else {
+//         console.error('WebSocket is not open.');
+//     }
+
+// }
 
 function changePage(page) {
     let content = '';
@@ -39,8 +71,8 @@ function changePage(page) {
     if (isLoggedIn || page == 'login')
     {
         updateProfilePictureStyle();
-        //console.log("girilen sayfa= "+page);
-        switch (page) {
+        switch (page) 
+        {
             case 'login':
                 removeHeader();
                 content = loginAdd();
@@ -48,13 +80,14 @@ function changePage(page) {
             case 'game':
                 content = chooseGame();
                 break;
-            case 'quickMatch':
+            case 'onevsone':
                 content = gameAdd();
-                startgame();
-                showHeader();
                 break;
-            case 'specialMatch':
-                content = chooseCustomGame();
+            case 'tournament':
+                content = tournamentPage(); 
+                break;
+            case 'aimode':
+                content = gameAdd();
                 showHeader();
                 break;
             case 'chat':
@@ -77,6 +110,10 @@ function changePage(page) {
             case 'loading':
                 removeHeader();
                 content = loading();
+                setTimeout(function() {
+                    if(isgetdata==false)
+                        window.location.hash = "login";
+                }, 5000);
                 break;
             case 'confirm':
                 break;
@@ -95,12 +132,11 @@ function changePage(page) {
         //Async function()
     }
     else
+    {
         window.location.hash = 'login';
+        isgetdata = false;
+    }
 }
-
-// document.addEventListener('DOMContentLoaded', function() {
-
-// });
 
 function updateProfilePictureStyle() {
     var profileImage = sessionStorage.getItem('profile_image');

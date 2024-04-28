@@ -1,6 +1,7 @@
 let isLoggedIn = false;
+let isgetdata = false;
 
-function login42() 
+function login42()
 {
     const client_id = 'u-s4t2ud-1c2cdbd5f93bbb10f5c88928250742cd0f34b7404d28cf9db6ce0a7ec31ae127'; // Ecole 42 uygulamanızın istemci kimliği
     const redirect_uri = 'http://localhost:423'; // Ecole 42 tarafından yetkilendirme sonrası yönlendirileceğiniz URI
@@ -9,16 +10,19 @@ function login42()
     window.location.href = authUrl;
 }
 
-function accountsave(accessToken) 
+function accountsave(accessToken)
 {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8000/api/account/42-api/');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
+            if (xhr.status === 200) 
+            {
                 const data = JSON.parse(xhr.responseText);
-                if (data) {
+                if (data)
+                {
+                    isgetdata = true;
                     sessionStorage.setItem('username', data.username);
                     sessionStorage.setItem('name', data.name);
                     sessionStorage.setItem('surname', data.surname);
@@ -29,7 +33,8 @@ function accountsave(accessToken)
                     usernameTextElements.forEach(function(element) {
                         element.textContent = data.username;
                     });
-                    window.location.hash = "#game"
+                    con();
+                    window.location.hash = "#game";
 
                 } else {
                     alert('Error while processing the request.');
@@ -46,7 +51,7 @@ function accountsave(accessToken)
     isLoggedIn = true;
 }
 
-function loginSuccess() 
+function loginSuccess()
 {
     // burdan veri tabanındaki çevrimiçi durumunu değiştiren kodu yaz
 
@@ -101,7 +106,7 @@ function loginAdd() {
                     width: 490px;
                     height: 300px;
                     background: #000;
-                    box-shadow: 0 0 50px greenyellow;
+                    box-shadow: 0 0 1.25em 0.5em greenyellow;
                     border-radius: 20px;
                     padding: 40px;
                     overflow: hidden;
@@ -112,7 +117,7 @@ function loginAdd() {
                     justify-content: center;
                     align-items: center;
                     width: 100%;
-                    height: 100%; 
+                    height: 100%;
                 }
 
                 h3 {
@@ -134,11 +139,12 @@ function loginAdd() {
                     border-radius: 20px;
                     border: none;
                     outline: none;
-                    transition: background-color 0.3s ease;
+                    transition: background-color 1s ease;
                 }
 
                 button:hover {
                     background-color: #0cf;
+                    transform: scale(1.1);
                 }
 
             </style>
