@@ -5,25 +5,6 @@ function chatAdd() {
     getonlinestatususer();
     getofflinestatususer();
     getfriends();
-// Blurlama için kodlar eğer arkadaş ekle butonuna basılırsa 2 saniye blur eklendi.
-document.addEventListener('click', function(event) {
-    var target = event.target;
-    if (target.classList.contains('invite-button')) {
-        addBlurEffect();
-    }
-});
-
-function addBlurEffect() {
-    document.body.style.filter = "blur(5px)";
-
-    setTimeout(function() {
-        removeBlurEffect();
-    }, 2000);
-}
-
-function removeBlurEffect() {
-    document.body.style.filter = "none";
-}
 
 return `
 <head>
@@ -393,11 +374,6 @@ body {
     box-shadow: 0 0 10px red
 }
 
-.blur{
-    filter: blur(5px);
-    pointer-events: none;
-}
-
 .online {
     color: green;
 }
@@ -463,7 +439,7 @@ body {
         <div class="additional-buttons">
         <h3 class="additional-buttons-header" data-translate="chatsettings"> Settings <i class="fa-solid fa-gear"></i></h3>
         <button class="button invite-button" data-translate="addgameuser" onclick="oyunadavet()"><i class="fas fa-gamepad"></i><span data-translate="addgameuser"> Oyuna Davet Et</span></button>
-        <button class="button block-button" data-translate="blockuser" onclick="adddarklist()"><i class="fas fa-times"></i><span data-translate="blockuser"> Engelle</span></button>
+        <button class="button block-button" data-translate="blockuser" onclick="adddarklist()"><i class="fas fa-times"></i><span data-translate="blockuser"> Engelle </span></button>
         <button class="button add-friend-button" data-translate="addfriend" onclick="addfriends()"><i class="fas fa-user-plus"></i><span data-translate="addfriend"> Arkadaş Ekle</span></button>
     </div>
     </div>

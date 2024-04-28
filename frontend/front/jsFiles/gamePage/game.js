@@ -13,6 +13,7 @@ function chooseGame() {
     </div>
 
         <style>
+        
             #game-container {
                 background-image: url('../img/retro-arcade.jpeg');
                 display: flex;
@@ -50,26 +51,28 @@ function chooseGame() {
             }
 
             .wrapper {
-                position: relative;
-                width: 490px;
+                position: absolute;
+                max-height: calc(100% - 100px); /* Adjusted maximum height to prevent excessive stretching */
                 height: 300px;
                 background: #000;
                 box-shadow: 0 0 50px greenyellow;
                 border-radius: 20px;
-                padding: 40px;
                 overflow: hidden;
+                display: flex;
             }
 
             .form-wrapper {
+                font-family: 'Poppins', sans-serif;
                 display: flex;
-                justify-content: center;
-                align-items: center;
                 width: 100%;
                 height: 100%;
+                flex-direction: column; /* Change flex-direction to column */
+                justify-content: center; /* Center vertically */
+                align-items: center; /* Center horizontally */
             }
 
             h3 {
-                font-size: 24px;
+                font-size: 30px;
                 margin-bottom: 20px;
                 color: #fff;
                 text-align: center;

@@ -1,31 +1,3 @@
-// function showNavbarStates() {
-//     // var profilePicture = document.getElementById("profile-picture");
-//     // var logoutWrapper = document.getElementById("logout-wrapper");
-//     // var logoutButton = document.getElementById("logout-btn");
-//     var matchHistory = document.getElementById("match_history");
-//     var historyTable = document.getElementById("history-div");
-  
-//     // Profil resmine tıklandığında çıkış yap butonunu göster veya gizle
-//   //   profilePicture.addEventListener("click", function() {
-//   //       if (logoutWrapper.style.display === "block") {
-//   //           logoutWrapper.style.display = "none";
-//   //       } else {
-//   //           logoutWrapper.style.display = "block";
-//   //       }
-//   //   });
-//     matchHistory.addEventListener("click", function() {
-//         if (historyTable.style.display === "block"){
-//             historyTable.style.display = "flex";
-//         } else {
-//             historyTable.style.display = "block";
-//         }
-//     })
-  
-//     // logoutButton.addEventListener("click", function() {
-//     //     window.location.hash = 'login';
-//     // });
-//   }
-
 function toggleTable() {
     var table = document.getElementById("history-div");
     table.classList.toggle("hidden");

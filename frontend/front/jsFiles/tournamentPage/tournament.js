@@ -5,25 +5,35 @@ function addplayer()
     const player3 = document.getElementById("player3");
     const player4 = document.getElementById("player4");
     const text = document.getElementById("addtext").value;
+    
     if(!text)
         return;
+
     if(player1.textContent === 'Player 1')
     {
+        //getonlinestatususer_t(text, player1);
+        //getofflinestatususer_t(text, player1);
         player1.textContent = text;
         document.getElementById("addtext").value = ''; 
     }
     else if(player2.textContent == "Player 2")
     {
+        //getonlinestatususer_t(text, player2);
+        //getofflinestatususer_t(text, player2);
         player2.textContent = text;
         document.getElementById("addtext").value = '';
     }
     else if(player3.textContent == "Player 3")
     {
+        //getonlinestatususer_t(text, player3);
+        //getofflinestatususer_t(text, player3);
         player3.textContent = text;
         document.getElementById("addtext").value = '';
     }
     else if(player4.textContent == "Player 4")
     {
+        //getonlinestatususer_t(text, player4);
+        //getofflinestatususer_t(text, player4);
         player4.textContent = text;
         document.getElementById("addtext").value = ''; 
     }
@@ -41,6 +51,7 @@ function starttournament() {
 
     if (player1 === 'Player 1' || player2 === 'Player 2') {
         alert('You need at least 2 players to start the tournament.');
+        //window.location.href = "#game"
         return;
     }
 
@@ -67,9 +78,7 @@ function tournamentPage() {
             <div class="form-wrapper">
                 <form onsubmit="return false;">
                     <h3 data-translate="turnuvaolustur">Turnuva Oluştur</h3>
-                   
                     <input type="text" id="addtext" placeholder="Oyuncu Adı"/>
-                  
                     <button class="choose-game-button2" data-translate="oyuncuekle" onclick="addplayer()">Start Tournament</button>
                     
                 </form>

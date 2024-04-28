@@ -2,58 +2,65 @@ let socket;
 let receiver_username;
 let showm;
 var offlineUSerList = [];
+
 function addfriends()
 {
-    var data = {
-        jsonsecuritykey: sessionStorage.getItem('securitykey'),
-        jsonusername: sessionStorage.getItem('username'),
-        jsonfriend: receiver_username,
-      }
-      fetch("http://localhost:8000/api/account/friendsadd/", {
-          method: 'POST', // İstek metodu
-        headers: {
-          'Content-Type': 'application/json', // İçerik tipini belirtme
-        },
-        body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
-    })
-      .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
-      .then(data => {
-          if (data) {
-            alert("add friends");
-        }else {
-            alert('Error while processing the request.');
-        }
-    })
-    .catch((error) => {
-        console.error('Hata:', error);
-    });
+    if (is_flag == true)
+    {
+        var data = {
+            jsonsecuritykey: sessionStorage.getItem('securitykey'),
+            jsonusername: sessionStorage.getItem('username'),
+            jsonfriend: receiver_username,
+          }
+          fetch("http://localhost:8000/api/account/friendsadd/", {
+              method: 'POST', // İstek metodu
+            headers: {
+              'Content-Type': 'application/json', // İçerik tipini belirtme
+            },
+            body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
+        })
+          .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
+          .then(data => {
+              if (data) {
+                alert("add friends");
+            }else {
+                alert('Error while processing the request.');
+            }
+        })
+        .catch((error) => {
+            console.error('Hata:', error);
+        });
+    }
 }
 
 function adddarklist()
 {
-    var data = {
-        jsonsecuritykey: sessionStorage.getItem('securitykey'),
-        jsonusername: sessionStorage.getItem('username'),
-        jsondarkfriend: receiver_username,
-      }
-      fetch("http://localhost:8000/api/account/darklistadd/", {
-          method: 'POST', // İstek metodu
-        headers: {
-          'Content-Type': 'application/json', // İçerik tipini belirtme
-        },
-        body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
-    })
-      .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
-      .then(data => {
-          if (data) {
-            alert("add darklist");
-        }else {
-            alert('Error while processing the request.');
-        }
-    })
-    .catch((error) => {
-        console.error('Hata:', error);
-    });
+    if (is_flag == true)
+    {
+        var data = {
+            jsonsecuritykey: sessionStorage.getItem('securitykey'),
+            jsonusername: sessionStorage.getItem('username'),
+            jsondarkfriend: receiver_username,
+          }
+          fetch("http://localhost:8000/api/account/darklistadd/", {
+              method: 'POST', // İstek metodu
+            headers: {
+              'Content-Type': 'application/json', // İçerik tipini belirtme
+            },
+            body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
+        })
+          .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
+          .then(data => {
+              if (data) {
+                alert("add darklist");
+            }else {
+                alert('Error while processing the request.');
+            }
+        })
+        .catch((error) => {
+            console.error('Hata:', error);
+        });
+    }
 }
 
 function onlineuseradd(selectedValue)
@@ -235,17 +242,21 @@ function con()
     });
 }
 
+let is_flag = false;
+
 function userchanges(name)
 {
     if(name && name.trim().length != 0)
-    {const chatInput = document.getElementById('chat-text');
-    const chatHeader = document.getElementById('chat-header');
-    const myUsername = sessionStorage.getItem('username');
-    chatHeader.innerHTML = `${myUsername} is chatting with <a href="#" onclick="goToProfile('${name}')">${name}</a>`;
-    chatHeader.style.color = 'greenyellow';
-    chatInput.placeholder = `Type to ${name}...`;
-    receiver_username = name;
-    showm = true;
+    {
+        const chatInput = document.getElementById('chat-text');
+        const chatHeader = document.getElementById('chat-header');
+        const myUsername = sessionStorage.getItem('username');
+        chatHeader.innerHTML = `${myUsername} is chatting with <a href="#" onclick="goToProfile('${name}')">${name}</a>`;
+        chatHeader.style.color = 'greenyellow';
+        chatInput.placeholder = `Type to ${name}...`;
+        receiver_username = name;
+        showm = true;
+        is_flag = true;
 
     if(offlineUSerList.includes(name)){
         chatInput.disabled = true;
@@ -386,27 +397,29 @@ function displayMessager(message,rusername)
 
 //Oyuna Davet Kısmı
 function oyunadavet() {
-    const message_text = `<a href="#onevsone" return false;">SENİ OYUNA DAVET EDİYORUM</a>`;
-    const myUsername = sessionStorage.getItem('username');
-    const messageData = {
-        sender: myUsername,
-        receiver_username: receiver_username,
-        message: message_text,
-        timestamp: new Date().toISOString(),
-    };
-
-    if (socket && socket.readyState === WebSocket.OPEN) {
-        socket.send(JSON.stringify(messageData));
-    } else {
-        console.error('WebSocket is not open.');
+    if ((is_flag == true))
+    {
+        const message_text = `<a href="#onevsone" return false;">SENİ OYUNA DAVET EDİYORUM</a>`;
+        const myUsername = sessionStorage.getItem('username');
+        const messageData = {
+            sender: myUsername,
+            receiver_username: receiver_username,
+            message: message_text,
+        };
+    
+        if (socket && socket.readyState === WebSocket.OPEN) {
+            socket.send(JSON.stringify(messageData));
+        } else {
+            console.error('WebSocket is not open.');
+        }
+        // Session Storage'a kaydetme
+        let storedMessages = JSON.parse(sessionStorage.getItem('messages')) || {};
+        let messageKey = `${myUsername}_${receiver_username}`;
+        let messages = storedMessages[messageKey] || [];
+        messages.push(messageData);
+        storedMessages[messageKey] = messages;
+        sessionStorage.setItem('messages', JSON.stringify(storedMessages));
+    
+        displayMessage(messageData);
     }
-    // Session Storage'a kaydetme
-    let storedMessages = JSON.parse(sessionStorage.getItem('messages')) || {};
-    let messageKey = `${myUsername}_${receiver_username}`;
-    let messages = storedMessages[messageKey] || [];
-    messages.push(messageData);
-    storedMessages[messageKey] = messages;
-    sessionStorage.setItem('messages', JSON.stringify(storedMessages));
-
-    displayMessage(messageData);
 }
