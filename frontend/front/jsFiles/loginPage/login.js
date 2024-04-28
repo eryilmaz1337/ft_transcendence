@@ -1,4 +1,5 @@
 let isLoggedIn = false;
+let isgetdata = false;
 
 function login42()
 {
@@ -21,6 +22,7 @@ function accountsave(accessToken)
                 const data = JSON.parse(xhr.responseText);
                 if (data)
                 {
+                    isgetdata = true;
                     sessionStorage.setItem('username', data.username);
                     sessionStorage.setItem('name', data.name);
                     sessionStorage.setItem('surname', data.surname);

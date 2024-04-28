@@ -200,6 +200,20 @@ function con()
             const chatMessages = document.getElementById('chat');
             chatMessages.innerHTML += createChatMessageElementReceiver(messageData);
             chatMessages.scrollTop = chatMessages.scrollHeight;
+            const myUsername = messageData.sender_username;
+            const messageDataadd =
+            {
+                sender: myUsername,
+                receiver_username: sessionStorage.getItem('username'),
+                message: messageData.message,
+                timestamp: new Date().toISOString(),
+            };
+            let storedMessages = JSON.parse(sessionStorage.getItem('messages')) || {};
+            let messageKey = `${myUsername}_${sessionStorage.getItem('username')}`;
+            let messages = storedMessages[messageKey] || [];
+            messages.push(messageDataadd);
+            storedMessages[messageKey] = messages;
+            sessionStorage.setItem('messages', JSON.stringify(storedMessages));
         }
         else
         {
@@ -297,26 +311,25 @@ function createChatMessageElementReceiverr(message,rusername) {
         // <div class="message-timestamp" style="text-align: right;">${hours}:${minutes}</div>
 }
 
-function createChatMessageElement(message) {
+function createChatMessageElement(message) 
+{
     return `
     <div class="message blue-bg" style="width: 100%; display: flex; justify-content: flex-end;">
         <div class = "message-sender">${sessionStorage.getItem('username')}</div>
         <div class="message-text">${message.message}</div>
         </div>
         `;
-        // <div class="message-timestamp" style="text-align: right;">${hours}:${minutes}</div>
 }
 
 function sendMessage()
 {
     const message_text = document.getElementById("chat-text").value;
-    if(!message_text)
-        return;
-
     if(!receiver_username){
         alert("Seçili kullanıcı yok");
         return;
     }
+    if(!message_text)
+        return;
 
     const myUsername = sessionStorage.getItem('username');
     const messageData = {

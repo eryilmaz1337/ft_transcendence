@@ -131,7 +131,6 @@ function singin()
     <div class="container">
     <div class="button-wrapper"><button class="back-button" onclick="location.href='#login'" data-translate="back">Back to Login</button></div>
       <h2 data-translate="giristrans">Sign In to Transcendence Project</h2>
-      <form id="signInForm">
         <div class="input-group">
           <input type="text" id="username" required>
           <label for="username" data-translate="girisuser">Username</label>
@@ -140,8 +139,7 @@ function singin()
           <input type="password" id="password" required>
           <label for="password" data-translate="girispass">Password</label>
         </div>
-        <button type="submit" onclick="signinjson()" data-translate="girisbuttons">Sign In</button>
-      </form>
+        <button type=""button onclick="signinjson()" data-translate="girisbuttons">Sign In</button>
     </div>
   </body>
 

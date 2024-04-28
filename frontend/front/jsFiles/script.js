@@ -36,8 +36,30 @@ gameBGColor='';
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
     const page = window.location.hash.substring(1);
+    if(page=="loading")
+    {
+        isgetdata = false;
+    }
     changePage(page);
 });
+
+// function checklogin() devam edilcek yarın
+// {
+//     const myUsername = sessionStorage.getItem('username');
+//     const messageData = {
+//         sender: myUsername,
+//         receiver_username: receiver_username,
+//         message: message_text,
+//         timestamp: new Date().toISOString(),
+//     };
+
+//     if (socket && socket.readyState === WebSocket.OPEN) {
+//         socket.send(JSON.stringify(messageData));
+//     } else {
+//         console.error('WebSocket is not open.');
+//     }
+
+// }
 
 function changePage(page) {
     let content = '';
@@ -88,6 +110,10 @@ function changePage(page) {
             case 'loading':
                 removeHeader();
                 content = loading();
+                setTimeout(function() {
+                    if(isgetdata==false)
+                        window.location.hash = "login";
+                }, 5000);
                 break;
             case 'confirm':
                 break;
@@ -106,7 +132,10 @@ function changePage(page) {
         //Async function()
     }
     else
+    {
         window.location.hash = 'login';
+        isgetdata = false;
+    }
 }
 
 function updateProfilePictureStyle() {

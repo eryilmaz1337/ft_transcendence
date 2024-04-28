@@ -158,7 +158,7 @@ body {
 }
 
 .chat-messages {
-    height: 23em;
+    height: 24.5em;
     overflow-y: scroll;
 }
 
@@ -452,11 +452,11 @@ body {
             <h3 id="chat-header" class="chat-header" ><i class="fa-brands fa-rocketchat"></i></h3>
         </div>
         <div id="chat" class="chat-messages"></div>
-        <form class="chat-input-form">
+        <br>
+        </br>
             <input id="chat-text" type="text" class="chat-input" placeholder="Type here..." />
-            <button type="submit" class="button send-button" onclick="sendMessage()" data-translate="chatmesajgonder">Send</button>
+            <button type="button" class="button send-button" onclick="sendMessage()" data-translate="chatmesajgonder">Send</button>
             <button type="button" class="clear-message-button" onclick="clearmessage()" data-translate="chattemizle">Clear Chat <i class="fa-solid fa-comment-slash"></i></button>
-        </form>
 
         <!-- Settings Kısmı -->
         

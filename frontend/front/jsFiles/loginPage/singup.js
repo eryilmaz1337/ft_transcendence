@@ -31,6 +31,7 @@ function signupjson()
   .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
   .then(data => {
     console.log('Başarıyla gönderildi:', data);
+    window.location.hash = "login";
   })
   .catch((error) => {
     console.error('Hata:', error);
@@ -113,13 +114,13 @@ function singup()
       <div class="form-wrapper">
         <button class="back-button" onclick="location.href='#login'" data-translate="back">Back to Login</button>
         <h3 data-translate="registertoproject">Register to Transcendence Project</h3>
-          <form id="registerForm" method="get" >
+          <form id="registerForm" method="post" >
             <input type="text" id="username" placeholder="Username" requidred>
             <input type="text" id="name" placeholder="Name" requidred>
             <input type="text" id="surname" placeholder="Surname" requidred>
             <input type="email" id="email" placeholder="Email" required>
             <input type="password" id="password" placeholder="Password" required>
-            <button type="submit" onclick="signupjson()" data-translate="registerbuton">Sign Up</button>
+            <button type="button" onclick="signupjson()" data-translate="registerbuton">Sign Up</button>
           </form>
       </div>
   </body>

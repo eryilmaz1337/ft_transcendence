@@ -32,22 +32,31 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 json_response = await response.json()
     # WebSocket'ten veri alındığında çalışacak kod
     async def receive(self, text_data):
+          api_url = 'http://localhost:8000/api/account/userauthenticator/'
           data = json.loads(text_data)
-          sender_username = data['sender']
-          receiver_username = data['receiver_username']
-          message = data['message']
-          timestamp = data['timestamp']
-          receiver_channel_name = connected_users.get(receiver_username)
-          if receiver_channel_name:
-              await self.channel_layer.send(
-                  receiver_channel_name,
-                  {
-                      "type": "chat.message",
-                      "message": message,
-                      "sender_username": sender_username,
-                      "timestamp": timestamp,
-                  },
-              )
+          async with aiohttp.ClientSession() as session:
+              async with session.post(api_url, json=data) as response:
+                    json_response = await response.json()
+          if not self.username == data.get("sender"):
+            self.send(text_data=json.dumps({
+            'message': "Error"
+            }))
+          else:
+            sender_username = data['sender']
+            receiver_username = data['receiver_username']
+            message = data['message']
+            timestamp = data['timestamp']
+            receiver_channel_name = connected_users.get(receiver_username)
+            if receiver_channel_name:
+                await self.channel_layer.send(
+                    receiver_channel_name,
+                    {
+                        "type": "chat.message",
+                        "message": message,
+                        "sender_username": sender_username,
+                        "timestamp": timestamp,
+                    },
+                )
               
     async def chat_message(self, event):
         message = event['message']
