@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 from django.views.static import serve
-from .views import singup ,singin, account42, accountdataedit, userauthenticator, upload_image, onlineusers, offlineusers, friendsadd ,getfriends, darklistadd, tournament
+from .views import singup ,singin, account42, accountdataedit, userauthenticator, upload_image, onlineusers, offlineusers, friendsadd ,getfriends, darklistadd, tournament, get_user_data
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -18,6 +18,7 @@ urlpatterns = [
     path('getfriends/', getfriends, name='getfriends'),
     path('darklistadd/', darklistadd, name='darklistadd'),
     path('tournament/', tournament, name='tournament'),
+    path('getuser/', get_user_data, name='get_user_data'),
     re_path(r'^api/account/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
 

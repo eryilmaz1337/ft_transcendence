@@ -17,7 +17,16 @@
 		<img class="cloud2" src="img/cloud.png" alt="cloud2">
 		<img class="cloud3" src="img/cloud.png" alt="cloud3">
 	</div>
-
+	<script>
+		function exit()
+		{
+			sessionStorage.clear();
+      		socket.close();
+			socket = 0; 
+      		setTimeout(function() {}, 1000);
+      		window.location.hash = 'login';
+		}
+	</script>
 	<nav>
 		<div class="logo">
 			<h4>ft_transcendence</h4>
@@ -34,7 +43,7 @@
 			</div>
             <div class="profile-picture" id="profile-picture"></div>
             <div class="logout-wrapper" id="logout-wrapper">
-                <button class="logout-btn" id="logout-btn">Çıkış Yap</button>
+                <button class="logout-btn" onclick="exit()">Çıkış Yap</button>
             </div>
         </div>
 		<div class="burger">
@@ -60,6 +69,7 @@
 	<script src="jsFiles/profilePage/publicProfile.js"></script>
 	<script src="jsFiles/profilePage/profileSettings.js"></script>
 	<script src="jsFiles/profilePage/profile2exit.js"></script>
+	<script src="jsFiles/profilePage/chatProfile.js"></script>
 	<script src="jsFiles/chatPage/chat.js"></script>
 	<script src="jsFiles/chatPage/chatApp.js"></script>
 	<script src="jsFiles/confirmPage/confirm.js"></script>

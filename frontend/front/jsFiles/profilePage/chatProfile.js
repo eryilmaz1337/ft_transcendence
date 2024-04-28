@@ -3,25 +3,24 @@ function toggleTable() {
     table.classList.toggle("hidden");
 }
 
-// // Fonksiyon ile veri alımı
-// // function fetchData(url) {
-// //     return fetch(url)
-// //       .then(response => {
-// //         if (!response.ok) {
-// //           throw new Error('Network response was not ok');
-// //         }
-// //         return response.json();
-// //       })
-// //       .catch(error => {
-// //         console.error('Error fetching data:', error);
-// //         return Promise.resolve([]); // Hata durumunda boş liste dön yani data listesi boş dönüyor
-// //       });
-// //   }
+// Fonksiyon ile veri alımı
+// function fetchData(url) {
+//     return fetch(url)
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error('Network response was not ok');
+//         }
+//         return response.json();
+//       })
+//       .catch(error => {
+//         console.error('Error fetching data:', error);
+//         return Promise.resolve([]); // Hata durumunda boş liste dön yani data listesi boş dönüyor
+//       });
+//   }
   
 //   // Verileri tablo olarak gösteren fonksiyon
 //   function displayData(data) {
 //     const container = document.querySelector('#history-div');
-//     console.log(data.length);
 //     if (data.length == 0) {
 //         const message = document.createElement('h1');
 //         message.textContent = 'No match history found!';
@@ -59,36 +58,77 @@ function toggleTable() {
 //     });
 //   }
 
-function publicProfile() {
-    // Veriyi alma ve tablo olarak gösterme işlemlerini yürütme
-    // fetchData('your-backend-url/data')
-    // .then(data => {
-    //   displayData(data);
-    // });
+function chatProfile(username) {
+    var data = {
+        jsonsecuritykey: sessionStorage.getItem("securitykey"),
+        getusername: username 
+    }
+    console.log(username);
+    fetch(`http://localhost:8000/api/account/getuser/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+
+        sessionStorage.setItem('rusername', data.username);
+        sessionStorage.setItem('rname', data.name);
+        sessionStorage.setItem('rsurname', data.surname);
+        sessionStorage.setItem('remail', data.email);
+        sessionStorage.setItem('rprofile_image', data.profile_image);
+        var usernameTextElements = document.querySelectorAll('.username_text');
+            usernameTextElements.forEach(function(element) {
+                element.textContent = data.username;
+            });
+            updateProfileImageOnPage(data.profile_image);
+
+        // Profil bilgilerini güncelle
+        document.getElementById('username').value = data.username;
+        document.getElementById('email').value = data.email;
+        document.getElementById('first-name').value = data.name;
+        document.getElementById('last-name').value = data.surname;
+
+        // Profil fotoğrafını güncelle
+        const profilePhoto = document.getElementById('profile-photo');
+        profilePhoto.src = data.profile_image;
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+        // Hata durumunda uygun bir mesaj gösterebilirsiniz
+    });
+    
     return `
     <div class="wrapper">
     <div class="form-wrapper">
             <h3>Profile</h3>
                 <div class="field-wrapper profile-photo-wrapper">
-                    <img src="${sessionStorage.getItem('profile_image')}" id="profile-photo" class="profile-photo" alt="Profile Photo">
+                    <img src="${sessionStorage.getItem('rprofile_image')}" id="profile-photo" class="profile-photo" alt="Profile Photo">
                 </div>
 
                 <div class="field-wrapper">
                 <!-- Username -->
                     <label for="username" data-translate="profileusername">Username:</label>
-                    <input type="text" id="username" name="username" value="${sessionStorage.getItem('username')}" readonly>
+                    <input type="text" id="username" name="username" value="${sessionStorage.getItem('rusername')}" readonly>
                 <!-- Email -->
                     <label for="email"  data-translate="profileemail">Email:</label>
-                    <input type="email" id="email" name="email" value="${sessionStorage.getItem('email')}" readonly>
+                    <input type="email" id="email" name="email" value="${sessionStorage.getItem('remail')}" readonly>
                 </div>
 
                 <div class="field-wrapper">
                 <!-- First Name -->
                     <label for="first-name" data-translate="profilefirstname">First Name:</label>
-                    <input type="text" id="first-name" name="first-name" value="${sessionStorage.getItem('name')}" readonly>
+                    <input type="text" id="first-name" name="first-name" value="${sessionStorage.getItem('rname')}" readonly>
                 <!-- Last Name -->
                     <label for="last-name" data-translate="profilelastname">Last Name:</label>
-                    <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('surname')}" readonly>
+                    <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('rsurname')}" readonly>
                 </div>
                     <div class="form-wrapper">
                     <!-- Match History Symbol -->

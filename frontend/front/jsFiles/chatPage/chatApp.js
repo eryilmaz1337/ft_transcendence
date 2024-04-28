@@ -248,15 +248,16 @@ function userchanges(name)
 {
     if(name && name.trim().length != 0)
     {
+        chatProfileUsername=name;
         const chatInput = document.getElementById('chat-text');
-        const chatHeader = document.getElementById('chat-header');
-        const myUsername = sessionStorage.getItem('username');
-        chatHeader.innerHTML = `${myUsername} is chatting with <a href="#" onclick="goToProfile('${name}')">${name}</a>`;
-        chatHeader.style.color = 'greenyellow';
-        chatInput.placeholder = `Type to ${name}...`;
-        receiver_username = name;
-        showm = true;
-        is_flag = true;
+    const chatHeader = document.getElementById('chat-header');
+    const myUsername = sessionStorage.getItem('username');
+    chatHeader.innerHTML = `${myUsername} is chatting with <a href="#chatProfile">${name}</a>`;
+    chatHeader.style.color = 'greenyellow';
+    chatInput.placeholder = `Type to ${name}...`;
+    receiver_username = name;
+    showm = true;
+    is_flag = true;
 
     if(offlineUSerList.includes(name)){
         chatInput.disabled = true;

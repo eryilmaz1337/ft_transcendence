@@ -301,3 +301,18 @@ def tournament(request):
             return JsonResponse({'success': False})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+    
+@csrf_exempt
+def get_user_data(request):
+    if request.method == 'POST':
+        # POST verisinden kullanıcı adı ve parolayı al
+        data = json.loads(request.body)
+        jsecuritykey = data.get('jsonsecuritykey')
+        if not users.objects.filter(securitykey=jsecuritykey).exists():
+            user = users.objects.get(securitykey=jsecuritykey)
+            if not user.securitykey==jsecuritykey:
+                return JsonResponse({'success': False, 'massage': 'unauthorized transaction'})
+        user = users.objects.get(username=data.get("getusername"))
+        return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
+    else:
+        return JsonResponse({'success': False, 'message': 'Only POST method is allow'})
