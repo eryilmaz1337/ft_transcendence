@@ -11,29 +11,21 @@ function addplayer()
 
     if(player1.textContent === 'Player 1')
     {
-        //getonlinestatususer_t(text, player1);
-        //getofflinestatususer_t(text, player1);
         player1.textContent = text;
         document.getElementById("addtext").value = ''; 
     }
     else if(player2.textContent == "Player 2")
     {
-        //getonlinestatususer_t(text, player2);
-        //getofflinestatususer_t(text, player2);
         player2.textContent = text;
         document.getElementById("addtext").value = '';
     }
     else if(player3.textContent == "Player 3")
     {
-        //getonlinestatususer_t(text, player3);
-        //getofflinestatususer_t(text, player3);
         player3.textContent = text;
         document.getElementById("addtext").value = '';
     }
     else if(player4.textContent == "Player 4")
     {
-        //getonlinestatususer_t(text, player4);
-        //getofflinestatususer_t(text, player4);
         player4.textContent = text;
         document.getElementById("addtext").value = ''; 
     }
@@ -48,16 +40,19 @@ function addplayer()
 function starttournament() {
     const player1 = document.getElementById("player1").textContent;
     const player2 = document.getElementById("player2").textContent;
+    const player3 = document.getElementById('player3').textContent;
+    const player4 = document.getElementById('player4').textContent;
 
     if (player1 === 'Player 1' || player2 === 'Player 2') {
         alert('You need at least 2 players to start the tournament.');
-        //window.location.href = "#game"
         return;
     }
 
     // Optionally, store the player names in session or local storage to use on the game page
     sessionStorage.setItem("player1", player1);
     sessionStorage.setItem("player2", player2);
+    sessionStorage.setItem("player3", player3);
+    sessionStorage.setItem("player4", player4);
 
     // Change the href to direct to the onevsone page with a hash
     let link = document.getElementById("startLink");

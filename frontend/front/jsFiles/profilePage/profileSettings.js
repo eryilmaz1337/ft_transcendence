@@ -1,46 +1,51 @@
 function saveProfile() {
-    var data = {
-        jsonsecuritykey: sessionStorage.getItem("securitykey"),
-        jsonoldusername: sessionStorage.getItem("username"),
-        jsonusername: document.getElementById('username').value,
-        jsonname: document.getElementById('first-name').value,
-        jsonsurname: document.getElementById('last-name').value,
-        jsonemail: document.getElementById('email').value,
-        jsonprofileimage: "http://localhost:8000/api/account/media/uploads/profile_image.jpg" // Profil resmi yolu
-    }
-
-    fetch("http://localhost:8000/api/account/account-edit/", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data) {
-            alert('Başarılı');
-            sessionStorage.setItem('username', data.username);
-            sessionStorage.setItem('name', data.name);
-            sessionStorage.setItem('surname', data.surname);
-            sessionStorage.setItem('email', data.email);
-            sessionStorage.setItem('profile_image', data.profile_image);
-            var usernameTextElements = document.querySelectorAll('.username_text');
-            usernameTextElements.forEach(function(element) {
-                element.textContent = data.username;
-            });
-            updateProfileImageOnPage(data.profile_image);
-        } else {
-            alert('Error while processing the request.');
+    if (flag == true)
+    {
+        var data = {
+            jsonsecuritykey: sessionStorage.getItem("securitykey"),
+            jsonoldusername: sessionStorage.getItem("username"),
+            jsonusername: document.getElementById('username').value,
+            jsonname: document.getElementById('first-name').value,
+            jsonsurname: document.getElementById('last-name').value,
+            jsonemail: document.getElementById('email').value,
+            jsonprofileimage: "http://localhost:8000/api/account/media/uploads/profile_image.jpg" // Profil resmi yolu
         }
-    })
-    .catch((error) => {
-        console.error('Hata:', error);
-    });
+    
+        fetch("http://localhost:8000/api/account/account-edit/", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                alert('Başarılı');
+                sessionStorage.setItem('username', data.username);
+                sessionStorage.setItem('name', data.name);
+                sessionStorage.setItem('surname', data.surname);
+                sessionStorage.setItem('email', data.email);
+                sessionStorage.setItem('profile_image', data.profile_image);
+                var usernameTextElements = document.querySelectorAll('.username_text');
+                usernameTextElements.forEach(function(element) {
+                    element.textContent = data.username;
+                });
+                updateProfileImageOnPage(data.profile_image);
+            } else {
+                alert('Error while processing the request.');
+            }
+        })
+        .catch((error) => {
+            console.error('Hata:', error);
+        });
+    }
 }
 
+let flag = false;
 
 function uploadFile() {
+    flag = true;
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
 
@@ -52,7 +57,9 @@ function uploadFile() {
     // Dosya uzantısını kontrol et
     const fileName = file.name;
     const extension = fileName.slice(fileName.lastIndexOf('.') + 1).toLowerCase();
-    if (extension !== 'jpg') {
+    if (extension !== 'jpg')
+    {
+        flag = false;
         alert('Lütfen bir .jpg dosyası yükleyin.');
         return;
     }
