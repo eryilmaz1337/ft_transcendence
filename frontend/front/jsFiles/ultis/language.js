@@ -61,7 +61,8 @@ var translations = {
       'addgameuser' : '🎮 Oyuna Davet Et ',
       'blockuser' : '❌ Engelle',
       'addfriend' : '➕ Arkadaş Ekle',
-      'friends' : 'Arkadaşlar'
+      'friends' : 'Arkadaşlar',
+      'signupError' : 'Kullanıcı oluşturulamadı! Farklı bir kullanıcı adıyla tekrar dene!'
 
       
   },
@@ -126,7 +127,8 @@ var translations = {
     'addgameuser': '🎮 Invite to Game',
     'blockuser': '❌ Block User',
     'addfriend': '➕ Add Friend',
-    'friends' : 'Friends'
+    'friends' : 'Friends',
+    'signupError' : 'Failed to create user! Try again with a different username!'
   },
   ru: {
 
@@ -190,7 +192,8 @@ var translations = {
     'addgameuser': '🎮 Пригласить в игру',
     'blockuser': '❌ Заблокировать пользователя',
     'addfriend': '➕ Добавить друга',
-    'friends' : 'Друзья'
+    'friends' : 'Друзья',
+    'signupError' : 'Не удалось создать пользователя! Попробуйте еще раз с другим именем пользователя!'
   
   }
 };
