@@ -62,9 +62,8 @@ var translations = {
       'blockuser' : '❌ Engelle',
       'addfriend' : '➕ Arkadaş Ekle',
       'friends' : 'Arkadaşlar',
-      'signupError' : 'Kullanıcı oluşturulamadı! Farklı bir kullanıcı adıyla tekrar dene!'
-
-      
+      'signupError' : 'Kullanıcı oluşturulamadı! Farklı bir kullanıcı adıyla tekrar dene!',
+      'matchHistory' : 'Karşılaşma Geçmişi'
   },
   en: {
     'titlelogin': 'LOGIN',
@@ -128,7 +127,8 @@ var translations = {
     'blockuser': '❌ Block User',
     'addfriend': '➕ Add Friend',
     'friends' : 'Friends',
-    'signupError' : 'Failed to create user! Try again with a different username!'
+    'signupError' : 'Failed to create user! Try again with a different username!',
+    'matchHistory' : 'Match History'
   },
   ru: {
 
@@ -193,7 +193,8 @@ var translations = {
     'blockuser': '❌ Заблокировать пользователя',
     'addfriend': '➕ Добавить друга',
     'friends' : 'Друзья',
-    'signupError' : 'Не удалось создать пользователя! Попробуйте еще раз с другим именем пользователя!'
+    'signupError' : 'Не удалось создать пользователя! Попробуйте еще раз с другим именем пользователя!',
+    'matchHistory' : 'История матчей'
   
   }
 };

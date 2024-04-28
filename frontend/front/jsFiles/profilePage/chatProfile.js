@@ -134,7 +134,7 @@ function chatProfile(username) {
                     <!-- Match History Symbol -->
                         <img src="../img/symbols/matchHistory.png" id="match_history" alt="Match History" class="match_history" onclick="toggleTable()">
                         <div class="game-explanation">
-                            <label for="match_history_label">Match History</label>
+                            <label for="match_history_label" data-translate="matchHistory">Match History</label>
                         </div>
                     </div>
                 <div class="history-div" id="history-div">
