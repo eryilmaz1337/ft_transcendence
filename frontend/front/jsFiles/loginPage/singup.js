@@ -17,7 +17,7 @@ function signupjson()
     jsonpassword: document.getElementById('password').value
   }
   if(!isValidEmail(data.jsonemail)){
-    alert("email formatı yanlış\nÖrnek:abc@abc.com");
+    alert("email formatı yanlış!");
     return;
   }
   console.log(data);
@@ -28,7 +28,14 @@ function signupjson()
     },
     body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
   })
-  .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
+  .then(response => {
+    if (!response.ok) {
+      signupError = document.getElementById('signupError');
+      signupError.style.visibility = 'visible';
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+}) // JSON olarak dönen yanıtı parse etme
   .then(data => {
     console.log('Başarıyla gönderildi:', data);
     window.location.hash = "login";
@@ -108,6 +115,14 @@ function singup()
         transform: scale(1.3);
       }
 
+      .signupError{
+        text-align: center;
+        visibility: hidden;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #f00;
+      }
+
     </style>
 
     <body>
@@ -120,6 +135,7 @@ function singup()
             <input type="text" id="surname" placeholder="Surname" requidred>
             <input type="email" id="email" placeholder="Email" required>
             <input type="password" id="password" placeholder="Password" required>
+            <div class="signupError" id="signupError" data-translate="signupError"></div>
             <button type="button" onclick="signupjson()" data-translate="registerbuton">Sign Up</button>
           </form>
       </div>

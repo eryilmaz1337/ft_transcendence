@@ -281,3 +281,23 @@ def darklistadd(request):
             return JsonResponse({'success': False, 'message': 'no unauthorized'})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+
+@csrf_exempt
+def tournament(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            user = users.objects.get(securitykey=data.get('jsonsecuritykey'))
+            if user.username == data.get('jsonusername'):
+                my_list = [data.get("jsonplayer1"), data.get("jsonplayer2"), data.get("jsonplayer3"), data.get("jsonplayer4")]
+                json_data_list = []
+                for i in range(4):
+                    selected_value = random.choice(my_list)
+                    my_list.remove(selected_value)
+                    json_data = { i : selected_value}
+                    json_data_list.append(json_data)
+                return JsonResponse({'success': True , 'message': json_data_list})
+        else:
+            return JsonResponse({'success': False})
+    else:
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})

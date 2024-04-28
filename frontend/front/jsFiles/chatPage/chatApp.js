@@ -35,7 +35,7 @@ function addfriends()
 
 function adddarklist()
 {
-    if (is_flag == true)
+    if (is_flag == true && receiver_username != 0)
     {
         var data = {
             jsonsecuritykey: sessionStorage.getItem('securitykey'),
@@ -397,7 +397,7 @@ function displayMessager(message,rusername)
 
 //Oyuna Davet Kısmı
 function oyunadavet() {
-    if ((is_flag == true))
+    if ((is_flag == true) && (receiver_username != 0))
     {
         const message_text = `<a href="#onevsone" return false;">SENİ OYUNA DAVET EDİYORUM</a>`;
         const myUsername = sessionStorage.getItem('username');

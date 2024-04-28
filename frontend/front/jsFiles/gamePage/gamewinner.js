@@ -1,105 +1,16 @@
-function chooseGame() {
-    return `
-    <div id="game-container">
-        <div class="wrapper">
-        <div class="form-wrapper">
-            <form onsubmit="return false;">
-                <h3 data-translate="ponggame">🏓 Pong Game 🏓</h3>
-                <a href ="#aimode" class="choose-game-button" data-translate="aimode">ai</a>
-                <a href ="#tournament" class="choose-game-button" data-translate="tournamentt" >tournament</a>
-                <a href ="#onevsone" class="choose-game-button">özel oyun</a>
-            </form>
-        </div>
-    </div>
-
-        <style>
-        
-            #game-container {
-                background-image: url('../img/retro-arcade.jpeg');
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-                font-family: 'Poppins', sans-serif;
-                box-sizing: border-box;
-            }
-
-            .choose-game-container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                margin-top: 20px;
-            }
-
-            .choose-game-button {
-                text-decoration: none;
-                padding: 10px 20px;
-                font-size: 17px;
-                border: none;
-                border-radius: 20px;
-                cursor: pointer;
-                background-color: greenyellow;
-                color: #000;
-                margin: 10px;
-                font-weight: bold;
-                transition: background-color 0.3s ease;
-            }
-
-            .choose-game-button:hover {
-                background-color: #0cf;
-            }
-
-            .wrapper {
-                position: absolute;
-                max-height: calc(100% - 100px); /* Adjusted maximum height to prevent excessive stretching */
-                height: 300px;
-                background: #000;
-                box-shadow: 0 0 50px greenyellow;
-                border-radius: 20px;
-                overflow: hidden;
-                display: flex;
-            }
-
-            .form-wrapper {
-                font-family: 'Poppins', sans-serif;
-                display: flex;
-                width: 100%;
-                height: 100%;
-                flex-direction: column; /* Change flex-direction to column */
-                justify-content: center; /* Center vertically */
-                align-items: center; /* Center horizontally */
-            }
-
-            h3 {
-                font-size: 30px;
-                margin-bottom: 20px;
-                color: #fff;
-                text-align: center;
-            }
-
-        </style>
-    `;
-}
-
-function checkGameTheme() {
-    if(window.location.hash == "#aimode" || window.location.hash == "#onevsone"  || window.location.hash == "#tournamentmatches")
+function checkGameThemewinner() {
+    if(window.location.hash == "#tournamentmatches")
     {if(gameTheme === 0) {
        window.setTimeout(checkGameTheme, 1000); /* this checks the flag every 1000 milliseconds*/
     } 
     else {
         console.log("gameTheme= "+gameTheme);
-        if(window.location.hash == "#aimode")
-            startgame();
-        else if ( window.location.hash == "#tournamentmatches")
-            tournamentmatches();
-        else
-            startgameone();
+        tournamentmatches();
     }}
     return;
 }
 
-function setGameTheme(value)
+function setGameThemewinner(value)
 {
     var audio = document.getElementById("clMusic");
     console.log("setGameTheme value is: "+value);
@@ -163,8 +74,8 @@ function setGameTheme(value)
 }
 
 // Oyun Fonksiyonu
-function gameAdd() {
-    checkGameTheme();
+function gameAddwinner() {
+    checkGameThemewinner();
     return `
     <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -296,8 +207,8 @@ function gameAdd() {
             <button type="button" class="btn btn-outline-secondary" onclick="setGameTheme(5)">Milky Way</button>
         </div>
         <div id="scoreboard">
-            <h1 id="player1Score">0</h1>
-            <h1 id="player2Score">0</h1>
+            <h1 id="player1Score">${paddle1Score}</h1>
+            <h1 id="player2Score">${paddle2Score}</h1>
         </div>
         <h2 id ="WelcomeText" data-translate="welcomepong">Welcome to the Pong Game</h2>
         <h2 id ="ChooseTheme" data-translate="choosetheme">Choose a theme below!</h2>
