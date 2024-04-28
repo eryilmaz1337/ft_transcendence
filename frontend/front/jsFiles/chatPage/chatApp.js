@@ -257,7 +257,7 @@ function userchanges(name)
     chatInput.placeholder = `Type to ${name}...`;
     receiver_username = name;
     showm = true;
-        is_flag = true;
+    is_flag = true;
 
     if(offlineUSerList.includes(name)){
         chatInput.disabled = true;

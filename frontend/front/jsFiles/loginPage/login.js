@@ -34,6 +34,7 @@ function accountsave(accessToken)
                         element.textContent = data.username;
                     });
                     con();
+                    setTimeout(function() {}, 1000);
                     window.location.hash = "#game";
 
                 } else {
@@ -48,15 +49,6 @@ function accountsave(accessToken)
     // accessToken'i doğru şekilde kullan
     const requestBody = JSON.stringify({ code: accessToken });
     xhr.send(requestBody);
-    isLoggedIn = true;
-}
-
-function loginSuccess()
-{
-    // burdan veri tabanındaki çevrimiçi durumunu değiştiren kodu yaz
-
-    window.location.hash = "#loading"
-    isLoggedIn = true;
 }
 
 function signinFunction(){

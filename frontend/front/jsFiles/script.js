@@ -1,4 +1,4 @@
-
+let key = false;
 var searchlanguages = localStorage.getItem('selectedLanguage');
         if(!searchlanguages)
         localStorage.setItem('selectedLanguage', 'tr');
@@ -15,10 +15,17 @@ document.addEventListener('DOMContentLoaded', function () {
         window.history.replaceState(null, null, cleanUrl);
         // `accessToken` değişkenini kullanarak sunucu tarafında erişim token'ı almak için bir istek yapın
         accountsave(accessToken);
-        loginSuccess();
+        window.location.hash = "#loading"
     }
     else
     {
+        var usernameTextElements = document.querySelectorAll('.username_text');
+                    usernameTextElements.forEach(function(element) {
+                        element.textContent = sessionStorage.getItem("username");
+                    });
+        if(page == "game" || page == "onevsone" || page == "tournament" || page == "aimode" || page == "chat" || page == "publicProfile" ||page == "chatProfile"||page == "profileSettings"||page == "loading")
+            con();
+        setTimeout(function() {}, 1000);
         changePage(page || 'login'); // Eğer hash yoksa login sayfasına yönlendir
     }
 });
@@ -37,10 +44,9 @@ chatProfileUsername="";
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
     const page = window.location.hash.substring(1);
-    if(page=="loading")
-    {
-        isgetdata = false;
-    }
+    if(page == "game" || page == "onevsone" || page == "tournament" || page == "aimode" || page == "chat" || page == "publicProfile" ||page == "chatProfile"||page == "profileSettings"||page == "loading")
+        con();
+    setTimeout(function() {}, 1000);
     changePage(page);
 });
 
@@ -67,17 +73,13 @@ function changePage(page) {
     //önceki içerik temizlenir
     document.getElementById('content').innerHTML = '';
     showHeader();
-    showNavbarStates();
+    // showNavbarStates();
 
-    if (true)
+    if (socket)
     {
         updateProfilePictureStyle();
         switch (page) 
         {
-            case 'login':
-                removeHeader();
-                content = loginAdd();
-                break;
             case 'game':
                 content = chooseGame();
                 break;
@@ -105,6 +107,37 @@ function changePage(page) {
             case 'profileSettings':
                 content = profileSettings();
                 break;
+            case 'loading':
+                removeHeader();
+                content = loading();
+                setTimeout(function() {
+                    if(isgetdata==false)
+                        window.location.hash = "login";
+                }, 5000);
+                break;
+            case 'confirm':
+                break;
+            default:
+                content = ErrorAdd();
+        }
+        //Yeni içerik eklenir.
+        document.getElementById('content').innerHTML = content;
+        window.location.hash = page;
+
+        var languages = localStorage.getItem('selectedLanguage');
+        changeLanguage(languages);
+        //Sayfa içeriği değiştikten sonra navbar gösterme
+        // showNavbarStates();
+        //Async function()
+    }
+    else
+    {
+        switch (page) 
+        {
+            case 'login':
+                removeHeader();
+                content = loginAdd();
+                break;
             case 'signup':
                 removeHeader();
                 content = singup();
@@ -121,12 +154,11 @@ function changePage(page) {
                         window.location.hash = "login";
                 }, 5000);
                 break;
-            case 'confirm':
-                break;
             default:
                 removeHeader();
                 content = ErrorAdd();
         }
+        
         //Yeni içerik eklenir.
         document.getElementById('content').innerHTML = content;
         window.location.hash = page;
@@ -134,13 +166,8 @@ function changePage(page) {
         var languages = localStorage.getItem('selectedLanguage');
         changeLanguage(languages);
         //Sayfa içeriği değiştikten sonra navbar gösterme
-        showNavbarStates();
+        // showNavbarStates();
         //Async function()
-    }
-    else
-    {
-        window.location.hash = 'login';
-        isgetdata = false;
     }
 }
 

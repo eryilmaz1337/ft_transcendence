@@ -26,7 +26,8 @@ function signinjson()
           usernameTextElements.forEach(function(element) {
               element.textContent = data.username;
           });
-          con()
+          con();
+          setTimeout(function() {}, 1000);
           window.location.href = "#game";
         }else {
           alert('Error while processing the request.');
