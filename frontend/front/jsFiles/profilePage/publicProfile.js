@@ -1,70 +1,70 @@
-function toggleTable() {
-    var table = document.getElementById("history-div");
-    table.classList.toggle("hidden");
-}
+// function toggleTable() {
+//     var table = document.getElementById("history-div");
+//     table.classList.toggle("hidden");
+// }
 
-// Fonksiyon ile veri alımı
-function fetchData(url) {
-    return fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        return Promise.resolve([]); // Hata durumunda boş liste dön yani data listesi boş dönüyor
-      });
-  }
+// // Fonksiyon ile veri alımı
+// // function fetchData(url) {
+// //     return fetch(url)
+// //       .then(response => {
+// //         if (!response.ok) {
+// //           throw new Error('Network response was not ok');
+// //         }
+// //         return response.json();
+// //       })
+// //       .catch(error => {
+// //         console.error('Error fetching data:', error);
+// //         return Promise.resolve([]); // Hata durumunda boş liste dön yani data listesi boş dönüyor
+// //       });
+// //   }
   
-  // Verileri tablo olarak gösteren fonksiyon
-  function displayData(data) {
-    const container = document.querySelector('#history-div');
-    console.log(data.length);
-    if (data.length == 0) {
-        const message = document.createElement('h1');
-        message.textContent = 'No match history found!';
-        container.appendChild(message);
-        return;
-    }
+//   // Verileri tablo olarak gösteren fonksiyon
+//   function displayData(data) {
+//     const container = document.querySelector('#history-div');
+//     console.log(data.length);
+//     if (data.length == 0) {
+//         const message = document.createElement('h1');
+//         message.textContent = 'No match history found!';
+//         container.appendChild(message);
+//         return;
+//     }
     
-    const header = document.createElement('h1');
-    header.textContent = 'Match History Table';
-    container.appendChild(header);
-    const table = document.createElement('table');
-    table.innerHTML = `
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Age</th>
-        </tr>
-      </thead>
-      <tbody id="table-body">
-        <!-- Data will be displayed here -->
-      </tbody>
-    `;
-    container.appendChild(table);
+//     const header = document.createElement('h1');
+//     header.textContent = 'Match History Table';
+//     container.appendChild(header);
+//     const table = document.createElement('table');
+//     table.innerHTML = `
+//       <thead>
+//         <tr>
+//           <th>ID</th>
+//           <th>Name</th>
+//           <th>Age</th>
+//         </tr>
+//       </thead>
+//       <tbody id="table-body">
+//         <!-- Data will be displayed here -->
+//       </tbody>
+//     `;
+//     container.appendChild(table);
   
-    const tableBody = document.querySelector('#table-body');
-    data.forEach(item => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${item.id}</td>
-        <td>${item.name}</td>
-        <td>${item.age}</td>
-      `;
-      tableBody.appendChild(row);
-    });
-  }
+//     const tableBody = document.querySelector('#table-body');
+//     data.forEach(item => {
+//       const row = document.createElement('tr');
+//       row.innerHTML = `
+//         <td>${item.id}</td>
+//         <td>${item.name}</td>
+//         <td>${item.age}</td>
+//       `;
+//       tableBody.appendChild(row);
+//     });
+//   }
 
 function publicProfile() {
     // Veriyi alma ve tablo olarak gösterme işlemlerini yürütme
-    fetchData('your-backend-url/data')
-    .then(data => {
-      displayData(data);
-    });
+    // fetchData('your-backend-url/data')
+    // .then(data => {
+    //   displayData(data);
+    // });
     return `
     <div class="wrapper">
     <div class="form-wrapper">

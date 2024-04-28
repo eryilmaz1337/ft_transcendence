@@ -38,7 +38,6 @@ function signinjson()
       });
 }
 
-
 function singin()
 {
     return `
