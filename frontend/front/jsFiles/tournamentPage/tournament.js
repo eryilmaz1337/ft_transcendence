@@ -35,6 +35,31 @@ function addplayer()
     
 }
 
+function starttournament() {
+    const player1 = document.getElementById("player1").textContent;
+    const player2 = document.getElementById("player2").textContent;
+
+    if (player1 === 'Player 1' || player2 === 'Player 2') {
+        alert('You need at least 2 players to start the tournament.');
+        return;
+    }
+
+    // Optionally, store the player names in session or local storage to use on the game page
+    sessionStorage.setItem("player1", player1);
+    sessionStorage.setItem("player2", player2);
+
+    // Change the href to direct to the onevsone page with a hash
+    let link = document.getElementById("startLink");
+    link.href = "#onevsone";
+    
+    // Redirect to the page
+    window.location.href = "#onevsone";
+
+    // Optionally display the message on redirection or through another means
+    alert(`It's now time for ${player1} and ${player2}`);
+}
+
+
 function tournamentPage() {
     return `
     <div id="game-container">
@@ -64,7 +89,7 @@ function tournamentPage() {
                 </form>
             </div>
             
-            <a href ="#quickMatch" class="choose-game-button2" data-translate="TurnuvaStart">Start Tournament</a>
+            <a href ="#onevsone" onclick = "starttournament()" class="choose-game-button2" data-translate="TurnuvaStart">Start Tournament</a>
 
         </div>
     </div>

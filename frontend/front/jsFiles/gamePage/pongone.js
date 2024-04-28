@@ -84,16 +84,16 @@ function startgameone()
         this.update = function() {
             if(player == "player2")
             {
-                if (keysPressed[KEY_UP])
+                if (keysPressed[KEY_UP_P])
                     this.pos.y -= this.velocity.y;
-                if (keysPressed[KEY_DOWN])
+                if (keysPressed[KEY_DOWN_P])
                     this.pos.y += this.velocity.y;
             }
             if(player == "player1")
             {
-                if (keysPressed[KEY_UP_P])
+                if (keysPressed[KEY_UP])
                     this.pos.y -= this.velocity.y;
-                if (keysPressed[KEY_DOWN_P])
+                if (keysPressed[KEY_DOWN])
                     this.pos.y += this.velocity.y;
             }
         };
