@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 gameTheme=0;
 gameBGImagePath="";
 gameBGColor='';
+chatProfileUsername="";
 
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
@@ -95,6 +96,9 @@ function changePage(page) {
                 break;
             case 'publicProfile':
                 content = publicProfile();
+                break;
+            case 'chatProfile':
+                content = chatProfile(chatProfileUsername);
                 break;
             case 'profileSettings':
                 content = profileSettings();
