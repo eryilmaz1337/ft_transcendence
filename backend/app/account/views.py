@@ -271,17 +271,24 @@ def friendsadd(request):
 def darklistadd(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
-            darklist.objects.create(
-                username=data['jsonusername'],
-                darkfriends=data['jsondarkfriend']
-            )
-            return JsonResponse({'success': True, 'message': 'darklist add'})
+        security_key = data.get('jsonsecuritykey')
+        username = data.get('jsonusername')
+        darkfriend = data.get('jsondarkfriend')
+
+        user = users.objects.filter(securitykey=security_key).first()
+        if user:
+            # Dark list'e ekleme
+            darklist.objects.create(username=username, darkfriends=darkfriend)
+            
+            # Arkadaş listesinden silme
+            friends.objects.filter(username=username, friends=darkfriend).delete()
+
+            return JsonResponse({'success': True, 'message': 'User added to darklist and removed from friends list.'})
         else:
-            return JsonResponse({'success': False, 'message': 'no unauthorized'})
+            return JsonResponse({'success': False, 'message': 'Unauthorized access'})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
-
+    
 @csrf_exempt
 def tournament(request):
     if request.method == 'POST':
