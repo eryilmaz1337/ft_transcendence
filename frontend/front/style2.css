@@ -50,19 +50,6 @@ nav {
 	font-weight: bold;
 }
 
-.burger {
-	display: none;
-	cursor: pointer;
-}
-
-.burger div{
-	width: 25px;
-	height: 3px;
-	margin: 5px;
-	background-color: white;
-	transition: all 0.3s ease;
-}
-
 @media screen and (max-width:1024px){
 	.nav-links {
 		width: 60%;
@@ -90,9 +77,6 @@ nav {
 
 	.nav-links li {
 		opacity: 0;
-	}
-	.burger{
-		display: block;
 	}
 }
 

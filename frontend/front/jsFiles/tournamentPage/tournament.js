@@ -1,3 +1,5 @@
+let playerCounter = 0;
+
 function addplayer()
 {
     const player1 = document.getElementById("player1");
@@ -10,33 +12,37 @@ function addplayer()
     if(!text)
         return;
 
-        const players = document.querySelectorAll("#player1, #player2, #player3, #player4");
-        for (let i = 0; i < players.length; i++) {
-            if (players[i].textContent.trim() === my_text) {
-                alert("Bu isim zaten kullanılıyor. Lütfen farklı bir isim seçin.");
-                return;
-            }
+    const players = document.querySelectorAll("#player1, #player2, #player3, #player4");
+    for (let i = 0; i < players.length; i++) {
+        if (players[i].textContent.trim() === my_text) {
+            alert("Bu isim zaten kullanılıyor. Lütfen farklı bir isim seçin.");
+            return;
         }
+     }
 
-    if(player1.textContent === 'Player 1')
+    if (player1.textContent === 'Player 1')
     {
         player1.textContent = text;
         document.getElementById("addtext").value = '';
+        playerCounter++;
     }
     else if(player2.textContent == "Player 2")
     {
         player2.textContent = text;
         document.getElementById("addtext").value = '';
+        playerCounter++;
     }
     else if(player3.textContent == "Player 3")
     {
         player3.textContent = text;
         document.getElementById("addtext").value = '';
+        playerCounter++;
     }
     else if(player4.textContent == "Player 4")
     {
         player4.textContent = text;
         document.getElementById("addtext").value = '';
+        playerCounter++;
     }
     else
     {
@@ -52,6 +58,13 @@ function starttournament()
     const player2 = document.getElementById("player2").textContent;
     const player3 = document.getElementById('player3').textContent;
     const player4 = document.getElementById('player4').textContent;
+
+    //console.log("Kullanıcı uzunluğu " + playerCounter);
+    if (playerCounter < 3)
+    {
+        alert("Minimum 3 Kullanıcı Olabilir");
+        return;
+    }
 
     if (player1 === 'Player 1' || player2 === 'Player 2') {
         alert('You need at least 2 players to start the tournament.');
@@ -100,7 +113,9 @@ function starttournament()
 }
 
 
-function tournamentPage() {
+function tournamentPage()
+{
+    playerCounter = 0;
     return `
     <div id="game-container">
         <div class="wrapper">

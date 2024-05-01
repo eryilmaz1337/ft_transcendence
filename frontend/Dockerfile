@@ -10,7 +10,6 @@ WORKDIR /usr/src/app
 # COPY /front/index.html .
 # COPY style.css .
 # COPY style2.css .
-# COPY app.js .
 
 # http-server yükleyin
 RUN npm install -g http-server
