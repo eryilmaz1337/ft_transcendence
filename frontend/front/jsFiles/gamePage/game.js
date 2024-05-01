@@ -90,7 +90,7 @@ function checkGameTheme() {
     }
     else {
         console.log("gameTheme= " + gameTheme);
-        if(window.location.hash === "#aimode")
+        if (window.location.hash === "#aimode")
             startgame();
         else if ( window.location.hash === "#tournamentmatches")
             tournamentmatches();
@@ -306,3 +306,6 @@ function gameAdd() {
 
     `;
 }
+
+// paddleScore1 = 0 kullanıcı isimleri de yazılmalı
+// paddleScore2 = 0 kullanıcı isimleri de yazılmalı

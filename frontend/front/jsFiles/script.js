@@ -95,6 +95,12 @@ function changePage(page) {
             case 'tournamentmatches':
                 content = gameAdd();
                 break;
+            case 'tournament1':
+                content = gameAddwinner1();
+                break;
+            case 'tournament2':
+                content = gameAdd();
+                break;
             case 'winnerpage':
                 content = gameAddwinner();
                 break;

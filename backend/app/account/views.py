@@ -49,8 +49,8 @@ def singup(request):
                 JsonResponse({'error': 'Hata'})
     else:
         return JsonResponse({'error': 'Invalid request method'})
-    
-    
+
+
 @csrf_exempt  # Gerçek bir uygulamada CSRF token kullanılmalıdır
 def singin(request):
     if request.method == 'POST':
@@ -80,7 +80,7 @@ def account42(request):
             client_secret = os.getenv('CLIENT_SECRET')
             redirect_uri = 'http://localhost:423'
             grant_type = 'authorization_code'
-            
+
             token_data = {
                 'grant_type': grant_type,
                 'client_id': client_id,
@@ -97,7 +97,7 @@ def account42(request):
                 user_info_url = 'https://api.intra.42.fr/v2/me'
                 headers = {'Authorization': f'Bearer {access_token}'}
                 user_response = requests.get(user_info_url, headers=headers)
-                
+
                 if user_response.status_code == 200:
                     user_data = user_response.json()
                     user_exists = users.objects.filter(login_42=user_data['login']).exists()# Kullanıcı adıyla veritabanını kontrol et eğer bu kullanıcı yoksa veritabanına kaydet.
@@ -166,7 +166,7 @@ def upload_image(request):
             new_name = 'profile_image'  # Sabit bir dosya adı kullanıyoruz
             extension = 'jpg'  # Sabit bir uzantı kullanıyoruz
             new_filename = f"{new_name}.{extension}"
-            
+
             # Eski dosyayı sil
             existing_file_path = 'uploads/' + new_filename
             if default_storage.exists(existing_file_path):
@@ -195,7 +195,7 @@ def userauthenticator(request):
         else:
             return JsonResponse({'success': False, 'message': 'unauthorized transaction'})
     else:
-        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'}) 
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
 
 @csrf_exempt
 def onlineusers(request):
@@ -213,8 +213,8 @@ def onlineusers(request):
         else:
             return JsonResponse({'success': False, 'message': 'no unauthorized'})
     else:
-        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'}) 
-    
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+
 @csrf_exempt
 def offlineusers(request):
     if request.method == 'POST':
@@ -279,7 +279,7 @@ def darklistadd(request):
         if user:
             # Dark list'e ekleme
             darklist.objects.create(username=username, darkfriends=darkfriend)
-            
+
             # Arkadaş listesinden silme
             friends.objects.filter(username=username, friends=darkfriend).delete()
 
@@ -288,7 +288,8 @@ def darklistadd(request):
             return JsonResponse({'success': False, 'message': 'Unauthorized access'})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
-    
+
+# Degisecek 3 kullanıcı icin de yapilmali
 @csrf_exempt
 def tournament(request):
     if request.method == 'POST':
@@ -308,7 +309,7 @@ def tournament(request):
             return JsonResponse({'success': False})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
-    
+
 @csrf_exempt
 def get_user_data(request):
     if request.method == 'POST':
