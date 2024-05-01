@@ -13,7 +13,7 @@ function chooseGame() {
     </div>
 
         <style>
-        
+
             #game-container {
                 background-image: url('../img/retro-arcade.jpeg');
                 display: flex;
@@ -84,14 +84,15 @@ function chooseGame() {
 
 function checkGameTheme() {
     if(window.location.hash == "#aimode" || window.location.hash == "#onevsone"  || window.location.hash == "#tournamentmatches")
-    {if(gameTheme === 0) {
+    {
+        if(gameTheme === 0) {
        window.setTimeout(checkGameTheme, 1000); /* this checks the flag every 1000 milliseconds*/
-    } 
+    }
     else {
-        console.log("gameTheme= "+gameTheme);
-        if(window.location.hash == "#aimode")
+        console.log("gameTheme= " + gameTheme);
+        if(window.location.hash === "#aimode")
             startgame();
-        else if ( window.location.hash == "#tournamentmatches")
+        else if ( window.location.hash === "#tournamentmatches")
             tournamentmatches();
         else
             startgameone();

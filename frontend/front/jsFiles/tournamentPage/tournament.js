@@ -5,14 +5,14 @@ function addplayer()
     const player3 = document.getElementById("player3");
     const player4 = document.getElementById("player4");
     const text = document.getElementById("addtext").value;
-    
+
     if(!text)
         return;
 
     if(player1.textContent === 'Player 1')
     {
         player1.textContent = text;
-        document.getElementById("addtext").value = ''; 
+        document.getElementById("addtext").value = '';
     }
     else if(player2.textContent == "Player 2")
     {
@@ -27,17 +27,18 @@ function addplayer()
     else if(player4.textContent == "Player 4")
     {
         player4.textContent = text;
-        document.getElementById("addtext").value = ''; 
+        document.getElementById("addtext").value = '';
     }
     else
     {
         alert("Tüm Slotlar Dolu");
         document.getElementById("addtext").value = '';
     }
-    
+
 }
 
-function starttournament() {
+function starttournament()
+{
     const player1 = document.getElementById("player1").textContent;
     const player2 = document.getElementById("player2").textContent;
     const player3 = document.getElementById('player3').textContent;
@@ -55,8 +56,8 @@ function starttournament() {
     sessionStorage.setItem("player4", player4);
 
     // Change the href to direct to the onevsone page with a hash
-    
-    var data = 
+
+    var data =
     {
         jsonplayer1: sessionStorage.getItem('player1'),
         jsonplayer2: sessionStorage.getItem('player2'),
@@ -76,11 +77,11 @@ function starttournament() {
     .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
     .then(data => {
             //console.log(data.message[0]);
-            sessionStorage.setItem("round1_paddle1", data.message[0]);
-            sessionStorage.setItem("round1_paddle2", data.message[1]);
-
-            sessionStorage.setItem("round2_paddle1", data.message[0]);
-            sessionStorage.setItem("round2_paddle2", data.message[1]);
+            sessionStorage.setItem('paddle1User', data.message[0][Object.keys(data.message[0])[0]]);
+            sessionStorage.setItem('paddle2User', data.message[1][Object.keys(data.message[1])[0]]);
+            //console.log("paddle1: " + sessionStorage.getItem('paddle1User'));
+            //console.log("paddle2: " + sessionStorage.getItem('paddle2User'));
+            //console.log(window.location.hash); -> #Tournament
             window.location.hash = "tournamentmatches"
     })
     .catch((error) => {
@@ -99,7 +100,7 @@ function tournamentPage() {
                     <h3 data-translate="turnuvaolustur">Turnuva Oluştur</h3>
                     <input type="text" id="addtext" placeholder="Oyuncu Adı"/>
                     <button class="choose-game-button2" data-translate="oyuncuekle" onclick="addplayer()">Start Tournament</button>
-                    
+
                 </form>
             </div>
         </div>
@@ -116,7 +117,7 @@ function tournamentPage() {
                     </ul>
                 </form>
             </div>
-            
+
             <button onclick = "starttournament()" class="choose-game-button2" data-translate="TurnuvaStart">Start Tournament</button>
 
         </div>
@@ -151,18 +152,18 @@ function tournamentPage() {
             align-items: center;
             width: 100%;
             height: 100%;
-          
+
         }
         .eklebutton {
             font-size: 16px;
             color: aquamarine;
             cursor: pointer;
-            width: 100px; 
+            width: 100px;
             display: block;
-            margin: 0 auto; 
-            text-align: center; 
+            margin: 0 auto;
+            text-align: center;
         }
-    
+
         input {
             width: 100%;
             padding: 10px;
@@ -180,14 +181,14 @@ function tournamentPage() {
             border: none;
             border-radius: 20px;
             cursor: pointer;
-           
+
             color: greenyellow;
             margin: 0 auto;
             font-weight: bold;
             transition: background-color 0.3s ease;
             text-align: center;
             justify-content: center;
-            
+
         }
 
         .choose-game-button2 {

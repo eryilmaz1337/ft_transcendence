@@ -78,7 +78,7 @@ function changePage(page) {
     if (socket)
     {
         updateProfilePictureStyle();
-        switch (page) 
+        switch (page)
         {
             case 'game':
                 content = chooseGame();
@@ -86,14 +86,17 @@ function changePage(page) {
             case 'onevsone':
                 content = gameAdd();
                 break;
+            case 'aimode':
+                content = gameAdd();
+                break;
             case 'tournament':
-                content = tournamentPage(); 
+                content = tournamentPage();
                 break;
             case 'tournamentmatches':
                 content = gameAdd();
                 break;
-            case 'aimode':
-                content = gameAdd();
+            case 'winnerpage':
+                content = gameAddwinner();
                 break;
             case 'chat':
                 content = chatAdd();
@@ -132,7 +135,7 @@ function changePage(page) {
     }
     else
     {
-        switch (page) 
+        switch (page)
         {
             case 'login':
                 removeHeader();
@@ -158,7 +161,7 @@ function changePage(page) {
                 removeHeader();
                 content = ErrorAdd();
         }
-        
+
         //Yeni içerik eklenir.
         document.getElementById('content').innerHTML = content;
         window.location.hash = page;

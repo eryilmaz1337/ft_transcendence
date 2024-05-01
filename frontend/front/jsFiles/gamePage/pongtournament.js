@@ -2,6 +2,10 @@ let gameRunningTournament = false;
 let paddle1Score = 0;
 let paddle2Score = 0;
 
+paddle1User = "";
+paddle2User = "";
+winnerUser = "";
+
 function tournamentmatches()
 {
     gameRunningTournament = true;
@@ -82,7 +86,7 @@ function tournamentmatches()
         this.width = width;
         this.height = height;
         this.score = 0;
-        
+
         this.update = function() {
             if(player == "player2")
             {
@@ -174,14 +178,15 @@ function tournamentmatches()
             {
                 paddle1Score = paddle1.score;
                 paddle2Score = paddle2.score;
-                
-                gameAddwinner();
-                gameRunningTournament = false;
 
-                //alert("Winner is : ");
-                paddle2.score = 0;
+                gameRunningTournament = false;
+                winnerUser = sessionStorage.getItem('paddle2User');
+
+                console.log('winner user is:' + winnerUser);
+
                 paddle1.score = 0;
-                //window.location.hash = 'game';
+                paddle2.score = 0;
+                window.location.hash = 'winnerpage';
                 return;
             }
             respawnBall(ball);
@@ -193,13 +198,18 @@ function tournamentmatches()
             paddle1.score++;
             document.getElementById('player1Score').innerHTML = paddle1.score;
 
-            if (paddle1.score == 3){
+            if (paddle1.score == 3)
+            {
                 paddle1Score = paddle1.score;
                 paddle2Score = paddle2.score;
                 gameRunningTournament = false;
-                //window.location.hash = 'game';
-                //paddle1.score = 0;
-                //paddle2.score = 0;
+
+                winnerUser = sessionStorage.getItem('paddle1User');
+                console.log(winnerUser);
+                paddle1.score = 0;
+                paddle2.score = 0;
+
+                window.location.hash = 'winnerpage';
                 return;
             }
             respawnBall(ball);
