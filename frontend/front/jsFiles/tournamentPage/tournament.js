@@ -5,9 +5,18 @@ function addplayer()
     const player3 = document.getElementById("player3");
     const player4 = document.getElementById("player4");
     const text = document.getElementById("addtext").value;
+    const my_text = document.getElementById("addtext").value.trim();
 
     if(!text)
         return;
+
+        const players = document.querySelectorAll("#player1, #player2, #player3, #player4");
+        for (let i = 0; i < players.length; i++) {
+            if (players[i].textContent.trim() === my_text) {
+                alert("Bu isim zaten kullanılıyor. Lütfen farklı bir isim seçin.");
+                return;
+            }
+        }
 
     if(player1.textContent === 'Player 1')
     {
