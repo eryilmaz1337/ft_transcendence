@@ -91,7 +91,8 @@ function tournamentmatches()
 
     }
 
-    function Paddle(pos, velocity, width, height,player) {
+    function Paddle(pos, velocity, width, height,player)
+    {
         this.pos = pos;
         this.velocity = velocity;
         this.width = width;
@@ -182,64 +183,99 @@ function tournamentmatches()
     {
         if (ball.pos.x <= -ball.radius)
         {
-            paddle2.score++;
-            document.getElementById('player2Score').innerHTML = paddle2.score;
+                paddle2.score++;
+                document.getElementById('player2Score').innerHTML = paddle2.score;
 
-            if (paddle2.score == 3 && uc_kisi == 1)
-            {
-                paddle1Score = paddle1.score;
-                paddle2Score = paddle2.score;
-
-                gameRunningTournament = false;
-
-                if (ilk_mac_kazanan === 1 && uc_kisi === 1)
-                {
-                    ikinci_mac_kazanan_name = sessionStorage.getItem('paddle1User');
-                    sessionStorage.setItem("winner2", ikinci_mac_kazanan_name);
-                    ikinci_mac_kazanan = 1;
-                }
-
-                ilk_mac_kazanan_name  = sessionStorage.getItem('paddle2User');
-                sessionStorage.setItem("winner1",ilk_mac_kazanan_name);
-                console.log("paddle3: " + sessionStorage.getItem('paddle3User'));
-                sessionStorage.setItem("oynamayan1", sessionStorage.getItem('paddle3User'));
-                ilk_mac_kazanan = 1;
-
-                paddle1.score = 0;
-                paddle2.score = 0;
-
-                if (ikinci_mac_kazanan == 1)
-                {
-                    winnerUser = ikinci_mac_kazanan_name;
-                    window.location.hash = 'winnerpage';
-                    ilk_mac_kazanan = 0;
-                    ikinci_mac_kazanan = 0;
-                    return;
-                }
-                else if (ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0)
-                {
-                    window.location.hash = 'tournament1';
-                    winnerUser = ilk_mac_kazanan_name;
-                }
-                    return;
-                }
-
-                else if (paddle2.score == 3 && dort_kisi == 1)
+                if (paddle2.score == 3 && uc_kisi == 1)
                 {
                     paddle1Score = paddle1.score;
                     paddle2Score = paddle2.score;
 
                     gameRunningTournament = false;
-                    ilk_mac_kazanan = sessionStorage.getItem('paddle2User');
+
+                    if (ilk_mac_kazanan === 1 && uc_kisi === 1)
+                    {
+                        ikinci_mac_kazanan_name = sessionStorage.getItem('paddle2User');
+                        sessionStorage.setItem("winner2", ikinci_mac_kazanan_name);
+                        ikinci_mac_kazanan = 1;
+                    }
+
+                    ilk_mac_kazanan_name  = sessionStorage.getItem('paddle2User');
+                    sessionStorage.setItem("winner1",ilk_mac_kazanan_name);
+                    console.log("paddle3: " + sessionStorage.getItem('paddle3User'));
+                    sessionStorage.setItem("oynamayan1", sessionStorage.getItem('paddle3User'));
+                    ilk_mac_kazanan = 1;
 
                     paddle1.score = 0;
                     paddle2.score = 0;
-                    //window.location.hash = 'tournament1';
+
+                    if (ikinci_mac_kazanan == 1)
+                    {
+                        winnerUser = ikinci_mac_kazanan_name;
+                        window.location.hash = 'winnerpage';
+                        ilk_mac_kazanan = 0;
+                        ikinci_mac_kazanan = 0;
+                        return;
+                    }
+                    else if (ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0)
+                    {
+                        window.location.hash = 'tournament1';
+                        winnerUser = ilk_mac_kazanan_name;
+                    }
+                        return;
+                    }
+
+                else if (paddle2.score == 3 && dort_kisi == 1)
+                {
+                    paddle1Score = paddle1.score;
+                    paddle2Score = paddle2.score;
+                    gameRunningTournament = false;
+
+                    if (ilk_mac_kazanan === 1 && dort_kisi === 1 && ikinci_mac_kazanan == 1)
+                    {
+                        ucuncu_mac_kazanan = sessionStorage.getItem('paddle2User');
+                        sessionStorage.setItem("winner3", ucuncu_mac_kazanan_name);
+                        ucuncu_mac_kazanan = 1;
+                    }
+
+                    else if (ilk_mac_kazanan === 1 && dort_kisi === 1 && ikinci_mac_kazanan == 0)
+                    {
+                        ikinci_mac_kazanan = sessionStorage.getItem('paddle2User');
+                        sessionStorage.setItem("winner2", ikinci_mac_kazanan_name);
+                        ikinci_mac_kazanan = 1;
+                    }
+
+                    ilk_mac_kazanan_name  = sessionStorage.getItem('paddle2User');
+                    sessionStorage.setItem("winner1",ilk_mac_kazanan_name);
+                    //console.log("paddle3: " + sessionStorage.getItem('paddle3User'));
+                    //sessionStorage.setItem("oynamayan1", sessionStorage.getItem('paddle3User'));
+                    ilk_mac_kazanan = 1;
+
+                    paddle1.score = 0;
+                    paddle2.score = 0;
+
+                    if (ucuncu_mac_kazanan == 1)
+                    {
+                        winnerUser = ucuncu_mac_kazanan_name;
+                        window.location.hash = 'winnerpage';
+                        ilk_mac_kazanan = 0;
+                        ikinci_mac_kazanan = 0;
+                        return;
+                    }
+                    else if (ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 1 && ucuncu_mac_kazanan == 0)
+                    {
+                        winnerUser = ikinci_mac_kazanan_name;
+                        window.location.hash = 'tournament2';
+                    }
+                    else if (ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0 && ucuncu_mac_kazanan == 0)
+                    {
+                        window.location.hash = 'tournament1';
+                        winnerUser = ilk_mac_kazanan_name;
+                    }
                     return;
                 }
-
-            respawnBall(ball);
-            gameRunningTournament = true;
+                    respawnBall(ball);
+                    gameRunningTournament = true;
         }
 
         if (ball.pos.x >= canvas.width + ball.radius)
@@ -291,13 +327,49 @@ function tournamentmatches()
             {
                 paddle1Score = paddle1.score;
                 paddle2Score = paddle2.score;
-
                 gameRunningTournament = false;
-                ilk_mac_kazanan = sessionStorage.getItem('paddle1User');
+
+                if (ilk_mac_kazanan === 1 && dort_kisi === 1 && ikinci_mac_kazanan == 1)
+                {
+                    ucuncu_mac_kazanan = sessionStorage.getItem('paddle1User');
+                    sessionStorage.setItem("winner3", ucuncu_mac_kazanan_name);
+                    ucuncu_mac_kazanan = 1;
+                }
+
+                else if (ilk_mac_kazanan === 1 && dort_kisi === 1 && ikinci_mac_kazanan == 0)
+                {
+                    ikinci_mac_kazanan = sessionStorage.getItem('paddle1User');
+                    sessionStorage.setItem("winner2", ikinci_mac_kazanan_name);
+                    ikinci_mac_kazanan = 1;
+                }
+
+                ilk_mac_kazanan_name  = sessionStorage.getItem('paddle1User');
+                sessionStorage.setItem("winner1",ilk_mac_kazanan_name);
+                //console.log("paddle3: " + sessionStorage.getItem('paddle3User'));
+                //sessionStorage.setItem("oynamayan1", sessionStorage.getItem('paddle3User'));
+                ilk_mac_kazanan = 1;
 
                 paddle1.score = 0;
                 paddle2.score = 0;
-                window.location.hash = 'tournament1';
+
+                if (ucuncu_mac_kazanan == 1)
+                {
+                    winnerUser = ucuncu_mac_kazanan_name;
+                    window.location.hash = 'winnerpage';
+                    ilk_mac_kazanan = 0;
+                    ikinci_mac_kazanan = 0;
+                    return;
+                }
+                else if (ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 1 && ucuncu_mac_kazanan == 0)
+                {
+                    winnerUser = ikinci_mac_kazanan_name;
+                    window.location.hash = 'tournament2';
+                }
+                else if (ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0 && ucuncu_mac_kazanan == 0)
+                {
+                    window.location.hash = 'tournament1';
+                    winnerUser = ilk_mac_kazanan_name;
+                }
                 return;
             }
                 respawnBall(ball);
