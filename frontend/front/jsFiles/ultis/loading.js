@@ -15,7 +15,7 @@ function loading() {
 			</style>
 
 			<div class="background">
-			<img src="../img/loading-page1.gif">
+			<img src="../img/other_backgrounds/loading-page1.gif">
 			</div>
 		`;
 }

@@ -15,7 +15,7 @@ function chooseGame() {
         <style>
 
             #game-container {
-                background-image: url('../img/retro-arcade.jpeg');
+                background-image: url('../img/other_backgrounds/retro-arcade.jpeg');
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -173,6 +173,9 @@ function gameAdd() {
     <style>
 
     body {
+        background-image: url('img/other_backgrounds/space.jpeg');
+        background-position: center; /* Center the background image */
+        background-size: cover; /* Ensure the image covers the entire body */
         background-color: #15202b;
         height: 100vh;
         margin: 0;

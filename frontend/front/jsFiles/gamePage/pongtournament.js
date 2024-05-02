@@ -212,6 +212,8 @@ function tournamentmatches()
                 {
                     winnerUser = ikinci_mac_kazanan_name;
                     window.location.hash = 'winnerpage';
+                    ilk_mac_kazanan = 0;
+                    ikinci_mac_kazanan = 0;
                     return;
                 }
                 else if (ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0)
@@ -272,6 +274,8 @@ function tournamentmatches()
                 {
                     winnerUser = ikinci_mac_kazanan_name;
                     window.location.hash = 'winnerpage';
+                    ilk_mac_kazanan = 0;
+                    ikinci_mac_kazanan = 0;
                     return;
                 }
                 else if (ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0)

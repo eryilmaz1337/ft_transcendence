@@ -29,7 +29,7 @@ function gameAddwinnerContinue()
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('../img/confeti.gif');
+            background-image: url('../img/other_backgrounds/confeti.gif');
             background-size: cover;
         }
 

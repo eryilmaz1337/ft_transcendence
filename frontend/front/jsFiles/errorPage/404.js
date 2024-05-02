@@ -2,7 +2,7 @@ function ErrorAdd() {
     return `
 			<style>
 				.background {
-					background-image: url('img/404.jpeg');
+					background-image: url('img/other_backgrounds/404.jpeg');
 					background-size: cover; /* contain */
 					background-position: center;
 					background-repeat: no-repeat;
