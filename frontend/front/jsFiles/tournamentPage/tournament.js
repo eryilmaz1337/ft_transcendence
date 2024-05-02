@@ -1,6 +1,7 @@
 let playerCounter = 0;
 let uc_kisi = 0;
 let dort_kisi = 0;
+let bool = false;
 
 function addplayer()
 {
@@ -64,7 +65,19 @@ function starttournament()
     if (uc_kisi === 1 && window.location.hash === "#tournament2")
     {
         player1 = sessionStorage.getItem('winner1');
-        player2 = sessionStorage.getItem('oynamayan1'); //player3 yerine ilk maç oynamayan kişi yazılacak.
+        player2 = sessionStorage.getItem('oynamayan1');
+    }
+    else if(dort_kisi === 1 && window.location.hash === "#tournament2" && !bool)
+    {
+        player3 = sessionStorage.getItem('player3');
+        player4 = sessionStorage.getItem('player4');
+        bool = true;
+    }
+    else if(dort_kisi === 1 && window.location.hash === "#tournament2" && bool) 
+    {
+        player1 = sessionStorage.getItem('winner1');
+        player2 = sessionStorage.getItem('winner2');
+        bool = false;
     }
     else
     {
@@ -74,7 +87,6 @@ function starttournament()
         player4 = document.getElementById('player4').textContent;
     }
 
-    //console.log("Kullanıcı uzunluğu " + playerCounter);
     if (playerCounter < 3)
     {
         alert("Minimum 3 Kullanıcı Olabilir");
