@@ -12,6 +12,9 @@ let ucuncu_mac_kazanan_name = "";
 
 let paddle1User = "";
 let paddle2User = "";
+let paddle3User = "";
+let paddle4User = "";
+
 let winnerUser = "";
 
 function tournamentmatches()
@@ -175,6 +178,8 @@ function tournamentmatches()
         ball.velocity.y *= -1;
     }
 
+    //random mevzusunu kaldır. kafa karıştırıyor
+    //şu anda random mevzusu kalkarsa 3 kişilik oyun çalışıyor.
     function increaseScore(ball,paddle1,paddle2)
     {
         if (ball.pos.x <= -ball.radius)
@@ -190,9 +195,17 @@ function tournamentmatches()
                 gameRunningTournament = false;
 
                 if (ilk_mac_kazanan === 1 && uc_kisi === 1)
-                    ikinci_mac_kazanan_name = sessionStorage.getItem('paddle2User');
-
-                ilk_mac_kazanan_name  = sessionStorage.getItem('paddle2User');
+                {
+                    ikinci_mac_kazanan_name = sessionStorage.getItem('paddle1User');
+                    sessionStorage.setItem("winner2", ikinci_mac_kazanan_name);
+                    ikinci_mac_kazanan = 1;
+                    ilk_mac_kazanan = 0;
+                }
+                
+                ilk_mac_kazanan_name  = sessionStorage.getItem('paddle1User');
+                sessionStorage.setItem("winner1",ilk_mac_kazanan_name);
+                console.log("paddle3: " + sessionStorage.getItem('paddle3User'));
+                sessionStorage.setItem("oynamayan1", sessionStorage.getItem('paddle3User'));
                 ilk_mac_kazanan = 1;
 
                 paddle1.score = 0;
@@ -236,9 +249,17 @@ function tournamentmatches()
                 gameRunningTournament = false;
 
                 if (ilk_mac_kazanan === 1 && uc_kisi === 1)
+                {
                     ikinci_mac_kazanan_name = sessionStorage.getItem('paddle1User');
-
+                    sessionStorage.setItem("winner2", ikinci_mac_kazanan_name);
+                    ikinci_mac_kazanan = 1;
+                    ilk_mac_kazanan = 0;
+                }
+                
                 ilk_mac_kazanan_name  = sessionStorage.getItem('paddle1User');
+                sessionStorage.setItem("winner1",ilk_mac_kazanan_name);
+                console.log("paddle3: " + sessionStorage.getItem('paddle3User'));
+                sessionStorage.setItem("oynamayan1", sessionStorage.getItem('paddle3User'));
                 ilk_mac_kazanan = 1;
 
                 paddle1.score = 0;
@@ -248,7 +269,6 @@ function tournamentmatches()
                     window.location.hash = 'winnerpage';
                 else if (ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0)
                     window.location.hash = 'tournament1';
-
                 return;
             }
 

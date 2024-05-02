@@ -63,10 +63,8 @@ function starttournament()
 
     if (uc_kisi === 1 && window.location.hash === "#tournament2")
     {
-        player1 = document.getElementById("player1");
-        player2 = document.getElementById("player2");
-        player3 = document.getElementById('player3');
-        player4 = document.getElementById('player4');
+        player1 = sessionStorage.getItem('winner1');
+        player2 = sessionStorage.getItem('oynamayan1'); //player3 yerine ilk maç oynamayan kişi yazılacak.
     }
     else
     {
@@ -124,8 +122,13 @@ function starttournament()
             //console.log(data.message[0]);
             sessionStorage.setItem('paddle1User', data.message[0][Object.keys(data.message[0])[0]]);
             sessionStorage.setItem('paddle2User', data.message[1][Object.keys(data.message[1])[0]]);
+            sessionStorage.setItem('paddle3User', data.message[2][Object.keys(data.message[2])[0]]);
+            sessionStorage.setItem('paddle4User', data.message[3][Object.keys(data.message[3])[0]]);
             console.log("paddle1: " + sessionStorage.getItem('paddle1User'));
             console.log("paddle2: " + sessionStorage.getItem('paddle2User'));
+            console.log("paddle3: " + sessionStorage.getItem('paddle3User'));
+            console.log("paddle4: " + sessionStorage.getItem('paddle4User'));
+
             //console.log(window.location.hash); -> #Tournament
             window.location.hash = "tournamentmatches"
     })
