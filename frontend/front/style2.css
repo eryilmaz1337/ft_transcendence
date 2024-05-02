@@ -1,0 +1,190 @@
+html,body {
+	height: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+
+body {
+	background-color: #15202b;
+	height: 100vh;
+	margin: 0;
+	overflow-x: hidden;
+}
+
+nav {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 8vh;
+	background-color:black;
+	font-family: 'Poppins', sans-serif;
+}
+
+.logo {
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	font-size: 20px;
+}
+
+.nav-links {
+	display: flex;
+	justify-content: space-around;
+	width: 30%;
+}
+
+.nav-links li {
+	list-style: none;
+}
+
+.nav-links a {
+	color: greenyellow;
+	text-decoration: none;
+	letter-spacing: 2px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+@media screen and (max-width:1024px){
+	.nav-links {
+		width: 60%;
+	}
+}
+
+@media screen and (max-width:768px){
+	body{
+		overflow-x: hidden;
+		background-size: cover;
+	}
+	.nav-links{
+		position: absolute;
+		right: 0px;
+		height: 100vh;
+		top: 0;
+		background-color:black;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 50%;
+		transform: translateX(100%);
+		transition: transform 0.5s ease-in;
+	}
+
+	.nav-links li {
+		opacity: 0;
+	}
+}
+
+.nav-active{
+	transform: translateX(0%);
+}
+
+@keyframes navLinkFade{
+	from{
+		opacity: 0;
+		transform: translateX(50px);
+	}
+	to{
+		opacity: 1;
+		transform: translateX(0px);
+	}
+}
+
+.toggle .line1{
+	transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line2{
+	opacity: 0;
+}
+
+.toggle .line3{
+	transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Profile & Log Out */
+
+.profile-wrapper {
+	display: flex;
+	flex-direction: row;
+    position: relative;
+	border-radius: 50%;
+}
+
+.profile-picture {
+    width: 40px;
+    height: 40px;
+    background-image: url("${sessionStorage.getItem('profile_image')}");
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    cursor: pointer;
+	border: 2px solid greenyellow;
+	z-index: 9999;
+}
+
+.logout-wrapper {
+    position: absolute;
+    top: calc(100% + 10px);/* 5px -> 10px oldu kullanıcı adı için*/
+    left: 50%;
+    transform: translateX(-50%);
+	visibility: hidden;
+	align-items: center;
+	flex-direction: column;
+}
+
+.logout-btn, .username-btn {
+    padding: 5px 7px;
+    font-size: 15px;
+	font-family: 'Poppins', sans-serif;
+    border: none;
+	font-weight: bold;
+    background-color: greenyellow;
+    color: black;
+    cursor: pointer;
+	margin-left: 5px;
+	border-radius: 10%;
+}
+
+.username_class {
+	position: absolute;
+	right: 0px;
+	display: none;
+	/* align-items: left; */
+}
+
+.username_text {
+    height: 40px; /* Sabit yükseklik belirleniyor */
+    padding: 13px 50px 13px 20px;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    font-weight: bold;
+    background-color: greenyellow;
+    color: black;
+    cursor: pointer;
+    border-radius: 20px;
+    min-width: 100px;
+    /* max-width: 100px; */
+    /* width: auto; */
+    /* box-sizing: border-box; */
+}
+
+
+.logout-btn:hover {
+    background-color: #0cf; /* Üzerine gelince maviye dönsün */
+}
+
+.profile-wrapper:hover .logout-wrapper {
+    display: flex; /* Profil resmine hover yapıldığında göster */
+	transform: translateX(-50%); /*  nesneyi kendi genişliğinin yarısı kadar sola kaydırır.  */
+}
+
+.profile-wrapper:hover .username_class {
+    display: flex; /* Profil resmine hover yapıldığında göster */
+}
