@@ -1,4 +1,5 @@
 let gameRunning = false;
+let ai = 'Artifical Intelligence';
 
 function startgame()
 {
@@ -78,8 +79,8 @@ function startgame()
         this.width = width;
         this.height = height;
         this.score = 0;
-        
-        this.update = function() { 
+
+        this.update = function() {
             if (keysPressed[KEY_UP])
                 this.pos.y -= this.velocity.y;
             if (keysPressed[KEY_DOWN])
@@ -180,7 +181,10 @@ function startgame()
 
             if (paddle2.score == 3){
                 gameRunning = false;
-                window.location.hash = 'game';
+                window.location.hash = 'winnerpage';
+                //winnerUser = sessionStorage.getItem('paddle2User');
+
+                winnerUser = ai;
                 paddle2.score = 0;
                 paddle1.score = 0;
                 return;
@@ -196,7 +200,10 @@ function startgame()
 
             if (paddle1.score == 3){
                 gameRunning = false;
-                window.location.hash = 'game';
+                window.location.hash = 'winnerpage';
+                //sessionStorage' set edilecek paddle1User set edilmeli
+                winnerUser = sessionStorage.getItem('paddle1User');
+
                 paddle1.score = 0;
                 paddle2.score = 0;
                 return;

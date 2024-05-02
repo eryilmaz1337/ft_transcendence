@@ -80,7 +80,7 @@ function startgameone()
         this.width = width;
         this.height = height;
         this.score = 0;
-        
+
         this.update = function() {
             if(player == "player2")
             {
@@ -163,6 +163,7 @@ function startgameone()
 
     function increaseScore(ball,paddle1,paddle2)
     {
+        let winneruserone = "";
         if (ball.pos.x <= -ball.radius)
         {
             paddle2.score++;
@@ -170,9 +171,13 @@ function startgameone()
 
             if (paddle2.score == 3){
                 gameRunningone = false;
-                window.location.hash = 'game';
+                winneruserone = sessionStorage.getItem('paddle2User');
+                //winnerUser = winneruserone; -> uncaught çünkü hiçbir yerde setItem edilmedi paddle2User yani çekememem normal
+                console.log('kazanan : ' + winneruserone);
+                winnerUser = winneruserone;
                 paddle2.score = 0;
                 paddle1.score = 0;
+                window.location.hash = 'winnerpage';
                 return;
             }
             respawnBall(ball);
@@ -186,9 +191,13 @@ function startgameone()
 
             if (paddle1.score == 3){
                 gameRunningone = false;
-                window.location.hash = 'game';
+                winneruserone = sessionStorage.getItem('paddle1User');
+                //winnerUser = winneruserone; ->uncaught çünkü hiçbir yerde setItem edilmedi paddle2User yani çekemem normal
+                console.log('kazanan : ' + winneruserone);
+                winnerUser = winneruserone;
                 paddle1.score = 0;
                 paddle2.score = 0;
+                window.location.hash = 'winnerpage';
                 return;
             }
             respawnBall(ball);

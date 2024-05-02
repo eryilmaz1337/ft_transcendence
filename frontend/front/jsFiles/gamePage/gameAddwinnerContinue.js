@@ -1,4 +1,10 @@
-function gameAddwinner()
+function redirectToTournament()
+{
+	window.location.hash = "tournament2";
+	starttournament();
+}
+
+function gameAddwinnerContinue()
 {
     const winnerColor = 'greenyellow';
     return `
@@ -7,6 +13,7 @@ function gameAddwinner()
             <h1>Congratulations!</h1>
             <h2>Winner is: <span style="color: ${winnerColor};">${winnerUser}</span></h2>
             <div id="confetti"></div>
+			<button class="btn-winner" onclick="redirectToTournament()">Next Match</button>
         </div>
     </body>
 
@@ -48,6 +55,24 @@ function gameAddwinner()
             height: 100%;
             z-index: -1;
             pointer-events: none;
+        }
+
+		.btn-winner {
+            margin-top: 20px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 17px;
+            border: none;
+            border-radius: 20px;
+            font-family: 'Arial', sans-serif;
+            background-color: greenyellow;
+            color: #000;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-winner:hover {
+            background-color: #0cf;
         }
 
         </style>

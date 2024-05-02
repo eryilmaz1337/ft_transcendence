@@ -296,19 +296,23 @@ def tournament(request):
         if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
             user = users.objects.get(securitykey=data.get('jsonsecuritykey'))
             if user.username == data.get('jsonusername'):
-                my_list = [data.get("jsonplayer1"), data.get("jsonplayer2"), data.get("jsonplayer3"), data.get("jsonplayer4")]
+                my_list = [
+                    data.get("jsonplayer1"), 
+                    data.get("jsonplayer2"), 
+                    data.get("jsonplayer3"), 
+                    data.get("jsonplayer4")
+                ]
                 json_data_list = []
-                for i in range(4):
-                    selected_value = random.choice(my_list)
-                    my_list.remove(selected_value)
-                    json_data = { i : selected_value}
+                # Sırayla tüm oyuncuları seç
+                for i, player in enumerate(my_list):
+                    json_data = {i: player}
                     json_data_list.append(json_data)
                 return JsonResponse({'success': True , 'message': json_data_list})
         else:
-            return JsonResponse({'success': False})
+            return JsonResponse({'success': False, 'message': 'Security key not found'})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
-    
+  
 @csrf_exempt
 def get_user_data(request):
     if request.method == 'POST':

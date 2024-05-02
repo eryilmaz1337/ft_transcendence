@@ -10,7 +10,7 @@ function saveProfile() {
             jsonemail: document.getElementById('email').value,
             jsonprofileimage: "http://localhost:8000/api/account/media/uploads/profile_image.jpg" // Profil resmi yolu
         }
-    
+
         fetch("http://localhost:8000/api/account/account-edit/", {
             method: 'POST',
             headers: {
@@ -69,7 +69,7 @@ function uploadFile() {
 
     // Burada 'new_name' değerini dosya adı olarak ayarlıyorsunuz, belki sonuna uzantıyı eklemek istersiniz
     formData.append('new_name', 'profile_image');
-    
+
     fetch('http://localhost:8000/api/account/upload/', {
         method: 'POST',
         body: formData
@@ -162,22 +162,19 @@ function profileSettings() {
             margin-bottom: 20px;
             display: flex;
             align-items: center;
+            min-width: 300px; /* .input-wrapper'ın minimum genişliğini ayarlayın */
         }
 
         .input-wrapper label {
             margin-right: 10px;
-            width: 200px;
+            width: 120px; /* Etiketlerin sabit bir genişliği olsun */
         }
 
         .input-wrapper input[type="text"],
         .input-wrapper input[type="email"],
         .input-wrapper input[type="number"],
         .input-wrapper input[type="file"] {
-            flex: 1;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: calc(100% - 210px); /* Genişlik ayarlaması güncellendi */
+            flex: 2 0 auto; /* Giriş kutuları daha geniş olacak, esneklik ekleyerek içerik boyutuna göre ayarlanmasını sağlayın */
         }
 
         .input-wrapper input[type="checkbox"] {
@@ -219,7 +216,6 @@ function profileSettings() {
             cursor: pointer;
         }
 
-
         .btn-primary {
             background-color: greenyellow;
             color: #000;
@@ -246,6 +242,20 @@ function profileSettings() {
 			border-radius: 5px;
 			cursor: pointer;
 		}
+
+        @media screen and (max-width: 768px) {
+            .input-wrapper label {
+                font-size: 14px; /* Etiket metin boyutunu küçült */
+                width: auto; /* Etiketlerin genişliğini otomatik olarak ayarla */
+            }
+
+            .input-wrapper input[type="text"],
+            .input-wrapper input[type="email"],
+            .input-wrapper input[type="number"],
+            .input-wrapper input[type="file"] {
+                width: calc(100% - 130px); /* Giriş kutularının genişliğini ayarla */
+            }
+        }
 
     </style>
     `;
