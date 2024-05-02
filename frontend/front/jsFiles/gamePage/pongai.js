@@ -181,7 +181,7 @@ function startgame()
 
             if (paddle2.score == 3){
                 gameRunning = false;
-                window.location.hash = 'winnerpage_last';
+                window.location.hash = 'winnerpage';
                 //winnerUser = sessionStorage.getItem('paddle2User');
 
                 winnerUser = ai;
@@ -200,7 +200,7 @@ function startgame()
 
             if (paddle1.score == 3){
                 gameRunning = false;
-                window.location.hash = 'winnerpage_last';
+                window.location.hash = 'winnerpage';
                 //sessionStorage' set edilecek paddle1User set edilmeli
                 winnerUser = sessionStorage.getItem('paddle1User');
 

@@ -3,62 +3,6 @@ function toggleTable() {
     table.classList.toggle("hidden");
 }
 
-// // Fonksiyon ile veri alımı
-// // function fetchData(url) {
-// //     return fetch(url)
-// //       .then(response => {
-// //         if (!response.ok) {
-// //           throw new Error('Network response was not ok');
-// //         }
-// //         return response.json();
-// //       })
-// //       .catch(error => {
-// //         console.error('Error fetching data:', error);
-// //         return Promise.resolve([]); // Hata durumunda boş liste dön yani data listesi boş dönüyor
-// //       });
-// //   }
-  
-//   // Verileri tablo olarak gösteren fonksiyon
-//   function displayData(data) {
-//     const container = document.querySelector('#history-div');
-//     console.log(data.length);
-//     if (data.length == 0) {
-//         const message = document.createElement('h1');
-//         message.textContent = 'No match history found!';
-//         container.appendChild(message);
-//         return;
-//     }
-    
-//     const header = document.createElement('h1');
-//     header.textContent = 'Match History Table';
-//     container.appendChild(header);
-//     const table = document.createElement('table');
-//     table.innerHTML = `
-//       <thead>
-//         <tr>
-//           <th>ID</th>
-//           <th>Name</th>
-//           <th>Age</th>
-//         </tr>
-//       </thead>
-//       <tbody id="table-body">
-//         <!-- Data will be displayed here -->
-//       </tbody>
-//     `;
-//     container.appendChild(table);
-  
-//     const tableBody = document.querySelector('#table-body');
-//     data.forEach(item => {
-//       const row = document.createElement('tr');
-//       row.innerHTML = `
-//         <td>${item.id}</td>
-//         <td>${item.name}</td>
-//         <td>${item.age}</td>
-//       `;
-//       tableBody.appendChild(row);
-//     });
-//   }
-
 function publicProfile() {
     // Veriyi alma ve tablo olarak gösterme işlemlerini yürütme
     // fetchData('your-backend-url/data')
@@ -66,6 +10,7 @@ function publicProfile() {
     //   displayData(data);
     // });
     return `
+
     <div class="wrapper">
     <div class="form-wrapper">
             <h3>Profile</h3>
@@ -144,12 +89,14 @@ function publicProfile() {
         display: flex;
         align-items: center;
         width: 100%;
+        min-width: 300px; /* Input wrapper'ın minimum genişliğini belirleyin */
     }
 
     .field-wrapper label {
         margin-right: 20px;
         margin-left: 20px;
         width: 150px;
+        min-width: 150px; /* Etiketlerin minimum genişliğini belirleyin */
         display: inline-block;
         color: #fff;
     }
@@ -161,7 +108,8 @@ function publicProfile() {
 
     .field-wrapper input[type="text"],
     .field-wrapper input[type="email"],
-    .field-wrapper input[type="number"] {
+    .field-wrapper input[type="number"]
+    .field-wrapper input[type="file"] {
         flex: 1;
         padding: 1px;
         border: 1px solid #ccc;
@@ -171,7 +119,8 @@ function publicProfile() {
         color: #f0f0f0;
         cursor: not-allowed;
         pointer-events: none;
-        text-shadow: 0 0 5px #ff668c;
+        text-shadow: 0 0 5px greenyellow;
+        min-width: 70px; /* Input alanlarının minimum genişliğini belirleyin */
     }
 
     .field-wrapper input:hover{
@@ -198,7 +147,7 @@ function publicProfile() {
     .match_history:hover {
         box-shadow: 0 0 5px #FFFA67
     }
-    
+
     .field-wrapper.profile-photo-wrapper {
         display: flex;
         justify-content: center;
@@ -223,13 +172,13 @@ function publicProfile() {
     .symbol-wrapper:hover {
         box-shadow: 0 0 10px purple
     }
-    
+
     .symbol-wrapper img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
-    
+
     .number {
         position: absolute;
         bottom: 20px;
@@ -244,17 +193,17 @@ function publicProfile() {
         width: 100%;
         border-collapse: collapse;
     }
-    
+
     .table th, .table td {
         border: 1px solid #dddddd;
         padding: 8px;
         text-align: left;
     }
-    
+
     .table th {
         background-color: #f2f2f2;
     }
-    
+
     /* Satır arka plan rengi değişimi */
     .table tr:nth-child(even) {
         background-color: #f2f2f2;
@@ -273,6 +222,23 @@ function publicProfile() {
     .hidden {
         display: none;
     }
+
+    @media screen and (max-width: 1230px) {
+        .field-wrapper label {
+            font-size: 14px; /* Etiket metin boyutunu küçült */
+            width: auto; /* Etiketlerin genişliğini otomatik olarak ayarla */
+            min-width: auto; /* Ekstra olarak etiketlerin minimum genişliğini de otomatik ayarlayın */
+        }
+
+        .field-wrapper input[type="text"],
+        .field-wrapper input[type="email"],
+        .field-wrapper input[type="number"],
+        .field-wrapper input[type="file"] {
+            width: calc(100% - 170px); /* Giriş kutularının genişliğini ayarla */
+            min-width: auto; /* Ekstra olarak input alanlarının minimum genişliğini de otomatik ayarlayın */
+        }
+    }
+
 
 </style>
     `;

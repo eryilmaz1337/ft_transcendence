@@ -50,24 +50,6 @@ window.addEventListener('hashchange', function () {
     changePage(page);
 });
 
-// function checklogin() devam edilcek yarın
-// {
-//     const myUsername = sessionStorage.getItem('username');
-//     const messageData = {
-//         sender: myUsername,
-//         receiver_username: receiver_username,
-//         message: message_text,
-//         timestamp: new Date().toISOString(),
-//     };
-
-//     if (socket && socket.readyState === WebSocket.OPEN) {
-//         socket.send(JSON.stringify(messageData));
-//     } else {
-//         console.error('WebSocket is not open.');
-//     }
-
-// }
-
 function changePage(page) {
     let content = '';
     //önceki içerik temizlenir
@@ -95,11 +77,14 @@ function changePage(page) {
             case 'tournamentmatches':
                 content = gameAdd();
                 break;
-            case 'winnerpage_last':
-                content = gameAddwinner();
-                break;
-            case 'winnerpage_continue':
+            case 'tournament1':
                 content = gameAddwinnerContinue();
+                break;
+            case 'tournament2':
+                content = gameAdd();
+                break;
+            case 'winnerpage':
+                content = gameAddwinner();
                 break;
             case 'chat':
                 content = chatAdd();

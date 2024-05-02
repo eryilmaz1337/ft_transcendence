@@ -1,4 +1,6 @@
 let playerCounter = 0;
+let uc_kisi = 0;
+let dort_kisi = 0;
 
 function addplayer()
 {
@@ -54,10 +56,23 @@ function addplayer()
 
 function starttournament()
 {
-    const player1 = document.getElementById("player1").textContent;
-    const player2 = document.getElementById("player2").textContent;
-    const player3 = document.getElementById('player3').textContent;
-    const player4 = document.getElementById('player4').textContent;
+    let player1 = "";
+    let player2 = "";
+    let player3 = "";
+    let player4 = "";
+
+    if (uc_kisi === 1 && window.location.hash === "#tournament2")
+    {
+        player1 = sessionStorage.getItem('winner1');
+        player2 = sessionStorage.getItem('oynamayan1'); //player3 yerine ilk maç oynamayan kişi yazılacak.
+    }
+    else
+    {
+        player1 = document.getElementById("player1").textContent;
+        player2 = document.getElementById("player2").textContent;
+        player3 = document.getElementById('player3').textContent;
+        player4 = document.getElementById('player4').textContent;
+    }
 
     //console.log("Kullanıcı uzunluğu " + playerCounter);
     if (playerCounter < 3)
@@ -65,6 +80,12 @@ function starttournament()
         alert("Minimum 3 Kullanıcı Olabilir");
         return;
     }
+
+    if (playerCounter == 3)
+        uc_kisi = 1;
+
+    if (playerCounter == 4)
+        dort_kisi = 1;
 
     if (player1 === 'Player 1' || player2 === 'Player 2') {
         alert('You need at least 2 players to start the tournament.');
@@ -101,8 +122,13 @@ function starttournament()
             //console.log(data.message[0]);
             sessionStorage.setItem('paddle1User', data.message[0][Object.keys(data.message[0])[0]]);
             sessionStorage.setItem('paddle2User', data.message[1][Object.keys(data.message[1])[0]]);
-            //console.log("paddle1: " + sessionStorage.getItem('paddle1User'));
-            //console.log("paddle2: " + sessionStorage.getItem('paddle2User'));
+            sessionStorage.setItem('paddle3User', data.message[2][Object.keys(data.message[2])[0]]);
+            sessionStorage.setItem('paddle4User', data.message[3][Object.keys(data.message[3])[0]]);
+            console.log("paddle1: " + sessionStorage.getItem('paddle1User'));
+            console.log("paddle2: " + sessionStorage.getItem('paddle2User'));
+            console.log("paddle3: " + sessionStorage.getItem('paddle3User'));
+            console.log("paddle4: " + sessionStorage.getItem('paddle4User'));
+
             //console.log(window.location.hash); -> #Tournament
             window.location.hash = "tournamentmatches"
     })

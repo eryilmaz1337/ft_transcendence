@@ -1,4 +1,10 @@
-function gameAddwinner()
+function redirectToTournament()
+{
+	window.location.hash = "tournament2";
+	starttournament();
+}
+
+function gameAddwinnerContinue()
 {
     const winnerColor = 'greenyellow';
     return `
@@ -7,7 +13,7 @@ function gameAddwinner()
             <h1>Congratulations!</h1>
             <h2>Winner is: <span style="color: ${winnerColor};">${winnerUser}</span></h2>
             <div id="confetti"></div>
-			<button class="btn-winner">Next Match</button>
+			<button class="btn-winner" onclick="redirectToTournament()">Next Match</button>
         </div>
     </body>
 
