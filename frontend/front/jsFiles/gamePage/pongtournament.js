@@ -197,7 +197,6 @@ function tournamentmatches()
                     ikinci_mac_kazanan_name = sessionStorage.getItem('paddle1User');
                     sessionStorage.setItem("winner2", ikinci_mac_kazanan_name);
                     ikinci_mac_kazanan = 1;
-                    ilk_mac_kazanan = 0;
                 }
 
                 ilk_mac_kazanan_name  = sessionStorage.getItem('paddle2User');
@@ -213,13 +212,13 @@ function tournamentmatches()
                 {
                     winnerUser = ikinci_mac_kazanan_name;
                     window.location.hash = 'winnerpage';
+                    return;
                 }
                 else if (ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0)
                 {
                     window.location.hash = 'tournament1';
                     winnerUser = ilk_mac_kazanan_name;
                 }
-
                     return;
                 }
 
@@ -258,7 +257,6 @@ function tournamentmatches()
                     ikinci_mac_kazanan_name = sessionStorage.getItem('paddle1User');
                     sessionStorage.setItem("winner2", ikinci_mac_kazanan_name);
                     ikinci_mac_kazanan = 1;
-                    ilk_mac_kazanan = 0;
                 }
 
                 ilk_mac_kazanan_name  = sessionStorage.getItem('paddle1User');
@@ -274,6 +272,7 @@ function tournamentmatches()
                 {
                     winnerUser = ikinci_mac_kazanan_name;
                     window.location.hash = 'winnerpage';
+                    return;
                 }
                 else if (ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0)
                 {
