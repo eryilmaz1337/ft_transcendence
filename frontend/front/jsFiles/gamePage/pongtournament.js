@@ -19,11 +19,45 @@ let winnerUser = "";
 
 function tournamentmatches()
 {
-    const ply1 = document.getElementById("ply1");
-    ply1.innerHTML = sessionStorage.getItem("paddle1User");
-    const ply2 = document.getElementById("ply2");
-    ply2.innerHTML = sessionStorage.getItem("paddle2User");
-    
+    if(uc_kisi == 1)
+    {
+        console.log("burda=1");
+        const ply1 = document.getElementById("ply1");
+        ply1.innerHTML = sessionStorage.getItem("paddle1User");
+        const ply2 = document.getElementById("ply2");
+        ply2.innerHTML = sessionStorage.getItem("paddle2User");
+    }
+    else if(dort_kisi == 1)
+    {
+        console.log("burda=2");
+        console.log("ilk" + ilk_mac_kazanan);
+        console.log("iki" + ikinci_mac_kazanan);
+        console.log("üç" + ucuncu_mac_kazanan);
+        if(ilk_mac_kazanan == 0 && ikinci_mac_kazanan == 0 && ucuncu_mac_kazanan == 0)
+        {
+            console.log("burda=3");
+            const ply1 = document.getElementById("ply1");
+            ply1.innerHTML = sessionStorage.getItem("paddle1User");
+            const ply2 = document.getElementById("ply2");
+            ply2.innerHTML = sessionStorage.getItem("paddle2User");
+        }
+        else if(ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0 && ucuncu_mac_kazanan == 0)
+        {
+            console.log("burda=4");
+            const ply1 = document.getElementById("ply1");
+            ply1.innerHTML = sessionStorage.getItem("paddle3User");
+            const ply2 = document.getElementById("ply2");
+            ply2.innerHTML = sessionStorage.getItem("paddle4User");
+        }
+        else if(ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 1 && ucuncu_mac_kazanan == 0)
+        {
+            console.log("burda=5");
+            const ply1 = document.getElementById("ply1");
+            ply1.innerHTML = sessionStorage.getItem("paddle1User");
+            const ply2 = document.getElementById("ply2");
+            ply2.innerHTML = sessionStorage.getItem("paddle2User");
+        }
+    }
     gameRunningTournament = true;
 
     const canvas = document.getElementById("canvas");
