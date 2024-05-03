@@ -3,33 +3,66 @@ function toggleTable() {
     table.classList.toggle("hidden");
 }
 
-function addToTable(data, tableId) 
+function addToTable(data) 
 {
-    // Tablo elementini seç
-    var table = document.getElementById(tableId);
+     // JSON'dan gelen veriyi al
+     var historyData = data.history_users;
 
-    // Tablo bulunamazsa hata mesajı göster ve fonksiyondan çık
-    if (!table) {
-        console.error("Tablo bulunamadı.");
-        return;
-    }
-
-    // Veri array'i boyunca döngü
-    data.forEach(function(rowData) {
-        // Yeni bir satır oluştur
-        var row = table.insertRow();
-
-        // Veri array'inin her öğesi için bir hücre oluştur ve hücreye değeri ekle
-        rowData.forEach(function(cellData) {
-            var cell = row.insertCell();
-            cell.textContent = cellData;
-        });
-    });
+     // Tablo elementini seç
+     var table = document.getElementById("table");
+ 
+     // Tabloyu temizle (mevcut veriyi kaldır)
+     table.innerHTML = "";
+ 
+     // Her bir kullanıcı verisi için tabloya satır ekleyin
+     historyData.forEach(function(user) {
+         var row = table.insertRow();
+         var cell1 = row.insertCell();
+         cell1.textContent = user.username;
+         var cell2 = row.insertCell();
+         cell2.textContent = user.receiver_username;
+         var cell3 = row.insertCell();
+         cell3.textContent = user.score1;
+         var cell4 = row.insertCell();
+         cell4.textContent = user.score2;
+         var cell5 = row.insertCell();
+         cell5.textContent = user.date;
+     });
 }
 
-function publicProfile() {
-    return `
+function dataget()
+{
+    var data = {
+        jsonsecuritykey: sessionStorage.getItem("securitykey"),
+        username: sessionStorage.getItem("username")
+    }
 
+    fetch("http://localhost:8000/api/account/gethistory/", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data) 
+        {
+            addToTable(data);
+        } 
+        else 
+        {
+            alert('Error while processing the request.');
+        }
+    })
+    .catch((error) => {
+        console.error('Hata:', error);
+    });
+}   
+
+function publicProfile() {
+    dataget();
+    return `
     <div class="wrapper">
     <div class="form-wrapper">
             <h3>Profile</h3>
@@ -62,16 +95,7 @@ function publicProfile() {
                         </div>
                     </div>
                 <div class="history-div" id="history-div">
-                    <table border="3">
-                        <tbody>
-                            <tr>
-                                <td>eryilmaz</td>
-                                <td>burak</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>tarih</td>
-                            </tr>
-                        </tbody>
+                    <table border="3" id="table">
                     </table>
                 </div>
     </div>

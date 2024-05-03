@@ -23,9 +23,7 @@ function historysave(score1_tmp,score2_tmp)
     .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
     .then(data => {
             //console.log(data.message[0]);
-
-            window.location.hash = "game"
-    })
+        })
     .catch((error) => {
       console.error('Hata:', error);
     });

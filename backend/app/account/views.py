@@ -345,3 +345,25 @@ def historysave(request):
             return JsonResponse({'success': False, 'message': 'no unauthorized'})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+    
+@csrf_exempt
+def gethistory(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            users_history = history.objects.filter(username=data["username"])
+            users_history_data = []
+            for user in users_history:
+                user_data = {
+                    "username" : user.username,
+                    "receiver_username" : user.receiver_username,
+                    "score1" : user.score1,
+                    "score2" : user.score2,
+                    "date" : user.date,
+                }
+                users_history_data.append(user_data)
+            return JsonResponse({'history_users': users_history_data})
+        else:
+            return JsonResponse({'success': False, 'message': 'no unauthorized'})
+    else:
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})

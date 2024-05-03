@@ -1,9 +1,68 @@
 function toggleTable() {
     var table = document.getElementById("history-div");
     table.classList.toggle("hidden");
+    dataget_chat();
 }
 
-function chatProfile(username) {
+function addToTable_chat(data) 
+{
+     // JSON'dan gelen veriyi al
+     var historyData = data.history_users;
+
+     // Tablo elementini seç
+     var table = document.getElementById("table_chat");
+ 
+     // Tabloyu temizle (mevcut veriyi kaldır)
+     table.innerHTML = "";
+ 
+     // Her bir kullanıcı verisi için tabloya satır ekleyin
+     historyData.forEach(function(user) {
+         var row = table.insertRow();
+         var cell1 = row.insertCell();
+         cell1.textContent = user.username;
+         var cell2 = row.insertCell();
+         cell2.textContent = user.receiver_username;
+         var cell3 = row.insertCell();
+         cell3.textContent = user.score1;
+         var cell4 = row.insertCell();
+         cell4.textContent = user.score2;
+         var cell5 = row.insertCell();
+         cell5.textContent = user.date;
+     });
+}
+
+function dataget_chat()
+{
+    var data = {
+        jsonsecuritykey: sessionStorage.getItem("securitykey"),
+        username: sessionStorage.getItem("rusername")
+    }
+
+    fetch("http://localhost:8000/api/account/gethistory/", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data) 
+        {
+            addToTable_chat(data);
+        } 
+        else 
+        {
+            alert('Error while processing the request.');
+        }
+    })
+    .catch((error) => {
+        console.error('Hata:', error);
+    });
+}  
+
+function dataget_public(username)
+{
     var data = {
         jsonsecuritykey: sessionStorage.getItem("securitykey"),
         getusername: username
@@ -49,7 +108,12 @@ function chatProfile(username) {
         console.error('Error fetching data:', error);
         // Hata durumunda uygun bir mesaj gösterebilirsiniz
     });
+}
 
+
+function chatProfile(username) 
+{
+    dataget_public(username);
     return `
     <div class="wrapper">
     <div class="form-wrapper">
@@ -83,11 +147,11 @@ function chatProfile(username) {
                         </div>
                     </div>
                 <div class="history-div" id="history-div">
-                    <!-- Tablo veya mesaj burada görüntülenecek -->
+                <table border="3" id="table_chat">
+                </table>
                 </div>
     </div>
 </div>
-
 <style>
     .wrapper {
         margin-top: 37px;

@@ -3,7 +3,11 @@ var searchlanguages = localStorage.getItem('selectedLanguage');
         if(!searchlanguages)
         localStorage.setItem('selectedLanguage', 'tr');
 
-
+window.addEventListener('beforeunload', function(event) {
+    // Bağlantıyı kapat
+    socket.close();
+});
+        
 document.addEventListener('DOMContentLoaded', function () {
 
     const page = window.location.hash.substring(1);
@@ -23,9 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     usernameTextElements.forEach(function(element) {
                         element.textContent = sessionStorage.getItem("username");
                     });
-        if(page == "game" || page == "onevsone" || page == "tournament" || page == "aimode" || page == "chat" || page == "publicProfile" ||page == "chatProfile"||page == "profileSettings"||page == "loading")
-            con();
-        setTimeout(function() {}, 1000);
+        window.location.hash = "#login";
         changePage(page || 'login'); // Eğer hash yoksa login sayfasına yönlendir
     }
 });
@@ -44,13 +46,10 @@ chatProfileUsername="";
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
     const page = window.location.hash.substring(1);
-    if(page == "game" || page == "onevsone" || page == "tournament" || page == "aimode" || page == "chat" || page == "publicProfile" ||page == "chatProfile"||page == "profileSettings"||page == "loading")
-        con();
-    setTimeout(function() {}, 1000);
     changePage(page);
 });
 
-function changePage(page) {
+function changePage(page) { 
     let content = '';
     //önceki içerik temizlenir
     document.getElementById('content').innerHTML = '';
@@ -150,12 +149,19 @@ function changePage(page) {
                 break;
             default:
                 removeHeader();
-                content = ErrorAdd();
+                key = true;
+                content = loginAdd();
         }
 
         //Yeni içerik eklenir.
         document.getElementById('content').innerHTML = content;
-        window.location.hash = page;
+        if(key == false)
+            window.location.hash = page;
+        else
+        {
+            window.location.hash = "login"
+            key = false;
+        }
 
         var languages = localStorage.getItem('selectedLanguage');
         changeLanguage(languages);
