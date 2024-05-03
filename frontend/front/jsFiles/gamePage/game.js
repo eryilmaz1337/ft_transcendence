@@ -84,7 +84,8 @@ function chooseGame() {
     `;
 }
 
-function checkGameTheme() {
+function checkGameTheme() 
+{
     if(window.location.hash == "#aimode" || window.location.hash == "#onevsone"  || window.location.hash == "#tournamentmatches")
     {
         if(gameTheme === 0) {

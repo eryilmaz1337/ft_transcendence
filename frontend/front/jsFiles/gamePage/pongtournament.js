@@ -37,6 +37,7 @@ function tournamentmatches()
             ply2.innerHTML = sessionStorage.getItem("paddle2User");
         }
         else if(ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0 && ucuncu_mac_kazanan == 0)
+        {
 
             const ply1 = document.getElementById("ply1");
             ply1.innerHTML = sessionStorage.getItem("paddle3User");
@@ -532,7 +533,8 @@ function tournamentmatches()
 
     function gameLoop()
     {
-        if(window.location.hash != "#tournamentmatches"){
+        if(window.location.hash != "#tournamentmatches")
+        {
             gameTheme = 0;
             gameRunningTournament = false;
         }

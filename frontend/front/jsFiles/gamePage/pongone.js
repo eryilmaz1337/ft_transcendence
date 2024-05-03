@@ -2,6 +2,7 @@ let gameRunningone = false;
 
 function historysave(score1_tmp,score2_tmp)
 {
+    var now = new Date();
     var data =
     {
         jsonsecuritykey: sessionStorage.getItem('securitykey'),
@@ -9,6 +10,7 @@ function historysave(score1_tmp,score2_tmp)
         receiver_username: sessionStorage.getItem('ply'),
         score1: score1_tmp,
         score2: score2_tmp,
+        date: now.toLocaleString(),
     }
     console.log(data);
     fetch("http://localhost:8000/api/account/historysave/", {
@@ -236,7 +238,7 @@ function startgameone()
             {
                 gameRunningone = false;
                 winnerUser = sessionStorage.getItem("ply");
-                historysave(paddle1.score, paddle2.score)
+                historysave(paddle1.score, paddle2.score);
                 paddle2.score = 0;
                 paddle1.score = 0;
                 window.location.hash = 'winnerpage';
@@ -255,7 +257,7 @@ function startgameone()
                 gameRunningone = false;
     
                 winnerUser = sessionStorage.getItem("username");
-                historysave(paddle1.score, paddle2.score)
+                historysave(paddle1.score, paddle2.score);
                 paddle1.score = 0;
                 paddle2.score = 0;
                 window.location.hash = 'winnerpage';
