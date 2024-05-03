@@ -66,17 +66,23 @@ function starttournament()
     {
         player1 = sessionStorage.getItem('winner1');
         player2 = sessionStorage.getItem('oynamayan1');
+        sessionStorage.setItem("next1", player1);
+        sessionStorage.setItem("next2", player2);
     }
     else if(dort_kisi === 1 && window.location.hash === "#tournament2" && !bool)
     {
         player3 = sessionStorage.getItem('player3');
         player4 = sessionStorage.getItem('player4');
+        sessionStorage.setItem("next1", player3);
+        sessionStorage.setItem("next2", player4);
         bool = true;
     }
     else if(dort_kisi === 1 && window.location.hash === "#tournament2" && bool) 
     {
         player1 = sessionStorage.getItem('winner1');
         player2 = sessionStorage.getItem('winner2');
+        sessionStorage.setItem("next1", player1);
+        sessionStorage.setItem("next2", player2);
         bool = false;
     }
     else
@@ -85,6 +91,12 @@ function starttournament()
         player2 = document.getElementById("player2").textContent;
         player3 = document.getElementById('player3').textContent;
         player4 = document.getElementById('player4').textContent;
+
+        sessionStorage.setItem("next1", player3);
+        if(player4 === 'Player 4'){
+            sessionStorage.setItem("next2", sessionStorage.getItem('winner1'));
+        }
+        sessionStorage.setItem("next2", player4);
     }
 
     if (playerCounter < 3)
