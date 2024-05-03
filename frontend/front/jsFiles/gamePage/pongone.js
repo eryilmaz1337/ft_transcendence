@@ -169,7 +169,8 @@ function startgameone()
             paddle2.score++;
             document.getElementById('player2Score').innerHTML = paddle2.score;
 
-            if (paddle2.score == 3){
+            if (paddle2.score == 3)
+            {
                 gameRunningone = false;
                 winneruserone = sessionStorage.getItem('paddle2User');
                 //winnerUser = winneruserone; -> uncaught çünkü hiçbir yerde setItem edilmedi paddle2User yani çekememem normal

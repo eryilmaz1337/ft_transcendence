@@ -19,6 +19,11 @@ let winnerUser = "";
 
 function tournamentmatches()
 {
+    const ply1 = document.getElementById("ply1");
+    ply1.innerHTML = sessionStorage.getItem("paddle1User");
+    const ply2 = document.getElementById("ply2");
+    ply2.innerHTML = sessionStorage.getItem("paddle2User");
+    
     gameRunningTournament = true;
 
     const canvas = document.getElementById("canvas");

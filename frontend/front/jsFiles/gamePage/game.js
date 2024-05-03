@@ -1,4 +1,6 @@
 function chooseGame() {
+    uc_kisi = 0;
+    dort_kisi = 0;
     return `
     <div id="game-container">
         <div class="wrapper">
@@ -164,7 +166,8 @@ function setGameTheme(value)
 }
 
 // Oyun Fonksiyonu
-function gameAdd() {
+function gameAdd() 
+{
     checkGameTheme();
     return `
     <head>
@@ -300,7 +303,9 @@ function gameAdd() {
             <button type="button" class="btn btn-outline-secondary" onclick="setGameTheme(5)">Milky Way</button>
         </div>
         <div id="scoreboard">
+            <h1 id="ply1">ply1<h1>
             <h1 id="player1Score">0</h1>
+            <h1 id="ply2">ply2<h1>
             <h1 id="player2Score">0</h1>
         </div>
         <h2 id ="WelcomeText" data-translate="welcomepong">Welcome to the Pong Game</h2>
