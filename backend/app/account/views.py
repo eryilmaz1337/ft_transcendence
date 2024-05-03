@@ -367,3 +367,10 @@ def gethistory(request):
             return JsonResponse({'success': False, 'message': 'no unauthorized'})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
+
+def get_client_id(request):
+    client_id = os.getenv('CLIENT_ID')
+    if client_id:
+        return JsonResponse({'client_id': client_id})
+    else:
+        return JsonResponse({'error': 'CLIENT_ID not found in environment'})

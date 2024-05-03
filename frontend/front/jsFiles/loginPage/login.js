@@ -1,9 +1,20 @@
 let isLoggedIn = false;
 let isgetdata = false;
+let client_id;
+
+fetch('http://localhost:8000/api/account/get-client-id/')
+.then(response => response.json())
+.then(data => {
+    client = data.client_id;
+    // Server tarafından dönen client_id'yi kullanın
+})
+.catch(error => {
+    console.error('Error:', error);
+});
 
 function login42()
 {
-    const client_id = 'u-s4t2ud-1c2cdbd5f93bbb10f5c88928250742cd0f34b7404d28cf9db6ce0a7ec31ae127'; // Ecole 42 uygulamanızın istemci kimliği
+    const client_id = client; // Ecole 42 uygulamanızın istemci kimliği
     const redirect_uri = 'http://localhost:423'; // Ecole 42 tarafından yetkilendirme sonrası yönlendirileceğiniz URI
     const scopes = 'public'; // İzin istediğiniz kapsamlar
     const authUrl = `https://api.intra.42.fr/oauth/authorize?client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}&response_type=code&scope=${encodeURIComponent(scopes)}`;

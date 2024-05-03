@@ -28,7 +28,7 @@ function signinjson()
           });
           con();
           setTimeout(function() {}, 1000);
-          window.location.href = "#game";
+          window.location.hash = "#game";
         }else {
           alert('Error while processing the request.');
         }
