@@ -63,7 +63,14 @@ var translations = {
       'addfriend' : '➕ Arkadaş Ekle',
       'friends' : 'Arkadaşlar',
       'signupError' : 'Kullanıcı oluşturulamadı! Farklı bir kullanıcı adıyla tekrar dene!',
-      'matchHistory' : 'Karşılaşma Geçmişi'
+      'matchHistory' : 'Karşılaşma Geçmişi',
+      'ozeloyun': 'Özel Oyun',
+      'digeroyuncu' : 'Diğer Oyuncu',
+      'oyunubaslat' : 'Oyunu Başlat',
+      'chatheader2' : '1 kişiyle sohbet ediyor',
+      'cikisyap' : 'Çıkış Yap',
+      'profile' : 'Profil',
+      'dosyayukle' : 'Dosya Yükle',
   },
   en: {
     'titlelogin': 'LOGIN',
@@ -128,7 +135,14 @@ var translations = {
     'addfriend': '➕ Add Friend',
     'friends' : 'Friends',
     'signupError' : 'Failed to create user! Try again with a different username!',
-    'matchHistory' : 'Match History'
+    'matchHistory' : 'Match History',
+    'ozeloyun': 'Private Game',
+    'oyunubaslat': 'Start Game',
+    'digeroyuncu': 'Other Player',
+    'cikisyap': 'Log Out',
+    'profile': 'Profile',
+    'chatheader2': 'Chatting with 1 person',
+    'dosyayukle': 'Upload File',
   },
   ru: {
 
@@ -194,8 +208,14 @@ var translations = {
     'addfriend': '➕ Добавить друга',
     'friends' : 'Друзья',
     'signupError' : 'Не удалось создать пользователя! Попробуйте еще раз с другим именем пользователя!',
-    'matchHistory' : 'История матчей'
-  
+    'matchHistory' : 'История матчей',
+    'ozeloyun': 'Частная игра',
+    'oyunubaslat': 'Начать игру',
+    'digeroyuncu': 'Другой игрок',
+    'cikisyap': 'Выйти',
+    'profile': 'Профиль',
+    'chatheader2': 'Беседа с 1 человеком',
+    'dosyayukle': 'Загрузить файл',
   }
 };
 

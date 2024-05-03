@@ -426,7 +426,7 @@ body {
     <div class="chat-container">
         <div class="chat-header-horizontal-container">
             <div class="chat-profile-picture" id="chachat-textt-profile-picture"></div>
-            <h3 id="chat-header" class="chat-header" ><i class="fa-brands fa-rocketchat"></i></h3>
+            <h3 id="chat-header" class="chat-header"data-translate="chatheader2" ><i class="fa-brands fa-rocketchat"></i></h3>
         </div>
         <div id="chat" class="chat-messages"></div>
         <br>

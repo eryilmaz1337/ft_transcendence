@@ -15,9 +15,9 @@ function onevsonesetup()
         <div class="wrapper">
             <div class="form-wrapper">
                 <form onsubmit="return false;">
-                    <h3>Diğer oyuncu</h3>
+                    <h3 data-translate="digeroyuncu" >Diğer oyuncu </h3>
                     <input type="text" id="ply" placeholder="Oyuncu Adı"/>
-                    <button class="choose-game-button2" onclick="startonevsone()">oyunu başlat</button>
+                    <button class="choose-game-button2"data-translate="oyunubaslat" onclick="startonevsone()">oyunu başlat</button>
 
                 </form>
             </div>

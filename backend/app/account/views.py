@@ -337,7 +337,7 @@ def historysave(request):
                 username=data['username'],
                 receiver_username=data['receiver_username'],
                 score1 = data['score1'],
-                score2 = data['score1'],
+                score2 = data['score2'],
                 date = data['date']
             )
             return JsonResponse({'success': True, 'message': 'history add'})

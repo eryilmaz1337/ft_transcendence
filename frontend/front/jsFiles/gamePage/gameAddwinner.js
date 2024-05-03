@@ -4,7 +4,7 @@ function gameAddwinner()
     return `
     <body>
         <div id="winner-page">
-            <h1>Congratulations!</h1>
+            <h1 data-translate="congrats">Congratulations!</h1>
             <h2>Winner is: <span style="color: ${winnerColor};">${winnerUser}</span></h2>
             <div id="confetti"></div>
         </div>

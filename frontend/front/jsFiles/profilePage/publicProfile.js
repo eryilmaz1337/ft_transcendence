@@ -15,7 +15,8 @@ function addToTable(data)
      table.innerHTML = "";
  
      // Her bir kullanıcı verisi için tabloya satır ekleyin
-     historyData.forEach(function(user) {
+     historyData.forEach(function(user)
+     {
          var row = table.insertRow();
          var cell1 = row.insertCell();
          cell1.textContent = user.username;
@@ -28,6 +29,39 @@ function addToTable(data)
          var cell5 = row.insertCell();
          cell5.textContent = user.date;
      });
+     // Kolon isimlerini ekleyelim
+        var header = table.createTHead();
+        var headerRow = header.insertRow(0);
+
+        var cell1 = headerRow.insertCell(0);
+        cell1.textContent = "Username";
+        cell1.style.whiteSpace = "nowrap"
+        cell1.style.color = "greenyellow";
+        cell1.className = "username-cell";
+
+        var cell2 = headerRow.insertCell(1);
+        cell2.textContent = "Enemy";
+        cell2.style.whiteSpace = "nowrap";
+        cell2.style.color = "red";
+        cell2.className = "enemy-cell";
+
+        var cell3 = headerRow.insertCell(2);
+        cell3.textContent = "Username Score";
+        cell3.style.whiteSpace = "nowrap";
+        cell3.style.color = "white";
+        cell3.className = "username-score-cell";
+
+        var cell4 = headerRow.insertCell(3);
+        cell4.textContent = "Enemy Score";
+        cell4.style.whiteSpace = "nowrap";
+        cell4.style.color = "white";
+        cell4.className = "enemy-score-cell";
+
+        var cell5 = headerRow.insertCell(4);
+        cell5.textContent = "Date";
+        cell5.style.whiteSpace = "nowrap";
+        cell5.style.color = "green";
+        cell5.className = "date-cell";
 }
 
 function dataget()
@@ -65,7 +99,7 @@ function publicProfile() {
     return `
     <div class="wrapper">
     <div class="form-wrapper">
-            <h3>Profile</h3>
+        <h3 data-translate="profile">Profile</h3>
                 <div class="field-wrapper profile-photo-wrapper">
                     <img src="${sessionStorage.getItem('profile_image')}" id="profile-photo" class="profile-photo" alt="Profile Photo">
                 </div>
@@ -253,15 +287,6 @@ function publicProfile() {
         text-align: left;
     }
 
-    .table th {
-        background-color: #f2f2f2;
-    }
-
-    /* Satır arka plan rengi değişimi */
-    .table tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
     /* Resim stil */
     .match_history {
         cursor: pointer;
@@ -275,6 +300,51 @@ function publicProfile() {
     .hidden {
         display: none;
     }
+    /* Tablo başlığı */
+    #table thead {
+        background-color: #333;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Tek tek hücreler */
+    #table td {
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    /* Zebra çizgileri */
+    #table tr:nth-child(even) {
+        background-color: green;
+    }
+
+    /* Username hücresi rengi */
+    .username-cell {
+        color: greenyellow;
+    }
+
+    /* Enemy hücresi rengi */
+    .enemy-cell {
+        color: red;
+    }
+
+    /* Username Score hücresi rengi */
+    .username-score-cell {
+        color: white;
+    }
+
+    /* Enemy Score hücresi rengi */
+    .enemy-score-cell {
+        color: white;
+    }
+
+    /* Date hücresi rengi */
+    .date-cell {
+        color: green;
+    }
+
+</style>
+
 
     @media screen and (max-width: 1230px) {
         .field-wrapper label {

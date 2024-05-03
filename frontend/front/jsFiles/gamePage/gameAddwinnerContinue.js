@@ -8,7 +8,7 @@ function gameAddwinnerContinue() {
     return `
     <body>
         <div id="winner-page">
-            <h1>Congratulations!</h1>
+            <h1 data-translate="congrats">Congratulations!</h1>
             <h2>Winner is: <span style="color: ${winnerColor};">${winnerUser}</span></h2>
             <div id="confetti"></div>
             <button class="btn-winner" onclick="redirectToTournament()" style="background-color: greenyellow;">Next Match (<span style="color: white;">${sessionStorage.getItem('next1')}</span> VS <span style="color: white;">${sessionStorage.getItem('next2')}</span>)</button>
