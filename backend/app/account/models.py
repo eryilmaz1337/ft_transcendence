@@ -25,3 +25,13 @@ class darklist(models.Model):
     darkfriends = models.CharField(max_length=60,default='none')
     def __str__(self):
         return f"Username: {self.username}, Name: {self.darkfriends}"
+    
+class history(models.Model):
+    username = models.CharField(max_length=60,default='none')
+    receiver_username = models.CharField(max_length=60,default='none')
+    score1 = models.CharField(max_length=60,default='none')
+    score2 = models.CharField(max_length=60,default='none')
+    date = models.CharField(max_length=60,default='none')
+    def __str__(self):
+        return f"Username: {self.username}, Name: {self.receiver_username}"
+    

@@ -12,7 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import render
-from .models import users ,friends, darklist
+from .models import users ,friends, darklist, history
 import json
 import requests
 import random
@@ -327,3 +327,21 @@ def get_user_data(request):
         return JsonResponse({'username': user.username, 'name': user.name, 'surname': user.surname, 'email': user.email, 'profile_image': user.profile_image})
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allow'})
+
+@csrf_exempt
+def historysave(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            history.objects.create(
+                username=data['username'],
+                receiver_username=data['receiver_username'],
+                score1 = data['score1'],
+                score2 = data['score1'],
+                date = data['date']
+            )
+            return JsonResponse({'success': True, 'message': 'history add'})
+        else:
+            return JsonResponse({'success': False, 'message': 'no unauthorized'})
+    else:
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})

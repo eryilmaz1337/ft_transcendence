@@ -101,10 +101,10 @@ function startgame()
         };
 
         this.getCenter = function() {
-            return {
-                x: this.pos.x + this.getHalfWidth(),
-                y: this.pos.y + this.getHalfHeight()
-            };
+            return vec2(
+                this.pos.x + this.getHalfWidth(),
+                this.pos.y + this.getHalfHeight(),
+            );
         };
     }
 
@@ -124,13 +124,44 @@ function startgame()
             ball.velocity.y *= -1;
     }
 
-    function ballPaddleCollision(ball,paddle)
+    function ballPaddleCollision(ball, paddle)
     {
-        let dx = Math.abs(ball.pos.x - paddle.getCenter().x);
-        let dy = Math.abs(ball.pos.y - paddle.getCenter().y);
+        let ballNextX = ball.pos.x + ball.velocity.x;
+        let ballNextY = ball.pos.y + ball.velocity.y;
 
-        if (dx <= (ball.radius + paddle.getHalfWidth()) && dy <= (ball.radius + paddle.getHalfHeight()))
-            ball.velocity.x *= -1;
+        let paddleLeft = paddle.pos.x;
+        let paddleRight = paddle.pos.x + paddle.width;
+        let paddleTop = paddle.pos.y;
+        let paddleBottom = paddle.pos.y + paddle.height;
+
+        if (
+            ballNextX + ball.radius > paddleLeft &&
+            ballNextX - ball.radius < paddleRight &&
+            ballNextY + ball.radius > paddleTop &&
+            ballNextY - ball.radius < paddleBottom
+        ) {
+            // Çarpışma oluyorsa topun paddle'dan çıkarılması gerekiyor
+            // X ekseninde çarpışma
+            if (ballNextX < paddleLeft || ballNextX > paddleRight) {
+                ball.velocity.x *= -1;
+                // Çarpışma sonrası topun paddle'ın içinden çıkarılması
+                if (ballNextX < paddleLeft) {
+                    ball.pos.x = paddleLeft - ball.radius;
+                } else {
+                    ball.pos.x = paddleRight + ball.radius;
+                }
+            }
+            // Y ekseninde çarpışma
+            if (ballNextY < paddleTop || ballNextY > paddleBottom) {
+                ball.velocity.y *= -1;
+                // Çarpışma sonrası topun paddle'ın içinden çıkarılması
+                if (ballNextY < paddleTop) {
+                    ball.pos.y = paddleTop - ball.radius;
+                } else {
+                    ball.pos.y = paddleBottom + ball.radius;
+                }
+            }
+        }
     }
 
     function player2AI(ball,paddle) // gelen veri için kullan burda gelen veri işle ve konum güncellemesini yap

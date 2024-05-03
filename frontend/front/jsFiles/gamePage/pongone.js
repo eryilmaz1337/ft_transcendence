@@ -1,8 +1,41 @@
 let gameRunningone = false;
 
+function historysave(score1_tmp,score2_tmp)
+{
+    var data =
+    {
+        jsonsecuritykey: sessionStorage.getItem('securitykey'),
+        username: sessionStorage.getItem('username'),
+        receiver_username: sessionStorage.getItem('ply'),
+        score1: score1_tmp,
+        score2: score2_tmp,
+    }
+    console.log(data);
+    fetch("http://localhost:8000/api/account/historysave/", {
+      method: 'POST', // İstek metodu
+      headers: {
+        'Content-Type': 'application/json', // İçerik tipini belirtme
+      },
+      body: JSON.stringify(data), // JavaScript objesini JSON string'ine dönüştürme
+    })
+    .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
+    .then(data => {
+            //console.log(data.message[0]);
+
+            window.location.hash = "game"
+    })
+    .catch((error) => {
+      console.error('Hata:', error);
+    });
+}
+
 function startgameone()
 {
     gameRunningone = true;
+    const ply1 = document.getElementById("ply1");
+    ply1.innerHTML = sessionStorage.getItem("username");
+    const ply2 = document.getElementById("ply2");
+    ply2.innerHTML = sessionStorage.getItem("ply");
 
     const canvas = document.getElementById("canvas");
     if (!canvas) {
@@ -112,10 +145,10 @@ function startgameone()
         };
 
         this.getCenter = function() {
-            return {
-                x: this.pos.x + this.getHalfWidth(),
-                y: this.pos.y + this.getHalfHeight()
-            };
+            return vec2(
+                this.pos.x + this.getHalfWidth(),
+                this.pos.y + this.getHalfHeight(),
+            );
         };
     }
 
@@ -135,13 +168,44 @@ function startgameone()
             ball.velocity.y *= -1;
     }
 
-    function ballPaddleCollision(ball,paddle)
+    function ballPaddleCollision(ball, paddle)
     {
-        let dx = Math.abs(ball.pos.x - paddle.getCenter().x);
-        let dy = Math.abs(ball.pos.y - paddle.getCenter().y);
+        let ballNextX = ball.pos.x + ball.velocity.x;
+        let ballNextY = ball.pos.y + ball.velocity.y;
 
-        if (dx <= (ball.radius + paddle.getHalfWidth()) && dy <= (ball.radius + paddle.getHalfHeight()))
-            ball.velocity.x *= -1;
+        let paddleLeft = paddle.pos.x;
+        let paddleRight = paddle.pos.x + paddle.width;
+        let paddleTop = paddle.pos.y;
+        let paddleBottom = paddle.pos.y + paddle.height;
+
+        if (
+            ballNextX + ball.radius > paddleLeft &&
+            ballNextX - ball.radius < paddleRight &&
+            ballNextY + ball.radius > paddleTop &&
+            ballNextY - ball.radius < paddleBottom
+        ) {
+            // Çarpışma oluyorsa topun paddle'dan çıkarılması gerekiyor
+            // X ekseninde çarpışma
+            if (ballNextX < paddleLeft || ballNextX > paddleRight) {
+                ball.velocity.x *= -1;
+                // Çarpışma sonrası topun paddle'ın içinden çıkarılması
+                if (ballNextX < paddleLeft) {
+                    ball.pos.x = paddleLeft - ball.radius;
+                } else {
+                    ball.pos.x = paddleRight + ball.radius;
+                }
+            }
+            // Y ekseninde çarpışma
+            if (ballNextY < paddleTop || ballNextY > paddleBottom) {
+                ball.velocity.y *= -1;
+                // Çarpışma sonrası topun paddle'ın içinden çıkarılması
+                if (ballNextY < paddleTop) {
+                    ball.pos.y = paddleTop - ball.radius;
+                } else {
+                    ball.pos.y = paddleBottom + ball.radius;
+                }
+            }
+        }
     }
 
     function respawnBall(ball)
@@ -163,7 +227,6 @@ function startgameone()
 
     function increaseScore(ball,paddle1,paddle2)
     {
-        let winneruserone = "";
         if (ball.pos.x <= -ball.radius)
         {
             paddle2.score++;
@@ -172,10 +235,8 @@ function startgameone()
             if (paddle2.score == 3)
             {
                 gameRunningone = false;
-                winneruserone = sessionStorage.getItem('paddle2User');
-                //winnerUser = winneruserone; -> uncaught çünkü hiçbir yerde setItem edilmedi paddle2User yani çekememem normal
-                console.log('kazanan : ' + winneruserone);
-                winnerUser = winneruserone;
+                winnerUser = sessionStorage.getItem("ply");
+                historysave(paddle1.score, paddle2.score)
                 paddle2.score = 0;
                 paddle1.score = 0;
                 window.location.hash = 'winnerpage';
@@ -192,10 +253,9 @@ function startgameone()
 
             if (paddle1.score == 3){
                 gameRunningone = false;
-                winneruserone = sessionStorage.getItem('paddle1User');
-                //winnerUser = winneruserone; ->uncaught çünkü hiçbir yerde setItem edilmedi paddle2User yani çekemem normal
-                console.log('kazanan : ' + winneruserone);
-                winnerUser = winneruserone;
+    
+                winnerUser = sessionStorage.getItem("username");
+                historysave(paddle1.score, paddle2.score)
                 paddle1.score = 0;
                 paddle2.score = 0;
                 window.location.hash = 'winnerpage';

@@ -68,6 +68,9 @@ function changePage(page) {
             case 'onevsone':
                 content = gameAdd();
                 break;
+            case 'onevsonesetup':
+                content = onevsonesetup();
+                break;
             case 'aimode':
                 content = gameAdd();
                 break;

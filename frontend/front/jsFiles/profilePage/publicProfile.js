@@ -3,12 +3,31 @@ function toggleTable() {
     table.classList.toggle("hidden");
 }
 
+function addToTable(data, tableId) 
+{
+    // Tablo elementini seç
+    var table = document.getElementById(tableId);
+
+    // Tablo bulunamazsa hata mesajı göster ve fonksiyondan çık
+    if (!table) {
+        console.error("Tablo bulunamadı.");
+        return;
+    }
+
+    // Veri array'i boyunca döngü
+    data.forEach(function(rowData) {
+        // Yeni bir satır oluştur
+        var row = table.insertRow();
+
+        // Veri array'inin her öğesi için bir hücre oluştur ve hücreye değeri ekle
+        rowData.forEach(function(cellData) {
+            var cell = row.insertCell();
+            cell.textContent = cellData;
+        });
+    });
+}
+
 function publicProfile() {
-    // Veriyi alma ve tablo olarak gösterme işlemlerini yürütme
-    // fetchData('your-backend-url/data')
-    // .then(data => {
-    //   displayData(data);
-    // });
     return `
 
     <div class="wrapper">
@@ -43,7 +62,17 @@ function publicProfile() {
                         </div>
                     </div>
                 <div class="history-div" id="history-div">
-                    <!-- Tablo veya mesaj burada görüntülenecek -->
+                    <table border="3">
+                        <tbody>
+                            <tr>
+                                <td>eryilmaz</td>
+                                <td>burak</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>tarih</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
     </div>
 </div>

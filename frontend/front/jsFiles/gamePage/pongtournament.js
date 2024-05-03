@@ -29,21 +29,15 @@ function tournamentmatches()
     }
     else if(dort_kisi == 1)
     {
-        console.log("burda=2");
-        console.log("ilk" + ilk_mac_kazanan);
-        console.log("iki" + ikinci_mac_kazanan);
-        console.log("üç" + ucuncu_mac_kazanan);
         if(ilk_mac_kazanan == 0 && ikinci_mac_kazanan == 0 && ucuncu_mac_kazanan == 0)
         {
-            console.log("burda=3");
             const ply1 = document.getElementById("ply1");
             ply1.innerHTML = sessionStorage.getItem("paddle1User");
             const ply2 = document.getElementById("ply2");
             ply2.innerHTML = sessionStorage.getItem("paddle2User");
         }
         else if(ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 0 && ucuncu_mac_kazanan == 0)
-        {
-            console.log("burda=4");
+
             const ply1 = document.getElementById("ply1");
             ply1.innerHTML = sessionStorage.getItem("paddle3User");
             const ply2 = document.getElementById("ply2");
@@ -51,7 +45,6 @@ function tournamentmatches()
         }
         else if(ilk_mac_kazanan == 1 && ikinci_mac_kazanan == 1 && ucuncu_mac_kazanan == 0)
         {
-            console.log("burda=5");
             const ply1 = document.getElementById("ply1");
             ply1.innerHTML = sessionStorage.getItem("paddle1User");
             const ply2 = document.getElementById("ply2");
@@ -169,10 +162,10 @@ function tournamentmatches()
         };
 
         this.getCenter = function() {
-            return {
-                x: this.pos.x + this.getHalfWidth(),
-                y: this.pos.y + this.getHalfHeight()
-            };
+            return vec2(
+                this.pos.x + this.getHalfWidth(),
+                this.pos.y + this.getHalfHeight(),
+            );
         };
     }
 
@@ -192,15 +185,45 @@ function tournamentmatches()
             ball.velocity.y *= -1;
     }
 
-    function ballPaddleCollision(ball,paddle)
+    function ballPaddleCollision(ball, paddle)
     {
-        let dx = Math.abs(ball.pos.x - paddle.getCenter().x);
-        let dy = Math.abs(ball.pos.y - paddle.getCenter().y);
+        let ballNextX = ball.pos.x + ball.velocity.x;
+        let ballNextY = ball.pos.y + ball.velocity.y;
 
-        if (dx <= (ball.radius + paddle.getHalfWidth()) && dy <= (ball.radius + paddle.getHalfHeight()))
-            ball.velocity.x *= -1;
+        let paddleLeft = paddle.pos.x;
+        let paddleRight = paddle.pos.x + paddle.width;
+        let paddleTop = paddle.pos.y;
+        let paddleBottom = paddle.pos.y + paddle.height;
+
+        if (
+            ballNextX + ball.radius > paddleLeft &&
+            ballNextX - ball.radius < paddleRight &&
+            ballNextY + ball.radius > paddleTop &&
+            ballNextY - ball.radius < paddleBottom
+        ) {
+            // Çarpışma oluyorsa topun paddle'dan çıkarılması gerekiyor
+            // X ekseninde çarpışma
+            if (ballNextX < paddleLeft || ballNextX > paddleRight) {
+                ball.velocity.x *= -1;
+                // Çarpışma sonrası topun paddle'ın içinden çıkarılması
+                if (ballNextX < paddleLeft) {
+                    ball.pos.x = paddleLeft - ball.radius;
+                } else {
+                    ball.pos.x = paddleRight + ball.radius;
+                }
+            }
+            // Y ekseninde çarpışma
+            if (ballNextY < paddleTop || ballNextY > paddleBottom) {
+                ball.velocity.y *= -1;
+                // Çarpışma sonrası topun paddle'ın içinden çıkarılması
+                if (ballNextY < paddleTop) {
+                    ball.pos.y = paddleTop - ball.radius;
+                } else {
+                    ball.pos.y = paddleBottom + ball.radius;
+                }
+            }
+        }
     }
-
     function respawnBall(ball)
     {
         if (ball.velocity.x > 0)

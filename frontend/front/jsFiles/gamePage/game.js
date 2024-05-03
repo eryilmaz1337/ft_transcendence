@@ -9,7 +9,7 @@ function chooseGame() {
                 <h3 data-translate="ponggame">🏓 Pong Game 🏓</h3>
                 <a href ="#aimode" class="choose-game-button" data-translate="aimode">ai</a>
                 <a href ="#tournament" class="choose-game-button" data-translate="tournamentt" >tournament</a>
-                <a href ="#onevsone" class="choose-game-button">özel oyun</a>
+                <a href ="#onevsonesetup" class="choose-game-button">özel oyun</a>
             </form>
         </div>
     </div>
