@@ -1,11 +1,9 @@
-function redirectToTournament()
-{
-	window.location.hash = "tournament2";
-	starttournament();
+function redirectToTournament() {
+    window.location.hash = "tournament2";
+    starttournament();
 }
 
-function gameAddwinnerContinue()
-{
+function gameAddwinnerContinue() {
     const winnerColor = 'greenyellow';
     return `
     <body>
@@ -13,16 +11,12 @@ function gameAddwinnerContinue()
             <h1>Congratulations!</h1>
             <h2>Winner is: <span style="color: ${winnerColor};">${winnerUser}</span></h2>
             <div id="confetti"></div>
-			<button class="btn-winner" onclick="redirectToTournament()">Next Match</button>
-            <h1>${sessionStorage.getItem('next1')}</h1>
-            <h1>VS</h1>
-            <h1>${sessionStorage.getItem('next2')}</h1>
+            <button class="btn-winner" onclick="redirectToTournament()" style="background-color: greenyellow;">Next Match (<span style="color: white;">${sessionStorage.getItem('next1')}</span> VS <span style="color: white;">${sessionStorage.getItem('next2')}</span>)</button>
         </div>
     </body>
 
     <head>
         <style>
-
         #winner-page {
             position: relative;
             text-align: center;
@@ -60,7 +54,7 @@ function gameAddwinnerContinue()
             pointer-events: none;
         }
 
-		.btn-winner {
+        .btn-winner {
             margin-top: 20px;
             padding: 10px 20px;
             text-decoration: none;
@@ -68,7 +62,6 @@ function gameAddwinnerContinue()
             border: none;
             border-radius: 20px;
             font-family: 'Arial', sans-serif;
-            background-color: greenyellow;
             color: #000;
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -77,10 +70,7 @@ function gameAddwinnerContinue()
         .btn-winner:hover {
             background-color: #0cf;
         }
-
         </style>
     </head>
-
-
     `;
 }

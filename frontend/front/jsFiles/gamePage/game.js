@@ -294,6 +294,7 @@ function gameAdd()
 </style>
 </head>
 <audio id="clMusic" src="../sounds/UEFA Champions League Anthem (Full Version).m4a"></audio>
+
     <div id="canvas-container">
         <canvas id="canvas"></canvas>
         <div class="btn-group btn-group-lg" role="group" aria-label="Basic radio toggle button group">
@@ -304,9 +305,9 @@ function gameAdd()
             <button type="button" class="btn btn-outline-secondary" onclick="setGameTheme(5)">Milky Way</button>
         </div>
         <div id="scoreboard">
-            <h1 id="ply1">ply1<h1>
+            <h1 id="ply1" style="color: white;">ply1</h1>
             <h1 id="player1Score">0</h1>
-            <h1 id="ply2">ply2<h1>
+            <h1 id="ply2" style="color: white;">ply2</h1>
             <h1 id="player2Score">0</h1>
         </div>
         <h2 id ="WelcomeText" data-translate="welcomepong">Welcome to the Pong Game</h2>
