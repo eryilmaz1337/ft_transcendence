@@ -6,7 +6,7 @@ function isValidEmail(email) {
 
 function signupjson()
 {
-  if(!document.getElementById('username').value || !document.getElementById('name').value
+  if(!document.getElementById('onayKutusu').checked || !document.getElementById('username').value || !document.getElementById('name').value
     || !document.getElementById('surname').value)
     return;
   var data = {
@@ -136,10 +136,13 @@ function singup()
             <input type="email" id="email" placeholder="Email" required>
             <input type="password" id="password" placeholder="Password" required>
             <div class="signupError" id="signupError" data-translate="signupError"></div>
+            <div>
+              <input type="checkbox" id="onayKutusu">
+              <label for="onayKutusu">GDPR Gizlilik Politikası <a href="https://commission.europa.eu/law/law-topic/data-protection/data-protection-eu_en" target="_blank">Kabul ediyorum</a></label>
+            </div>
             <button type="button" onclick="signupjson()" data-translate="registerbuton">Sign Up</button>
           </form>
       </div>
   </body>
     `;
 }
-
