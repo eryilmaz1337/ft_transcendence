@@ -15,12 +15,7 @@ function del()
     .then(response => response.json())
     .then(data => {
         if (data) {
-            if (localStorage.getItem('selectedLanguage') == ru)
-                alert('успешный');
-            if (localStorage.getItem('selectedLanguage') == en)
-                alert('Success');
-            if (localStorage.getItem('selectedLanguage') == tr)
-                alert('Başarılı');
+            alert("✓️");
             exit();
         } else {
             alert('Error while processing the request.');
@@ -98,12 +93,7 @@ function saveProfile() {
         .then(response => response.json())
         .then(data => {
             if (data) {
-                if (localStorage.getItem('selectedLanguage') == ru)
-                    alert('успешный');
-                if (localStorage.getItem('selectedLanguage') == en)
-                    alert('Success');
-                if (localStorage.getItem('selectedLanguage') == tr)
-                    alert('Başarılı');
+                alert("✓️");
                 sessionStorage.setItem('username', data.username);
                 sessionStorage.setItem('name', data.name);
                 sessionStorage.setItem('surname', data.surname);
