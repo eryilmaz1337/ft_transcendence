@@ -71,6 +71,7 @@ var translations = {
       'cikisyap' : 'Çıkış Yap',
       'profile' : 'Profil',
       'dosyayukle' : 'Dosya Yükle',
+      'delete' : 'Sil',
   },
   en: {
     'titlelogin': 'LOGIN',
@@ -143,6 +144,7 @@ var translations = {
     'profile': 'Profile',
     'chatheader2': 'Chatting with 1 person',
     'dosyayukle': 'Upload File',
+    'delete' : 'Delete',
   },
   ru: {
 
@@ -216,6 +218,7 @@ var translations = {
     'profile': 'Профиль',
     'chatheader2': 'Беседа с 1 человеком',
     'dosyayukle': 'Загрузить файл',
+    'delete' : 'удалить',
   }
 };
 

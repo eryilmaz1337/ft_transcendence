@@ -3,6 +3,7 @@ FROM node:14-alpine
 
 # Çalışma dizini oluştur
 WORKDIR /usr/src
+
 RUN mkdir media
 # HTML, CSS ve JS dosyalarını kopyala
 # RUN mkdir img

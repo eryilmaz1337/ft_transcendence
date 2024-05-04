@@ -14,7 +14,6 @@ function signinjson()
       })
       .then(response => response.json()) // JSON olarak dönen yanıtı parse etme
       .then(data => {
-        alert(`Giriş Başarılı`);
         if (data) {
           sessionStorage.setItem('username', data.username);
           sessionStorage.setItem('name', data.name);

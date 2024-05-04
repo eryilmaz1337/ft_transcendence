@@ -343,8 +343,6 @@ function publicProfile() {
         color: green;
     }
 
-</style>
-
 
     @media screen and (max-width: 1230px) {
         .field-wrapper label {

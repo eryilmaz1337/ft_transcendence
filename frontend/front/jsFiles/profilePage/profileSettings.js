@@ -1,4 +1,4 @@
-
+let flag = false;
 function del()
 {
     var data = {
@@ -15,7 +15,12 @@ function del()
     .then(response => response.json())
     .then(data => {
         if (data) {
-            alert('Başarılı');
+            if (localStorage.getItem('selectedLanguage') == ru)
+                alert('успешный');
+            if (localStorage.getItem('selectedLanguage') == en)
+                alert('Success');
+            if (localStorage.getItem('selectedLanguage') == tr)
+                alert('Başarılı');
             exit();
         } else {
             alert('Error while processing the request.');
@@ -27,9 +32,10 @@ function del()
 }
 
 function saveProfile() {
+    var data;
     if (flag == true)
     {
-        var data = {
+        data = {
             jsonsecuritykey: sessionStorage.getItem("securitykey"),
             jsonoldusername: sessionStorage.getItem("username"),
             jsonusername: document.getElementById('username').value,
@@ -38,7 +44,50 @@ function saveProfile() {
             jsonemail: document.getElementById('email').value,
             jsonprofileimage: serverIP + "/api/account/media/uploads/profile_image.jpg" // Profil resmi yolu
         }
-
+    }
+    else
+    {
+        if(sessionStorage.getItem("profile_image") == "https://localhost/img/profile_photos/pp08.jpeg")
+        {
+            data = {
+                jsonsecuritykey: sessionStorage.getItem("securitykey"),
+                jsonoldusername: sessionStorage.getItem("username"),
+                jsonusername: document.getElementById('username').value,
+                jsonname: document.getElementById('first-name').value,
+                jsonsurname: document.getElementById('last-name').value,
+                jsonemail: document.getElementById('email').value,
+                jsonprofileimage: serverIP + "/img/profile_photos/pp08.jpeg" // Profil resmi yolu
+            }
+        }
+        else
+        {
+            if(flag == '42')
+            {
+                data = 
+                {
+                    jsonsecuritykey: sessionStorage.getItem("securitykey"),
+                    jsonoldusername: sessionStorage.getItem("username"),
+                    jsonusername: document.getElementById('username').value,
+                    jsonname: document.getElementById('first-name').value,
+                    jsonsurname: document.getElementById('last-name').value,
+                    jsonemail: document.getElementById('email').value,
+                    jsonprofileimage: sessionStorage.getItem("profile_image")
+                }
+            }
+            else
+            {
+                data = {
+                    jsonsecuritykey: sessionStorage.getItem("securitykey"),
+                    jsonoldusername: sessionStorage.getItem("username"),
+                    jsonusername: document.getElementById('username').value,
+                    jsonname: document.getElementById('first-name').value,
+                    jsonsurname: document.getElementById('last-name').value,
+                    jsonemail: document.getElementById('email').value,
+                    jsonprofileimage: serverIP + "/api/account/media/uploads/profile_image.jpg" // Profil resmi yolu
+                }
+            }
+        }
+    }
         fetch(serverIP + "/api/account/account-edit/", {
             method: 'POST',
             headers: {
@@ -49,7 +98,12 @@ function saveProfile() {
         .then(response => response.json())
         .then(data => {
             if (data) {
-                alert('Başarılı');
+                if (localStorage.getItem('selectedLanguage') == ru)
+                    alert('успешный');
+                if (localStorage.getItem('selectedLanguage') == en)
+                    alert('Success');
+                if (localStorage.getItem('selectedLanguage') == tr)
+                    alert('Başarılı');
                 sessionStorage.setItem('username', data.username);
                 sessionStorage.setItem('name', data.name);
                 sessionStorage.setItem('surname', data.surname);
@@ -67,10 +121,7 @@ function saveProfile() {
         .catch((error) => {
             console.error('Hata:', error);
         });
-    }
 }
-
-let flag = false;
 
 function uploadFile() {
     flag = true;
@@ -156,7 +207,7 @@ function profileSettings() {
         <!-- Buttons -->
         <div class="input-wrapper button_wrapper">
             <button type="button" data-translate="save"class="btn btn-primary button_profile" onclick="saveProfile()">Save</button>
-            <button type="button" class="btn btn-primary button_profile" onclick="del()">DEL</button>
+            <button type="button" data-translate="delete" class="btn btn-primary button_profile" onclick="del()">Delete</button>
         </div>
         </form>
         </div>

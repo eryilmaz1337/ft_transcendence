@@ -46,10 +46,20 @@ chatProfileUsername="";
 window.addEventListener('hashchange', function () {
 
     const page = window.location.hash.substring(1);
-    // if(page == "login")
-    //     sessionStorage.setItem(login, true);
     changePage(page);
 });
+
+function getStart() {
+    fetch(serverIP + '/api/account/get-client-id/')
+    .then(response => response.json())
+    .then(data => {
+        client = data.client_id;
+        // Server tarafından dönen client_id'yi kullanın
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
 function changePage(page) {
     log = sessionStorage.getItem("login");
@@ -132,6 +142,7 @@ function changePage(page) {
         {
             case 'login':
                 removeHeader();
+                getStart();
                 content = loginAdd();
                 break;
             case 'signup':

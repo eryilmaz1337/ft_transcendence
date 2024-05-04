@@ -2,16 +2,6 @@ let isLoggedIn = false;
 let isgetdata = false;
 let client_id;
 
-fetch(serverIP + '/api/account/get-client-id/')
-.then(response => response.json())
-.then(data => {
-    client = data.client_id;
-    // Server tarafından dönen client_id'yi kullanın
-})
-.catch(error => {
-    console.error('Error:', error);
-});
-
 function login42()
 {
     const client_id = client; // Ecole 42 uygulamanızın istemci kimliği
@@ -45,6 +35,7 @@ function accountsave(accessToken)
                         element.textContent = data.username;
                     });
                     con();
+                    flag="42";
                     sessionStorage.setItem("login", true);
                     setTimeout(function() {}, 1000);
                     window.location.hash = "#game";

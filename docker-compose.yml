@@ -19,6 +19,7 @@ volumes:
       type: none
       device: ./backend/media/uploads
       o: bind
+
 networks:
   network:
     driver: bridge
