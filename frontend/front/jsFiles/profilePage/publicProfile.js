@@ -71,7 +71,7 @@ function dataget()
         username: sessionStorage.getItem("username")
     }
 
-    fetch("http://localhost:8000/api/account/gethistory/", {
+    fetch(serverIP + "/api/account/gethistory/", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

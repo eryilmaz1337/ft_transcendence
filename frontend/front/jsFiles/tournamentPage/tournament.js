@@ -134,7 +134,7 @@ function starttournament()
         jsonusername: sessionStorage.getItem('username'),
     }
     console.log(data);
-    fetch("http://localhost:8000/api/account/tournament/", {
+    fetch(serverIP + "/api/account/tournament/", {
       method: 'POST', // İstek metodu
       headers: {
         'Content-Type': 'application/json', // İçerik tipini belirtme

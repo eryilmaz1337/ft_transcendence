@@ -1,3 +1,31 @@
+
+function del()
+{
+    var data = {
+        jsonsecuritykey: sessionStorage.getItem("securitykey")
+    }
+
+    fetch(serverIP + "/api/account/deluser/", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data) {
+            alert('Başarılı');
+            exit();
+        } else {
+            alert('Error while processing the request.');
+        }
+    })
+    .catch((error) => {
+        console.error('Hata:', error);
+    });
+}
+
 function saveProfile() {
     if (flag == true)
     {
@@ -8,10 +36,10 @@ function saveProfile() {
             jsonname: document.getElementById('first-name').value,
             jsonsurname: document.getElementById('last-name').value,
             jsonemail: document.getElementById('email').value,
-            jsonprofileimage: "http://localhost:8000/api/account/media/uploads/profile_image.jpg" // Profil resmi yolu
+            jsonprofileimage: serverIP + "/api/account/media/uploads/profile_image.jpg" // Profil resmi yolu
         }
 
-        fetch("http://localhost:8000/api/account/account-edit/", {
+        fetch(serverIP + "/api/account/account-edit/", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -70,7 +98,7 @@ function uploadFile() {
     // Burada 'new_name' değerini dosya adı olarak ayarlıyorsunuz, belki sonuna uzantıyı eklemek istersiniz
     formData.append('new_name', 'profile_image');
 
-    fetch('http://localhost:8000/api/account/upload/', {
+    fetch(serverIP + '/api/account/upload/', {
         method: 'POST',
         body: formData
     })
@@ -122,9 +150,13 @@ function profileSettings() {
             <label for="last-name" data-translate="accountlastname">Last Name:</label>
             <input type="text" id="last-name" name="last-name" value="${sessionStorage.getItem('surname')}">
         </div>
+        <div>
+            
+        </div>
         <!-- Buttons -->
         <div class="input-wrapper button_wrapper">
             <button type="button" data-translate="save"class="btn btn-primary button_profile" onclick="saveProfile()">Save</button>
+            <button type="button" class="btn btn-primary button_profile" onclick="del()">DEL</button>
         </div>
         </form>
         </div>

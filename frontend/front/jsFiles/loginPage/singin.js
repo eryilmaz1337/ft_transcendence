@@ -5,7 +5,7 @@ function signinjson()
         jsonpassword: document.getElementById('password').value,
       }
       console.log(data);
-      fetch("http://localhost:8000/api/account/singin/", {
+      fetch(serverIP + "/api/account/singin/", {
         method: 'POST', // İstek metodu
         headers: {
           'Content-Type': 'application/json', // İçerik tipini belirtme
@@ -27,6 +27,7 @@ function signinjson()
               element.textContent = data.username;
           });
           con();
+          sessionStorage.setItem("login", true);
           setTimeout(function() {}, 1000);
           window.location.hash = "#game";
         }else {

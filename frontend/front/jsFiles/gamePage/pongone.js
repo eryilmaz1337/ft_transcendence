@@ -13,7 +13,7 @@ function historysave(score1_tmp,score2_tmp)
         date: now.toLocaleString(),
     }
     console.log(data);
-    fetch("http://localhost:8000/api/account/historysave/", {
+    fetch(serverIP + "/api/account/historysave/", {
       method: 'POST', // İstek metodu
       headers: {
         'Content-Type': 'application/json', // İçerik tipini belirtme

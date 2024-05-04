@@ -40,7 +40,7 @@ def singup(request):
                     name=data['jsonname'],
                     surname=data['jsonsurname'],
                     email=data['jsonemail'],
-                    profile_image = "http://localhost:423/img/profile_photos/pp08.jpeg",
+                    profile_image = "https://localhost:/img/profile_photos/pp08.jpeg",
                     password=make_password(data['jsonpassword']),
                     securitykey=generate_random_string()
                 )
@@ -78,7 +78,7 @@ def account42(request):
             token_url = 'https://api.intra.42.fr/oauth/token'
             client_id = os.getenv('CLIENT_ID')
             client_secret = os.getenv('CLIENT_SECRET')
-            redirect_uri = 'http://localhost:423'
+            redirect_uri = 'https://localhost:443'
             grant_type = 'authorization_code'
 
             token_data = {
@@ -368,9 +368,23 @@ def gethistory(request):
     else:
         return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})
 
+@csrf_exempt
 def get_client_id(request):
     client_id = os.getenv('CLIENT_ID')
     if client_id:
         return JsonResponse({'client_id': client_id})
     else:
         return JsonResponse({'error': 'CLIENT_ID not found in environment'})
+
+@csrf_exempt
+def deluser(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if users.objects.filter(securitykey=data.get('jsonsecuritykey')).exists():
+            user = users.objects.get(securitykey=data.get('jsonsecuritykey'))
+            user.delete()
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'message': 'no unauthorized'})
+    else:
+        return JsonResponse({'success': False, 'message': 'Only POST method is allowed'})

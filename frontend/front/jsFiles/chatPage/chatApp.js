@@ -1,3 +1,4 @@
+let serverIP = 'https://localhost';
 let socket;
 let receiver_username;
 let showm;
@@ -12,7 +13,7 @@ function addfriends()
             jsonusername: sessionStorage.getItem('username'),
             jsonfriend: receiver_username,
           }
-          fetch("http://localhost:8000/api/account/friendsadd/", {
+          fetch( serverIP + "/api/account/friendsadd/", {
               method: 'POST', // İstek metodu
             headers: {
               'Content-Type': 'application/json', // İçerik tipini belirtme
@@ -42,7 +43,7 @@ function adddarklist()
             jsonusername: sessionStorage.getItem('username'),
             jsondarkfriend: receiver_username,
           }
-          fetch("http://localhost:8000/api/account/darklistadd/", {
+          fetch( serverIP + "/api/account/darklistadd/", {
               method: 'POST', // İstek metodu
             headers: {
               'Content-Type': 'application/json', // İçerik tipini belirtme
@@ -98,7 +99,7 @@ function  getfriends()
         jsonsecuritykey: sessionStorage.getItem('securitykey'),
         jsonusername: sessionStorage.getItem('username')
       }
-      fetch("http://localhost:8000/api/account/getfriends/", {
+      fetch(serverIP + "/api/account/getfriends/", {
           method: 'POST', // İstek metodu
         headers: {
           'Content-Type': 'application/json', // İçerik tipini belirtme
@@ -127,7 +128,7 @@ function getonlinestatususer()
     var data = {
         jsonsecuritykey: sessionStorage.getItem('securitykey')
       }
-      fetch("http://localhost:8000/api/account/onlineusers/", {
+      fetch(serverIP + "/api/account/onlineusers/", {
           method: 'POST', // İstek metodu
         headers: {
           'Content-Type': 'application/json', // İçerik tipini belirtme
@@ -158,7 +159,7 @@ function  getofflinestatususer()
     var data = {
         jsonsecuritykey: sessionStorage.getItem('securitykey')
       }
-      fetch("http://localhost:8000/api/account/offlineusers/", {
+      fetch(serverIP + "/api/account/offlineusers/", {
           method: 'POST', // İstek metodu
         headers: {
           'Content-Type': 'application/json', // İçerik tipini belirtme

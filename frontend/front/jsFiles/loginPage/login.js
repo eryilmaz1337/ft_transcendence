@@ -2,7 +2,7 @@ let isLoggedIn = false;
 let isgetdata = false;
 let client_id;
 
-fetch('http://localhost:8000/api/account/get-client-id/')
+fetch(serverIP + '/api/account/get-client-id/')
 .then(response => response.json())
 .then(data => {
     client = data.client_id;
@@ -15,7 +15,7 @@ fetch('http://localhost:8000/api/account/get-client-id/')
 function login42()
 {
     const client_id = client; // Ecole 42 uygulamanızın istemci kimliği
-    const redirect_uri = 'http://localhost:423'; // Ecole 42 tarafından yetkilendirme sonrası yönlendirileceğiniz URI
+    const redirect_uri = serverIP + ':443'; // Ecole 42 tarafından yetkilendirme sonrası yönlendirileceğiniz URI
     const scopes = 'public'; // İzin istediğiniz kapsamlar
     const authUrl = `https://api.intra.42.fr/oauth/authorize?client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}&response_type=code&scope=${encodeURIComponent(scopes)}`;
     window.location.href = authUrl;
@@ -24,7 +24,7 @@ function login42()
 function accountsave(accessToken)
 {
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:8000/api/account/42-api/');
+    xhr.open('POST', serverIP + '/api/account/42-api/');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -45,6 +45,7 @@ function accountsave(accessToken)
                         element.textContent = data.username;
                     });
                     con();
+                    sessionStorage.setItem("login", true);
                     setTimeout(function() {}, 1000);
                     window.location.hash = "#game";
 

@@ -13,7 +13,12 @@ volumes:
       type: none
       device: ./frontend/front
       o: bind
-
+  img:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./backend/media/uploads
+      o: bind
 networks:
   network:
     driver: bridge
@@ -32,14 +37,12 @@ services:
     container_name: database
     image: postgres:latest
     restart: always
-    environment:
-      POSTGRES_DB: testdb
-      POSTGRES_USER: testuser
-      POSTGRES_PASSWORD: testpass
     ports:
       - 5435:5435
     networks:
       - network
+    env_file:
+      - .env
 
   backend:
     container_name: backend
@@ -54,7 +57,7 @@ services:
     depends_on:
       - database
     env_file:
-      - ./backend/app/.env
+      - .env
 
   frontend:
     container_name: frontend

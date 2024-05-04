@@ -42,21 +42,24 @@ gameTheme=0;
 gameBGImagePath="";
 gameBGColor='';
 chatProfileUsername="";
-
 // Sayfa değiştikçe URL hash'ini güncelle
 window.addEventListener('hashchange', function () {
+
     const page = window.location.hash.substring(1);
+    // if(page == "login")
+    //     sessionStorage.setItem(login, true);
     changePage(page);
 });
 
-function changePage(page) { 
+function changePage(page) {
+    log = sessionStorage.getItem("login");
     let content = '';
     //önceki içerik temizlenir
     document.getElementById('content').innerHTML = '';
     showHeader();
     // showNavbarStates();
 
-    if (socket)
+    if (log!="false" && log)
     {
         updateProfilePictureStyle();
         switch (page)

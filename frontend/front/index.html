@@ -22,8 +22,8 @@
 		function exit()
 		{
 			sessionStorage.clear();
-      		socket.close();
 			socket = 0;
+			sessionStorage.setItem("login", false);
       		setTimeout(function() {}, 1000);
       		window.location.hash = 'login';
 		}

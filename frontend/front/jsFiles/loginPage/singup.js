@@ -21,7 +21,7 @@ function signupjson()
     return;
   }
   console.log(data);
-  fetch("http://localhost:8000/api/account/singup/", {
+  fetch(serverIP + "/api/account/singup/", {
     method: 'POST', // İstek metodu
     headers: {
       'Content-Type': 'application/json', // İçerik tipini belirtme
