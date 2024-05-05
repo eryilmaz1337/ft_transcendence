@@ -138,7 +138,7 @@ function singup()
             <div class="signupError" id="signupError" data-translate="signupError"></div>
             <div>
               <input type="checkbox" id="onayKutusu">
-              <label for="onayKutusu">GDPR Gizlilik Politikası <a href="https://commission.europa.eu/law/law-topic/data-protection/data-protection-eu_en" target="_blank">Kabul ediyorum</a></label>
+              <a data-translate="gdpr" href='https://commission.europa.eu/law/law-topic/data-protection/data-protection-eu_en' target='_b'lank'>lll</a>
             </div>
             <button type="button" onclick="signupjson()" data-translate="registerbuton">Sign Up</button>
           </form>

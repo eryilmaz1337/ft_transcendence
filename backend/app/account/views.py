@@ -40,7 +40,7 @@ def singup(request):
                     name=data['jsonname'],
                     surname=data['jsonsurname'],
                     email=data['jsonemail'],
-                    profile_image = "https://localhost/img/profile_photos/pp08.jpeg",
+                    profile_image = os.getenv('URL') + "/img/profile_photos/pp08.jpeg",
                     password=make_password(data['jsonpassword']),
                     securitykey=generate_random_string()
                 )
@@ -78,7 +78,7 @@ def account42(request):
             token_url = 'https://api.intra.42.fr/oauth/token'
             client_id = os.getenv('CLIENT_ID')
             client_secret = os.getenv('CLIENT_SECRET')
-            redirect_uri = 'https://localhost:443'
+            redirect_uri = os.getenv('URL') + ':443'
             grant_type = 'authorization_code'
 
             token_data = {

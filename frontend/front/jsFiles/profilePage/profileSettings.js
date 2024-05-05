@@ -42,7 +42,7 @@ function saveProfile() {
     }
     else
     {
-        if(sessionStorage.getItem("profile_image") == "https://localhost/img/profile_photos/pp08.jpeg")
+        if(sessionStorage.getItem("profile_image") == serverIP + "/img/profile_photos/pp08.jpeg")
         {
             data = {
                 jsonsecuritykey: sessionStorage.getItem("securitykey"),
@@ -119,7 +119,7 @@ function uploadFile() {
     const file = fileInput.files[0];
 
     if (!file) {
-        alert('Lütfen bir dosya seçin.');
+        alert('❌');
         return;
     }
 
@@ -129,7 +129,7 @@ function uploadFile() {
     if (extension !== 'jpg')
     {
         flag = false;
-        alert('Lütfen bir .jpg dosyası yükleyin.');
+        alert('❌');
         return;
     }
 
@@ -145,14 +145,14 @@ function uploadFile() {
     })
     .then(response => {
         if (response.ok) {
-            alert('Dosya başarıyla yüklendi.');
+            alert("✓️");
         } else {
-            alert('Dosya yüklenirken bir hata oluştu.');
+            alert('❌');
         }
     })
     .catch(error => {
         console.error('Hata:', error);
-        alert('Dosya yüklenirken bir hata oluştu.');
+        alert('❌');
     });
 }
 

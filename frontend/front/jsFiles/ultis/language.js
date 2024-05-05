@@ -72,6 +72,7 @@ var translations = {
       'profile' : 'Profil',
       'dosyayukle' : 'Dosya Yükle',
       'delete' : 'Sil',
+      'gdpr' : "GDPR Gizlilik Politikası Kabul ediyorum",
   },
   en: {
     'titlelogin': 'LOGIN',
@@ -145,6 +146,7 @@ var translations = {
     'chatheader2': 'Chatting with 1 person',
     'dosyayukle': 'Upload File',
     'delete' : 'Delete',
+    'gdpr' : "I Agree GDPR Privacy Policy",
   },
   ru: {
 
@@ -219,6 +221,7 @@ var translations = {
     'chatheader2': 'Беседа с 1 человеком',
     'dosyayukle': 'Загрузить файл',
     'delete' : 'удалить',
+    'gdpr' : 'Политика конфиденциальности GDPR Я принимаю',
   }
 };
 
