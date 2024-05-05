@@ -78,7 +78,7 @@ def account42(request):
             token_url = 'https://api.intra.42.fr/oauth/token'
             client_id = os.getenv('CLIENT_ID')
             client_secret = os.getenv('CLIENT_SECRET')
-            redirect_uri = os.getenv('URL') + ':443'
+            redirect_uri = 'https://localhost:443'
             grant_type = 'authorization_code'
 
             token_data = {
